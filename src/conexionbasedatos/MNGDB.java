@@ -63,7 +63,7 @@ public class MNGDB {
     
     
     public void crearBaseDatos(){
-        if(!comprobarExsite("tallermotos")){
+        if(!comprobarExsite("Concesionario")){
             String[] opciones = {"Crear BBDD", "Salir del programa"};
             int n = JOptionPane.showOptionDialog(
                     padre, 
@@ -74,7 +74,7 @@ public class MNGDB {
                     opciones[0]);
             if(n == 0){
                 try {
-                PreparedStatement exe = conexion.prepareStatement("CREATE DATABASE TallerMotos;");
+                PreparedStatement exe = conexion.prepareStatement("CREATE DATABASE Concesionario;");
                 exe.executeUpdate();
                 crearTablas();
                 } catch (SQLException ex) {
@@ -88,7 +88,7 @@ public class MNGDB {
     
     public void crearTablas(){
         try {
-          conexion.prepareStatement("use tallerMotos;").executeUpdate();
+          conexion.prepareStatement("use Concesionario;").executeUpdate();
           PreparedStatement exe = conexion.prepareStatement(
                    "CREATE TABLE t_clientes("
                   + "DNI varchar(9) primary key,"
@@ -108,6 +108,7 @@ public class MNGDB {
             exe = conexion.prepareStatement(
                   "Create table t_usuarios("
                   + "Nombre varchar(30) not null,"
+                          +"Contrasena varchar(15) not null,"
                   + "IDUsuario int(3) AUTO_INCREMENT primary key,"
                   + "nivelPermiso char(1));");
             exe.executeUpdate();
@@ -123,13 +124,26 @@ public class MNGDB {
                             + "foreign key (DNI) references t_clientes(DNI),"
                             + "foreign key (IDVendedor) references t_usuarios(IDUsuario));");
             exe.executeUpdate();
-          
+            crearRegistros();
           
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
     }
-    
+
+    public void crearRegistros(){
+        try{
+            PreparedStatement exe = conexion.prepareStatement(
+                    "INSERT INTO t_usuarios (Nombre, Contrasena, nivelPermiso) VALUES" +
+                    " ('fenixabi','gabriela123',1)," +
+                    "('delcorral','delco123',1)," +
+                    "('eduardo','edu123',2)," +
+                    "('invitado','1234',3);");
+            exe.executeUpdate();
+        }catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+    }
     public boolean comprobarExsite(String nombreDatabase){
         try{
         PreparedStatement ps;
