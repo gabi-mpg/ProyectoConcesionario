@@ -37,6 +37,7 @@ public class MNGDB {
         if(estado){
           crearBaseDatos();
             System.out.println("wololooo");
+            System.out.println("holiaaaa");
         }
     }
     
