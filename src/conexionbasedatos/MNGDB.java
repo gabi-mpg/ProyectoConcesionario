@@ -8,11 +8,7 @@ package conexionbasedatos;
 import static conexionbasedatos.Utilidades.reescalarImagen;
 import java.awt.Component;
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,18 +29,11 @@ public class MNGDB {
     
     public MNGDB(Component padre){
         this.padre = padre;
-        establecerConexion();
-        if(estado){
-          crearBaseDatos();
-            System.out.println("wololooo");
-            System.out.println("holiaaaa");
-            System.out.println("hollaa gabilondaaaaaa aki adnamo weyando");
-        }
     }
     
-    
-    
-    public void establecerConexion(){
+
+    public boolean establecerConexion(){
+
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String connectionURL = "jdbc:mysql://localhost:3306/";
@@ -52,18 +41,20 @@ public class MNGDB {
         String clave = "pass123";
         this.conexion = DriverManager.getConnection(connectionURL,usuario,clave);
         estado = true;
-            System.out.println("conecteado");
+        crearBaseDatos();
+        return true;
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             System.out.println("no");
              estado = false;
+             return false;
         }
     }
     
     
     
     public void crearBaseDatos(){
-        if(!comprobarExsite("Concesionario")){
+        if(!comprobarExsite("concesionario")){
             String[] opciones = {"Crear BBDD", "Salir del programa"};
             int n = JOptionPane.showOptionDialog(
                     padre, 
@@ -83,6 +74,11 @@ public class MNGDB {
             }else{
                 System.exit(0);
             }       
+        }else{
+            try {
+                conexion.prepareStatement("use Concesionario;").executeUpdate();
+            } catch (SQLException throwables) {
+            }
         }
     }
     
@@ -135,7 +131,7 @@ public class MNGDB {
         try{
             PreparedStatement exe = conexion.prepareStatement(
                     "INSERT INTO t_usuarios (Nombre, Contrasena, nivelPermiso) VALUES" +
-                    " ('fenixabi','gabriela123',1)," +
+                    "('fenixabi','gabriela123',1)," +
                     "('delcorral','delco123',1)," +
                     "('eduardo','edu123',2)," +
                     "('invitado','1234',3);");
@@ -169,12 +165,13 @@ public class MNGDB {
      * @return True si se cierra la conexión
      * False si no se cierra o ya estaba cerrada
      */
-    public void cerrarConexion(){
+    public boolean cerrarConexion(){
         try {
             conexion.close();
             this.estado = false;
+            return true;
         } catch (SQLException ex) {
-            Logger.getLogger(MNGDB.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
@@ -187,25 +184,28 @@ public class MNGDB {
     }
     
     
-    
-    public void testQuery(String consulta){
+    public int iniciarSesion(String nombreUsuario, String contrasena){
         try {
-            PreparedStatement s = conexion.prepareStatement(consulta);
-            ResultSet r = s.executeQuery();
-            //Cambiar al tipo de dato que vamos a recoger
-            System.out.println("ID\tPropietario\tAnimal\tRaza");
-            while(r.next()){
-                System.out.print(r.getInt(1)+"\t");
-                System.out.print(r.getString(2)+"\t\t");
-                System.out.print(r.getString(3)+"\t");
-                System.out.print(r.getString(4)+"\n");
-                
+            Statement s = conexion.createStatement();
+            int n = 0;
+            ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where Nombre='"+nombreUsuario+"'");
+            if(r.next()) {
+                if(contrasena.equals(r.getString("Contrasena"))){
+                    return r.getInt("nivelPermiso");
+                }else{
+                    JOptionPane.showMessageDialog(padre,"Contraseña incorrecta");
+                    return 0;
+                }
+            }else{
+                JOptionPane.showMessageDialog(padre,"Usuario "+nombreUsuario+" no registrado");
+                return -1;
             }
-       
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return -2;
         }
-        
     }
+
+
+
 }
