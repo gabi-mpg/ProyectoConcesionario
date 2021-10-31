@@ -38,6 +38,7 @@ public class MNGDB {
           crearBaseDatos();
             System.out.println("wololooo");
             System.out.println("holiaaaa");
+            System.out.println("hollaa gabilondaaaaaa aki adnamo weyando");
         }
     }
     
@@ -132,7 +133,7 @@ public class MNGDB {
     }
     
     public boolean comprobarExsite(String nombreDatabase){
-        try {
+        try{
         PreparedStatement ps;
         ResultSet rs;
 
@@ -145,10 +146,10 @@ public class MNGDB {
             }
         }
         return false;
-    } catch (SQLException ex) {
+    }catch (SQLException ex) {
         System.out.println("error: " + ex);
         return false;
-    }
+        }
     }
     
     /**
