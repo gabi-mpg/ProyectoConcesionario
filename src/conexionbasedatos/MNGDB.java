@@ -35,7 +35,8 @@ public class MNGDB {
         this.padre = padre;
         establecerConexion();
         if(estado){
-          crearBaseDatos();  
+          crearBaseDatos();
+            System.out.println("wololooo");
         }
     }
     
