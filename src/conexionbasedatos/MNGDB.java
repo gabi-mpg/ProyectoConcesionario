@@ -74,7 +74,7 @@ public class MNGDB {
                     opciones[0]);
             if(n == 0){
                 try {
-                PreparedStatement exe = conexion.prepareStatement("CREATE DATABASE TallerMotos");
+                PreparedStatement exe = conexion.prepareStatement("CREATE DATABASE TallerMotos;");
                 exe.executeUpdate();
                 crearTablas();
                 } catch (SQLException ex) {
@@ -88,42 +88,40 @@ public class MNGDB {
     
     public void crearTablas(){
         try {
+          conexion.prepareStatement("use tallerMotos;").executeUpdate();
           PreparedStatement exe = conexion.prepareStatement(
-                  "Use database TallerMotos\n"
-                  + "Create table CLIENTES(\n"
-                  + "DNI varchar(9) primary key,\n"
-                  + "Nombre varchar(30),\n"
-                  + "Apellido varchar(30),\n"
-                  + "Direcccion varchar(30))");
+                   "CREATE TABLE t_clientes("
+                  + "DNI varchar(9) primary key,"
+                  + "Nombre varchar(30),"
+                  + "Apellido varchar(30),"
+                  + "Direcccion varchar(30));");
           exe.executeUpdate();
           
           exe = conexion.prepareStatement(
-                  "Create table Motos(\n"
-                  + "Matricula varchar(15) not null primary key,\n"
-                  + "Marca varchar(30) not null,\n"
-                  + "Color varchar(15),\n"
-                  + "Tanque tinyint))");
+                  "CREATE TABLE t_motos("
+                  + "Matricula varchar(15) not null primary key,"
+                  + "Marca varchar(30) not null,"
+                  + "Color varchar(15),"
+                  + "Tanque tinyint);");
           exe.executeUpdate();
-          
-            exe = conexion.prepareStatement(
-                  "Create table Ventas(\n"
-                  + "IDVenta int (10) AUTO_INCREMENT not null primary key,\n"
-                  + "Matricula varchar(15) not null,\n"
-                  + "DNI varchar(9),\n"
-                  + "Precio decimal,\n"
-                  + "IDVendedor int(3),\n"
-                  + "foreign key (Matricula) references Motos(Matricula),\n"
-                  + "foreing key (DNI) references Clientes(DNI),\n"
-                  + "foreing key (IDVendedor) references Usuarios(IDUsusario))");
-            exe.executeUpdate();
             
             exe = conexion.prepareStatement(
-                  "Create table Usuarios(\n"
-                  + "Nombre varchar(30) not null,\n"
-                  + "IDUsuario int(3) AUTO_INCREMENT primary key,\n"
-                  + "nivelPermiso, \n"
-                  + "Precio decimal,\n"
-                  + "IDVendedor int(3))");
+                  "Create table t_usuarios("
+                  + "Nombre varchar(30) not null,"
+                  + "IDUsuario int(3) AUTO_INCREMENT primary key,"
+                  + "nivelPermiso char(1));");
+            exe.executeUpdate();
+
+            exe = conexion.prepareStatement(
+                    "Create table t_ventas("
+                            + "IDVenta int (10) AUTO_INCREMENT not null primary key,"
+                            + "Matricula varchar(15) not null,"
+                            + "DNI varchar(9),"
+                            + "Precio decimal(10,2),"
+                            + "IDVendedor int(3),"
+                            + "foreign key (Matricula) references t_motos(Matricula),"
+                            + "foreign key (DNI) references t_clientes(DNI),"
+                            + "foreign key (IDVendedor) references t_usuarios(IDUsuario));");
             exe.executeUpdate();
           
           
