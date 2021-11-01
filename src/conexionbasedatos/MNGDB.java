@@ -26,6 +26,9 @@ public class MNGDB {
     private Component padre;
     public static final String RUTA_REC = System.getProperty("user.dir")+File.separator+
                            "Recourses"+File.separator;
+    private final String BBDD_URL = "jdbc:mysql://localhost:3306/";
+    private final String USUARIO = "root";
+    private final String CLAVE = "pass123";
     
     public MNGDB(Component padre){
         this.padre = padre;
@@ -35,10 +38,9 @@ public class MNGDB {
     public boolean establecerConexion(){
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String connectionURL = "jdbc:mysql://localhost:3306/";
         String usuario = "root";
         String clave = "pass123";
-        this.conexion = DriverManager.getConnection(connectionURL,usuario,clave);
+        this.conexion = DriverManager.getConnection(BBDD_URL,USUARIO,CLAVE);
         estado = true;
         crearBaseDatos();
         return true;
