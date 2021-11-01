@@ -1,14 +1,21 @@
-package conexionbasedatos;
+package Interfaz;
+
+import conexionbasedatos.MNGDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Interfazz extends JFrame implements ActionListener {
+import static conexionbasedatos.Utilidades.reescalarImagen;
+import static java.awt.event.KeyEvent.VK_ENTER;
+
+public class loginInterface extends JFrame implements ActionListener {
 
     private JPanel panelIndicador, panelLogin;
-    private JButton botonConexion, botonLogin;
+    private JButton botonConexion, botonLogin, botonConfig;
     private JTextField campousuario;
     private JLabel textoUsuario, textoClave;
     private JPasswordField campoClave;
@@ -16,7 +23,8 @@ public class Interfazz extends JFrame implements ActionListener {
     private MNGDB conexion;
 
 
-    public Interfazz(){
+
+    public loginInterface(){
         super("Iniciar sesion");
         conexion = new MNGDB(this);
         initComponents();
@@ -47,6 +55,11 @@ public class Interfazz extends JFrame implements ActionListener {
 
     public void addComponents(){
         botonConexion = new JButton("Conectar con BBDD");
+        botonConfig = new JButton();
+        botonConfig.setIcon(reescalarImagen(new ImageIcon(MNGDB.RUTA_REC+"confIcon.png"),15,15));
+        botonConfig.setToolTipText("Configuración de acceso a la base de datos");
+        //El boton de configuración está pendiente de ver si se añade o no
+
         textoUsuario = new JLabel("Usuario");
         textoClave = new JLabel("Contraseña");
         botonLogin = new JButton("Iniciar sesion");
@@ -65,6 +78,7 @@ public class Interfazz extends JFrame implements ActionListener {
         * intelliJ que propiedad del Constraint estamos modificando*/
 
         anadir(botonLogin,panelLogin,0,3,1,1,10,0,0,0,GridBagConstraints.LINE_START);
+        anadir(botonConfig,panelLogin,1,0,1,1,0,30,10,0,GridBagConstraints.LINE_START);
         anadir(botonConexion,panelLogin,0,0,1,1,0,30,0,0,GridBagConstraints.LINE_START);
 
         anadir(textoUsuario,panelLogin,1,1,1,1,10,10,0,0,GridBagConstraints.LINE_START);
@@ -110,23 +124,34 @@ public class Interfazz extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        if(s.equals(botonConexion.getActionCommand())){
-            if(!conexion.estado()){
-                if(conexion.establecerConexion()){
-                    panelIndicador.setBackground(Color.green);
-                    habilitar(true);
-                    JOptionPane.showMessageDialog(this, "Se ha conectado a la base de datos");
-                    botonConexion.setEnabled(false);
-                }else{
-                    JOptionPane.showMessageDialog(this,"No se ha podido establecer conexión");
-                }
-            }else{
-                if(conexion.cerrarConexion()){
-                    panelIndicador.setBackground(Color.red);
-                    JOptionPane.showMessageDialog(this, "Se ha desconectado de la base de datos");
-                }
+        if (s.equals(botonConexion.getActionCommand())) {
+            cambioIndicador();
+        } else {
+            login();
+        }
+    }
+
+
+    private void cambioIndicador() {
+        if (!conexion.estado()) {
+            if (conexion.establecerConexion()) {
+                panelIndicador.setBackground(Color.green);
+                habilitar(true);
+                JOptionPane.showMessageDialog(this, "Se ha conectado a la base de datos");
+                botonConexion.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha podido establecer conexión");
             }
-        }else{
+        } else {
+            if (conexion.cerrarConexion()) {
+                panelIndicador.setBackground(Color.red);
+                JOptionPane.showMessageDialog(this, "Se ha desconectado de la base de datos");
+            }
+        }
+    }
+
+
+    private void login(){
             String user = campousuario.getText();
             String pass = new String(campoClave.getPassword());
             if(user.isEmpty() | pass.isEmpty()){
@@ -135,20 +160,25 @@ public class Interfazz extends JFrame implements ActionListener {
                 int n = conexion.iniciarSesion(user,pass);
                 System.out.println(n);
                 switch (n){
-                    case 1:
-                        //Aquí van las diferentes ventanas que vamos a programar en futuras versiones :p
+                    case -2:
+                        JOptionPane.showMessageDialog(this,"Error inesperado");
+                        System.exit(0);
                         break;
-                    case 2:
-
+                    case -1:
+                        JOptionPane.showMessageDialog(this,"El usuario "+user+" no existe");
                         break;
-                    case 3:
-
+                    case 0:
+                        JOptionPane.showMessageDialog(this,"Contraseña incorrecta");
                         break;
                     default:
+                        new mainInterface(conexion.getConexion(),n,user);
+                        //Esta ventana está en proceso
+                        this.dispose();
                         break;
                 }
-
             }
         }
-    }
+
+
 }
+

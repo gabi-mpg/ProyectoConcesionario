@@ -24,7 +24,7 @@ public class MNGDB {
     private Connection conexion;
     private boolean estado;
     private Component padre;
-    private final String RUTA_REC = System.getProperty("user.dir")+File.separator+
+    public static final String RUTA_REC = System.getProperty("user.dir")+File.separator+
                            "Recourses"+File.separator;
     
     public MNGDB(Component padre){
@@ -33,7 +33,6 @@ public class MNGDB {
     
 
     public boolean establecerConexion(){
-
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String connectionURL = "jdbc:mysql://localhost:3306/";
@@ -103,8 +102,10 @@ public class MNGDB {
             
             exe = conexion.prepareStatement(
                   "Create table t_usuarios("
-                  + "Nombre varchar(30) not null,"
-                          +"Contrasena varchar(15) not null,"
+                  + "nick varchar(30) not null,"
+                  + "Nombre varchar(20) not null,"
+                  + "Apellidos varchar(40) not null,"
+                  +"Contrasena varchar(15) not null,"
                   + "IDUsuario int(3) AUTO_INCREMENT primary key,"
                   + "nivelPermiso char(1));");
             exe.executeUpdate();
@@ -130,11 +131,11 @@ public class MNGDB {
     public void crearRegistros(){
         try{
             PreparedStatement exe = conexion.prepareStatement(
-                    "INSERT INTO t_usuarios (Nombre, Contrasena, nivelPermiso) VALUES" +
-                    "('fenixabi','gabriela123',1)," +
-                    "('delcorral','delco123',1)," +
-                    "('eduardo','edu123',2)," +
-                    "('invitado','1234',3);");
+                    "INSERT INTO t_usuarios (nick,Nombre, Apellidos, Contrasena, nivelPermiso) VALUES" +
+                    "('fenixabi','Gabriela','Mercado Pérez','gabriela123',1)," +
+                    "('delcorral','Christian','Del Corral Remedios','delco123',1)," +
+                    "('eduardo','Eduardo','Bethencourt Herrera','edu123',2)," +
+                    "('invitado','-','-','1234',3);");
             exe.executeUpdate();
         }catch (SQLException ex){
             System.out.println(ex.toString());
@@ -174,6 +175,10 @@ public class MNGDB {
             return false;
         }
     }
+
+    public Connection getConexion(){
+        return this.conexion;
+    }
     
     /**
      * 
@@ -188,16 +193,14 @@ public class MNGDB {
         try {
             Statement s = conexion.createStatement();
             int n = 0;
-            ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where Nombre='"+nombreUsuario+"'");
+            ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where nick='"+nombreUsuario+"'");
             if(r.next()) {
                 if(contrasena.equals(r.getString("Contrasena"))){
                     return r.getInt("nivelPermiso");
                 }else{
-                    JOptionPane.showMessageDialog(padre,"Contraseña incorrecta");
                     return 0;
                 }
             }else{
-                JOptionPane.showMessageDialog(padre,"Usuario "+nombreUsuario+" no registrado");
                 return -1;
             }
         } catch (SQLException e) {
