@@ -16,6 +16,7 @@ public class config implements Serializable{
 
     public config() {
         this.ficheroConfig = new File(RUTA_CONFIG);
+        configuracionInicial();
     }
 
     public String[] configuracionInicial() {
@@ -28,15 +29,22 @@ public class config implements Serializable{
                 return informacion;
             } else {
                 ObjectInputStream is = new ObjectInputStream(new FileInputStream(ficheroConfig));
-                return (String[]) is.readObject();
+                this.informacion = (String[]) is.readObject();
+                is.close();
+                return this.informacion;
             }
+        } catch (EOFException e){
+            System.out.println(e.toString());
+            return informacion;
         } catch (Exception e) {
+            System.out.println(e.toString());
             return informacion;
         }
     }
 
     public boolean escribirFichero(String[] info) {
         try {
+            this.informacion = info;
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(ficheroConfig));
             os.writeObject(info);
             os.close();

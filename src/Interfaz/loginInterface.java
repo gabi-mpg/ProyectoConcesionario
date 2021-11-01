@@ -133,10 +133,9 @@ public class loginInterface extends JFrame implements ActionListener {
             login();
         }else{
             this.setEnabled(false);
-            new configInterface(configuracion.getConfig(),configuracion);
+            new configInterface(configuracion.configuracionInicial(),configuracion, this);
             System.out.println("vuelta al principal");
-            this.transferFocus();
-            this.conexion.setRegistros(configuracion.getConfig());
+            this.conexion.setRegistros(configuracion.configuracionInicial());
         }
     }
 
@@ -148,6 +147,7 @@ public class loginInterface extends JFrame implements ActionListener {
                 habilitar(true);
                 JOptionPane.showMessageDialog(this, "Se ha conectado a la base de datos");
                 botonConexion.setEnabled(false);
+                botonConfig.setEnabled(false);
             } else {
                 JOptionPane.showMessageDialog(this, "No se ha podido establecer conexión");
             }

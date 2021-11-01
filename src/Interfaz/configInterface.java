@@ -16,16 +16,19 @@ public class configInterface extends JFrame implements ActionListener {
     private JButton boton;
     private GridBagConstraints gestor;
     private config configuracion;
+    private JFrame padre;
 
-    public configInterface(String[] config, config configuracion){
-        super("Panel de configuracion");
+    public configInterface(String[] config, config configuracion, JFrame padre){
+
+        this.padre = padre;
+        setTitle("Panel de configuración");
         this.configuracionRecogida = config;
         this.configuracion = configuracion;
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         pack();
     }
 
@@ -33,7 +36,7 @@ public class configInterface extends JFrame implements ActionListener {
         gestor = new GridBagConstraints();
         panelGeneral = new JPanel();
         panelGeneral.setLayout(new GridBagLayout());
-        panelGeneral.setPreferredSize(new Dimension(240,200));
+        panelGeneral.setPreferredSize(new Dimension(280,200));
         labelUser = new JLabel("User");
         labelClave = new JLabel("Clave");
         labelRuta = new JLabel("Ruta BBDD");
@@ -86,12 +89,9 @@ public class configInterface extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this,"Faltan campos por completar");
         }else{
             String[] devuelta = {s1,s2,s3};
-             configuracion.setConfig(devuelta);
-            try {
-                finalize();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+            configuracion.escribirFichero(devuelta);
+            padre.setEnabled(true);
+            this.dispose();
         }
     }
 

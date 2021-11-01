@@ -39,7 +39,6 @@ public class MNGDB {
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String usuario = "root";
-        String clave = "pass123";
         this.conexion = DriverManager.getConnection(bbdd,user,clave);
         estado = true;
         crearBaseDatos();
