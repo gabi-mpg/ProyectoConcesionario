@@ -6,6 +6,10 @@
 package conexionbasedatos;
 
 import Interfaz.loginInterface;
+import Interfaz.mainInterface;
+
+import javax.swing.*;
+import java.sql.Connection;
 
 /**
  *
@@ -18,13 +22,11 @@ public class ConexionBaseDatos {
      */
     public static void main(String[] args) {
 
+        //Esto es para hacer pruebas evitando tener que logearse cada vez
+        new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
+        //loginInterface interfaz = new loginInterface();
 
-        loginInterface interfaz = new loginInterface();
 
-        //Hacer una aplicacion que conecte con la base de datos
-        //Añadir a la aplicación un formulario que nos permita arrancar la base de datos,
-        //este formlario debe tener un testigo para saber cuando esta conectado con la
-        //base de datos
     }
     
 }
