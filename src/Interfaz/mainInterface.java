@@ -7,6 +7,8 @@ import java.awt.*;
 import java.net.ConnectException;
 import java.sql.Connection;
 
+import static conexionbasedatos.Utilidades.reescalarImagen;
+
 public class mainInterface extends JFrame {
 
     private Connection conexion;
@@ -22,17 +24,22 @@ public class mainInterface extends JFrame {
         this.user = user;
         gestor = new GridBagConstraints();
         initComponents();
-        setLocationRelativeTo(null);
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(d.width/3,d.height/5); //Hay que centrar bien
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         pack();
     }
 
     private void initComponents(){
+        panelUsuario = new JPanel();
+        panelUsuario.setPreferredSize(new Dimension(590,70));
+        panelUsuario.setBackground(Color.red); //para visualizar
+        compPanelUsuario();
         panelGeneral = new JPanel();
         panelGeneral.setPreferredSize(new Dimension(600,700));
         pestana = new JTabbedPane();
-        pestana.setPreferredSize(new Dimension(500,600));
+        pestana.setPreferredSize(new Dimension(590,620));
         panelClientes = new JPanel();
 
         panelMotos = new JPanel();
@@ -44,8 +51,19 @@ public class mainInterface extends JFrame {
         pestana.addTab("Ventas",panelVentas);
         pestana.add("Motos",panelMotos);
         pestana.add("Clientes",panelClientes);
+        panelGeneral.add(panelUsuario);
         panelGeneral.add(pestana);
+
         add(panelGeneral);
+    }
+
+    private void compPanelUsuario(){
+        ImageIcon nuevaImagen = reescalarImagen(new ImageIcon(MNGDB.RUTA_REC+"BBDDError.png"),50,50);
+        JLabel nick = new JLabel("Prueba nombre usuario");
+        JLabel nombre = new JLabel("Prueba nombre y apellido");
+        anadir(new JLabel(nuevaImagen),panelUsuario,0,0,4,4,10,10,10,10,GridBagConstraints.LINE_START);
+        anadir(nick,panelUsuario,5,0,1,1,10,10,10,10,GridBagConstraints.LINE_START);
+        anadir(nombre, panelUsuario,6,4,1,1,10,10,10,10,GridBagConstraints.LINE_START);
     }
 
     private void anadir(Component comp, JPanel panel, int col, int row, int width, int heigth, int top, int bottom, int left, int rigth, int pos){

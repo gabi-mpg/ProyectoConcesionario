@@ -19,6 +19,8 @@ public class Utilidades {
         Image reescalada = imagen.getImage();
         return new ImageIcon(reescalada.getScaledInstance(h, w, Image.SCALE_SMOOTH));
     }
+
+
     
     
 }
