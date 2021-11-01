@@ -28,13 +28,14 @@ public class mainInterface extends JFrame {
         setLocation(d.width/3,d.height/5); //Hay que centrar bien
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        setResizable(false);
         pack();
     }
 
     private void initComponents(){
         panelUsuario = new JPanel();
         panelUsuario.setPreferredSize(new Dimension(590,70));
-        panelUsuario.setBackground(Color.red); //para visualizar
+        panelUsuario.setLayout(new GridBagLayout());
         compPanelUsuario();
         panelGeneral = new JPanel();
         panelGeneral.setPreferredSize(new Dimension(600,700));
@@ -61,9 +62,9 @@ public class mainInterface extends JFrame {
         ImageIcon nuevaImagen = reescalarImagen(new ImageIcon(MNGDB.RUTA_REC+"BBDDError.png"),50,50);
         JLabel nick = new JLabel("Prueba nombre usuario");
         JLabel nombre = new JLabel("Prueba nombre y apellido");
-        anadir(new JLabel(nuevaImagen),panelUsuario,0,0,20,1,10,10,10,200,GridBagConstraints.LINE_START);
-        anadir(nick,panelUsuario,1,0,1,1,10,10,10,10,GridBagConstraints.LINE_START);
-        anadir(nombre, panelUsuario,2,2,10,10,10,10,10,10,GridBagConstraints.LINE_START);
+        anadir(new JLabel(nuevaImagen),panelUsuario,0,1,1,2,10,10,10,10,GridBagConstraints.CENTER);
+        anadir(nick,panelUsuario,1,1,1,1,20,10,0,340,GridBagConstraints.CENTER);
+        anadir(nombre, panelUsuario,1,2,1,1,0,20,10,340,GridBagConstraints.CENTER);
     }
 
     private void anadir(Component comp, JPanel panel, int col, int row, int width, int heigth, int top, int bottom, int left, int rigth, int pos){
