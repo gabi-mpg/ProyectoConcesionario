@@ -128,8 +128,10 @@ public class loginInterface extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if (s.equals(botonConexion.getActionCommand())) {
+            this.conexion.setRegistros(configuracion.getConfig());
             cambioIndicador();
         } else if(s.equals(botonLogin.getActionCommand())){
+
             login();
         }else{
             this.setEnabled(false);
