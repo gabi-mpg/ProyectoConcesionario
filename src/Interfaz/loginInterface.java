@@ -1,6 +1,7 @@
 package Interfaz;
 
 import conexionbasedatos.MNGDB;
+import conexionbasedatos.config;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,12 +22,15 @@ public class loginInterface extends JFrame implements ActionListener {
     private JPasswordField campoClave;
     private GridBagConstraints gestor;
     private MNGDB conexion;
+    private config configuracion;
 
 
 
     public loginInterface(){
         super("Iniciar sesion");
         conexion = new MNGDB(this);
+        configuracion = new config();
+        conexion.setRegistros(configuracion.configuracionInicial());
         initComponents();
         addComponents();
         habilitar(false);
@@ -34,6 +38,7 @@ public class loginInterface extends JFrame implements ActionListener {
         setLocation(d.width/4+d.width/6,d.height/3);
         setResizable(false);
         setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
     }
 
@@ -48,9 +53,6 @@ public class loginInterface extends JFrame implements ActionListener {
         add(panelLogin, BorderLayout.SOUTH);
         panelLogin.setLayout(new GridBagLayout());
         gestor = new GridBagConstraints();
-
-
-
     }
 
     public void addComponents(){
@@ -67,6 +69,7 @@ public class loginInterface extends JFrame implements ActionListener {
         campousuario = new JTextField();
         botonConexion.addActionListener(this);
         botonLogin.addActionListener(this);
+        botonConfig.addActionListener(this);
         botonConexion.setPreferredSize(new Dimension(160,20));
         botonLogin.setPreferredSize(new Dimension(120,30));
         campousuario.setPreferredSize(new Dimension(180,20));
@@ -126,8 +129,14 @@ public class loginInterface extends JFrame implements ActionListener {
         String s = e.getActionCommand();
         if (s.equals(botonConexion.getActionCommand())) {
             cambioIndicador();
-        } else {
+        } else if(s.equals(botonLogin.getActionCommand())){
             login();
+        }else{
+            this.setEnabled(false);
+            new configInterface(configuracion.getConfig(),configuracion);
+            System.out.println("vuelta al principal");
+            this.transferFocus();
+            this.conexion.setRegistros(configuracion.getConfig());
         }
     }
 

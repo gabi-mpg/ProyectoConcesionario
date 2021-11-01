@@ -5,6 +5,7 @@
  */
 package conexionbasedatos;
 
+import Interfaz.configInterface;
 import Interfaz.loginInterface;
 import Interfaz.mainInterface;
 
@@ -25,6 +26,8 @@ public class ConexionBaseDatos {
         //Esto es para hacer pruebas evitando tener que logearse cada vez
         //new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
         loginInterface interfaz = new loginInterface();
+        String[] s = {"1","2","3"};
+        //configInterface config = new configInterface(null,s);
         System.out.println("Holiii");
 
 

@@ -26,10 +26,10 @@ public class MNGDB {
     private Component padre;
     public static final String RUTA_REC = System.getProperty("user.dir")+File.separator+
                            "Recourses"+File.separator;
-    private final String BBDD_URL = "jdbc:mysql://localhost:3306/";
-    private final String USUARIO = "root";
-    private final String CLAVE = "pass123";
-    
+    private  String bbdd,user,clave;
+
+
+
     public MNGDB(Component padre){
         this.padre = padre;
     }
@@ -40,7 +40,7 @@ public class MNGDB {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String usuario = "root";
         String clave = "pass123";
-        this.conexion = DriverManager.getConnection(BBDD_URL,USUARIO,CLAVE);
+        this.conexion = DriverManager.getConnection(bbdd,user,clave);
         estado = true;
         crearBaseDatos();
         return true;
@@ -209,6 +209,12 @@ public class MNGDB {
             System.out.println(e.toString());
             return -2;
         }
+    }
+
+    public void setRegistros(String[] registros){
+        this.bbdd = registros[0];
+        this.user = registros[1];
+        this.clave = registros[2];
     }
 
 
