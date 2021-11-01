@@ -28,8 +28,6 @@ public class MNGDB {
                            "Recourses"+File.separator;
     private  String bbdd,user,clave;
 
-
-
     public MNGDB(Component padre){
         this.padre = padre;
     }

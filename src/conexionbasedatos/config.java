@@ -30,9 +30,7 @@ public class config implements Serializable{
                 this.informacion = (String[]) is.readObject();
                 is.close();
             }
-        } catch (EOFException e){
-            System.out.println(e.toString());
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println(e.toString());
         }
     }
@@ -56,10 +54,7 @@ public class config implements Serializable{
             is = new ObjectInputStream(new FileInputStream(ficheroConfig));
             this.informacion = (String[]) is.readObject();
             return this.informacion;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return this.informacion;
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return this.informacion;
         }
