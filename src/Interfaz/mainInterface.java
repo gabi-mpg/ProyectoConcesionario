@@ -61,9 +61,9 @@ public class mainInterface extends JFrame {
         ImageIcon nuevaImagen = reescalarImagen(new ImageIcon(MNGDB.RUTA_REC+"BBDDError.png"),50,50);
         JLabel nick = new JLabel("Prueba nombre usuario");
         JLabel nombre = new JLabel("Prueba nombre y apellido");
-        anadir(new JLabel(nuevaImagen),panelUsuario,0,0,4,4,10,10,10,10,GridBagConstraints.LINE_START);
-        anadir(nick,panelUsuario,5,0,1,1,10,10,10,10,GridBagConstraints.LINE_START);
-        anadir(nombre, panelUsuario,6,4,1,1,10,10,10,10,GridBagConstraints.LINE_START);
+        anadir(new JLabel(nuevaImagen),panelUsuario,0,0,20,1,10,10,10,200,GridBagConstraints.LINE_START);
+        anadir(nick,panelUsuario,1,0,1,1,10,10,10,10,GridBagConstraints.LINE_START);
+        anadir(nombre, panelUsuario,2,2,10,10,10,10,10,10,GridBagConstraints.LINE_START);
     }
 
     private void anadir(Component comp, JPanel panel, int col, int row, int width, int heigth, int top, int bottom, int left, int rigth, int pos){
