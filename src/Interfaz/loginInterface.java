@@ -30,7 +30,7 @@ public class loginInterface extends JFrame implements ActionListener {
         super("Iniciar sesion");
         conexion = new MNGDB(this);
         configuracion = new config();
-        conexion.setRegistros(configuracion.configuracionInicial());
+        conexion.setRegistros(configuracion.getConfig());
         initComponents();
         addComponents();
         habilitar(false);
@@ -133,9 +133,9 @@ public class loginInterface extends JFrame implements ActionListener {
             login();
         }else{
             this.setEnabled(false);
-            new configInterface(configuracion.configuracionInicial(),configuracion, this);
+            new configInterface(configuracion.getConfig(),configuracion, this);
             System.out.println("vuelta al principal");
-            this.conexion.setRegistros(configuracion.configuracionInicial());
+            this.conexion.setRegistros(configuracion.getConfig());
         }
     }
 
