@@ -10,8 +10,6 @@ import java.awt.Component;
 import java.io.File;
 import java.sql.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -23,26 +21,25 @@ public class MNGDB {
     
     private Connection conexion;
     private boolean estado;
-    private Component padre;
+    private final Component PADRE;
     public static final String RUTA_REC = System.getProperty("user.dir")+File.separator+
                            "Recourses"+File.separator;
     private  String bbdd,user,clave;
 
     public MNGDB(Component padre){
-        this.padre = padre;
+        this.PADRE = padre;
     }
     
 
     public boolean establecerConexion(){
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String usuario = "root";
         this.conexion = DriverManager.getConnection(bbdd,user,clave);
         estado = true;
         crearBaseDatos();
         return true;
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
             System.out.println("no");
              estado = false;
              return false;
@@ -55,9 +52,9 @@ public class MNGDB {
         if(!comprobarExsite("concesionario")){
             String[] opciones = {"Crear BBDD", "Salir del programa"};
             int n = JOptionPane.showOptionDialog(
-                    padre, 
+                    PADRE,
                     "Deseas crear una nueva BBDD?", 
-                    "No se encuentra la BBDD", 0, 0,
+                    "No se encuentra la BBDD", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE,
                     reescalarImagen(new ImageIcon(RUTA_REC+"BBDDError.png"),30,30),
                     opciones,
                     opciones[0]);
@@ -67,7 +64,7 @@ public class MNGDB {
                 exe.executeUpdate();
                 crearTablas();
                 } catch (SQLException ex) {
-                    System.out.println(ex.toString());
+                    System.out.println(ex.getMessage());
                 }
             }else{
                 System.exit(0);
@@ -76,6 +73,7 @@ public class MNGDB {
             try {
                 conexion.prepareStatement("use Concesionario;").executeUpdate();
             } catch (SQLException throwables) {
+                System.out.println(throwables.getMessage());
             }
         }
     }
@@ -123,7 +121,7 @@ public class MNGDB {
             crearRegistros();
           
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -137,7 +135,7 @@ public class MNGDB {
                     "('invitado','-','-','1234',3);");
             exe.executeUpdate();
         }catch (SQLException ex){
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
         }
     }
     public boolean comprobarExsite(String nombreDatabase){
@@ -191,7 +189,6 @@ public class MNGDB {
     public int iniciarSesion(String nombreUsuario, String contrasena){
         try {
             Statement s = conexion.createStatement();
-            int n = 0;
             ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where nick='"+nombreUsuario+"'");
             if(r.next()) {
                 if(contrasena.equals(r.getString("Contrasena"))){
@@ -203,7 +200,7 @@ public class MNGDB {
                 return -1;
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
             return -2;
         }
     }

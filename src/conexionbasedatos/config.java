@@ -8,12 +8,11 @@ import java.io.*;
 public class config implements Serializable{
 
 
-    private final String RUTA_CONFIG =
-            System.getProperty("user.dir") + File.separator + "config.dat";
     public File ficheroConfig;
     private String[] informacion = {"-", "-", "-"};
 
     public config() {
+        String RUTA_CONFIG = System.getProperty("user.dir") + File.separator + "config.dat";
         this.ficheroConfig = new File(RUTA_CONFIG);
         configuracionInicial();
     }
@@ -21,7 +20,6 @@ public class config implements Serializable{
     public void configuracionInicial() {
         try {
             if (!this.ficheroConfig.exists()) {
-                ficheroConfig.createNewFile();
                 ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(ficheroConfig));
                 os.writeObject(informacion);
                 os.close();
@@ -31,25 +29,23 @@ public class config implements Serializable{
                 is.close();
             }
         } catch (Exception e){
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
 
-    public boolean escribirFichero(String[] info) {
+    public void escribirFichero(String[] info) {
         try {
             this.informacion = info;
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(ficheroConfig));
             os.writeObject(info);
             os.close();
-            return true;
         } catch (Exception e) {
-            System.out.println(e.toString());
-            return  false;
+            System.out.println(e.getMessage());
         }
     }
 
     public String[] getConfig(){
-        ObjectInputStream is = null;
+        ObjectInputStream is;
         try {
             is = new ObjectInputStream(new FileInputStream(ficheroConfig));
             this.informacion = (String[]) is.readObject();
@@ -61,7 +57,7 @@ public class config implements Serializable{
 
     }
 
-    public void setConfig(String[] informacion){
+    public void setConfig(String[] informacion){//ESTE NUNCA SE USA
         escribirFichero(informacion);
         this.informacion = informacion;
     }

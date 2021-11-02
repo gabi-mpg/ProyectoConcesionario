@@ -7,29 +7,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import static conexionbasedatos.Utilidades.reescalarImagen;
-import static java.awt.event.KeyEvent.VK_ENTER;
 
 public class loginInterface extends JFrame implements ActionListener {
 
     private JPanel panelIndicador, panelLogin;
     private JButton botonConexion, botonLogin, botonConfig;
     private JTextField campousuario;
-    private JLabel textoUsuario, textoClave;
     private JPasswordField campoClave;
     private GridBagConstraints gestor;
-    private MNGDB conexion;
-    private config configuracion;
+    private final MNGDB conexion;
+    private final config configuracion = new config();
 
 
 
     public loginInterface(){
         super("Iniciar sesion");
         conexion = new MNGDB(this);
-        configuracion = new config();
         conexion.setRegistros(configuracion.getConfig());
         initComponents();
         addComponents();
@@ -62,8 +57,8 @@ public class loginInterface extends JFrame implements ActionListener {
         botonConfig.setToolTipText("Configuración de acceso a la base de datos");
         //El boton de configuración está pendiente de ver si se añade o no
 
-        textoUsuario = new JLabel("Usuario");
-        textoClave = new JLabel("Contraseña");
+        JLabel textoUsuario = new JLabel("Usuario");
+        JLabel textoClave = new JLabel("Contraseña");
         botonLogin = new JButton("Iniciar sesion");
         campoClave = new JPasswordField();
         campousuario = new JTextField();
