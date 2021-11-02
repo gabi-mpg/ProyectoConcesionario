@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import static conexionbasedatos.Utilidades.jMensaje;
 
 public class configInterface extends JFrame implements ActionListener {
 
@@ -91,7 +92,7 @@ public class configInterface extends JFrame implements ActionListener {
         s2 = textoUser.getText();
         s3 = textoClave.getText();
         if(s1.isEmpty() | s2.isEmpty()){
-            JOptionPane.showMessageDialog(this,"Faltan campos por completar");
+            jMensaje(this,"Faltan campos por completar","Información incompleta",2);
         }else{
             String[] devuelta = {s1,s2,s3};
             configuracion.escribirFichero(devuelta);

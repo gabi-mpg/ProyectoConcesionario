@@ -7,7 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import conexionbasedatos.Utilidades.*;
 
+import static conexionbasedatos.Utilidades.jMensaje;
 import static conexionbasedatos.Utilidades.reescalarImagen;
 
 public class loginInterface extends JFrame implements ActionListener {
@@ -126,7 +128,6 @@ public class loginInterface extends JFrame implements ActionListener {
             this.conexion.setRegistros(configuracion.getConfig());
             cambioIndicador();
         } else if(s.equals(botonLogin.getActionCommand())){
-
             login();
         }else{
             this.setEnabled(false);
@@ -142,16 +143,16 @@ public class loginInterface extends JFrame implements ActionListener {
             if (conexion.establecerConexion()) {
                 panelIndicador.setBackground(Color.green);
                 habilitar(true);
-                JOptionPane.showMessageDialog(this, "Se ha conectado a la base de datos");
+                jMensaje(this,"Se ha conectado a la base de datos","Conexión establecida",1);
                 botonConexion.setEnabled(false);
                 botonConfig.setEnabled(false);
             } else {
-                JOptionPane.showMessageDialog(this, "No se ha podido establecer conexión");
+                jMensaje(this,"No se ha podido establecer conexión","Error de conexión",0);
             }
         } else {
             if (conexion.cerrarConexion()) {
                 panelIndicador.setBackground(Color.red);
-                JOptionPane.showMessageDialog(this, "Se ha desconectado de la base de datos");
+                jMensaje(this,"Se ha desconectado de la base de datos","Conexión cerrada",1);
             }
         }
     }
@@ -161,20 +162,20 @@ public class loginInterface extends JFrame implements ActionListener {
             String user = campousuario.getText();
             String pass = new String(campoClave.getPassword());
             if(user.isEmpty() | pass.isEmpty()){
-                JOptionPane.showMessageDialog(this,"Faltan campos por completar");
+                jMensaje(this,"Faltan campos por completar","Falta información",2);
             }else{
                 int n = conexion.iniciarSesion(user,pass);
                 System.out.println(n);
                 switch (n){
                     case -2:
-                        JOptionPane.showMessageDialog(this,"Error inesperado");
+                        jMensaje(this,"Ha ocurrido un error","Error en la conexion",0);
                         System.exit(0);
                         break;
                     case -1:
-                        JOptionPane.showMessageDialog(this,"El usuario "+user+" no existe");
+                        jMensaje(this,"El usuario "+user+" no existe","Usuario incorrecto",2);
                         break;
                     case 0:
-                        JOptionPane.showMessageDialog(this,"Contraseña incorrecta");
+                        jMensaje(this,"La contraseña introducida no coincide con el usuario","Contraseña incorrecta",2);
                         break;
                     default:
                         new mainInterface(conexion.getConexion(),n,user);

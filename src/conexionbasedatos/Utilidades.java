@@ -5,8 +5,10 @@
  */
 package conexionbasedatos;
 
+import java.awt.Component;
+
 import java.awt.Image;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 
 /**
@@ -20,7 +22,33 @@ public class Utilidades {
         return new ImageIcon(reescalada.getScaledInstance(h, w, Image.SCALE_SMOOTH));
     }
 
+    /**
+     *
+     * @param parent
+     * @param titulo
+     * @param mensaje
+     * @param tipoMensaje 0 - Error, 1 - Informacion, 2 - Aviso, 3 - Pregunta
+     */
+    public static void jMensaje(Component parent, String titulo, String mensaje, int tipoMensaje){
+        switch (tipoMensaje){
+            case 0:
+                JOptionPane.showMessageDialog(parent,titulo,mensaje, JOptionPane.ERROR_MESSAGE);
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(parent,titulo,mensaje, JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(parent,titulo,mensaje, JOptionPane.WARNING_MESSAGE);
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(parent,titulo,mensaje, JOptionPane.QUESTION_MESSAGE);
+                break;
+            default:
+                JOptionPane.showMessageDialog(parent,titulo,mensaje, JOptionPane.PLAIN_MESSAGE);
+                break;
+        }
 
+    }
 
 
 
