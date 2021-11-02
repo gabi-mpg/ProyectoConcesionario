@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class configInterface extends JFrame implements ActionListener {
 
@@ -15,6 +16,7 @@ public class configInterface extends JFrame implements ActionListener {
     private JLabel labelUser, labelClave, labelRuta;
     private JButton boton;
     private GridBagConstraints gestor;
+    private JProgressBar barra;
     private config configuracion;
     private JFrame padre;
 
@@ -24,6 +26,7 @@ public class configInterface extends JFrame implements ActionListener {
         setTitle("Panel de configuración");
         this.configuracionRecogida = config;
         this.configuracion = configuracion;
+
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -34,6 +37,8 @@ public class configInterface extends JFrame implements ActionListener {
 
     private void initComponents(){
         gestor = new GridBagConstraints();
+        barra = new JProgressBar();
+        barra.setPreferredSize(new Dimension(280,10));
         panelGeneral = new JPanel();
         panelGeneral.setLayout(new GridBagLayout());
         panelGeneral.setPreferredSize(new Dimension(280,200));
@@ -54,7 +59,7 @@ public class configInterface extends JFrame implements ActionListener {
         anadir(textoClave, panelGeneral,0,2,1,5,10,5,5,1,GridBagConstraints.LINE_START);
         anadir(labelClave, panelGeneral,1,2,1,5,10,5,5,1,GridBagConstraints.LINE_START);
         anadir(boton, panelGeneral,0,3,2,5,50,5,5,1,GridBagConstraints.LINE_START);
-
+        add(barra,BorderLayout.SOUTH);
         add(panelGeneral);
 
     }
@@ -90,9 +95,37 @@ public class configInterface extends JFrame implements ActionListener {
         }else{
             String[] devuelta = {s1,s2,s3};
             configuracion.escribirFichero(devuelta);
-            padre.setEnabled(true);
-            this.dispose();
+            new Thread(new barraProgreso(this,padre,barra)).start();
+            boton.setEnabled(false);
+
         }
     }
-
 }
+
+ class barraProgreso implements Runnable {
+
+     private JProgressBar barra;
+     private JFrame padre;
+     private JFrame comp;
+
+     public barraProgreso(JFrame comp, JFrame padre, JProgressBar barra) {
+         this.barra = barra;
+         this.padre = padre;
+         this.comp = comp;
+     }
+
+     @Override
+     public void run() {
+         int n = 1;
+         while (n < 100) {
+             barra.setValue(n);
+             n+= new Random().nextInt(15) + 1;
+             try {
+                 Thread.sleep(100);
+             } catch (InterruptedException ex) {
+             }
+         }
+         padre.setEnabled(true);
+         comp.dispose();
+     }
+ }
