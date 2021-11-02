@@ -45,17 +45,31 @@ public class mainInterface extends JFrame {
 
         panelMotos = new JPanel();
         panelVentas = new JPanel();
-
-        panelClientes.add(new JButton(""));
-        panelVentas.add(new JButton(""));
-        panelMotos.add(new JButton(""));
         pestana.addTab("Ventas",panelVentas);
         pestana.add("Motos",panelMotos);
         pestana.add("Clientes",panelClientes);
         panelGeneral.add(panelUsuario);
         panelGeneral.add(pestana);
-
+        initPanelComponents(panelVentas);
+        initPanelComponents(panelClientes);
+        initPanelComponents(panelMotos);
         add(panelGeneral);
+    }
+
+    private void initPanelComponents(JPanel panel){
+        panel.setLayout(new GridLayout(2,2));
+        JPanel panelConsultar = new JPanel();
+        panelConsultar.setBorder(BorderFactory.createLineBorder(Color.gray));
+        JPanel panelModificar = new JPanel();
+        panelModificar.setBorder(BorderFactory.createLineBorder(Color.gray));
+        JPanel panelInsertar = new JPanel();
+        panelInsertar.setBorder(BorderFactory.createLineBorder(Color.gray));
+        JPanel panelEliminar = new JPanel();
+        panelEliminar.setBorder(BorderFactory.createLineBorder(Color.gray));
+        panel.add(panelConsultar);
+        panel.add(panelInsertar);
+        panel.add(panelModificar);
+        panel.add(panelEliminar);
     }
 
     private void compPanelUsuario(){

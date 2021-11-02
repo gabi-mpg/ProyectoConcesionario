@@ -24,8 +24,8 @@ public class ConexionBaseDatos {
     public static void main(String[] args) {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
-        //new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
-            new loginInterface();
+        new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
+        //new loginInterface();
 
 
 
