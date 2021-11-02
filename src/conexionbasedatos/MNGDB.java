@@ -10,8 +10,6 @@ import java.awt.Component;
 import java.io.File;
 import java.sql.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -23,13 +21,13 @@ public class MNGDB {
     
     private Connection conexion;
     private boolean estado;
-    private Component padre;
+    private final Component PADRE;
     public static final String RUTA_REC = System.getProperty("user.dir")+File.separator+
                            "Recourses"+File.separator;
     private  String bbdd,user,clave;
 
     public MNGDB(Component padre){
-        this.padre = padre;
+        this.PADRE = padre;
     }
     
 
@@ -42,7 +40,7 @@ public class MNGDB {
         crearBaseDatos();
         return true;
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
             System.out.println("no");
              estado = false;
              return false;
@@ -55,7 +53,7 @@ public class MNGDB {
         if(!comprobarExsite("concesionario")){
             String[] opciones = {"Crear BBDD", "Salir del programa"};
             int n = JOptionPane.showOptionDialog(
-                    padre, 
+                    PADRE,
                     "Deseas crear una nueva BBDD?", 
                     "No se encuentra la BBDD", 0, 0,
                     reescalarImagen(new ImageIcon(RUTA_REC+"BBDDError.png"),30,30),
