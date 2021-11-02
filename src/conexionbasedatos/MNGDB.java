@@ -34,7 +34,6 @@ public class MNGDB {
     public boolean establecerConexion(){
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String usuario = "root";
         this.conexion = DriverManager.getConnection(bbdd,user,clave);
         estado = true;
         crearBaseDatos();
@@ -55,7 +54,7 @@ public class MNGDB {
             int n = JOptionPane.showOptionDialog(
                     PADRE,
                     "Deseas crear una nueva BBDD?", 
-                    "No se encuentra la BBDD", 0, 0,
+                    "No se encuentra la BBDD", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE,
                     reescalarImagen(new ImageIcon(RUTA_REC+"BBDDError.png"),30,30),
                     opciones,
                     opciones[0]);
@@ -65,7 +64,7 @@ public class MNGDB {
                 exe.executeUpdate();
                 crearTablas();
                 } catch (SQLException ex) {
-                    System.out.println(ex.toString());
+                    System.out.println(ex.getMessage());
                 }
             }else{
                 System.exit(0);
@@ -74,6 +73,7 @@ public class MNGDB {
             try {
                 conexion.prepareStatement("use Concesionario;").executeUpdate();
             } catch (SQLException throwables) {
+                System.out.println(throwables.getMessage());
             }
         }
     }
@@ -121,7 +121,7 @@ public class MNGDB {
             crearRegistros();
           
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ public class MNGDB {
                     "('invitado','-','-','1234',3);");
             exe.executeUpdate();
         }catch (SQLException ex){
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
         }
     }
     public boolean comprobarExsite(String nombreDatabase){
@@ -189,7 +189,6 @@ public class MNGDB {
     public int iniciarSesion(String nombreUsuario, String contrasena){
         try {
             Statement s = conexion.createStatement();
-            int n = 0;
             ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where nick='"+nombreUsuario+"'");
             if(r.next()) {
                 if(contrasena.equals(r.getString("Contrasena"))){
@@ -201,7 +200,7 @@ public class MNGDB {
                 return -1;
             }
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
             return -2;
         }
     }
