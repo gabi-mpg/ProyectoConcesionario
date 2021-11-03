@@ -1,4 +1,4 @@
-package controllers.conexionBD;
+package conecionBD;
 
 
 

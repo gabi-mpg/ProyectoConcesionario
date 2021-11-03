@@ -1,7 +1,7 @@
 package views;
 
-import controllers.conexionBD.MNGDB;
-import controllers.conexionBD.config;
+import conecionBD.MNGDB;
+import conecionBD.config;
 
 import javax.swing.*;
 import java.awt.*;
