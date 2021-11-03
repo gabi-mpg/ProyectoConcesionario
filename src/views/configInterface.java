@@ -1,6 +1,6 @@
 package views;
 
-import controllers.config;
+import controllers.conexionBD.config;
 
 import javax.swing.*;
 import java.awt.*;
