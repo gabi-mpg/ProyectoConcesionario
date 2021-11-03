@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexionbasedatos;
+package controllers;
 
-import static conexionbasedatos.Utilidades.reescalarImagen;
+import static controllers.Utilidades.reescalarImagen;
 import java.awt.Component;
 import java.io.File;
 import java.sql.*;

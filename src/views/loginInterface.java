@@ -1,15 +1,15 @@
 package views;
 
-import conexionbasedatos.MNGDB;
-import conexionbasedatos.config;
+import controllers.MNGDB;
+import controllers.config;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static conexionbasedatos.Utilidades.jMensaje;
-import static conexionbasedatos.Utilidades.reescalarImagen;
+import static controllers.Utilidades.jMensaje;
+import static controllers.Utilidades.reescalarImagen;
 
 public class loginInterface extends JFrame implements ActionListener {
 

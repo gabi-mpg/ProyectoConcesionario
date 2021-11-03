@@ -1,13 +1,13 @@
 package views;
 
-import conexionbasedatos.config;
+import controllers.config;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import static conexionbasedatos.Utilidades.jMensaje;
+import static controllers.Utilidades.jMensaje;
 
 public class configInterface extends JFrame implements ActionListener {
 

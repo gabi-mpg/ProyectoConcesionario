@@ -1,12 +1,12 @@
 package views;
 
-import conexionbasedatos.MNGDB;
+import controllers.MNGDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 
-import static conexionbasedatos.Utilidades.reescalarImagen;
+import static controllers.Utilidades.reescalarImagen;
 
 public class mainInterface extends JFrame {
 
@@ -18,6 +18,7 @@ public class mainInterface extends JFrame {
     private JTabbedPane pestana;
 
     public mainInterface(Connection conexion, int nivelUsuario, String user){
+        super("Concesionario Gaby Chris");
         this.conexion = conexion;
         this.nivelUsuario = nivelUsuario;
         this.user = user;

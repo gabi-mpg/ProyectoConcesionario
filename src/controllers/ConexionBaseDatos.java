@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexionbasedatos;
+package controllers;
 
+import views.loginInterface;
 import views.mainInterface;
 
 import javax.swing.*;
@@ -21,8 +22,8 @@ public class ConexionBaseDatos {
     public static void main(String[] args) {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
-        new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
-        //new loginInterface();
+        //new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
+        new loginInterface();
 
 
 
