@@ -5,12 +5,9 @@
  */
 package conexionbasedatos;
 
-import Interfaz.configInterface;
-import Interfaz.loginInterface;
-import Interfaz.mainInterface;
+import views.mainInterface;
 
 import javax.swing.*;
-import java.sql.Connection;
 
 /**
  *

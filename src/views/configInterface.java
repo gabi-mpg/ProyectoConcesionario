@@ -1,4 +1,4 @@
-package Interfaz;
+package views;
 
 import conexionbasedatos.config;
 

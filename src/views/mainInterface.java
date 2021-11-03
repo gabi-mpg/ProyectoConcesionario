@@ -1,10 +1,9 @@
-package Interfaz;
+package views;
 
 import conexionbasedatos.MNGDB;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.ConnectException;
 import java.sql.Connection;
 
 import static conexionbasedatos.Utilidades.reescalarImagen;

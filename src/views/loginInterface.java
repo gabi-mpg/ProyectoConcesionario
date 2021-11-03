@@ -1,4 +1,4 @@
-package Interfaz;
+package views;
 
 import conexionbasedatos.MNGDB;
 import conexionbasedatos.config;
@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import conexionbasedatos.Utilidades.*;
 
 import static conexionbasedatos.Utilidades.jMensaje;
 import static conexionbasedatos.Utilidades.reescalarImagen;
