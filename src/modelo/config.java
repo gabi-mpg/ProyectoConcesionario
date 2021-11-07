@@ -1,4 +1,4 @@
-package conecionBD;
+package modelo;
 
 
 

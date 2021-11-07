@@ -1,12 +1,12 @@
 package views;
 
-import conecionBD.MNGDB;
+import modelo.MNGDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 
-import static controllers.Utilidades.reescalarImagen;
+import static utils.Utilidades.reescalarImagen;
 
 public class mainInterface extends JFrame {
 

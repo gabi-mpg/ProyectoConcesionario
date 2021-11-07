@@ -1,13 +1,13 @@
 package views;
 
-import conecionBD.config;
+import modelo.config;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import static controllers.Utilidades.jMensaje;
+import static utils.Utilidades.jMensaje;
 
 public class configInterface extends JFrame implements ActionListener {
 

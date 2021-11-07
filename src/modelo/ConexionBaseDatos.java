@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conecionBD;
+package modelo;
 
 import views.loginInterface;
-import views.mainInterface;
-
-import javax.swing.*;
 
 /**
  *
