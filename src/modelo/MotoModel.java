@@ -77,6 +77,8 @@ public class MotoModel{
         String sql = "delete from t_moto where matricula like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
+            pst.setString(1, matricula);
+            pst.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
