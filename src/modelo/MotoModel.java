@@ -56,7 +56,7 @@ public class MotoModel{
         return listaMotos;
     }
 
-    public static ArrayList<Moto> addMoto(Moto moto){
+    public static void addMoto(Moto moto){
         String sql = "INSERT INTO t_moto values (?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -70,10 +70,10 @@ public class MotoModel{
             System.err.println("Error registrando la moto. " + e);
         }
 
-        return getListaMotos();
+        listaMotos.add(moto);
     }
 
-    public static ArrayList<Moto> removeMoto(String matricula){
+    public static void removeMoto(String matricula){
         String sql = "delete from t_moto where matricula like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -83,7 +83,32 @@ public class MotoModel{
             throwables.printStackTrace();
         }
 
-        return getListaMotos();
+        listaMotos.removeIf(m -> m.getMatricula().equalsIgnoreCase(matricula));
+    }
+
+    public static void updateMoto(Moto moto){
+        String sql = "UPDATE t_moto set Marca = ?, Color = ?, Tanque = ? where matricula like ?";
+        try {
+            PreparedStatement pst = conexion.prepareStatement(sql);
+            pst.setString(1, moto.getMarca());
+            pst.setString(2, moto.getColor());
+            pst.setInt(3, moto.getTanque());
+            pst.setString(4, moto.getMatricula());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        updateMotoLista(moto);
+    }
+
+    private static void updateMotoLista(Moto moto){
+        for (Moto m : listaMotos){
+            if (m.getMatricula().equalsIgnoreCase(moto.getMatricula())){
+                m.setColor(moto.getColor());
+                m.setMarca(moto.getMarca());
+                m.setTanque(moto.getTanque());
+            }
+        }
     }
 
 }
