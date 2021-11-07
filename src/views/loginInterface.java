@@ -177,7 +177,7 @@ public class loginInterface extends JFrame implements ActionListener {
                         jMensaje(this,"La contraseña introducida no coincide con el usuario","Contraseña incorrecta",2);
                         break;
                     default:
-                        new mainInterface(cnControl.getConexion(),n,user);
+                        //new mainInterface(cnControl.getConexion(),n,user);
                         //Esta ventana está en proceso
                         this.dispose();
                         break;

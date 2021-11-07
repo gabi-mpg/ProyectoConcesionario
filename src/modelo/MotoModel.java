@@ -73,4 +73,15 @@ public class MotoModel{
         return getListaMotos();
     }
 
+    public static ArrayList<Moto> removeMoto(String matricula){
+        String sql = "delete from t_moto where matricula like ?";
+        try {
+            PreparedStatement pst = conexion.prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return getListaMotos();
+    }
+
 }
