@@ -1,5 +1,6 @@
 package views;
 
+import controllers.ControllerConexion;
 import modelo.MNGDB;
 import modelo.config;
 
@@ -18,15 +19,14 @@ public class loginInterface extends JFrame implements ActionListener {
     private JTextField campousuario;
     private JPasswordField campoClave;
     private GridBagConstraints gestor;
-    private final MNGDB conexion;
     private final config configuracion = new config();
+    private final ControllerConexion cnControl = new ControllerConexion();
 
 
 
     public loginInterface(){
         super("Iniciar sesion");
-        conexion = new MNGDB(this);
-        conexion.setRegistros(configuracion.getConfig());
+        cnControl.setRegistros();
         initComponents();
         addComponents();
         habilitar(false);
@@ -124,7 +124,7 @@ public class loginInterface extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
         if (s.equals(botonConexion.getActionCommand())) {
-            this.conexion.setRegistros(configuracion.getConfig());
+            cnControl.setRegistros();
             cambioIndicador();
         } else if(s.equals(botonLogin.getActionCommand())){
             login();
@@ -132,14 +132,14 @@ public class loginInterface extends JFrame implements ActionListener {
             this.setEnabled(false);
             new configInterface(configuracion.getConfig(),configuracion, this);
             System.out.println("vuelta al principal");
-            this.conexion.setRegistros(configuracion.getConfig());
+            cnControl.setRegistros();
         }
     }
 
 
     private void cambioIndicador() {
-        if (!conexion.estado()) {
-            if (conexion.establecerConexion()) {
+        if (!cnControl.estadoCn()) {
+            if (cnControl.conectar()) {
                 panelIndicador.setBackground(Color.green);
                 habilitar(true);
                 jMensaje(this,"Se ha conectado a la base de datos","Conexión establecida",1);
@@ -149,7 +149,7 @@ public class loginInterface extends JFrame implements ActionListener {
                 jMensaje(this,"No se ha podido establecer conexión","Error de conexión",0);
             }
         } else {
-            if (conexion.cerrarConexion()) {
+            if (cnControl.cerrarCn()) {
                 panelIndicador.setBackground(Color.red);
                 jMensaje(this,"Se ha desconectado de la base de datos","Conexión cerrada",1);
             }
@@ -163,7 +163,7 @@ public class loginInterface extends JFrame implements ActionListener {
             if(user.isEmpty() | pass.isEmpty()){
                 jMensaje(this,"Faltan campos por completar","Falta información",2);
             }else{
-                int n = conexion.iniciarSesion(user,pass);
+                int n = cnControl.login(user, pass);
                 System.out.println(n);
                 switch (n){
                     case -2:
@@ -177,7 +177,7 @@ public class loginInterface extends JFrame implements ActionListener {
                         jMensaje(this,"La contraseña introducida no coincide con el usuario","Contraseña incorrecta",2);
                         break;
                     default:
-                        new mainInterface(conexion.getConexion(),n,user);
+                        new mainInterface(cnControl.getConexion(),n,user);
                         //Esta ventana está en proceso
                         this.dispose();
                         break;

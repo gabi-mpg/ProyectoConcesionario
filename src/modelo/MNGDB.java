@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import views.loginInterface;
+
 import static utils.Utilidades.reescalarImagen;
 import java.awt.Component;
 import java.io.File;
@@ -21,13 +23,11 @@ public class MNGDB {
     
     private Connection conexion;
     private boolean estado;
-    private final Component PADRE;
     public static final String RUTA_REC = System.getProperty("user.dir")+File.separator+
                            "Recourses"+File.separator;
     private  String bbdd,user,clave;
 
-    public MNGDB(Component padre){
-        this.PADRE = padre;
+    public MNGDB(){
     }
     
 
@@ -52,7 +52,7 @@ public class MNGDB {
         if(!comprobarExsite("concesionario")){
             String[] opciones = {"Crear BBDD", "Salir del programa"};
             int n = JOptionPane.showOptionDialog(
-                    PADRE,
+                    null,
                     "Deseas crear una nueva BBDD?", 
                     "No se encuentra la BBDD", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE,
                     reescalarImagen(new ImageIcon(RUTA_REC+"BBDDError.png"),30,30),
@@ -176,14 +176,7 @@ public class MNGDB {
     public Connection getConexion(){
         return this.conexion;
     }
-    
-    /**
-     * 
-     * @return True si la conexión está cerrada, false si está abierta
-     */
-    public boolean estado(){
-       return this.estado;
-    }
+
     
     
     public int iniciarSesion(String nombreUsuario, String contrasena){
@@ -212,5 +205,15 @@ public class MNGDB {
     }
 
 
+    public void setConexion(Connection conexion) {
+        this.conexion = conexion;
+    }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 }
