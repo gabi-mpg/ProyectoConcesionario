@@ -8,9 +8,9 @@ public class MotoCRUD {
     public void crearMoto(String matricula, String color, String marca, int tanque){
 
     }
-
-    public Moto buscarMoto(String matricula){
-        return
-    }
+//
+//    public Moto buscarMoto(String matricula){
+//        return
+//    }
 
 }
