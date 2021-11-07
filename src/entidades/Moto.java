@@ -45,4 +45,14 @@ public class Moto {
     public void setTanque(int tanque) {
         this.tanque = tanque;
     }
+
+    @Override
+    public String toString() {
+        return "Moto{" +
+                "matricula='" + matricula + '\'' +
+                ", marca='" + marca + '\'' +
+                ", color='" + color + '\'' +
+                ", tanque=" + tanque +
+                '}';
+    }
 }

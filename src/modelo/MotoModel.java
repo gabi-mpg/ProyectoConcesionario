@@ -1,54 +1,76 @@
 package modelo;
 
 import controllers.ControllerConexion;
-import controllers.ICRUD;
 import entidades.Moto;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.ArrayList;
 
-public class MotoModel implements ICRUD {
+public class MotoModel{
 
-    private ArrayList<Moto> motos;
-    private ControllerConexion cnControl;
-    private Connection conexion;
+    private static ArrayList<Moto> listaMotos;
+    private static ControllerConexion cnControl;
+    private static Connection conexion;
 
     public MotoModel(){
-        this.motos = new ArrayList<>();
+        this.listaMotos = new ArrayList<>();
         this.cnControl = new ControllerConexion();
+        this.conexion = cnControl.getConexion();
     }
 
-    private void rellenarArray(){
+    private static void saveMotos(){
+        listaMotos.clear();
+        String sql = "SELECT * FROM t_moto";
+
+        try {
+            PreparedStatement pst = conexion.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()){
+                String matricula = rs.getString("Matricula");
+                String color = rs.getString("Color");
+                String marca = rs.getString("Marca");
+                int tanque = rs.getInt("Tanque");
+                Moto moto = new Moto(matricula, marca, color, tanque);
+                listaMotos.add(moto);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 
-    @Override
-    public Boolean crear(Object o) {
+    public static Moto buscarMoto(String pk){
+        for(Moto m : listaMotos){
+            if (m.getMatricula().equalsIgnoreCase(pk)){
+                return m;
+            }
+        }
+
         return null;
     }
 
-    @Override
-    public Object leer(Object o, int id) {
-        return null;
+    public static ArrayList<Moto> getListaMotos(){
+        saveMotos();
+        return listaMotos;
     }
 
-    @Override
-    public Object leerString(Object o, String pk) {
-        return null;
+    public static ArrayList<Moto> addMoto(Moto moto){
+        String sql = "INSERT INTO t_moto values (?, ?, ?, ?)";
+        try {
+            PreparedStatement pst = conexion.prepareStatement(sql);
+            pst.setString(1, moto.getMatricula());
+            pst.setString(2, moto.getMarca());
+            pst.setString(3, moto.getColor());
+            pst.setInt(4, moto.getTanque());
+
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Error registrando la moto. " + e);
+        }
+
+        return getListaMotos();
     }
 
-    @Override
-    public void listar(Object o) {
-
-    }
-
-    @Override
-    public Boolean actualizar(Object o, int id) {
-        return null;
-    }
-
-    @Override
-    public Boolean eliminar(Object o, int id) {
-        return null;
-    }
 }
