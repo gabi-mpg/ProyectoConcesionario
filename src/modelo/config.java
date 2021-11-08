@@ -45,17 +45,15 @@ public class config implements Serializable{
     }
 
     public String[] getConfig(){
-//        ObjectInputStream is;
-//        try {
-//            is = new ObjectInputStream(new FileInputStream(ficheroConfig));
-//            this.informacion = (String[]) is.readObject();
-//            return this.informacion;
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//            return this.informacion;
-//        }
-        String[] registro = {"jdbc:mysql://localhost/","root","pass123"};
-        return registro;
+        ObjectInputStream is;
+        try {
+            is = new ObjectInputStream(new FileInputStream(ficheroConfig));
+            this.informacion = (String[]) is.readObject();
+            return this.informacion;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return this.informacion;
+        }
     }
 
     public void setConfig(String[] informacion){//ESTE NUNCA SE USA

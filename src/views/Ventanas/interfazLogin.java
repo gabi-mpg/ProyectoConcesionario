@@ -17,16 +17,18 @@ import static utils.Utilidades.jMensaje;
  */
 public class interfazLogin extends javax.swing.JFrame{
 
-    /**
-     * Creates new form interfazLogin
-     */
+    private modelo.config configuracion;
+    private ControllerConexion conexion;
+
     private ControllerConexion controlador;
     private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
 
     public interfazLogin() {
         this.controlador = new ControllerConexion();
-        controlador.setRegistros();
-        controlador.conectar();
+        conexion = new ControllerConexion();
+        configuracion = new modelo.config();
+        conexion.setRegistros();
+        conexion.conectar();
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -42,6 +44,13 @@ public class interfazLogin extends javax.swing.JFrame{
             @Override
             public void mouseClicked(MouseEvent e){
                System.exit(0); 
+            }
+        });
+        this.configLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String[] configuracionIncial = new modelo.config().getConfig();
+                new interfazConfig(configuracionIncial,configuracion);
             }
         });
     }
@@ -189,6 +198,8 @@ public class interfazLogin extends javax.swing.JFrame{
     private void login() {
         String user = campoUsuario.getText();
         String pass = new String(campoClave.getPassword());
+        controlador.setRegistros();
+        //hay que primero leer los registros antes de hacer el login y despues hacer lo que sea que tal
         if (user.isEmpty() | pass.isEmpty()) {
             jMensaje(this, "Faltan campos por completar", "Falta información", 2);
         } else {
@@ -209,7 +220,7 @@ public class interfazLogin extends javax.swing.JFrame{
                     jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
                     break;
                 default:
-                    System.out.println("sesion iniciada");
+
                     this.dispose();
                     break;
             }
