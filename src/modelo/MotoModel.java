@@ -2,7 +2,6 @@ package modelo;
 
 import controllers.ControllerConexion;
 import entidades.Moto;
-import views.LoginInterface;
 
 import java.sql.*;
 import java.util.ArrayList;
