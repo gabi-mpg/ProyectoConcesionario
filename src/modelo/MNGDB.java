@@ -177,22 +177,27 @@ public class MNGDB {
     
     
     public int iniciarSesion(String nombreUsuario, String contrasena){
-        try {
-            Statement s = conexion.createStatement();
-            ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where nick='"+nombreUsuario+"'");
-            if(r.next()) {
-                if(contrasena.equals(r.getString("Contrasena"))){
-                    return r.getInt("nivelPermiso");
+        if(establecerConexion()){
+            try {
+                Statement s = conexion.createStatement();
+                ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where nick='"+nombreUsuario+"'");
+                if(r.next()) {
+                    if(contrasena.equals(r.getString("Contrasena"))){
+                        return r.getInt("nivelPermiso");
+                    }else{
+                        return 0;
+                    }
                 }else{
-                    return 0;
+                    return -1;
                 }
-            }else{
-                return -1;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return -2;
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return -2;
+        }else{
+            return -4;
         }
+
     }
 
     public void setRegistros(String[] registros){

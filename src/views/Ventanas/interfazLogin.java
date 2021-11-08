@@ -5,9 +5,11 @@
  */
 package views.Ventanas;
 
+import controllers.ControllerConexion;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import static utils.Utilidades.jMensaje;
 
 /**
  *
@@ -18,7 +20,13 @@ public class interfazLogin extends javax.swing.JFrame{
     /**
      * Creates new form interfazLogin
      */
+    private ControllerConexion controlador;
+    private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
+
     public interfazLogin() {
+        this.controlador = new ControllerConexion();
+        controlador.setRegistros();
+        controlador.conectar();
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -52,9 +60,9 @@ public class interfazLogin extends javax.swing.JFrame{
         jLabelLogo = new javax.swing.JLabel();
         configLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        campoUsuario = new javax.swing.JTextField();
+        campoClave = new javax.swing.JPasswordField();
+        botonLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         fondoPantalla = new javax.swing.JLabel();
@@ -64,7 +72,7 @@ public class interfazLogin extends javax.swing.JFrame{
         setUndecorated(true);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabelSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoSalir.png"))); // NOI18N
+        jLabelSalir.setIcon(new javax.swing.ImageIcon(ruta+"iconoSalir.png")); // NOI18N
         jLabelSalir.setToolTipText("Cerrar la aplicación");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -74,14 +82,14 @@ public class interfazLogin extends javax.swing.JFrame{
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         getContentPane().add(jLabelSalir, gridBagConstraints);
 
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imagenLogo.png"))); // NOI18N
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(ruta+"imagenLogo.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
         getContentPane().add(jLabelLogo, gridBagConstraints);
 
-        configLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoConfig.png"))); // NOI18N
+        configLabel.setIcon(new javax.swing.ImageIcon(ruta+"iconoConfig.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -99,20 +107,20 @@ public class interfazLogin extends javax.swing.JFrame{
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         getContentPane().add(jLabel1, gridBagConstraints);
 
-        jTextField2.setColumns(15);
-        jTextField2.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        campoUsuario.setColumns(15);
+        campoUsuario.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        campoUsuario.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 0);
-        getContentPane().add(jTextField2, gridBagConstraints);
+        getContentPane().add(campoUsuario, gridBagConstraints);
 
-        jPasswordField1.setColumns(15);
-        jPasswordField1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        campoClave.setColumns(15);
+        campoClave.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        campoClave.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        campoClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
             }
@@ -122,14 +130,14 @@ public class interfazLogin extends javax.swing.JFrame{
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(15, 0, 15, 0);
-        getContentPane().add(jPasswordField1, gridBagConstraints);
+        getContentPane().add(campoClave, gridBagConstraints);
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 102));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Iniciar sesión");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonLogin.setBackground(new java.awt.Color(102, 102, 102));
+        botonLogin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botonLogin.setForeground(new java.awt.Color(255, 255, 255));
+        botonLogin.setText("Iniciar sesión");
+        botonLogin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -139,7 +147,7 @@ public class interfazLogin extends javax.swing.JFrame{
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.ABOVE_BASELINE;
-        getContentPane().add(jButton1, gridBagConstraints);
+        getContentPane().add(botonLogin, gridBagConstraints);
 
         jLabel2.setBackground(new java.awt.Color(255, 51, 102));
         jLabel2.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
@@ -153,7 +161,7 @@ public class interfazLogin extends javax.swing.JFrame{
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        fondoPantalla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/wallpaper (Pequeño) (1).jpg"))); // NOI18N
+        fondoPantalla.setIcon(new javax.swing.ImageIcon(ruta+"wallpaper (Pequeño) (1).jpg")); // NOI18N
         fondoPantalla.setMinimumSize(new java.awt.Dimension(0, 0));
         fondoPantalla.setPreferredSize(new java.awt.Dimension(250, 400));
         jPanel1.add(fondoPantalla, java.awt.BorderLayout.CENTER);
@@ -174,12 +182,41 @@ public class interfazLogin extends javax.swing.JFrame{
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        login();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
+    private void login() {
+        String user = campoUsuario.getText();
+        String pass = new String(campoClave.getPassword());
+        if (user.isEmpty() | pass.isEmpty()) {
+            jMensaje(this, "Faltan campos por completar", "Falta información", 2);
+        } else {
+            int n = controlador.login(user, pass);
+            System.out.println(n);
+            switch (n) {
+                case -4:
+                    System.out.println("error");
+                    break;
+                    case -2:
+                    jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
+                    System.exit(0);
+                    break;
+                case -1:
+                    jMensaje(this, "El usuario " + user + " no existe", "Usuario incorrecto", 2);
+                    break;
+                case 0:
+                    jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
+                    break;
+                default:
+                    System.out.println("sesion iniciada");
+                    this.dispose();
+                    break;
+            }
+        }
+    }
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -215,14 +252,14 @@ public class interfazLogin extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel configLabel;
     private javax.swing.JLabel fondoPantalla;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelSalir;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField campoClave;
+    private javax.swing.JTextField campoUsuario;
     // End of variables declaration//GEN-END:variables
 
 }
