@@ -5,10 +5,8 @@
  */
 package modelo;
 
-import views.loginInterface;
-
 import static utils.Utilidades.reescalarImagen;
-import java.awt.Component;
+
 import java.io.File;
 import java.sql.*;
 

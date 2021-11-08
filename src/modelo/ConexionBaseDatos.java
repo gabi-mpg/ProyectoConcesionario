@@ -6,9 +6,6 @@
 package modelo;
 
 import views.NewJFrame;
-import views.loginInterface;
-
-import javax.swing.*;
 
 /**
  *

@@ -2,25 +2,28 @@ package modelo;
 
 import controllers.ControllerConexion;
 import entidades.Moto;
+import views.LoginInterface;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class MotoModel{
 
-    private static ArrayList<Moto> listaMotos;
-    private static ControllerConexion cnControl;
+    private static ArrayList<Moto> listaMotos = new ArrayList<>();
+    private static ControllerConexion cnControl = new ControllerConexion();
     private static Connection conexion;
 
     public MotoModel(){
-        this.listaMotos = new ArrayList<>();
-        this.cnControl = new ControllerConexion();
-        this.conexion = cnControl.getConexion();
+        listaMotos = new ArrayList<>();
+        cnControl = new ControllerConexion();
+        //conexion = cnControl.getConexion();
+        //conexion = conectar();
+        saveMotos();
     }
 
     private static void saveMotos(){
         listaMotos.clear();
-        String sql = "SELECT * FROM t_moto";
+        String sql = "SELECT * FROM t_motos";
 
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -42,13 +45,22 @@ public class MotoModel{
     }
 
     public static Moto buscarMoto(String pk){
+        saveMotos();
         for(Moto m : listaMotos){
             if (m.getMatricula().equalsIgnoreCase(pk)){
                 return m;
             }
         }
-
         return null;
+    }
+
+    public static void listarMoto(String pk){
+        if (buscarMoto(pk) != null){
+            System.out.println(buscarMoto(pk).toString());
+        } else{
+            System.out.println("La moto no existe en la bd");
+        }
+
     }
 
     public static ArrayList<Moto> getListaMotos(){
@@ -57,7 +69,8 @@ public class MotoModel{
     }
 
     public static void addMoto(Moto moto){
-        String sql = "INSERT INTO t_moto values (?, ?, ?, ?)";
+        saveMotos();
+        String sql = "INSERT INTO t_motos values (?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, moto.getMatricula());
@@ -70,35 +83,43 @@ public class MotoModel{
             System.err.println("Error registrando la moto. " + e);
         }
 
-        listaMotos.add(moto);
+        getListaMotos();
     }
 
-    public static void removeMoto(String matricula){
-        String sql = "delete from t_moto where matricula like ?";
+    public static boolean removeMoto(String matricula){
+        saveMotos();
+        String sql = "delete from t_motos where matricula like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, matricula);
             pst.executeUpdate();
+            listaMotos.removeIf(m -> m.getMatricula().equalsIgnoreCase(matricula));
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
-
-        listaMotos.removeIf(m -> m.getMatricula().equalsIgnoreCase(matricula));
     }
 
-    public static void updateMoto(Moto moto){
-        String sql = "UPDATE t_moto set Marca = ?, Color = ?, Tanque = ? where matricula like ?";
+    public static boolean updateMoto(Moto moto){
+        System.out.println(moto.toString());
+        saveMotos();
+        String sql = "UPDATE t_motos set Marca = ?, Color = ?, Tanque = ? where matricula like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, moto.getMarca());
             pst.setString(2, moto.getColor());
             pst.setInt(3, moto.getTanque());
             pst.setString(4, moto.getMatricula());
+            pst.executeUpdate();
+            updateMotoLista(moto);
+            return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
 
-        updateMotoLista(moto);
+
     }
 
     private static void updateMotoLista(Moto moto){
@@ -109,6 +130,25 @@ public class MotoModel{
                 m.setTanque(moto.getTanque());
             }
         }
+    }
+
+    public static void conectar(){
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
+            conexion = cn;
+        }catch(SQLException e){
+            System.err.println("Error en la conexión local " + e);
+        }
+    }
+
+    public static void main(String[] args) {
+        Moto moto = new Moto("0677fwj", "ducati", "roja", 70);
+        addMoto(moto);
+        listarMoto("0677fwj");
+        moto.setColor("blanco");
+        updateMoto(moto);
+        //removeMoto("0677fwj");
+        listarMoto("0677fwj");
     }
 
 }

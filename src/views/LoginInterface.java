@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import static utils.Utilidades.jMensaje;
 import static utils.Utilidades.reescalarImagen;
 
-public class loginInterface extends JFrame implements ActionListener {
+public class LoginInterface extends JFrame implements ActionListener {
 
     private JPanel panelIndicador, panelLogin;
     private JButton botonConexion, botonLogin, botonConfig;
@@ -24,7 +24,7 @@ public class loginInterface extends JFrame implements ActionListener {
 
 
 
-    public loginInterface(){
+    public LoginInterface(){
         super("Iniciar sesion");
         cnControl.setRegistros();
         initComponents();

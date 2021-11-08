@@ -2,9 +2,7 @@ package controllers;
 
 import modelo.MNGDB;
 import modelo.config;
-import views.loginInterface;
 
-import java.awt.*;
 import java.sql.Connection;
 
 public class ControllerConexion {
