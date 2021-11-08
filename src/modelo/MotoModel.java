@@ -54,6 +54,10 @@ public class MotoModel{
         return null;
     }
 
+    public static boolean motoExiste(String pk){
+        return buscarMoto(pk) != null;
+    }
+
     public static void listarMoto(String pk){
         if (buscarMoto(pk) != null){
             System.out.println(buscarMoto(pk).toString());

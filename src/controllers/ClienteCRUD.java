@@ -1,9 +1,7 @@
 package controllers;
 
 import entidades.Cliente;
-import entidades.Moto;
 import modelo.ClienteModel;
-import modelo.MotoModel;
 
 import java.util.ArrayList;
 

@@ -53,6 +53,10 @@ public class ClienteModel {
         return null;
     }
 
+    public static boolean clienteExiste(String pk){
+        return buscarCliente(pk) != null;
+    }
+
     public static void listarCliente(String pk){
         if (buscarCliente(pk) != null){
             System.out.println(buscarCliente(pk).toString());
