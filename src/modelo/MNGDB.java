@@ -97,11 +97,10 @@ public class MNGDB {
             
             exe = conexion.prepareStatement(
                   "Create table t_usuarios("
-                  + "nick varchar(30) not null,"
+                  + "nick varchar(30) not null primary key,"
                   + "Nombre varchar(20) not null,"
                   + "Apellidos varchar(40) not null,"
                   +"Contrasena varchar(15) not null,"
-                  + "IDUsuario int(3) AUTO_INCREMENT primary key,"
                   + "nivelPermiso char(1));");
             exe.executeUpdate();
 
@@ -111,10 +110,10 @@ public class MNGDB {
                             + "Matricula varchar(15) not null,"
                             + "DNI varchar(9),"
                             + "Precio decimal(10,2),"
-                            + "IDVendedor int(3),"
+                            + "IDVendedor varchar(30),"
                             + "foreign key (Matricula) references t_motos(Matricula),"
                             + "foreign key (DNI) references t_clientes(DNI),"
-                            + "foreign key (IDVendedor) references t_usuarios(IDUsuario));");
+                            + "foreign key (IDVendedor) references t_usuarios(nick));");
             exe.executeUpdate();
             crearRegistros();
           

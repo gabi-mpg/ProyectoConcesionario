@@ -55,4 +55,15 @@ public class Usuario {
     public void setPermiso(int permiso) {
         this.permiso = permiso;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nick='" + nick + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", contra='" + contra + '\'' +
+                ", permiso=" + permiso +
+                '}';
+    }
 }
