@@ -8,20 +8,18 @@ import java.util.ArrayList;
 
 public class ClienteModel {
 
-    private static ArrayList<Cliente> listaClientes = new ArrayList<>();
-    private static ControllerConexion cnControl = new ControllerConexion();
-    private static Connection conexion;
+    private ArrayList<Cliente> listaClientes;
+    private ControllerConexion cnControl;
+    private Connection conexion;
 
     public ClienteModel(){
         listaClientes = new ArrayList<>();
         cnControl = new ControllerConexion();
-        cnControl.conectar();
-        conexion = cnControl.getConexion();
-        //conexion = conectar();
+        conexion = cnControl.conectar();
         saveClientes();
     }
 
-    private static void saveClientes(){
+    private void saveClientes(){
         listaClientes.clear();
         String sql = "SELECT * FROM t_clientes";
 
@@ -33,7 +31,6 @@ public class ClienteModel {
                 String dni = rs.getString("DNI");
                 String nombre = rs.getString("Nombre");
                 String apellido = rs.getString("Apellido");
-                System.out.println(apellido);
                 String direcc = rs.getString("Direccion");
                 Cliente cliente = new Cliente(dni, nombre, apellido, direcc);
                 listaClientes.add(cliente);
@@ -45,7 +42,7 @@ public class ClienteModel {
 
     }
 
-    public static Cliente buscarCliente(String pk){
+    public Cliente buscarCliente(String pk){
         saveClientes();
         for(Cliente c : listaClientes){
             if (c.getDni().equalsIgnoreCase(pk)){
@@ -55,11 +52,11 @@ public class ClienteModel {
         return null;
     }
 
-    public static boolean clienteExiste(String pk){
+    public boolean clienteExiste(String pk){
         return buscarCliente(pk) != null;
     }
 
-    public static void listarCliente(String pk){
+    public void listarCliente(String pk){
         if (buscarCliente(pk) != null){
             System.out.println(buscarCliente(pk).toString());
         } else{
@@ -68,12 +65,12 @@ public class ClienteModel {
 
     }
 
-    public static ArrayList<Cliente> getListaClientes(){
+    public ArrayList<Cliente> getListaClientes(){
         saveClientes();
         return listaClientes;
     }
 
-    public static ArrayList<Cliente> addCliente(Cliente cliente){
+    public ArrayList<Cliente> addCliente(Cliente cliente){
         saveClientes();
         String sql = "INSERT INTO t_clientes values (?, ?, ?, ?)";
         try {
@@ -91,7 +88,7 @@ public class ClienteModel {
         return getListaClientes();
     }
 
-    public static boolean removeCliente(String dni){
+    public boolean removeCliente(String dni){
         saveClientes();
         String sql = "delete from t_clientes where dni like ?";
         try {
@@ -106,7 +103,7 @@ public class ClienteModel {
         }
     }
 
-    public static boolean updateCliente(Cliente cliente){
+    public boolean updateCliente(Cliente cliente){
         System.out.println(cliente.toString());
         saveClientes();
         String sql = "UPDATE t_clientes set Nombre = ?, Apellido = ?, Direccion = ? where DNI like ?";
@@ -127,7 +124,7 @@ public class ClienteModel {
 
     }
 
-    private static void updateClienteLista(Cliente cliente){
+    private void updateClienteLista(Cliente cliente){
         for (Cliente c : listaClientes){
             if (c.getDni().equalsIgnoreCase(cliente.getDni())){
                 c.setNombre(cliente.getNombre());
@@ -137,7 +134,7 @@ public class ClienteModel {
         }
     }
 
-    public static void conectar(){
+    public void conectar(){
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
             conexion = cn;

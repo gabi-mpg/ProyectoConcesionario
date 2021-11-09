@@ -26,7 +26,7 @@ public class interfazLogin extends javax.swing.JFrame{
         conexion = new ControllerConexion();
         configuracion = new modelo.config();
         conexion.setRegistros();
-        conexion.conectar();
+        conexion.conectarComprobar();
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);

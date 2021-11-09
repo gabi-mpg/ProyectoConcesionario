@@ -2,26 +2,23 @@ package modelo;
 
 import controllers.ControllerConexion;
 import entidades.Usuario;
-import entidades.Venta;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class UsuarioModel {
-    private static ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-    private static ControllerConexion cnControl = new ControllerConexion();
+    private static ArrayList<Usuario> listaUsuarios;
+    private static ControllerConexion cnControl;
     private static Connection conexion;
 
     public UsuarioModel(){
         listaUsuarios = new ArrayList<>();
         cnControl = new ControllerConexion();
-        cnControl.conectar();
-        conexion = cnControl.getConexion();
-        //conexion = conectar();
+        conexion = cnControl.conectar();
         saveUsuario();
     }
 
-    private static void saveUsuario(){
+    private void saveUsuario(){
         listaUsuarios.clear();
         String sql = "SELECT * FROM t_usuarios";
 
@@ -45,7 +42,7 @@ public class UsuarioModel {
 
     }
 
-    public static Usuario buscarUsuario(String pk){
+    public Usuario buscarUsuario(String pk){
         saveUsuario();
         for(Usuario u : listaUsuarios){
             if (u.getNick().equalsIgnoreCase(pk)){
@@ -55,7 +52,7 @@ public class UsuarioModel {
         return null;
     }
 
-    public static void listarUsuario(String pk){
+    public void listarUsuario(String pk){
         if (buscarUsuario(pk) != null){
             System.out.println(buscarUsuario(pk).toString());
         } else{
@@ -64,16 +61,16 @@ public class UsuarioModel {
 
     }
 
-    public static ArrayList<Usuario> getListaUsuarios(){
+    public ArrayList<Usuario> getListaUsuarios(){
         saveUsuario();
         return listaUsuarios;
     }
 
-    public static boolean buscarExistencia(String pk){
+    public boolean buscarExistencia(String pk){
         return buscarUsuario(pk) != null;
     }
 
-    public static void addUsuario(Usuario usuario){
+    public void addUsuario(Usuario usuario){
         saveUsuario();
         String sql = "INSERT INTO t_usuarios values (?, ?, ?, ?, ?)";
         try {
@@ -92,7 +89,7 @@ public class UsuarioModel {
         getListaUsuarios();
     }
 
-    public static boolean removeUsuario(String pk){
+    public boolean removeUsuario(String pk){
         saveUsuario();
         String sql = "delete from t_usuarios where pk like ?";
         try {
@@ -107,7 +104,7 @@ public class UsuarioModel {
         }
     }
 
-    public static boolean updateUsuario(Usuario usuario){
+    public boolean updateUsuario(Usuario usuario){
         System.out.println(usuario.toString());
         saveUsuario();
         String sql = "UPDATE t_usuarios set Nombre = ?, Apellidos = ?, Contrasena = ?, nivelPermiso = ? where IDVenta = ?";
@@ -128,7 +125,7 @@ public class UsuarioModel {
 
     }
 
-    private static void updateVentaLista(Usuario usuario){
+    private void updateVentaLista(Usuario usuario){
         for (Usuario u : listaUsuarios){
             if (u.getNick().equalsIgnoreCase(usuario.getNick())){
                 u.setNombre(usuario.getNombre());
@@ -139,7 +136,7 @@ public class UsuarioModel {
         }
     }
 
-    public static void conectar(){
+    public void conectar(){
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
             conexion = cn;

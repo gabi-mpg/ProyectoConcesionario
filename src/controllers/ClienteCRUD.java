@@ -9,20 +9,21 @@ import java.util.ArrayList;
 
 public class ClienteCRUD {
 
+    private ClienteModel model;
 
     public ClienteCRUD(){
-
+        this.model = new ClienteModel();
     }
 
     public ArrayList<Cliente> getListaClientes(){
-        return ClienteModel.getListaClientes();
+        return model.getListaClientes();
     }
 
     public boolean agregarCliente(String dni, String nombre, String apellido, String direcc){
-        if (ClienteModel.buscarCliente(dni) != null){
+        if (model.buscarCliente(dni) != null){
             return false;
         } else {
-            ClienteModel.addCliente(new Cliente(dni, apellido, nombre, direcc));
+            model.addCliente(new Cliente(dni, apellido, nombre, direcc));
             return true;
         }
     }
@@ -32,7 +33,11 @@ public class ClienteCRUD {
     }
 
     public Cliente buscarCliente(String pk){
-        return ClienteModel.buscarCliente(pk);
+        return model.buscarCliente(pk);
+    }
+
+    public boolean clienteExiste(String pk){
+        return model.clienteExiste(pk);
     }
 
     public void listarCliente(String pk){
@@ -44,7 +49,7 @@ public class ClienteCRUD {
     }
 
     public void removeCliente(String pk){
-        if (ClienteModel.removeCliente(pk)){
+        if (model.removeCliente(pk)){
             System.out.println("Cliente eliminado con exito");
         } else {
             System.out.println("Error eliminando el cliente");
@@ -52,7 +57,7 @@ public class ClienteCRUD {
     }
 
     public void updateCliente(Cliente cliente){
-        if (ClienteModel.updateCliente(cliente)){
+        if (model.updateCliente(cliente)){
             System.out.println("Cliente actualizado con exito");
         } else {
             System.out.println("Error actualizando el cliente");

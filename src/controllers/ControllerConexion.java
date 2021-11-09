@@ -23,8 +23,12 @@ public class ControllerConexion {
         return conexionMng.isEstado();
     }
 
-    public boolean conectar(){
-        return conexionMng.establecerConexion();
+    public boolean conectarComprobar(){
+        return conexionMng.establecerConexionComprobar();
+    }
+
+    public Connection conectar(){
+        return conexionMng.conectar();
     }
 
     public boolean cerrarCn(){

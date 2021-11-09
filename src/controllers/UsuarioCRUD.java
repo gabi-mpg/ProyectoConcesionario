@@ -7,17 +7,18 @@ import java.util.ArrayList;
 
 public class UsuarioCRUD {
 
+    private UsuarioModel model;
     public UsuarioCRUD(){
-        UsuarioModel.conectar();
+        this.model = new UsuarioModel();
     }
 
     public ArrayList<Usuario> gesListaUsuarios(){
-        return UsuarioModel.getListaUsuarios();
+        return model.getListaUsuarios();
     }
 
     public boolean agregarUsuario(String nick, String nombre, String apellidos, String contra, int nivel){
-        if (UsuarioModel.buscarUsuario(nick) == null){
-            UsuarioModel.addUsuario(new Usuario(nick, nombre, apellidos, contra, nivel));
+        if (model.buscarUsuario(nick) == null){
+            model.addUsuario(new Usuario(nick, nombre, apellidos, contra, nivel));
             return true;
         } else {
             return false;
@@ -25,7 +26,7 @@ public class UsuarioCRUD {
     }
 
     public Usuario buscarUsuario(String pk){
-        return UsuarioModel.buscarUsuario(pk);
+        return model.buscarUsuario(pk);
     }
 
     public void listarUsuario(String pk){
@@ -37,7 +38,7 @@ public class UsuarioCRUD {
     }
 
     public void removeUsuario(String pk){
-        if (UsuarioModel.removeUsuario(pk)){
+        if (model.removeUsuario(pk)){
             System.out.println("Usuario eliminado con exito");
         } else {
             System.out.println("Error eliminando el usuario");
@@ -45,7 +46,7 @@ public class UsuarioCRUD {
     }
 
     public void updateUsuario(Usuario usuario){
-        if (UsuarioModel.updateUsuario(usuario)){
+        if (model.updateUsuario(usuario)){
             System.out.println("Usuario actualizado con exito");
         } else {
             System.out.println("Error actualizando el usuario");

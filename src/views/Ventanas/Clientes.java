@@ -5,8 +5,13 @@
  */
 package views.Ventanas;
 
+import com.mysql.cj.xdevapi.Client;
 import controllers.ClienteCRUD;
+import controllers.MotoCRUD;
+import controllers.UsuarioCRUD;
+import controllers.VentaCRUD;
 import entidades.Cliente;
+import entidades.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -57,6 +62,7 @@ public class Clientes extends javax.swing.JPanel {
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
+        cnCliente = new ClienteCRUD();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -77,7 +83,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
-        botonBuscar.setText("Buscar cliente");
+        botonBuscar.setText("Buscar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -85,7 +91,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 8);
         add(botonBuscar, gridBagConstraints);
 
-        botonModificar.setText("Modificar cliente");
+        botonModificar.setText("Modificar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -93,7 +99,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 8);
         add(botonModificar, gridBagConstraints);
 
-        botonCrear.setText("Crear cliente");
+        botonCrear.setText("Crear");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -101,13 +107,15 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 8);
         add(botonCrear, gridBagConstraints);
 
-        botonEliminar.setText("Eliminar cliente");
+        botonEliminar.setText("Eliminar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 35, 0, 8);
         add(botonEliminar, gridBagConstraints);
+
+        agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
     private void setHeaders(){
@@ -131,6 +139,80 @@ public class Clientes extends javax.swing.JPanel {
             model.addRow(datosCliente);
         }
     }
+
+    private void fillTableBuscar(Cliente c){
+        model.setRowCount(0);
+            Object[] datosCliente = new Object[4];
+            datosCliente[0] = c.getDni();
+            datosCliente[1] = c.getNombre();
+            datosCliente[2] = c.getApellido();
+            datosCliente[3] = c.getDireccion();
+            model.addRow(datosCliente);
+    }
+
+    private void agregarListeners(){
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+    }
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+            String dni = pedirDNI();
+            if (cnCliente.clienteExiste(dni)){
+                Cliente cliente = cnCliente.buscarCliente(dni);
+                fillTableBuscar(cliente);
+            } else {
+                JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD");
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private String pedirDNI(){
+        String dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
+
+        while (!cnCliente.comprobarDNI(dni)){
+            JOptionPane.showMessageDialog(this, "Formato DNI incorrecto");
+
+            dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
+        }
+        return dni;
+    }
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -139,5 +221,7 @@ public class Clientes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
+    private ClienteCRUD cnCliente;
+
     // End of variables declaration//GEN-END:variables
 }
