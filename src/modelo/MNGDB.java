@@ -84,7 +84,7 @@ public class MNGDB {
                   + "DNI varchar(9) primary key,"
                   + "Nombre varchar(30),"
                   + "Apellido varchar(30),"
-                  + "Direcccion varchar(30));");
+                  + "Direccion varchar(30));");
           exe.executeUpdate();
           
           exe = conexion.prepareStatement(

@@ -160,9 +160,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         // TODO add your handling code here:
     }
 
-
-
-
     /**
      * @param args the command line arguments
      */
@@ -197,8 +194,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             }
         });
     }
-
-
 
     private void anadirMenu(){
         barra = new JMenuBar();
@@ -258,8 +253,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JPanel panelSecundario;
     // End of variables declaration
 
-
-
     private void anadirPaneles(){
         panelSecundario.add(panelClientes);
         panelSecundario.add(panelMotos);
@@ -296,7 +289,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         anadirPaneles();
         switch(panelCambio){
             case PANEL_CLIENTE:
-
                 panelSecundario.remove(panelMotos);
                 panelSecundario.remove(panelVentas);
                 panelSecundario.remove(panelUsuario);
@@ -336,8 +328,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 panelSecundario.repaint();
                 mostrar();
                 break;
-
-
         }
     }
 
@@ -355,16 +345,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         o.start();
     }
 
-
-
-
-
-
-
     class esconderPanel implements Runnable{
 
         private JFrame panel;
-        private JPanel referencia;
+        //private JPanel referencia;
 
         public esconderPanel(JFrame panelCambio){
             this.panel = panelCambio; //Panel que va a sufrir el cambio
@@ -380,7 +364,9 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 n-=15;
                 try{
                     Thread.sleep(1);
-                }catch(InterruptedException io){}
+                }catch(InterruptedException io){
+                    System.out.println(io.getMessage());
+                }
             }
             panel.repaint();
 //       while(n < tamOriginal){
@@ -397,8 +383,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         private JFrame panel;
 
-
-
         public mostrarPanel(JFrame panelCambio){
             this.panel = panelCambio; //Panel que va a sufrir el cambio
         }
@@ -414,7 +398,9 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                     panel.repaint();
                     Thread.sleep(1);
                 }
-            } catch(InterruptedException e){}
+            } catch(InterruptedException e){
+                System.out.println(e.getMessage());
+            }
             panel.repaint();
         }
     }

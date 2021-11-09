@@ -1,6 +1,7 @@
 package controllers;
 
 import entidades.Cliente;
+import entidades.Moto;
 import modelo.ClienteModel;
 
 import java.util.ArrayList;
@@ -55,5 +56,21 @@ public class ClienteCRUD {
             System.out.println("Error actualizando el cliente");
         }
     }
-
+    public static void main(String[] args) {
+        ClienteCRUD mc = new ClienteCRUD();
+        //mc.listarMoto("0677fwj");
+        //mc.listarMoto("5647gfd");
+        //Cliente cliente = new Cliente("79070841S", "Gabriela", "Mercado Perez", "Los Adelantaods, 11");
+        //mc.agregarCliente("79070841S", "Gabriela", "Mercado Perez", "Los Adelantaods, 11");
+        //mc.agregarCliente("79070842Q", "Lucia", "Mercado Perez", "Los Adelantaods, 11");
+        //System.out.println(cliente.toString());
+        Cliente luci =mc.buscarCliente("79070842Q");
+        Cliente gabi =mc.buscarCliente("79070841S");
+        luci.setNombre("Lucia");
+        luci.setApellido("Mercado Perez");
+        gabi.setNombre("Gabriela");
+        gabi.setApellido("Mercado Perez");
+        mc.updateCliente(luci);
+        mc.updateCliente(gabi);
+    }
 }

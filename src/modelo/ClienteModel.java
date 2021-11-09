@@ -32,8 +32,9 @@ public class ClienteModel {
                 String dni = rs.getString("DNI");
                 String nombre = rs.getString("Nombre");
                 String apellido = rs.getString("Apellido");
+                System.out.println(apellido);
                 String direcc = rs.getString("Direccion");
-                Cliente cliente = new Cliente(dni, apellido, nombre, direcc);
+                Cliente cliente = new Cliente(dni, nombre, apellido, direcc);
                 listaClientes.add(cliente);
             }
 

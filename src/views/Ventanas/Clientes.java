@@ -5,6 +5,13 @@
  */
 package views.Ventanas;
 
+import controllers.ClienteCRUD;
+import entidades.Cliente;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
 /**
  *
  * @author Chris
@@ -45,27 +52,20 @@ public class Clientes extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaResultado = new javax.swing.JTable();
         botonBuscar = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        model = new DefaultTableModel();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
 
-        tablaResultado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaResultado);
+        DefaultTableModel model = new DefaultTableModel();
+        setHeaders();
+        fillTable();
+
+
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -113,7 +113,27 @@ public class Clientes extends javax.swing.JPanel {
         add(botonEliminar, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    private void setHeaders(){
+        this.tablaResultado = new JTable(model);
+        jScrollPane1.setViewportView(tablaResultado);
+        model.addColumn("DNI");
+        model.addColumn("Nombre");
+        model.addColumn("Apellidos");
+        model.addColumn("Direccion");
+    }
+    private void fillTable(){
+        ClienteCRUD controlador = new ClienteCRUD();
+        ArrayList<Cliente> listaClientes = controlador.getListaClientes();
+        model.setRowCount(0);
+        for (Cliente c : listaClientes){
+            Object[] datosCliente = new Object[4];
+            datosCliente[0] = c.getDni();
+            datosCliente[1] = c.getNombre();
+            datosCliente[2] = c.getApellido();
+            datosCliente[3] = c.getDireccion();
+            model.addRow(datosCliente);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -121,5 +141,6 @@ public class Clientes extends javax.swing.JPanel {
     private javax.swing.JButton botonModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
+    private DefaultTableModel model;
     // End of variables declaration//GEN-END:variables
 }
