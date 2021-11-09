@@ -15,6 +15,7 @@ public class ClienteModel {
     public ClienteModel(){
         listaClientes = new ArrayList<>();
         cnControl = new ControllerConexion();
+        cnControl.conectar();
         conexion = cnControl.getConexion();
         //conexion = conectar();
         saveClientes();

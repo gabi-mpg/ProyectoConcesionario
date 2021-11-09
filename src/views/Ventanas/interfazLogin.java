@@ -220,6 +220,7 @@ public class interfazLogin extends javax.swing.JFrame{
                     break;
                 case 1:
                     new mainInterface();
+                    conexion.cerrarCn();
                     this.dispose();
                     break;
             }
