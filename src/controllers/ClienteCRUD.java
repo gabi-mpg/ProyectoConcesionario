@@ -4,12 +4,14 @@ import entidades.Cliente;
 import entidades.Moto;
 import modelo.ClienteModel;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class ClienteCRUD {
 
+
     public ClienteCRUD(){
-        ClienteModel.conectar();
+
     }
 
     public ArrayList<Cliente> getListaClientes(){

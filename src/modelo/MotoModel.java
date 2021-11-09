@@ -15,7 +15,7 @@ public class MotoModel{
     public MotoModel(){
         listaMotos = new ArrayList<>();
         cnControl = new ControllerConexion();
-        //conexion = cnControl.getConexion();
+        conexion = cnControl.getConexion();
         //conexion = conectar();
         saveMotos();
     }

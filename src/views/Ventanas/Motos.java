@@ -5,6 +5,15 @@
  */
 package views.Ventanas;
 
+import controllers.ClienteCRUD;
+import controllers.MotoCRUD;
+import entidades.Cliente;
+import entidades.Moto;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
 /**
  *
  * @author Chris
@@ -34,22 +43,12 @@ public class Motos extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-
+        model = new DefaultTableModel();
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
 
-        tablaResultado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaResultado);
+        setHeaders();
+        fillTable();
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -97,7 +96,27 @@ public class Motos extends javax.swing.JPanel {
         add(jButton4, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    private void setHeaders(){
+        this.tablaResultado = new JTable(model);
+        jScrollPane1.setViewportView(tablaResultado);
+        model.addColumn("Matricula");
+        model.addColumn("Marca");
+        model.addColumn("Color");
+        model.addColumn("Tanque");
+    }
+    private void fillTable(){
+        MotoCRUD controlador = new MotoCRUD();
+        ArrayList<Moto> listaMotos = controlador.getListaMotos();
+        model.setRowCount(0);
+        for (Moto m : listaMotos){
+            Object[] datosMoto = new Object[4];
+            datosMoto[0] = m.getMatricula();
+            datosMoto[1] = m.getMarca();
+            datosMoto[2] = m.getColor();
+            datosMoto[3] = m.getTanque();
+            model.addRow(datosMoto);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton jButton2;
@@ -105,5 +124,6 @@ public class Motos extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
+    private DefaultTableModel model;
     // End of variables declaration//GEN-END:variables
 }

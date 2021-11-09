@@ -5,6 +5,15 @@
  */
 package views.Ventanas;
 
+import controllers.ClienteCRUD;
+import controllers.VentaCRUD;
+import entidades.Cliente;
+import entidades.Venta;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
 /**
  *
  * @author Chris
@@ -50,22 +59,13 @@ public class Ventas extends javax.swing.JPanel {
         botonModificar = new javax.swing.JButton();
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        model = new DefaultTableModel();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
 
-        tablaResultado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaResultado);
+        setHeaders();
+        fillTable();
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -123,6 +123,28 @@ public class Ventas extends javax.swing.JPanel {
         add(botonEliminar, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setHeaders(){
+        this.tablaResultado = new JTable(model);
+        jScrollPane1.setViewportView(tablaResultado);
+        model.addColumn("DNI");
+        model.addColumn("Nombre");
+        model.addColumn("Apellidos");
+        model.addColumn("Direccion");
+    }
+    private void fillTable(){
+        VentaCRUD controlador = new VentaCRUD();
+        ArrayList<Venta> listaVentas = controlador.getListaVentas();
+        model.setRowCount(0);
+        for (Venta v : listaVentas){
+            Object[] datosVenta = new Object[4];
+            datosVenta[0] = v.getIdVenta();
+            datosVenta[1] = v.getDni();
+            datosVenta[2] = v.getMatricula();
+            datosVenta[3] = v.getPrecio();
+            model.addRow(datosVenta);
+        }
+    }
+
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonModificarActionPerformed
@@ -139,5 +161,6 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JButton botonModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
+    private DefaultTableModel model;
     // End of variables declaration//GEN-END:variables
 }

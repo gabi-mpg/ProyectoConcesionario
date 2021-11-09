@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class VentaCRUD {
 
     public VentaCRUD(){
-        VentaModel.conectar();
+
     }
 
-    public ArrayList<Venta> getListaClientes(){
+    public ArrayList<Venta> getListaVentas(){
         return VentaModel.getListaVentas();
     }
 

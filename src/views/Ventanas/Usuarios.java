@@ -5,6 +5,15 @@
  */
 package views.Ventanas;
 
+import controllers.ClienteCRUD;
+import controllers.UsuarioCRUD;
+import entidades.Cliente;
+import entidades.Usuario;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
 /**
  *
  * @author Chris
@@ -50,22 +59,13 @@ public class Usuarios extends javax.swing.JPanel {
         botonModificar = new javax.swing.JButton();
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        model = new DefaultTableModel();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
 
-        tablaResultado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaResultado);
+        setHeaders();
+        fillTable();
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -122,6 +122,27 @@ public class Usuarios extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonModificarActionPerformed
 
+    private void setHeaders(){
+        this.tablaResultado = new JTable(model);
+        jScrollPane1.setViewportView(tablaResultado);
+        model.addColumn("Nick");
+        model.addColumn("Nombre");
+        model.addColumn("Apellidos");
+        model.addColumn("Password");
+    }
+    private void fillTable(){
+        UsuarioCRUD controlador = new UsuarioCRUD();
+        ArrayList<Usuario> listaUsuarios = controlador.gesListaUsuarios();
+        model.setRowCount(0);
+        for (Usuario u : listaUsuarios){
+            Object[] datosUsuario = new Object[4];
+            datosUsuario[0] = u.getNick();
+            datosUsuario[1] = u.getNombre();
+            datosUsuario[2] = u.getApellidos();
+            datosUsuario[3] = u.getContra();
+            model.addRow(datosUsuario);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
@@ -130,5 +151,6 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JButton botonModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
+    private DefaultTableModel model;
     // End of variables declaration//GEN-END:variables
 }
