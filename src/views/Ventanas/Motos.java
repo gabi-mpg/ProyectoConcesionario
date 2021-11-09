@@ -6,7 +6,6 @@
 package views.Ventanas;
 
 import controllers.MotoCRUD;
-import entidades.Cliente;
 import entidades.Moto;
 
 import javax.swing.*;
@@ -45,7 +44,7 @@ public class Motos extends javax.swing.JPanel {
         botonEliminar = new JButton();
         model = new DefaultTableModel();
         cnMoto = new MotoCRUD();
-        panelModificar = new PanelModificar();
+        panelModificar = new PanelModificarMoto();
         panelModificar.setVisible(false);
         setPreferredSize(new Dimension(600, 300));
         setLayout(new GridBagLayout());
@@ -219,6 +218,6 @@ public class Motos extends javax.swing.JPanel {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private MotoCRUD cnMoto;
-    private PanelModificar panelModificar;
+    private PanelModificarMoto panelModificar;
     // End of variables declaration//GEN-END:variables
 }
