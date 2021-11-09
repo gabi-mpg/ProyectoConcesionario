@@ -136,9 +136,9 @@ public class Ventas extends javax.swing.JPanel {
     private void setHeaders(){
         this.tablaResultado = new JTable(model);
         jScrollPane1.setViewportView(tablaResultado);
+        model.addColumn("ID");
+        model.addColumn("Matricula");
         model.addColumn("DNI");
-        model.addColumn("Nombre");
-        model.addColumn("Apellidos");
         model.addColumn("Precio");
         model.addColumn("Vendedor");
     }
