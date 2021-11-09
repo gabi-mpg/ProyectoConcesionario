@@ -138,8 +138,7 @@ public class ClienteModel {
     public void conectar(){
         try{
             String[] valores = new config().getConfig();
-            Connection cn = DriverManager.getConnection(valores[0], valores[1], valores[2]);
-            conexion = cn;
+            conexion = DriverManager.getConnection(valores[0], valores[1], valores[2]);
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
         }
