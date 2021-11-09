@@ -61,11 +61,8 @@ public class Clientes extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
 
-        DefaultTableModel model = new DefaultTableModel();
         setHeaders();
         fillTable();
-
-
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

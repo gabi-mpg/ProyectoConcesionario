@@ -11,7 +11,7 @@ public class VentaCRUD {
         VentaModel.conectar();
     }
 
-    public ArrayList<Venta> getListaClientes(){
+    public ArrayList<Venta> getListaVentas(){
         return VentaModel.getListaVentas();
     }
 
