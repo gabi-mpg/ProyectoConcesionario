@@ -13,6 +13,7 @@ import entidades.Venta;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -83,6 +84,7 @@ public class Ventas extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
 
         botonBuscar.setText("Buscar ventas");
+        botonBuscar.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -91,11 +93,7 @@ public class Ventas extends javax.swing.JPanel {
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Buscar ventas");
-        botonModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarActionPerformed(evt);
-            }
-        });
+        botonModificar.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -104,6 +102,7 @@ public class Ventas extends javax.swing.JPanel {
         add(botonModificar, gridBagConstraints);
 
         botonCrear.setText("Crear ventas");
+        botonCrear.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -112,6 +111,7 @@ public class Ventas extends javax.swing.JPanel {
         add(botonCrear, gridBagConstraints);
 
         botonEliminar.setText("Buscar ventas");
+        botonEliminar.setPreferredSize(new Dimension(90, 20));
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarActionPerformed(evt);

@@ -45,6 +45,8 @@ public class Motos extends javax.swing.JPanel {
         botonEliminar = new JButton();
         model = new DefaultTableModel();
         cnMoto = new MotoCRUD();
+        panelModificar = new PanelModificar();
+        panelModificar.setVisible(false);
         setPreferredSize(new Dimension(600, 300));
         setLayout(new GridBagLayout());
 
@@ -64,12 +66,12 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.insets = new Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
-        botonBuscar.setText("Buscar");
+        botonBuscar.setText("Buscar blabla");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new Insets(10, 18, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 18, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Modificar");
@@ -77,7 +79,7 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new Insets(10, 30, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 30, 0, 12);
         add(botonModificar, gridBagConstraints);
 
         botonCrear.setText("Crear");
@@ -85,7 +87,7 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new Insets(10, 30, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 30, 0, 12);
         add(botonCrear, gridBagConstraints);
 
         botonEliminar.setText("Eliminar");
@@ -93,7 +95,7 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new Insets(10, 39, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 39, 0, 12);
         add(botonEliminar, gridBagConstraints);
 
         agregarListeners();
@@ -173,18 +175,22 @@ public class Motos extends javax.swing.JPanel {
     }
 
     private String pedirMatricula(){
-        String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula a buscar", 1);
+        String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
 
         while (!cnMoto.comprobarMatricula(matricula)){
             JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
 
-            matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula a buscar", 1);
+            matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
         }
         return matricula;
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String matricula = pedirMatricula();
+        panelModificar.setMatricula(matricula);
+        panelModificar.rellenarCampos();
+        panelModificar.setVisible(true);
+        fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,5 +210,6 @@ public class Motos extends javax.swing.JPanel {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private MotoCRUD cnMoto;
+    private PanelModificar panelModificar;
     // End of variables declaration//GEN-END:variables
 }

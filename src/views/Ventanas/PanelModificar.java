@@ -1,6 +1,14 @@
 package views.Ventanas;
 
-public class panelModificar extends javax.swing.JPanel {
+import controllers.MotoCRUD;
+import entidades.Moto;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class PanelModificar extends javax.swing.JFrame {
 
 
         private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
@@ -9,9 +17,14 @@ public class panelModificar extends javax.swing.JPanel {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public panelModificar() {
-            labelTitulo.setText("Modificar una moto");
+        public PanelModificar() {
+
             initComponents();
+            labelTitulo.setText("Modificar moto");
+            setSize(350, 500);
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setVisible(true);
         }
 
         /**
@@ -36,7 +49,10 @@ public class panelModificar extends javax.swing.JPanel {
             jLabel4 = new javax.swing.JLabel();
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
+            matricula = "";
+            cnMoto = new MotoCRUD();
 
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setLayout(new java.awt.GridBagLayout());
 
             labelTitulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -60,7 +76,7 @@ public class panelModificar extends javax.swing.JPanel {
             gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(textoTanque, gridBagConstraints);
 
-            textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
+            /*textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 2;
@@ -68,7 +84,7 @@ public class panelModificar extends javax.swing.JPanel {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
-            add(textoMatricula, gridBagConstraints);
+            add(textoMatricula, gridBagConstraints);*/
 
             textoMarca.setPreferredSize(new java.awt.Dimension(75, 25));
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -98,11 +114,11 @@ public class panelModificar extends javax.swing.JPanel {
             gridBagConstraints.insets = new java.awt.Insets(4, 0, 3, 0);
             add(labelImagen, gridBagConstraints);
 
-            jLabel1.setText("Matrícula");
+            jLabel1.setText("Modificar moto con matricula: " + matricula);
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+            gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
             add(jLabel1, gridBagConstraints);
 
@@ -131,6 +147,12 @@ public class panelModificar extends javax.swing.JPanel {
             add(jLabel4, gridBagConstraints);
 
             botonModificar.setText("Modificar");
+            botonModificar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    modificar(actionEvent);
+                }
+            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -153,12 +175,36 @@ public class panelModificar extends javax.swing.JPanel {
             add(checkLimpiar, gridBagConstraints);
         }// </editor-fold>
 
+        public void rellenarCampos(){
+            if (cnMoto.motoExiste(matricula)){
+                Moto moto = cnMoto.buscarMoto(matricula);
+                textoColor.setText(moto.getColor());
+                textoMarca.setText(moto.getMarca());
+                textoTanque.setText(String.valueOf(moto.getTanque()));
+            } else {
+                JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
+                this.dispose();
+            }
+
+        }
         private void checkLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
         }
 
+        private void modificar(java.awt.event.ActionEvent evt) {
+            String marca = textoMarca.getText();
+            String color = textoColor.getText();
+            int tanque = Integer.parseInt(textoTanque.getText());
+            Moto moto = new Moto(matricula, marca, color, tanque);
+            cnMoto.updateMoto(moto);
+            dispose();
+        }
 
-        // Variables declaration - do not modify
+        public void setMatricula(String matricula) {
+            this.matricula = matricula;
+        }
+
+    // Variables declaration - do not modify
         private javax.swing.JButton botonModificar;
         private javax.swing.JCheckBox checkLimpiar;
         private javax.swing.JLabel jLabel1;
@@ -171,6 +217,8 @@ public class panelModificar extends javax.swing.JPanel {
         private javax.swing.JTextField textoMarca;
         private javax.swing.JTextField textoMatricula;
         private javax.swing.JTextField textoTanque;
+        private String matricula;
+        private MotoCRUD cnMoto;
         // End of variables declaration
     }
 

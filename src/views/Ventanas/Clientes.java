@@ -15,6 +15,7 @@ import entidades.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -84,35 +85,39 @@ public class Clientes extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
 
         botonBuscar.setText("Buscar");
+        botonBuscar.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 20);
+        gridBagConstraints.insets = new java.awt.Insets(15, 14, 0, 20);
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Modificar");
+        botonModificar.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 20);
+        gridBagConstraints.insets = new java.awt.Insets(15, 26, 0, 20);
         add(botonModificar, gridBagConstraints);
 
         botonCrear.setText("Crear");
+        botonCrear.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 20);
+        gridBagConstraints.insets = new java.awt.Insets(15, 26, 0, 20);
         add(botonCrear, gridBagConstraints);
 
         botonEliminar.setText("Eliminar");
+        botonEliminar.setPreferredSize(new Dimension(90, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 35, 0, 20);
+        gridBagConstraints.insets = new java.awt.Insets(15,35, 0, 20);
         add(botonEliminar, gridBagConstraints);
 
         agregarListeners();

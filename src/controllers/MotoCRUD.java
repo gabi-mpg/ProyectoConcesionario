@@ -5,6 +5,7 @@ import modelo.ClienteModel;
 import modelo.MotoModel;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MotoCRUD {
 
@@ -27,6 +28,7 @@ public class MotoCRUD {
     }
 
     public boolean comprobarMatricula(String matricula){
+        matricula = matricula.toUpperCase();
         return matricula.matches("^[0-9]{4}[A-Z]{3}$");
     }
 
@@ -66,12 +68,10 @@ public class MotoCRUD {
         MotoCRUD mc = new MotoCRUD();
         //mc.listarMoto("0677fwj");
         //mc.listarMoto("5647gfd");
-        Moto moto = mc.buscarMoto("0677fwj");
-        moto.setMarca("Suzuki");
-        moto.setColor("Verde");
+       // Moto moto = new Moto("0677fwj", "suzuki", "negra", 70);
+        mc.agregarMoto("0677fwj", "suzuki", "negra", 70);
         //System.out.println(moto.toString());
 
-        mc.updateMoto(moto);
         mc.listarMoto("0677fwj");
     }
     //en el update ponemos todos los campos y los que deje en blanco o ponga un guion se mandan los preexistentes, sino se mandan los nuevos
