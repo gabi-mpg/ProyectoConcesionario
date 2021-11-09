@@ -14,6 +14,7 @@ package views.Ventanas;
 import controllers.ControllerConexion;
 import modelo.config;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,12 +33,14 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
 
     public interfazConfig(String[] config, config configuracion) {
         initComponents();
+        colorTextos();
         this.configuracionRecogida = config;
         this.configuracion = configuracion;
         modificarTexto();
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+       setSize(334,410);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.boton.addActionListener(this);
     }
@@ -51,6 +54,11 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         this.boton.addActionListener(this);
     }
 
+    private void colorTextos(){
+        this.jLabel1.setForeground(Color.WHITE);
+        this.jLabel2.setForeground(Color.WHITE);
+        this.jLabel3.setForeground(Color.WHITE);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import views.Ventanas.interfazLogin;
+import views.Ventanas.mainInterface;
+
 /**
  *
  * @author chris
@@ -18,7 +21,7 @@ public class ConexionBaseDatos {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
         //new mainInterface(new MNGDB(new JPanel()).getConexion(),1,"Prueba");
-
+        new interfazLogin();
         //new NewJFrame();
 
 

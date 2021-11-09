@@ -20,11 +20,9 @@ public class interfazLogin extends javax.swing.JFrame{
     private modelo.config configuracion;
     private ControllerConexion conexion;
 
-    private ControllerConexion controlador;
     private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
 
     public interfazLogin() {
-        this.controlador = new ControllerConexion();
         conexion = new ControllerConexion();
         configuracion = new modelo.config();
         conexion.setRegistros();
@@ -51,6 +49,7 @@ public class interfazLogin extends javax.swing.JFrame{
             public void mouseClicked(MouseEvent e) {
                 String[] configuracionIncial = new modelo.config().getConfig();
                 new interfazConfig(configuracionIncial,configuracion);
+
             }
         });
     }
@@ -198,18 +197,18 @@ public class interfazLogin extends javax.swing.JFrame{
     private void login() {
         String user = campoUsuario.getText();
         String pass = new String(campoClave.getPassword());
-        controlador.setRegistros();
+        conexion.setRegistros();
         //hay que primero leer los registros antes de hacer el login y despues hacer lo que sea que tal
         if (user.isEmpty() | pass.isEmpty()) {
             jMensaje(this, "Faltan campos por completar", "Falta información", 2);
         } else {
-            int n = controlador.login(user, pass);
+            int n = conexion.login(user, pass);
             System.out.println(n);
             switch (n) {
                 case -4:
-                    System.out.println("error");
+                    jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
                     break;
-                    case -2:
+                case -2:
                     jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
                     System.exit(0);
                     break;
@@ -219,8 +218,8 @@ public class interfazLogin extends javax.swing.JFrame{
                 case 0:
                     jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
                     break;
-                default:
-
+                case 1:
+                    new mainInterface();
                     this.dispose();
                     break;
             }
