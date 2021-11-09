@@ -1,6 +1,8 @@
-package views.Ventanas;
+package views.Ventanas.crudClientes;
 
+import controllers.ClienteCRUD;
 import controllers.MotoCRUD;
+import entidades.Cliente;
 import entidades.Moto;
 
 import javax.swing.*;
@@ -8,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelModificarVenta extends JFrame {
+public class PanelModificarCliente extends JFrame {
 
 
         private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
@@ -17,7 +19,7 @@ public class PanelModificarVenta extends JFrame {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public PanelModificarVenta() {
+        public PanelModificarCliente() {
             initComponents();
             labelTitulo.setText("Modificar moto");
             setSize(350, 500);
@@ -37,10 +39,9 @@ public class PanelModificarVenta extends JFrame {
             GridBagConstraints gridBagConstraints;
 
             labelTitulo = new JLabel();
-            textoTanque = new JTextField();
-            textoMatricula = new JTextField();
-            textoMarca = new JTextField();
-            textoColor = new JTextField();
+            textoDireccion = new JTextField();
+            textoApellidos = new JTextField();
+            textoNombre = new JTextField();
             labelImagen = new JLabel();
             jLabel1 = new JLabel();
             jLabel2 = new JLabel();
@@ -48,8 +49,8 @@ public class PanelModificarVenta extends JFrame {
             jLabel4 = new JLabel();
             botonModificar = new JButton();
             checkLimpiar = new JCheckBox();
-            matricula = "";
-            cnMoto = new MotoCRUD();
+            dni = "";
+            cnCliente = new ClienteCRUD();
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setLayout(new GridBagLayout());
@@ -65,7 +66,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new Insets(8, 60, 8, 50);
             add(labelTitulo, gridBagConstraints);
 
-            textoTanque.setPreferredSize(new Dimension(75, 25));
+            textoDireccion.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
@@ -73,7 +74,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoTanque, gridBagConstraints);
+            add(textoDireccion, gridBagConstraints);
 
             /*textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -85,7 +86,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(textoMatricula, gridBagConstraints);*/
 
-            textoMarca.setPreferredSize(new Dimension(75, 25));
+            textoApellidos.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
@@ -93,9 +94,9 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoMarca, gridBagConstraints);
+            add(textoApellidos, gridBagConstraints);
 
-            textoColor.setPreferredSize(new Dimension(75, 25));
+            textoNombre.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
@@ -103,9 +104,9 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoColor, gridBagConstraints);
+            add(textoNombre, gridBagConstraints);
 
-            labelImagen.setIcon(new ImageIcon(ruta+"iconoModificar.png")); // NOI18N
+            labelImagen.setIcon(new ImageIcon(ruta + "iconoModificar.png")); // NOI18N
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
@@ -120,7 +121,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.weighty = 0.5;
             add(jLabel1, gridBagConstraints);
 
-            jLabel2.setText("Marca");
+            jLabel2.setText("Nombre");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 3;
@@ -128,7 +129,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.weighty = 0.5;
             add(jLabel2, gridBagConstraints);
 
-            jLabel3.setText("Color");
+            jLabel3.setText("Apellidos");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 4;
@@ -136,7 +137,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.weighty = 0.5;
             add(jLabel3, gridBagConstraints);
 
-            jLabel4.setText("Tanque");
+            jLabel4.setText("Direccion");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 5;
@@ -174,14 +175,14 @@ public class PanelModificarVenta extends JFrame {
         }// </editor-fold>
 
         public void rellenarCampos(){
-            if (cnMoto.motoExiste(matricula)){
-                Moto moto = cnMoto.buscarMoto(matricula);
-                jLabel1.setText("Modificar moto con matricula " + matricula);
-                textoColor.setText(moto.getColor());
-                textoMarca.setText(moto.getMarca());
-                textoTanque.setText(String.valueOf(moto.getTanque()));
+            if (cnCliente.clienteExiste(dni)){
+                Cliente cliente = cnCliente.buscarCliente(dni);
+                jLabel1.setText("Modificar cliente con DNI " + dni);
+                textoNombre.setText(cliente.getNombre());
+                textoApellidos.setText(cliente.getApellido());
+                textoDireccion.setText(cliente.getDireccion());
             } else {
-                JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
+                JOptionPane.showMessageDialog(this, "EL cliente no existe en la BD");
                 this.dispose();
             }
 
@@ -191,16 +192,16 @@ public class PanelModificarVenta extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            String marca = textoMarca.getText();
-            String color = textoColor.getText();
-            int tanque = Integer.parseInt(textoTanque.getText());
-            Moto moto = new Moto(matricula, marca, color, tanque);
-            cnMoto.updateMoto(moto);
+            String apellidos = textoApellidos.getText();
+            String nombre = textoNombre.getText();
+            String direccion = textoDireccion.getText();
+            Cliente cliente = new Cliente(dni, nombre, apellidos, direccion);
+            cnCliente.updateCliente(cliente);
             dispose();
         }
 
-        public void setMatricula(String matricula) {
-            this.matricula = matricula;
+        public void setDNI(String dni) {
+            this.dni = dni;
         }
 
     // Variables declaration - do not modify
@@ -212,12 +213,11 @@ public class PanelModificarVenta extends JFrame {
         private JLabel jLabel4;
         private JLabel labelImagen;
         private JLabel labelTitulo;
-        private JTextField textoColor;
-        private JTextField textoMarca;
-        private JTextField textoMatricula;
-        private JTextField textoTanque;
-        private String matricula;
-        private MotoCRUD cnMoto;
+        private JTextField textoNombre;
+        private JTextField textoApellidos;
+        private JTextField textoDireccion;
+        private String dni;
+        private ClienteCRUD cnCliente;
         // End of variables declaration
     }
 

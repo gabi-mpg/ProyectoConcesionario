@@ -1,8 +1,6 @@
-package views.Ventanas;
+package views.Ventanas.crudUsuarios;
 
-import controllers.ClienteCRUD;
 import controllers.MotoCRUD;
-import entidades.Cliente;
 import entidades.Moto;
 
 import javax.swing.*;
@@ -10,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelModificarCliente extends JFrame {
+public class PanelModificarUsuario extends JFrame {
 
 
         private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
@@ -19,7 +17,7 @@ public class PanelModificarCliente extends JFrame {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public PanelModificarCliente() {
+        public PanelModificarUsuario() {
             initComponents();
             labelTitulo.setText("Modificar moto");
             setSize(350, 500);
@@ -39,9 +37,10 @@ public class PanelModificarCliente extends JFrame {
             GridBagConstraints gridBagConstraints;
 
             labelTitulo = new JLabel();
-            textoDireccion = new JTextField();
-            textoApellidos = new JTextField();
-            textoNombre = new JTextField();
+            textoTanque = new JTextField();
+            textoMatricula = new JTextField();
+            textoMarca = new JTextField();
+            textoColor = new JTextField();
             labelImagen = new JLabel();
             jLabel1 = new JLabel();
             jLabel2 = new JLabel();
@@ -49,8 +48,8 @@ public class PanelModificarCliente extends JFrame {
             jLabel4 = new JLabel();
             botonModificar = new JButton();
             checkLimpiar = new JCheckBox();
-            dni = "";
-            cnCliente = new ClienteCRUD();
+            matricula = "";
+            cnMoto = new MotoCRUD();
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setLayout(new GridBagLayout());
@@ -66,7 +65,7 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.insets = new Insets(8, 60, 8, 50);
             add(labelTitulo, gridBagConstraints);
 
-            textoDireccion.setPreferredSize(new Dimension(75, 25));
+            textoTanque.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
@@ -74,7 +73,7 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoDireccion, gridBagConstraints);
+            add(textoTanque, gridBagConstraints);
 
             /*textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
             gridBagConstraints = new java.awt.GridBagConstraints();
@@ -86,7 +85,7 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(textoMatricula, gridBagConstraints);*/
 
-            textoApellidos.setPreferredSize(new Dimension(75, 25));
+            textoMarca.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
@@ -94,9 +93,9 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoApellidos, gridBagConstraints);
+            add(textoMarca, gridBagConstraints);
 
-            textoNombre.setPreferredSize(new Dimension(75, 25));
+            textoColor.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
@@ -104,9 +103,9 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoNombre, gridBagConstraints);
+            add(textoColor, gridBagConstraints);
 
-            labelImagen.setIcon(new ImageIcon(ruta + "iconoModificar.png")); // NOI18N
+            labelImagen.setIcon(new ImageIcon(ruta+"iconoModificar.png")); // NOI18N
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
@@ -175,14 +174,14 @@ public class PanelModificarCliente extends JFrame {
         }// </editor-fold>
 
         public void rellenarCampos(){
-            if (cnCliente.clienteExiste(dni)){
-                Cliente cliente = cnCliente.buscarCliente(dni);
-                jLabel1.setText("Modificar cliente con DNI " + dni);
-                textoNombre.setText(cliente.getNombre());
-                textoApellidos.setText(cliente.getApellido());
-                textoDireccion.setText(cliente.getDireccion());
+            if (cnMoto.motoExiste(matricula)){
+                Moto moto = cnMoto.buscarMoto(matricula);
+                jLabel1.setText("Modificar moto con matricula " + matricula);
+                textoColor.setText(moto.getColor());
+                textoMarca.setText(moto.getMarca());
+                textoTanque.setText(String.valueOf(moto.getTanque()));
             } else {
-                JOptionPane.showMessageDialog(this, "EL cliente no existe en la BD");
+                JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
                 this.dispose();
             }
 
@@ -192,16 +191,16 @@ public class PanelModificarCliente extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            String apellidos = textoApellidos.getText();
-            String nombre = textoNombre.getText();
-            String direccion = textoDireccion.getText();
-            Cliente cliente = new Cliente(dni, nombre, apellidos, direccion);
-            cnCliente.updateCliente(cliente);
+            String marca = textoMarca.getText();
+            String color = textoColor.getText();
+            int tanque = Integer.parseInt(textoTanque.getText());
+            Moto moto = new Moto(matricula, marca, color, tanque);
+            cnMoto.updateMoto(moto);
             dispose();
         }
 
-        public void setDNI(String dni) {
-            this.dni = dni;
+        public void setMatricula(String matricula) {
+            this.matricula = matricula;
         }
 
     // Variables declaration - do not modify
@@ -213,11 +212,12 @@ public class PanelModificarCliente extends JFrame {
         private JLabel jLabel4;
         private JLabel labelImagen;
         private JLabel labelTitulo;
-        private JTextField textoNombre;
-        private JTextField textoApellidos;
-        private JTextField textoDireccion;
-        private String dni;
-        private ClienteCRUD cnCliente;
+        private JTextField textoColor;
+        private JTextField textoMarca;
+        private JTextField textoMatricula;
+        private JTextField textoTanque;
+        private String matricula;
+        private MotoCRUD cnMoto;
         // End of variables declaration
     }
 

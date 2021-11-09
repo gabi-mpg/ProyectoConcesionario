@@ -7,6 +7,8 @@ package views.Ventanas;
 
 import controllers.MotoCRUD;
 import entidades.Moto;
+import views.Ventanas.crudMotos.PanelModificarMoto;
+import views.Ventanas.crudMotos.insertarMoto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,10 +21,11 @@ import java.util.ArrayList;
  */
 public class Motos extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Clientes
-     */
+    private insertarMoto insertar;
+
     public Motos() {
+        this.insertar = new insertarMoto();
+        insertar.setVisible(false);
         initComponents();
     }
 
@@ -187,7 +190,6 @@ public class Motos extends javax.swing.JPanel {
 
         while (!cnMoto.comprobarMatricula(matricula)){
             JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
-
             matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
         }
         return matricula;
@@ -197,12 +199,11 @@ public class Motos extends javax.swing.JPanel {
         String matricula = pedirMatricula();
         panelModificar.setMatricula(matricula);
         panelModificar.rellenarCampos();
-        panelModificar.setVisible(true);
         fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        insertar.setVisible(true);
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
