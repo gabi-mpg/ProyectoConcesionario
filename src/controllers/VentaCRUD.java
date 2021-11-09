@@ -7,17 +7,18 @@ import java.util.ArrayList;
 
 public class VentaCRUD {
 
+    private VentaModel model;
     public VentaCRUD(){
-
+        model = new VentaModel();
     }
 
     public ArrayList<Venta> getListaVentas(){
-        return VentaModel.getListaVentas();
+        return model.getListaVentas();
     }
 
     public boolean agregarVenta(String matricula, String DNI, double precio, int idUsuario){
-        if (VentaModel.buscarExistencia(matricula, DNI)){
-            VentaModel.addVenta(new Venta(matricula, DNI, precio, idUsuario));
+        if (model.buscarExistencia(matricula, DNI)){
+            model.addVenta(new Venta(matricula, DNI, precio, idUsuario));
             return true;
         } else {
             return false;
@@ -33,7 +34,7 @@ public class VentaCRUD {
     }
     
     public Venta buscarVenta(int pk){
-        return VentaModel.buscarVenta(pk);
+        return model.buscarVenta(pk);
     }
 
     public void listarVenta(int pk){
@@ -45,7 +46,7 @@ public class VentaCRUD {
     }
 
     public void removevENTA(int pk){
-        if (VentaModel.removeVenta(pk)){
+        if (model.removeVenta(pk)){
             System.out.println("Venta eliminada con exito");
         } else {
             System.out.println("Error eliminando la venta");
@@ -53,7 +54,7 @@ public class VentaCRUD {
     }
 
     public void updateVenta(Venta venta){
-        if (VentaModel.updateVenta(venta)){
+        if (model.updateVenta(venta)){
             System.out.println("Venta actualizada con exito");
         } else {
             System.out.println("Error actualizando la venta");

@@ -26,9 +26,7 @@ public class interfazLogin extends javax.swing.JFrame{
         conexion = new ControllerConexion();
         configuracion = new modelo.config();
         conexion.setRegistros();
-        conexion.conectar();
-
-
+        conexion.conectarComprobar();
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -50,7 +48,6 @@ public class interfazLogin extends javax.swing.JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 String[] configuracionIncial = new modelo.config().getConfig();
-                System.out.println(configuracionIncial[0]+" "+configuracionIncial[1]+" "+configuracionIncial[2]);
                 new interfazConfig(configuracionIncial,configuracion);
 
             }
@@ -222,7 +219,8 @@ public class interfazLogin extends javax.swing.JFrame{
                     jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
                     break;
                 case 1:
-                    new mainInterface(1, this.conexion);
+                    new mainInterface();
+                    conexion.cerrarCn();
                     this.dispose();
                     break;
             }

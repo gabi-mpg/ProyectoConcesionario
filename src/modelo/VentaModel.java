@@ -8,19 +8,22 @@ import java.util.ArrayList;
 
 public class VentaModel {
 
-    private static ArrayList<Venta> listaVentas = new ArrayList<>();
-    private static ControllerConexion cnControl = new ControllerConexion();
-    private static Connection conexion;
+    private ArrayList<Venta> listaVentas;
+    private ControllerConexion cnControl;
+    private ClienteModel modelC;
+    private MotoModel modelM;
+    private Connection conexion;
 
     public VentaModel(){
         listaVentas = new ArrayList<>();
         cnControl = new ControllerConexion();
-        conexion = cnControl.getConexion();
-        //conexion = conectar();
+        modelC = new ClienteModel();
+        modelM = new MotoModel();
+        conexion = cnControl.conectar();
         saveVentas();
     }
 
-    private static void saveVentas(){
+    private void saveVentas(){
         listaVentas.clear();
         String sql = "SELECT * FROM t_ventas";
 
@@ -44,7 +47,7 @@ public class VentaModel {
 
     }
 
-    public static Venta buscarVenta(int pk){
+    public Venta buscarVenta(int pk){
         saveVentas();
         for(Venta v : listaVentas){
             if (v.getIdVendedor() == pk){
@@ -54,7 +57,7 @@ public class VentaModel {
         return null;
     }
 
-    public static void listarVenta(int pk){
+    public void listarVenta(int pk){
         if (buscarVenta(pk) != null){
             System.out.println(buscarVenta(pk).toString());
         } else{
@@ -63,16 +66,16 @@ public class VentaModel {
 
     }
 
-    public static ArrayList<Venta> getListaVentas(){
+    public ArrayList<Venta> getListaVentas(){
         saveVentas();
         return listaVentas;
     }
 
-    public static boolean buscarExistencia(String matricula, String dni){
-        return MotoModel.motoExiste(matricula) && ClienteModel.clienteExiste(dni);
+    public boolean buscarExistencia(String matricula, String dni){
+        return modelM.motoExiste(matricula) && modelC.clienteExiste(dni);
     }
 
-    public static void addVenta(Venta venta){
+    public void addVenta(Venta venta){
         saveVentas();
         String sql = "INSERT INTO t_ventas values (?, ?, ?, ?)";
         try {
@@ -91,7 +94,7 @@ public class VentaModel {
         getListaVentas();
     }
 
-    public static boolean removeVenta(int pk){
+    public boolean removeVenta(int pk){
         saveVentas();
         String sql = "delete from t_ventas where pk = ?";
         try {
@@ -106,7 +109,7 @@ public class VentaModel {
         }
     }
 
-    public static boolean updateVenta(Venta venta){
+    public boolean updateVenta(Venta venta){
         System.out.println(venta.toString());
         saveVentas();
         String sql = "UPDATE t_ventas set Matricula = ?, DNI = ?, Precio = ? where IDVenta = ?";
@@ -127,7 +130,7 @@ public class VentaModel {
 
     }
 
-    private static void updateVentaLista(Venta venta){
+    private void updateVentaLista(Venta venta){
         for (Venta v : listaVentas){
             if (v.getIdVenta() == venta.getIdVenta()){
                 v.setMatricula(venta.getMatricula());
@@ -137,7 +140,7 @@ public class VentaModel {
         }
     }
 
-    public static void conectar(){
+    public void conectar(){
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
             conexion = cn;

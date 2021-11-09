@@ -8,31 +8,29 @@ import java.util.ArrayList;
 
 public class ClienteModel {
 
-    private static ArrayList<Cliente> listaClientes = new ArrayList<>();
-    private static ControllerConexion cnControl = new ControllerConexion();
-    private static Connection conexionBBDD;
+    private ArrayList<Cliente> listaClientes;
+    private ControllerConexion cnControl;
+    private Connection conexion;
 
-    public ClienteModel(ControllerConexion conexion){
+    public ClienteModel(){
         listaClientes = new ArrayList<>();
-        cnControl = conexion;
-        conexionBBDD = cnControl.getConexion();
-        //conexion = conectar();
+        cnControl = new ControllerConexion();
+        conexion = cnControl.conectar();
         saveClientes();
     }
 
-    private static void saveClientes(){
+    private void saveClientes(){
         listaClientes.clear();
         String sql = "SELECT * FROM t_clientes";
 
         try {
-            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
+            PreparedStatement pst = conexion.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
                 String dni = rs.getString("DNI");
                 String nombre = rs.getString("Nombre");
                 String apellido = rs.getString("Apellido");
-                System.out.println(apellido);
                 String direcc = rs.getString("Direccion");
                 Cliente cliente = new Cliente(dni, nombre, apellido, direcc);
                 listaClientes.add(cliente);
@@ -44,7 +42,7 @@ public class ClienteModel {
 
     }
 
-    public static Cliente buscarCliente(String pk){
+    public Cliente buscarCliente(String pk){
         saveClientes();
         for(Cliente c : listaClientes){
             if (c.getDni().equalsIgnoreCase(pk)){
@@ -54,11 +52,11 @@ public class ClienteModel {
         return null;
     }
 
-    public static boolean clienteExiste(String pk){
+    public boolean clienteExiste(String pk){
         return buscarCliente(pk) != null;
     }
 
-    public static void listarCliente(String pk){
+    public void listarCliente(String pk){
         if (buscarCliente(pk) != null){
             System.out.println(buscarCliente(pk).toString());
         } else{
@@ -67,16 +65,16 @@ public class ClienteModel {
 
     }
 
-    public static ArrayList<Cliente> getListaClientes(ControllerConexion conexion){
-        saveClientes(); //;
+    public ArrayList<Cliente> getListaClientes(){
+        saveClientes();
         return listaClientes;
     }
 
-    public static ArrayList<Cliente> addCliente(Cliente cliente){
+    public ArrayList<Cliente> addCliente(Cliente cliente){
         saveClientes();
         String sql = "INSERT INTO t_clientes values (?, ?, ?, ?)";
         try {
-            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
+            PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, cliente.getDni());
             pst.setString(2, cliente.getNombre());
             pst.setString(3, cliente.getApellido());
@@ -87,14 +85,14 @@ public class ClienteModel {
             System.err.println("Error registrando el cliente. " + e);
         }
 
-        return getListaClientes(cnControl);
+        return getListaClientes();
     }
 
-    public static boolean removeCliente(String dni){
+    public boolean removeCliente(String dni){
         saveClientes();
         String sql = "delete from t_clientes where dni like ?";
         try {
-            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
+            PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, dni);
             pst.executeUpdate();
             listaClientes.removeIf(c -> c.getDni().equalsIgnoreCase(dni));
@@ -105,12 +103,12 @@ public class ClienteModel {
         }
     }
 
-    public static boolean updateCliente(Cliente cliente){
+    public boolean updateCliente(Cliente cliente){
         System.out.println(cliente.toString());
         saveClientes();
         String sql = "UPDATE t_clientes set Nombre = ?, Apellido = ?, Direccion = ? where DNI like ?";
         try {
-            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
+            PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, cliente.getNombre());
             pst.setString(2, cliente.getApellido());
             pst.setString(3, cliente.getDireccion());
@@ -126,7 +124,7 @@ public class ClienteModel {
 
     }
 
-    private static void updateClienteLista(Cliente cliente){
+    private void updateClienteLista(Cliente cliente){
         for (Cliente c : listaClientes){
             if (c.getDni().equalsIgnoreCase(cliente.getDni())){
                 c.setNombre(cliente.getNombre());
@@ -136,11 +134,10 @@ public class ClienteModel {
         }
     }
 
-    public static void conectar(){
+    public void conectar(){
         try{
-            
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
-            conexionBBDD = cn;
+            conexion = cn;
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
         }

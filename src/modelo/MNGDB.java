@@ -29,7 +29,7 @@ public class MNGDB {
     }
     
 
-    public boolean establecerConexion(){
+    public boolean establecerConexionComprobar(){
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.conexion = DriverManager.getConnection(bbdd,user,clave);
@@ -42,6 +42,15 @@ public class MNGDB {
              estado = false;
              return false;
         }
+    }
+
+    public Connection conectar(){
+        try{
+            return conexion = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
+        }catch(SQLException e){
+            System.err.println("Error en la conexión local " + e);
+        }
+        return null;
     }
     
     
@@ -177,7 +186,7 @@ public class MNGDB {
     
     
     public int iniciarSesion(String nombreUsuario, String contrasena){
-        if(establecerConexion()){
+        if(establecerConexionComprobar()){
             try {
                 Statement s = conexion.createStatement();
                 ResultSet r = s.executeQuery("SELECT contrasena,nivelPermiso from t_usuarios where nick='"+nombreUsuario+"'");

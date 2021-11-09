@@ -8,19 +8,18 @@ import java.util.ArrayList;
 
 public class MotoModel{
 
-    private static ArrayList<Moto> listaMotos = new ArrayList<>();
-    private static ControllerConexion cnControl = new ControllerConexion();
-    private static Connection conexion;
+    private ArrayList<Moto> listaMotos;
+    private ControllerConexion cnControl;
+    private Connection conexion;
 
     public MotoModel(){
         listaMotos = new ArrayList<>();
         cnControl = new ControllerConexion();
-        conexion = cnControl.getConexion();
-        //conexion = conectar();
+        conexion = cnControl.conectar();
         saveMotos();
     }
 
-    private static void saveMotos(){
+    private void saveMotos(){
         listaMotos.clear();
         String sql = "SELECT * FROM t_motos";
 
@@ -43,7 +42,7 @@ public class MotoModel{
 
     }
 
-    public static Moto buscarMoto(String pk){
+    public Moto buscarMoto(String pk){
         saveMotos();
         for(Moto m : listaMotos){
             if (m.getMatricula().equalsIgnoreCase(pk)){
@@ -53,11 +52,11 @@ public class MotoModel{
         return null;
     }
 
-    public static boolean motoExiste(String pk){
+    public boolean motoExiste(String pk){
         return buscarMoto(pk) != null;
     }
 
-    public static void listarMoto(String pk){
+    public void listarMoto(String pk){
         if (buscarMoto(pk) != null){
             System.out.println(buscarMoto(pk).toString());
         } else{
@@ -66,12 +65,12 @@ public class MotoModel{
 
     }
 
-    public static ArrayList<Moto> getListaMotos(){
+    public ArrayList<Moto> getListaMotos(){
         saveMotos();
         return listaMotos;
     }
 
-    public static void addMoto(Moto moto){
+    public void addMoto(Moto moto){
         saveMotos();
         String sql = "INSERT INTO t_motos values (?, ?, ?, ?)";
         try {
@@ -89,7 +88,7 @@ public class MotoModel{
         getListaMotos();
     }
 
-    public static boolean removeMoto(String matricula){
+    public boolean removeMoto(String matricula){
         saveMotos();
         String sql = "delete from t_motos where matricula like ?";
         try {
@@ -104,7 +103,7 @@ public class MotoModel{
         }
     }
 
-    public static boolean updateMoto(Moto moto){
+    public boolean updateMoto(Moto moto){
         System.out.println(moto.toString());
         saveMotos();
         String sql = "UPDATE t_motos set Marca = ?, Color = ?, Tanque = ? where matricula like ?";
@@ -125,7 +124,7 @@ public class MotoModel{
 
     }
 
-    private static void updateMotoLista(Moto moto){
+    private void updateMotoLista(Moto moto){
         for (Moto m : listaMotos){
             if (m.getMatricula().equalsIgnoreCase(moto.getMatricula())){
                 m.setColor(moto.getColor());
@@ -135,7 +134,7 @@ public class MotoModel{
         }
     }
 
-    public static void conectar(){
+    public void conectar(){
         try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
             conexion = cn;
@@ -143,15 +142,4 @@ public class MotoModel{
             System.err.println("Error en la conexión local " + e);
         }
     }
-
-    public static void main(String[] args) {
-        Moto moto = new Moto("0677fwj", "ducati", "roja", 70);
-        addMoto(moto);
-        listarMoto("0677fwj");
-        moto.setColor("blanco");
-        updateMoto(moto);
-        //removeMoto("0677fwj");
-        listarMoto("0677fwj");
-    }
-
 }

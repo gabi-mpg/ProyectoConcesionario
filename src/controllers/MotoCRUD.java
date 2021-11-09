@@ -1,25 +1,27 @@
 package controllers;
 
 import entidades.Moto;
+import modelo.ClienteModel;
 import modelo.MotoModel;
 
 import java.util.ArrayList;
 
 public class MotoCRUD {
 
+    private MotoModel model;
     public MotoCRUD(){
-
+        this.model = new MotoModel();
     }
 
     public ArrayList<Moto> getListaMotos(){
-        return MotoModel.getListaMotos();
+        return model.getListaMotos();
     }
 
     public boolean agregarMoto(String matricula, String color, String marca, int tanque){
-        if (MotoModel.buscarMoto(matricula) != null){
+        if (model.buscarMoto(matricula) != null){
             return false;
         } else {
-            MotoModel.addMoto(new Moto(matricula, marca, color, tanque));
+            model.addMoto(new Moto(matricula, marca, color, tanque));
             return true;
         }
     }
@@ -29,7 +31,11 @@ public class MotoCRUD {
     }
 
     public Moto buscarMoto(String pk){
-        return MotoModel.buscarMoto(pk);
+        return model.buscarMoto(pk);
+    }
+
+    public boolean motoExiste(String pk){
+        return model.motoExiste(pk);
     }
 
     public void listarMoto(String pk){
@@ -41,7 +47,7 @@ public class MotoCRUD {
     }
 
     public void removeMoto(String pk){
-        if (MotoModel.removeMoto(pk)){
+        if (model.removeMoto(pk)){
             System.out.println("Moto eliminada con exito");
         } else {
             System.out.println("Error eliminando la moto");
@@ -49,7 +55,7 @@ public class MotoCRUD {
     }
 
     public void updateMoto(Moto moto){
-        if (MotoModel.updateMoto(moto)){
+        if (model.updateMoto(moto)){
             System.out.println("Moto actualizada con exito");
         } else {
             System.out.println("Error actualizando la moto");
