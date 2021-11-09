@@ -83,46 +83,51 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
-        botonBuscar.setText("Buscar ventas");
-        botonBuscar.setPreferredSize(new Dimension(90, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonBuscar.setText("Buscar");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 17, 0, 11);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(15, 10, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
-        botonModificar.setText("Buscar ventas");
-        botonModificar.setPreferredSize(new Dimension(90, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonModificar.setText("Modificar");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 29, 0, 11);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(15, 30, 0, 12);
         add(botonModificar, gridBagConstraints);
 
-        botonCrear.setText("Crear ventas");
-        botonCrear.setPreferredSize(new Dimension(90, 20));
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonCrear.setText("Crear");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 29, 0, 11);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 2.3;
+        gridBagConstraints.insets = new Insets(15, 30, 0, 12);
         add(botonCrear, gridBagConstraints);
 
-        botonEliminar.setText("Buscar ventas");
-        botonEliminar.setPreferredSize(new Dimension(90, 20));
+        botonEliminar.setText("Eliminar");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(15, 30, 0, 5);
+        add(botonEliminar, gridBagConstraints);
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 38, 0, 11);
-        add(botonEliminar, gridBagConstraints);
+
 
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents

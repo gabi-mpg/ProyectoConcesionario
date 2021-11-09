@@ -14,6 +14,7 @@ import modelo.UsuarioModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -83,43 +84,50 @@ public class Usuarios extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
-        botonBuscar.setText("Buscar cliente");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonBuscar.setText("Buscar");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 15, 0, 9);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(15, 10, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
-        botonModificar.setText("Buscar usuario");
+        botonModificar.setText("Modificar");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(15, 30, 0, 12);
+        add(botonModificar, gridBagConstraints);
+
+        botonCrear.setText("Crear");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 2.3;
+        gridBagConstraints.insets = new Insets(15, 30, 0, 12);
+        add(botonCrear, gridBagConstraints);
+
+        botonEliminar.setText("Eliminar");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 2.0;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(15, 30, 0, 5);
+        add(botonEliminar, gridBagConstraints);
         botonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonModificarActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 27, 0, 9);
-        add(botonModificar, gridBagConstraints);
-
-        botonCrear.setText("Crear usuario");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 27, 0, 9);
-        add(botonCrear, gridBagConstraints);
-
-        botonEliminar.setText("Eliminar usuario");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 36, 0, 9);
-        add(botonEliminar, gridBagConstraints);
-
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 

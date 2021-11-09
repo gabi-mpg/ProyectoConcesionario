@@ -2,6 +2,7 @@ package modelo;
 
 import controllers.ControllerConexion;
 import entidades.Cliente;
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -136,7 +137,8 @@ public class ClienteModel {
 
     public void conectar(){
         try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
+            String[] valores = new config().getConfig();
+            Connection cn = DriverManager.getConnection(valores[0], valores[1], valores[2]);
             conexion = cn;
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
