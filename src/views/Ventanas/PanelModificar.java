@@ -18,7 +18,6 @@ public class PanelModificar extends javax.swing.JFrame {
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
         public PanelModificar() {
-
             initComponents();
             labelTitulo.setText("Modificar moto");
             setSize(350, 500);
@@ -114,9 +113,8 @@ public class PanelModificar extends javax.swing.JFrame {
             gridBagConstraints.insets = new java.awt.Insets(4, 0, 3, 0);
             add(labelImagen, gridBagConstraints);
 
-            jLabel1.setText("Modificar moto con matricula: " + matricula);
             gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 2;
             gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
@@ -178,6 +176,7 @@ public class PanelModificar extends javax.swing.JFrame {
         public void rellenarCampos(){
             if (cnMoto.motoExiste(matricula)){
                 Moto moto = cnMoto.buscarMoto(matricula);
+                jLabel1.setText("Modificar moto con matricula " + matricula);
                 textoColor.setText(moto.getColor());
                 textoMarca.setText(moto.getMarca());
                 textoTanque.setText(String.valueOf(moto.getTanque()));

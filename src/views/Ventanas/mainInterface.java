@@ -137,7 +137,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(15, 2, 26, 2);
+        gridBagConstraints.insets = new java.awt.Insets(25, 2, 26, 2);
         jPanel1.add(botonClientes, gridBagConstraints);
 
         botonMotos.setText("Motos");

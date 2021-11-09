@@ -62,18 +62,16 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.ipady = 210;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 2.0;
-        gridBagConstraints.insets = new Insets(15, 10, 0, 5);
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
-        botonBuscar.setText("Buscar");
+        botonBuscar.setText("Buscar blabla");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(15, 10, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 18, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Modificar");
@@ -81,8 +79,6 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 12);
         add(botonModificar, gridBagConstraints);
 
@@ -91,8 +87,6 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 2.3;
         gridBagConstraints.insets = new Insets(15, 30, 0, 12);
         add(botonCrear, gridBagConstraints);
 
@@ -101,9 +95,7 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(15, 30, 0, 5);
+        gridBagConstraints.insets = new Insets(15, 39, 0, 12);
         add(botonEliminar, gridBagConstraints);
 
         agregarListeners();
