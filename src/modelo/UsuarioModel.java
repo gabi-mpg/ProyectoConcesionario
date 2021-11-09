@@ -15,7 +15,7 @@ public class UsuarioModel {
     public UsuarioModel(){
         listaUsuarios = new ArrayList<>();
         cnControl = new ControllerConexion();
-        //conexion = cnControl.getConexion();
+        conexion = cnControl.getConexion();
         //conexion = conectar();
         saveUsuario();
     }

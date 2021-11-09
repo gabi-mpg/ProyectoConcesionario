@@ -43,7 +43,7 @@ public class Motos extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-
+        model = new DefaultTableModel();
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
 

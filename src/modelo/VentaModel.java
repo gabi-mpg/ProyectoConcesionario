@@ -15,7 +15,7 @@ public class VentaModel {
     public VentaModel(){
         listaVentas = new ArrayList<>();
         cnControl = new ControllerConexion();
-        //conexion = cnControl.getConexion();
+        conexion = cnControl.getConexion();
         //conexion = conectar();
         saveVentas();
     }

@@ -59,6 +59,7 @@ public class Ventas extends javax.swing.JPanel {
         botonModificar = new javax.swing.JButton();
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        model = new DefaultTableModel();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());

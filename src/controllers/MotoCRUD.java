@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MotoCRUD {
 
     public MotoCRUD(){
-        MotoModel.conectar();
+
     }
 
     public ArrayList<Moto> getListaMotos(){
