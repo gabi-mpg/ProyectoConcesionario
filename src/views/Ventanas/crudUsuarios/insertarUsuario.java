@@ -1,4 +1,4 @@
-package views.Ventanas.crudMotos;
+package views.Ventanas.crudUsuarios;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,11 +9,11 @@ package views.Ventanas.crudMotos;
  *
  * @author chris
  */
-public class insertarMoto extends javax.swing.JFrame {
+public class insertarUsuario extends javax.swing.JFrame {
 
     private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
 
-    public insertarMoto() {
+    public insertarUsuario() {
         this.setVisible(true);
         setSize(240,410);
         initComponents();
@@ -44,7 +44,7 @@ public class insertarMoto extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(230, 390));
         setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Insertar una nueva moto");
+        jLabel1.setText("Insertar un nuevo usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -101,7 +101,7 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
         add(textoColor, gridBagConstraints);
 
-        jLabel3.setText("Tanque");
+        jLabel3.setText("Nick");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -109,7 +109,7 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("Matricula");
+        jLabel4.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -117,7 +117,7 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel4, gridBagConstraints);
 
-        jLabel5.setText("Marca");
+        jLabel5.setText("Apellidos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -125,7 +125,7 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("Color");
+        jLabel6.setText("Contraseña");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;

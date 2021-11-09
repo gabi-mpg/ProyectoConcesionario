@@ -43,7 +43,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_CLIENTE = "cliente";
     private final String PANEL_MOTO = "moto";
     private final String PANEL_VENTA = "venta";
-    private int nivelUsuario;
+    private int nivelUsuario = 3;
     private ControllerConexion conexion;
     private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
 
