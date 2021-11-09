@@ -57,6 +57,10 @@ public class VentaModel {
         return null;
     }
 
+    public boolean ventaExiste(int pk){
+        return buscarVenta(pk) != null;
+    }
+
     public void listarVenta(int pk){
         if (buscarVenta(pk) != null){
             System.out.println(buscarVenta(pk).toString());

@@ -8,6 +8,7 @@ package views.Ventanas;
 import controllers.ClienteCRUD;
 import controllers.VentaCRUD;
 import entidades.Cliente;
+import entidades.Usuario;
 import entidades.Venta;
 
 import javax.swing.*;
@@ -60,6 +61,7 @@ public class Ventas extends javax.swing.JPanel {
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
+        cnVentas = new VentaCRUD();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -121,6 +123,8 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 38, 0, 11);
         add(botonEliminar, gridBagConstraints);
+
+        agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
     private void setHeaders(){
@@ -131,7 +135,8 @@ public class Ventas extends javax.swing.JPanel {
         model.addColumn("Apellidos");
         model.addColumn("Direccion");
     }
-    private void fillTable(){
+
+    public void fillTable(){
         VentaCRUD controlador = new VentaCRUD();
         ArrayList<Venta> listaVentas = controlador.getListaVentas();
         model.setRowCount(0);
@@ -145,13 +150,68 @@ public class Ventas extends javax.swing.JPanel {
         }
     }
 
-    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonModificarActionPerformed
+    private void fillTableBuscar(Venta v){
+        model.setRowCount(0);
+        Object[] datosVenta = new Object[4];
+        datosVenta[0] = v.getIdVenta();
+        datosVenta[1] = v.getDni();
+        datosVenta[2] = v.getMatricula();
+        datosVenta[3] = v.getPrecio();
+        model.addRow(datosVenta);
+    }
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+    private void agregarListeners(){
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+    }
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+            int IDVenta = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el IDVenta", 1));
+            if (cnVentas.ventaExiste(IDVenta)){
+                Venta venta = cnVentas.buscarVenta(IDVenta);
+                fillTableBuscar(venta);
+            } else {
+                JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD");
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonEliminarActionPerformed
+    }
+
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -162,5 +222,6 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
+    private VentaCRUD cnVentas;
     // End of variables declaration//GEN-END:variables
 }

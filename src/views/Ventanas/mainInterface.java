@@ -11,6 +11,7 @@ import views.Ventanas.Motos;
 import views.Ventanas.Usuarios;
 import views.Ventanas.Ventas;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -34,7 +35,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private JMenuItem rutaFicheros, cambiarTema,verConexion,cerrarSesion;
     private JMenuItem infoConsulta,infoElimina, infoModif, infoInsertar;
     private JMenuItem quienesSomos, contacto;
-    private JPanel panelClientes, panelMotos, panelVentas, panelUsuario, panelInicial;
+    private Usuarios panelUsuario;
+    private Clientes panelClientes;
+    private Motos panelMotos;
+    private Ventas panelVentas;
     private final String PANEL_USUARIO = "usuario";
     private final String PANEL_CLIENTE = "cliente";
     private final String PANEL_MOTO = "moto";
@@ -116,6 +120,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(logoMain, gridBagConstraints);
 
         botonVentas.setText("Ventas");
+        botonVentas.setPreferredSize(new Dimension(90, 30));
         botonVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVentasActionPerformed(evt);
@@ -128,6 +133,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(botonVentas, gridBagConstraints);
 
         botonClientes.setText("Clientes");
+        botonClientes.setPreferredSize(new Dimension(90, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -135,6 +141,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(botonClientes, gridBagConstraints);
 
         botonMotos.setText("Motos");
+        botonMotos.setPreferredSize(new Dimension(90, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -142,6 +149,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         jPanel1.add(botonMotos, gridBagConstraints);
 
         botonUsuarios.setText("Usuarios");
+        botonUsuarios.setPreferredSize(new Dimension(90, 30));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -296,6 +304,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 panelSecundario.remove(panelVentas);
                 panelSecundario.remove(panelUsuario);
                 panelSecundario.remove(panelClientes);
+                panelClientes.fillTable();
                 panelSecundario.add(panelClientes);
                 this.panelClientes.setVisible(true);
                 panelSecundario.repaint();
@@ -306,6 +315,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 panelSecundario.remove(panelVentas);
                 panelSecundario.remove(panelUsuario);
                 panelSecundario.remove(panelMotos);
+                panelMotos.fillTable();
                 panelSecundario.add(panelMotos);
                 this.panelMotos.setVisible(true);
                 panelSecundario.repaint();
@@ -316,6 +326,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 panelSecundario.remove(panelVentas);
                 panelSecundario.remove(panelMotos);
                 panelSecundario.remove(panelUsuario);
+                panelUsuario.fillTable();
                 panelSecundario.add(panelUsuario);
                 this.panelUsuario.setVisible(true);
                 panelSecundario.repaint();
@@ -326,6 +337,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 panelSecundario.remove(panelMotos);
                 panelSecundario.remove(panelUsuario);
                 panelSecundario.remove(panelVentas);
+                panelVentas.fillTable();
                 panelSecundario.add(panelVentas);
                 this.panelVentas.setVisible(true);
                 panelSecundario.repaint();

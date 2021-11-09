@@ -126,7 +126,7 @@ public class Clientes extends javax.swing.JPanel {
         model.addColumn("Apellidos");
         model.addColumn("Direccion");
     }
-    private void fillTable(){
+    public void fillTable(){
         ClienteCRUD controlador = new ClienteCRUD();
         ArrayList<Cliente> listaClientes = controlador.getListaClientes();
         model.setRowCount(0);

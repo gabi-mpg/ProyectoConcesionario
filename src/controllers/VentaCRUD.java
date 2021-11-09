@@ -37,6 +37,10 @@ public class VentaCRUD {
         return model.buscarVenta(pk);
     }
 
+    public boolean ventaExiste(int pk){
+        return model.ventaExiste(pk);
+    }
+
     public void listarVenta(int pk){
         if (buscarVenta(pk) != null){
             System.out.println(buscarVenta(pk).toString());

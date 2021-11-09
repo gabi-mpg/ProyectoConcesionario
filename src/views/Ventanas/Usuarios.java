@@ -8,7 +8,9 @@ package views.Ventanas;
 import controllers.ClienteCRUD;
 import controllers.UsuarioCRUD;
 import entidades.Cliente;
+import entidades.Moto;
 import entidades.Usuario;
+import modelo.UsuarioModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -60,6 +62,7 @@ public class Usuarios extends javax.swing.JPanel {
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
+        cnUsuario = new UsuarioCRUD();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -116,11 +119,9 @@ public class Usuarios extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 36, 0, 9);
         add(botonEliminar, gridBagConstraints);
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonModificarActionPerformed
+        agregarListeners();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void setHeaders(){
         this.tablaResultado = new JTable(model);
@@ -130,7 +131,7 @@ public class Usuarios extends javax.swing.JPanel {
         model.addColumn("Apellidos");
         model.addColumn("Password");
     }
-    private void fillTable(){
+    public void fillTable(){
         UsuarioCRUD controlador = new UsuarioCRUD();
         ArrayList<Usuario> listaUsuarios = controlador.gesListaUsuarios();
         model.setRowCount(0);
@@ -144,6 +145,69 @@ public class Usuarios extends javax.swing.JPanel {
         }
     }
 
+    private void fillTableBuscar(Usuario u){
+        model.setRowCount(0);
+        Object[] datosUser = new Object[4];
+        datosUser[0] = u.getNick();
+        datosUser[1] = u.getNombre();
+        datosUser[2] = u.getApellidos();
+        datosUser[3] = u.getContra();
+        model.addRow(datosUser);
+    }
+
+    private void agregarListeners(){
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+    }
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+            String nick = JOptionPane.showInputDialog(this, "Introduce el nick de usuario", 1);
+            if (cnUsuario.usuarioExiste(nick)){
+                Usuario user = cnUsuario.buscarUsuario(nick);
+                fillTableBuscar(user);
+            } else {
+                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -152,5 +216,6 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
+    private UsuarioCRUD cnUsuario;
     // End of variables declaration//GEN-END:variables
 }

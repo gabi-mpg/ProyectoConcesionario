@@ -29,6 +29,10 @@ public class UsuarioCRUD {
         return model.buscarUsuario(pk);
     }
 
+    public boolean usuarioExiste(String pk){
+        return model.usuarioExiste(pk);
+    }
+
     public void listarUsuario(String pk){
         if (buscarUsuario(pk) != null){
             System.out.println(buscarUsuario(pk).toString());

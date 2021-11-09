@@ -5,13 +5,13 @@
  */
 package views.Ventanas;
 
-import controllers.ClienteCRUD;
 import controllers.MotoCRUD;
 import entidades.Cliente;
 import entidades.Moto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -35,65 +35,68 @@ public class Motos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaResultado = new javax.swing.JTable();
-        botonBuscar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new JScrollPane();
+        tablaResultado = new JTable();
+        botonBuscar = new JButton();
+        botonModificar = new JButton();
+        botonCrear = new JButton();
+        botonEliminar = new JButton();
         model = new DefaultTableModel();
-        setPreferredSize(new java.awt.Dimension(600, 300));
-        setLayout(new java.awt.GridBagLayout());
+        cnMoto = new MotoCRUD();
+        setPreferredSize(new Dimension(600, 300));
+        setLayout(new GridBagLayout());
 
         setHeaders();
         fillTable();
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 368;
         gridBagConstraints.ipady = 210;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(18, 5, 6, 5);
+        gridBagConstraints.insets = new Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
-        botonBuscar.setText("Buscar moto");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonBuscar.setText("Buscar");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 18, 0, 12);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new Insets(10, 18, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
-        jButton2.setText("Modificar moto");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonModificar.setText("Modificar");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 30, 0, 12);
-        add(jButton2, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new Insets(10, 30, 0, 12);
+        add(botonModificar, gridBagConstraints);
 
-        jButton3.setText("Crear moto");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonCrear.setText("Crear");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 30, 0, 12);
-        add(jButton3, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new Insets(10, 30, 0, 12);
+        add(botonCrear, gridBagConstraints);
 
-        jButton4.setText("Eliminar moto");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        botonEliminar.setText("Eliminar");
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 39, 0, 12);
-        add(jButton4, gridBagConstraints);
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new Insets(10, 39, 0, 12);
+        add(botonEliminar, gridBagConstraints);
+
+        agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
     private void setHeaders(){
@@ -104,7 +107,7 @@ public class Motos extends javax.swing.JPanel {
         model.addColumn("Color");
         model.addColumn("Tanque");
     }
-    private void fillTable(){
+    public void fillTable(){
         MotoCRUD controlador = new MotoCRUD();
         ArrayList<Moto> listaMotos = controlador.getListaMotos();
         model.setRowCount(0);
@@ -117,13 +120,89 @@ public class Motos extends javax.swing.JPanel {
             model.addRow(datosMoto);
         }
     }
+
+    private void fillTableBuscar(Moto m){
+        model.setRowCount(0);
+        Object[] datosMoto = new Object[4];
+        datosMoto[0] = m.getMatricula();
+        datosMoto[1] = m.getMarca();
+        datosMoto[2] = m.getColor();
+        datosMoto[3] = m.getTanque();
+        model.addRow(datosMoto);
+    }
+
+    private void agregarListeners(){
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+    }
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+            String matricula = pedirMatricula();
+            if (cnMoto.motoExiste(matricula)){
+                Moto moto = cnMoto.buscarMoto(matricula);
+                fillTableBuscar(moto);
+            } else {
+                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private String pedirMatricula(){
+        String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula a buscar", 1);
+
+        while (!cnMoto.comprobarMatricula(matricula)){
+            JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
+
+            matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula a buscar", 1);
+        }
+        return matricula;
+    }
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton botonCrear;
+    private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton botonModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
+    private MotoCRUD cnMoto;
     // End of variables declaration//GEN-END:variables
 }

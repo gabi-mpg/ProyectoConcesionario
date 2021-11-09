@@ -52,6 +52,10 @@ public class UsuarioModel {
         return null;
     }
 
+    public boolean usuarioExiste(String pk){
+        return buscarUsuario(pk) != null;
+    }
+
     public void listarUsuario(String pk){
         if (buscarUsuario(pk) != null){
             System.out.println(buscarUsuario(pk).toString());
