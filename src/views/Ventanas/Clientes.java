@@ -80,7 +80,8 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.ipady = 210;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weighty = 2.0;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(18, 5, 6, 5);
         add(jScrollPane1, gridBagConstraints);
 
@@ -91,7 +92,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(15, 10, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 5, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Modificar");
