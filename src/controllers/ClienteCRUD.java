@@ -9,13 +9,14 @@ import java.util.ArrayList;
 
 public class ClienteCRUD {
 
+    private  ControllerConexion conexion;
 
-    public ClienteCRUD(){
-
+    public ClienteCRUD(ControllerConexion conexion){
+        this.conexion = conexion;
     }
 
     public ArrayList<Cliente> getListaClientes(){
-        return ClienteModel.getListaClientes();
+        return ClienteModel.getListaClientes(conexion);
     }
 
     public boolean agregarCliente(String dni, String nombre, String apellido, String direcc){

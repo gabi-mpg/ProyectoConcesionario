@@ -5,6 +5,7 @@
  */
 package views.Ventanas;
 
+import controllers.ControllerConexion;
 import views.Ventanas.Clientes;
 import views.Ventanas.Motos;
 import views.Ventanas.Usuarios;
@@ -39,13 +40,14 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_MOTO = "moto";
     private final String PANEL_VENTA = "venta";
     private int nivelUsuario;
+    private ControllerConexion conexion;
     private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
 
     public mainInterface() {
         initComponents();
         anadirMenu();
         pack();
-        this.panelClientes = new Clientes();
+        this.panelClientes = new Clientes(nivelUsuario,conexion);
         this.panelMotos = new Motos();
         this.panelUsuario = new Usuarios();
         this.panelVentas = new Ventas();
@@ -60,18 +62,19 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         setVisible(true);
     }
 
-    public mainInterface(int nivelUsuario){
+    public mainInterface(int nivelUsuario, ControllerConexion conexion){
         this.nivelUsuario = nivelUsuario;
         initComponents();
         setLocationRelativeTo(null);
         anadirMenu();
         setResizable(false);
         pack();
-        this.panelClientes = new Clientes();
+        this.panelClientes = new Clientes(nivelUsuario,conexion);
         this.panelMotos = new Motos();
         this.panelUsuario = new Usuarios();
         this.panelVentas = new Ventas();
-
+        this.nivelUsuario = nivelUsuario;
+        this.conexion = conexion;
         anadirPaneles();
         botonVentas.addActionListener(this);
         botonVentas.addActionListener(this);

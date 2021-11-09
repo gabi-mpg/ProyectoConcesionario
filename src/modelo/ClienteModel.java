@@ -10,12 +10,12 @@ public class ClienteModel {
 
     private static ArrayList<Cliente> listaClientes = new ArrayList<>();
     private static ControllerConexion cnControl = new ControllerConexion();
-    private static Connection conexion;
+    private static Connection conexionBBDD;
 
-    public ClienteModel(){
+    public ClienteModel(ControllerConexion conexion){
         listaClientes = new ArrayList<>();
-        cnControl = new ControllerConexion();
-        conexion = cnControl.getConexion();
+        cnControl = conexion;
+        conexionBBDD = cnControl.getConexion();
         //conexion = conectar();
         saveClientes();
     }
@@ -25,7 +25,7 @@ public class ClienteModel {
         String sql = "SELECT * FROM t_clientes";
 
         try {
-            PreparedStatement pst = conexion.prepareStatement(sql);
+            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
@@ -67,7 +67,7 @@ public class ClienteModel {
 
     }
 
-    public static ArrayList<Cliente> getListaClientes(){
+    public static ArrayList<Cliente> getListaClientes(ControllerConexion conexion){
         saveClientes();
         return listaClientes;
     }
@@ -76,7 +76,7 @@ public class ClienteModel {
         saveClientes();
         String sql = "INSERT INTO t_clientes values (?, ?, ?, ?)";
         try {
-            PreparedStatement pst = conexion.prepareStatement(sql);
+            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
             pst.setString(1, cliente.getDni());
             pst.setString(2, cliente.getNombre());
             pst.setString(3, cliente.getApellido());
@@ -87,14 +87,14 @@ public class ClienteModel {
             System.err.println("Error registrando el cliente. " + e);
         }
 
-        return getListaClientes();
+        return getListaClientes(cnControl);
     }
 
     public static boolean removeCliente(String dni){
         saveClientes();
         String sql = "delete from t_clientes where dni like ?";
         try {
-            PreparedStatement pst = conexion.prepareStatement(sql);
+            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
             pst.setString(1, dni);
             pst.executeUpdate();
             listaClientes.removeIf(c -> c.getDni().equalsIgnoreCase(dni));
@@ -110,7 +110,7 @@ public class ClienteModel {
         saveClientes();
         String sql = "UPDATE t_clientes set Nombre = ?, Apellido = ?, Direccion = ? where DNI like ?";
         try {
-            PreparedStatement pst = conexion.prepareStatement(sql);
+            PreparedStatement pst = conexionBBDD.prepareStatement(sql);
             pst.setString(1, cliente.getNombre());
             pst.setString(2, cliente.getApellido());
             pst.setString(3, cliente.getDireccion());
@@ -138,8 +138,9 @@ public class ClienteModel {
 
     public static void conectar(){
         try{
+            
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
-            conexion = cn;
+            conexionBBDD = cn;
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
         }

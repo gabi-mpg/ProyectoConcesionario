@@ -6,6 +6,7 @@
 package views.Ventanas;
 
 import controllers.ClienteCRUD;
+import controllers.ControllerConexion;
 import entidades.Cliente;
 
 import javax.swing.*;
@@ -19,8 +20,11 @@ import java.util.ArrayList;
 public class Clientes extends javax.swing.JPanel {
 
     private int nivelUsuario;
+    private ControllerConexion conexion;
     
-    public Clientes() {
+    public Clientes(int nivelUsuario, ControllerConexion conexion) {
+        this.nivelUsuario = nivelUsuario;
+        this.conexion = conexion;
         initComponents();
     }
     
@@ -119,7 +123,7 @@ public class Clientes extends javax.swing.JPanel {
         model.addColumn("Direccion");
     }
     private void fillTable(){
-        ClienteCRUD controlador = new ClienteCRUD();
+        ClienteCRUD controlador = new ClienteCRUD(this.conexion);
         ArrayList<Cliente> listaClientes = controlador.getListaClientes();
         model.setRowCount(0);
         for (Cliente c : listaClientes){
