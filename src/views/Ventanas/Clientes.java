@@ -12,6 +12,7 @@ import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
 import entidades.Cliente;
 import entidades.Usuario;
+import views.Ventanas.crudClientes.PanelModificarCliente;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -64,6 +65,7 @@ public class Clientes extends javax.swing.JPanel {
         botonEliminar = new JButton();
         model = new DefaultTableModel();
         cnCliente = new ClienteCRUD();
+        panelModificar = new PanelModificarCliente();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -213,7 +215,10 @@ public class Clientes extends javax.swing.JPanel {
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String dni = pedirDNI();
+        panelModificar.setMatricula(dni);
+        panelModificar.rellenarCampos();
+        fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,6 +237,7 @@ public class Clientes extends javax.swing.JPanel {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private ClienteCRUD cnCliente;
+    private PanelModificarCliente panelModificar;
 
     // End of variables declaration//GEN-END:variables
 }

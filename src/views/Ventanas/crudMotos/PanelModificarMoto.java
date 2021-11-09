@@ -19,7 +19,6 @@ public class PanelModificarMoto extends javax.swing.JFrame {
         // y así reutilizar el panel
         public PanelModificarMoto() {
             initComponents();
-            labelTitulo.setText("Modificar moto");
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -55,7 +54,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             setLayout(new java.awt.GridBagLayout());
 
             labelTitulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-            labelTitulo.setText("Modificar una moto");
+            labelTitulo.setText("Modificar moto");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
@@ -145,12 +144,6 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             add(jLabel4, gridBagConstraints);
 
             botonModificar.setText("Modificar");
-            botonModificar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    modificar(actionEvent);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -159,11 +152,6 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             add(botonModificar, gridBagConstraints);
 
             checkLimpiar.setText("Limpiar campos");
-            checkLimpiar.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    checkLimpiarActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -171,6 +159,8 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
             gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 13);
             add(checkLimpiar, gridBagConstraints);
+
+            agregarListeners();
         }// </editor-fold>
 
         public void rellenarCampos(){
@@ -186,6 +176,22 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             }
 
         }
+
+    private void agregarListeners(){
+        checkLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                checkLimpiarActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                modificar(actionEvent);
+            }
+        });
+    }
+
         private void checkLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
         }

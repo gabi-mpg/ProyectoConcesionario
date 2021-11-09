@@ -21,7 +21,6 @@ public class PanelModificarCliente extends JFrame {
         // y así reutilizar el panel
         public PanelModificarCliente() {
             initComponents();
-            labelTitulo.setText("Modificar moto");
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -56,7 +55,7 @@ public class PanelModificarCliente extends JFrame {
             setLayout(new GridBagLayout());
 
             labelTitulo.setFont(new Font("Dialog", 0, 18)); // NOI18N
-            labelTitulo.setText("Modificar una moto");
+            labelTitulo.setText("Modificar cliente");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
@@ -75,16 +74,6 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
             add(textoDireccion, gridBagConstraints);
-
-            /*textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
-            add(textoMatricula, gridBagConstraints);*/
 
             textoApellidos.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
@@ -146,12 +135,7 @@ public class PanelModificarCliente extends JFrame {
             add(jLabel4, gridBagConstraints);
 
             botonModificar.setText("Modificar");
-            botonModificar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    modificar(actionEvent);
-                }
-            });
+
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -160,11 +144,6 @@ public class PanelModificarCliente extends JFrame {
             add(botonModificar, gridBagConstraints);
 
             checkLimpiar.setText("Limpiar campos");
-            checkLimpiar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    checkLimpiarActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -172,8 +151,24 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.anchor = GridBagConstraints.EAST;
             gridBagConstraints.insets = new Insets(0, 0, 0, 13);
             add(checkLimpiar, gridBagConstraints);
+
+            agregarListeners();
         }// </editor-fold>
 
+    private void agregarListeners(){
+        checkLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                checkLimpiarActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                modificar(actionEvent);
+            }
+        });
+    }
         public void rellenarCampos(){
             if (cnCliente.clienteExiste(dni)){
                 Cliente cliente = cnCliente.buscarCliente(dni);

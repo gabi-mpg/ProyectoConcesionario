@@ -11,6 +11,7 @@ import entidades.Cliente;
 import entidades.Moto;
 import entidades.Usuario;
 import modelo.UsuarioModel;
+import views.Ventanas.crudUsuarios.PanelModificarUsuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -64,6 +65,7 @@ public class Usuarios extends javax.swing.JPanel {
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
         cnUsuario = new UsuarioCRUD();
+        panelModificar = new PanelModificarUsuario();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -226,5 +228,6 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private UsuarioCRUD cnUsuario;
+    private PanelModificarUsuario panelModificar;
     // End of variables declaration//GEN-END:variables
 }

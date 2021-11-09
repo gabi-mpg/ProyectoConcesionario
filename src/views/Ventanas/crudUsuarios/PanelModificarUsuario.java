@@ -1,6 +1,7 @@
 package views.Ventanas.crudUsuarios;
 
 import controllers.MotoCRUD;
+import controllers.UsuarioCRUD;
 import entidades.Moto;
 
 import javax.swing.*;
@@ -49,7 +50,7 @@ public class PanelModificarUsuario extends JFrame {
             botonModificar = new JButton();
             checkLimpiar = new JCheckBox();
             matricula = "";
-            cnMoto = new MotoCRUD();
+            cnUser = new UsuarioCRUD();
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setLayout(new GridBagLayout());
@@ -74,16 +75,6 @@ public class PanelModificarUsuario extends JFrame {
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
             add(textoTanque, gridBagConstraints);
-
-            /*textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
-            add(textoMatricula, gridBagConstraints);*/
 
             textoMarca.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
@@ -145,12 +136,6 @@ public class PanelModificarUsuario extends JFrame {
             add(jLabel4, gridBagConstraints);
 
             botonModificar.setText("Modificar");
-            botonModificar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    modificar(actionEvent);
-                }
-            });
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -159,11 +144,6 @@ public class PanelModificarUsuario extends JFrame {
             add(botonModificar, gridBagConstraints);
 
             checkLimpiar.setText("Limpiar campos");
-            checkLimpiar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    checkLimpiarActionPerformed(evt);
-                }
-            });
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 7;
@@ -171,11 +151,13 @@ public class PanelModificarUsuario extends JFrame {
             gridBagConstraints.anchor = GridBagConstraints.EAST;
             gridBagConstraints.insets = new Insets(0, 0, 0, 13);
             add(checkLimpiar, gridBagConstraints);
+
+            agregarListeners();
         }// </editor-fold>
 
         public void rellenarCampos(){
-            if (cnMoto.motoExiste(matricula)){
-                Moto moto = cnMoto.buscarMoto(matricula);
+            if (cnUser.motoExiste(matricula)){
+                Moto moto = cnUser.buscarMoto(matricula);
                 jLabel1.setText("Modificar moto con matricula " + matricula);
                 textoColor.setText(moto.getColor());
                 textoMarca.setText(moto.getMarca());
@@ -186,6 +168,22 @@ public class PanelModificarUsuario extends JFrame {
             }
 
         }
+
+    private void agregarListeners(){
+        checkLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                checkLimpiarActionPerformed(evt);
+            }
+        });
+
+        botonModificar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                modificar(actionEvent);
+            }
+        });
+    }
+
         private void checkLimpiarActionPerformed(ActionEvent evt) {
             // TODO add your handling code here:
         }
@@ -195,7 +193,7 @@ public class PanelModificarUsuario extends JFrame {
             String color = textoColor.getText();
             int tanque = Integer.parseInt(textoTanque.getText());
             Moto moto = new Moto(matricula, marca, color, tanque);
-            cnMoto.updateMoto(moto);
+            cnUser.updateMoto(moto);
             dispose();
         }
 
@@ -217,7 +215,7 @@ public class PanelModificarUsuario extends JFrame {
         private JTextField textoMatricula;
         private JTextField textoTanque;
         private String matricula;
-        private MotoCRUD cnMoto;
+        private UsuarioCRUD cnUser;
         // End of variables declaration
     }
 
