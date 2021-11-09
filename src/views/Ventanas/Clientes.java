@@ -57,10 +57,10 @@ public class Clientes extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        botonBuscar = new JGradientButton();
-        botonModificar = new JGradientButton();
-        botonCrear = new JGradientButton();
-        botonEliminar = new JGradientButton();
+        botonBuscar = new JButton();
+        botonModificar = new JButton();
+        botonCrear = new JButton();
+        botonEliminar = new JButton();
         model = new DefaultTableModel();
         cnCliente = new ClienteCRUD();
 
@@ -88,7 +88,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 8);
+        gridBagConstraints.insets = new java.awt.Insets(10, 14, 0, 20);
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Modificar");
@@ -96,7 +96,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 8);
+        gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 20);
         add(botonModificar, gridBagConstraints);
 
         botonCrear.setText("Crear");
@@ -104,7 +104,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 8);
+        gridBagConstraints.insets = new java.awt.Insets(10, 26, 0, 20);
         add(botonCrear, gridBagConstraints);
 
         botonEliminar.setText("Eliminar");
@@ -112,7 +112,7 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 35, 0, 8);
+        gridBagConstraints.insets = new java.awt.Insets(10, 35, 0, 20);
         add(botonEliminar, gridBagConstraints);
 
         agregarListeners();

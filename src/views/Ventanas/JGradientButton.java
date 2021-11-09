@@ -11,6 +11,7 @@ import java.awt.*;
 
         public JGradientButton() {
             setContentAreaFilled(false);
+            setPreferredSize(new Dimension(120,60));
         }
 
         /**

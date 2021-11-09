@@ -46,7 +46,10 @@ public class MNGDB {
 
     public Connection conectar(){
         try{
-            return conexion = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
+            String[] valores = new config().getConfig();
+            conexion = DriverManager.getConnection(valores[0], valores[1], valores[2]);
+            crearBaseDatos();
+            return conexion;
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
         }

@@ -47,7 +47,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         initComponents();
         anadirMenu();
         pack();
-        this.panelClientes = new Clientes(nivelUsuario,conexion);
+        this.panelClientes = new Clientes(nivelUsuario);
         this.panelMotos = new Motos();
         this.panelUsuario = new Usuarios();
         this.panelVentas = new Ventas();
@@ -69,7 +69,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         anadirMenu();
         setResizable(false);
         pack();
-        this.panelClientes = new Clientes(nivelUsuario,conexion);
+        this.panelClientes = new Clientes(nivelUsuario);
         this.panelMotos = new Motos();
         this.panelUsuario = new Usuarios();
         this.panelVentas = new Ventas();
