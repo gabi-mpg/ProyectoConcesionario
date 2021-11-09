@@ -68,7 +68,7 @@ public class ClienteModel {
     }
 
     public static ArrayList<Cliente> getListaClientes(ControllerConexion conexion){
-        saveClientes();
+        saveClientes(); //;
         return listaClientes;
     }
 
