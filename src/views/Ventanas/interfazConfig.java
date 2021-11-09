@@ -40,7 +40,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-       setSize(334,410);
+        configWallpaper.setSize(370,410);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.boton.addActionListener(this);
     }
