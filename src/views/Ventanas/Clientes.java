@@ -57,10 +57,10 @@ public class Clientes extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        botonBuscar = new javax.swing.JButton();
-        botonModificar = new javax.swing.JButton();
-        botonCrear = new javax.swing.JButton();
-        botonEliminar = new javax.swing.JButton();
+        botonBuscar = new JGradientButton();
+        botonModificar = new JGradientButton();
+        botonCrear = new JGradientButton();
+        botonEliminar = new JGradientButton();
         model = new DefaultTableModel();
         cnCliente = new ClienteCRUD();
 
