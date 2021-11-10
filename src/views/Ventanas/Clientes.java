@@ -66,6 +66,7 @@ public class Clientes extends javax.swing.JPanel {
         model = new DefaultTableModel();
         cnCliente = new ClienteCRUD();
         panelModificar = new PanelModificarCliente();
+        panelModificar.setVisible(false);
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -216,7 +217,7 @@ public class Clientes extends javax.swing.JPanel {
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
         String dni = pedirDNI();
-        panelModificar.setMatricula(dni);
+        panelModificar.setDNI(dni);
         panelModificar.rellenarCampos();
         fillTable();
     }

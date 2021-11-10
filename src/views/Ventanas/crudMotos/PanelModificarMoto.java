@@ -22,7 +22,6 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
-            setVisible(true);
         }
 
         /**
@@ -170,6 +169,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
                 textoColor.setText(moto.getColor());
                 textoMarca.setText(moto.getMarca());
                 textoTanque.setText(String.valueOf(moto.getTanque()));
+                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
                 this.dispose();

@@ -5,12 +5,8 @@
  */
 package views.Ventanas;
 
-import controllers.ClienteCRUD;
 import controllers.UsuarioCRUD;
-import entidades.Cliente;
-import entidades.Moto;
 import entidades.Usuario;
-import modelo.UsuarioModel;
 import views.Ventanas.crudUsuarios.PanelModificarUsuario;
 
 import javax.swing.*;
@@ -66,6 +62,7 @@ public class Usuarios extends javax.swing.JPanel {
         model = new DefaultTableModel();
         cnUsuario = new UsuarioCRUD();
         panelModificar = new PanelModificarUsuario();
+        panelModificar.setVisible(false);
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -208,7 +205,10 @@ public class Usuarios extends javax.swing.JPanel {
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "-");
+        panelModificar.setNick(nick);
+        panelModificar.rellenarCampos();
+        fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {

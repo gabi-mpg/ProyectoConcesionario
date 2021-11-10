@@ -1,8 +1,8 @@
 package views.Ventanas.crudUsuarios;
 
-import controllers.MotoCRUD;
 import controllers.UsuarioCRUD;
 import entidades.Moto;
+import entidades.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,11 +20,10 @@ public class PanelModificarUsuario extends JFrame {
         // y así reutilizar el panel
         public PanelModificarUsuario() {
             initComponents();
-            labelTitulo.setText("Modificar moto");
+            labelTitulo.setText("Modificar usuario");
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
-            setVisible(true);
         }
 
         /**
@@ -38,10 +37,9 @@ public class PanelModificarUsuario extends JFrame {
             GridBagConstraints gridBagConstraints;
 
             labelTitulo = new JLabel();
-            textoTanque = new JTextField();
-            textoMatricula = new JTextField();
-            textoMarca = new JTextField();
-            textoColor = new JTextField();
+            textoPasw = new JTextField();
+            textoNombre = new JTextField();
+            textoApellidos = new JTextField();
             labelImagen = new JLabel();
             jLabel1 = new JLabel();
             jLabel2 = new JLabel();
@@ -49,7 +47,7 @@ public class PanelModificarUsuario extends JFrame {
             jLabel4 = new JLabel();
             botonModificar = new JButton();
             checkLimpiar = new JCheckBox();
-            matricula = "";
+            nick = "";
             cnUser = new UsuarioCRUD();
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -66,7 +64,7 @@ public class PanelModificarUsuario extends JFrame {
             gridBagConstraints.insets = new Insets(8, 60, 8, 50);
             add(labelTitulo, gridBagConstraints);
 
-            textoTanque.setPreferredSize(new Dimension(75, 25));
+            textoPasw.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 5;
@@ -74,9 +72,9 @@ public class PanelModificarUsuario extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoTanque, gridBagConstraints);
+            add(textoPasw, gridBagConstraints);
 
-            textoMarca.setPreferredSize(new Dimension(75, 25));
+            textoNombre.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
@@ -84,9 +82,9 @@ public class PanelModificarUsuario extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoMarca, gridBagConstraints);
+            add(textoNombre, gridBagConstraints);
 
-            textoColor.setPreferredSize(new Dimension(75, 25));
+            textoApellidos.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
@@ -94,7 +92,7 @@ public class PanelModificarUsuario extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoColor, gridBagConstraints);
+            add(textoApellidos, gridBagConstraints);
 
             labelImagen.setIcon(new ImageIcon(ruta+"iconoModificar.png")); // NOI18N
             gridBagConstraints = new GridBagConstraints();
@@ -156,14 +154,14 @@ public class PanelModificarUsuario extends JFrame {
         }// </editor-fold>
 
         public void rellenarCampos(){
-            if (cnUser.motoExiste(matricula)){
-                Moto moto = cnUser.buscarMoto(matricula);
-                jLabel1.setText("Modificar moto con matricula " + matricula);
-                textoColor.setText(moto.getColor());
-                textoMarca.setText(moto.getMarca());
-                textoTanque.setText(String.valueOf(moto.getTanque()));
+            if (cnUser.usuarioExiste(nick)){
+                Usuario usuario = cnUser.buscarUsuario(nick);
+                jLabel1.setText("Modificar usuario con nick " + nick);
+                textoApellidos.setText(usuario.getApellidos());
+                textoNombre.setText(usuario.getNombre());
+                textoPasw.setText(usuario.getContra());
             } else {
-                JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
+                JOptionPane.showMessageDialog(this, "El usuario no existe en la BD");
                 this.dispose();
             }
 
@@ -189,16 +187,17 @@ public class PanelModificarUsuario extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            String marca = textoMarca.getText();
-            String color = textoColor.getText();
-            int tanque = Integer.parseInt(textoTanque.getText());
-            Moto moto = new Moto(matricula, marca, color, tanque);
-            cnUser.updateMoto(moto);
+            String nombre = textoNombre.getText();
+            String apellidos = textoApellidos.getText();
+            String contra = "";
+            int permiso = Integer.parseInt(textoPasw.getText());
+            Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso);
+            cnUser.updateUsuario(usuario);
             dispose();
         }
 
-        public void setMatricula(String matricula) {
-            this.matricula = matricula;
+        public void setNick(String nick) {
+            this.nick = nick;
         }
 
     // Variables declaration - do not modify
@@ -210,11 +209,10 @@ public class PanelModificarUsuario extends JFrame {
         private JLabel jLabel4;
         private JLabel labelImagen;
         private JLabel labelTitulo;
-        private JTextField textoColor;
-        private JTextField textoMarca;
-        private JTextField textoMatricula;
-        private JTextField textoTanque;
-        private String matricula;
+        private JTextField textoApellidos;
+        private JTextField textoNombre;
+        private JTextField textoPasw;
+        private String nick;
         private UsuarioCRUD cnUser;
         // End of variables declaration
     }

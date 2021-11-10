@@ -24,7 +24,6 @@ public class PanelModificarCliente extends JFrame {
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
-            setVisible(true);
         }
 
         /**
@@ -176,6 +175,7 @@ public class PanelModificarCliente extends JFrame {
                 textoNombre.setText(cliente.getNombre());
                 textoApellidos.setText(cliente.getApellido());
                 textoDireccion.setText(cliente.getDireccion());
+                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "EL cliente no existe en la BD");
                 this.dispose();
