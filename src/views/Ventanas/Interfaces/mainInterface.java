@@ -3,25 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Interfaces;
 
 import controllers.ControllerConexion;
-import views.Ventanas.Clientes;
-import views.Ventanas.Motos;
-import views.Ventanas.Usuarios;
-import views.Ventanas.Ventas;
+import views.Ventanas.Paneles.Clientes;
+import views.Ventanas.Paneles.Motos;
+import views.Ventanas.Paneles.Usuarios;
+import views.Ventanas.Paneles.Ventas;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 /**
  *

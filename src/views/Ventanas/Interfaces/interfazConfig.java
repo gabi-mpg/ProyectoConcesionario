@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Interfaces;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +11,6 @@ package views.Ventanas;
  * and open the template in the editor.
  */
 
-import controllers.ControllerConexion;
 import modelo.config;
 import javax.swing.*;
 import java.awt.*;

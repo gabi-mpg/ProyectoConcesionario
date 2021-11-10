@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Paneles;
 
-import com.mysql.cj.xdevapi.Client;
 import controllers.ClienteCRUD;
-import controllers.MotoCRUD;
-import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
 import entidades.Cliente;
 import entidades.Usuario;
-import views.Ventanas.crudClientes.PanelModificarCliente;
+import entidades.Venta;
+import views.Ventanas.crudVentas.buscarVenta;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,15 +21,15 @@ import java.util.ArrayList;
  *
  * @author Chris
  */
-public class Clientes extends javax.swing.JPanel {
+public class Ventas extends javax.swing.JPanel {
 
     private int nivelUsuario;
     
-    public Clientes() {
+    public Ventas() {
         initComponents();
     }
     
-    public Clientes(int nivelUsuario){
+    public Ventas(int nivelUsuario){
         initComponents();
         this.nivelUsuario = nivelUsuario;
         cambiarPermisos();
@@ -59,14 +57,13 @@ public class Clientes extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        botonBuscar = new JButton();
-        botonModificar = new JButton();
-        botonCrear = new JButton();
-        botonEliminar = new JButton();
+        tablaResultado = new javax.swing.JTable();
+        botonBuscar = new javax.swing.JButton();
+        botonModificar = new javax.swing.JButton();
+        botonCrear = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
-        cnCliente = new ClienteCRUD();
-        panelModificar = new PanelModificarCliente();
-        panelModificar.setVisible(false);
+        cnVentas = new VentaCRUD();
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -127,6 +124,12 @@ public class Clientes extends javax.swing.JPanel {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 5);
         add(botonEliminar, gridBagConstraints);
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+
 
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
@@ -134,33 +137,36 @@ public class Clientes extends javax.swing.JPanel {
     private void setHeaders(){
         this.tablaResultado = new JTable(model);
         jScrollPane1.setViewportView(tablaResultado);
+        model.addColumn("ID");
+        model.addColumn("Matricula");
         model.addColumn("DNI");
-        model.addColumn("Nombre");
-        model.addColumn("Apellidos");
-        model.addColumn("Direccion");
+        model.addColumn("Precio");
+        model.addColumn("Vendedor");
     }
+
     public void fillTable(){
-        ClienteCRUD controlador = new ClienteCRUD();
-        ArrayList<Cliente> listaClientes = controlador.getListaClientes();
+        VentaCRUD controlador = new VentaCRUD();
+        ArrayList<Venta> listaVentas = controlador.getListaVentas();
         model.setRowCount(0);
-        for (Cliente c : listaClientes){
-            Object[] datosCliente = new Object[4];
-            datosCliente[0] = c.getDni();
-            datosCliente[1] = c.getNombre();
-            datosCliente[2] = c.getApellido();
-            datosCliente[3] = c.getDireccion();
-            model.addRow(datosCliente);
+        for (Venta v : listaVentas){
+            Object[] datosVenta = new Object[5];
+            datosVenta[0] = v.getIdVenta();
+            datosVenta[1] = v.getDni();
+            datosVenta[2] = v.getMatricula();
+            datosVenta[3] = v.getPrecio();
+            datosVenta[4] = v.getIdVendedor();
+            model.addRow(datosVenta);
         }
     }
 
-    private void fillTableBuscar(Cliente c){
+    private void fillTableBuscar(Venta v){
         model.setRowCount(0);
-            Object[] datosCliente = new Object[4];
-            datosCliente[0] = c.getDni();
-            datosCliente[1] = c.getNombre();
-            datosCliente[2] = c.getApellido();
-            datosCliente[3] = c.getDireccion();
-            model.addRow(datosCliente);
+        Object[] datosVenta = new Object[4];
+        datosVenta[0] = v.getIdVenta();
+        datosVenta[1] = v.getDni();
+        datosVenta[2] = v.getMatricula();
+        datosVenta[3] = v.getPrecio();
+        model.addRow(datosVenta);
     }
 
     private void agregarListeners(){
@@ -191,35 +197,23 @@ public class Clientes extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            String dni = pedirDNI();
-            if (cnCliente.clienteExiste(dni)){
-                Cliente cliente = cnCliente.buscarCliente(dni);
-                fillTableBuscar(cliente);
-            } else {
-                JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD");
-            }
+            new buscarVenta();
+            String valorBusqueda = "";
+//            int IDVenta = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el IDVenta", 1));
+//            if (cnVentas.ventaExiste(IDVenta)){
+//                Venta venta = cnVentas.buscarVenta(IDVenta);
+//                fillTableBuscar(venta);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD");
+//            }
 
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    private String pedirDNI(){
-        String dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
-
-        while (!cnCliente.comprobarDNI(dni)){
-            JOptionPane.showMessageDialog(this, "Formato DNI incorrecto");
-
-            dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
-        }
-        return dni;
-    }
-
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        String dni = pedirDNI();
-        panelModificar.setDNI(dni);
-        panelModificar.rellenarCampos();
-        fillTable();
+        // TODO add your handling code here:
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +223,8 @@ public class Clientes extends javax.swing.JPanel {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -237,8 +233,6 @@ public class Clientes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
-    private ClienteCRUD cnCliente;
-    private PanelModificarCliente panelModificar;
-
+    private VentaCRUD cnVentas;
     // End of variables declaration//GEN-END:variables
 }

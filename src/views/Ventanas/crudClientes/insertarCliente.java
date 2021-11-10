@@ -5,7 +5,8 @@ package views.Ventanas.crudClientes;
  * and open the template in the editor.
  */
 
-import static utils.Utilidades.RUTA_IMG;
+import java.io.File;
+
 
 /**
  *
@@ -13,7 +14,8 @@ import static utils.Utilidades.RUTA_IMG;
  */
 public class insertarCliente extends javax.swing.JFrame {
 
-
+    private String ruta =  System.getProperty("user.dir")+
+    File.separator+"src"+File.separator+"Imagenes"+File.separator;
 
     public insertarCliente() {
         this.setVisible(true);
@@ -54,7 +56,7 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(16, 32, 6, 32);
         add(jLabel1, gridBagConstraints);
 
-        iconoInsertar.setIcon(new javax.swing.ImageIcon(RUTA_IMG+"iconoInsertar.png")); // NOI18N
+        iconoInsertar.setIcon(new javax.swing.ImageIcon(ruta+"iconoInsertar.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

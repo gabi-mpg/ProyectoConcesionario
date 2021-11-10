@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Paneles;
 
-import controllers.ClienteCRUD;
-import controllers.VentaCRUD;
-import entidades.Cliente;
+import controllers.UsuarioCRUD;
 import entidades.Usuario;
-import entidades.Venta;
-import views.Ventanas.crudVentas.buscarVenta;
+import views.Ventanas.crudUsuarios.PanelModificarUsuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,15 +18,15 @@ import java.util.ArrayList;
  *
  * @author Chris
  */
-public class Ventas extends javax.swing.JPanel {
+public class Usuarios extends javax.swing.JPanel {
 
     private int nivelUsuario;
     
-    public Ventas() {
+    public Usuarios() {
         initComponents();
     }
     
-    public Ventas(int nivelUsuario){
+    public Usuarios(int nivelUsuario){
         initComponents();
         this.nivelUsuario = nivelUsuario;
         cambiarPermisos();
@@ -63,7 +60,9 @@ public class Ventas extends javax.swing.JPanel {
         botonCrear = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
-        cnVentas = new VentaCRUD();
+        cnUsuario = new UsuarioCRUD();
+        panelModificar = new PanelModificarUsuario();
+        panelModificar.setVisible(false);
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -124,49 +123,44 @@ public class Ventas extends javax.swing.JPanel {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 5);
         add(botonEliminar, gridBagConstraints);
-        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEliminarActionPerformed(evt);
+                botonModificarActionPerformed(evt);
             }
         });
-
-
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
     private void setHeaders(){
         this.tablaResultado = new JTable(model);
         jScrollPane1.setViewportView(tablaResultado);
-        model.addColumn("ID");
-        model.addColumn("Matricula");
-        model.addColumn("DNI");
-        model.addColumn("Precio");
-        model.addColumn("Vendedor");
+        model.addColumn("Nick");
+        model.addColumn("Nombre");
+        model.addColumn("Apellidos");
+        model.addColumn("Password");
     }
-
     public void fillTable(){
-        VentaCRUD controlador = new VentaCRUD();
-        ArrayList<Venta> listaVentas = controlador.getListaVentas();
+        UsuarioCRUD controlador = new UsuarioCRUD();
+        ArrayList<Usuario> listaUsuarios = controlador.gesListaUsuarios();
         model.setRowCount(0);
-        for (Venta v : listaVentas){
-            Object[] datosVenta = new Object[5];
-            datosVenta[0] = v.getIdVenta();
-            datosVenta[1] = v.getDni();
-            datosVenta[2] = v.getMatricula();
-            datosVenta[3] = v.getPrecio();
-            datosVenta[4] = v.getIdVendedor();
-            model.addRow(datosVenta);
+        for (Usuario u : listaUsuarios){
+            Object[] datosUsuario = new Object[4];
+            datosUsuario[0] = u.getNick();
+            datosUsuario[1] = u.getNombre();
+            datosUsuario[2] = u.getApellidos();
+            datosUsuario[3] = u.getContra();
+            model.addRow(datosUsuario);
         }
     }
 
-    private void fillTableBuscar(Venta v){
+    private void fillTableBuscar(Usuario u){
         model.setRowCount(0);
-        Object[] datosVenta = new Object[4];
-        datosVenta[0] = v.getIdVenta();
-        datosVenta[1] = v.getDni();
-        datosVenta[2] = v.getMatricula();
-        datosVenta[3] = v.getPrecio();
-        model.addRow(datosVenta);
+        Object[] datosUser = new Object[4];
+        datosUser[0] = u.getNick();
+        datosUser[1] = u.getNombre();
+        datosUser[2] = u.getApellidos();
+        datosUser[3] = u.getContra();
+        model.addRow(datosUser);
     }
 
     private void agregarListeners(){
@@ -197,15 +191,13 @@ public class Ventas extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            new buscarVenta();
-            String valorBusqueda = "";
-//            int IDVenta = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el IDVenta", 1));
-//            if (cnVentas.ventaExiste(IDVenta)){
-//                Venta venta = cnVentas.buscarVenta(IDVenta);
-//                fillTableBuscar(venta);
-//            } else {
-//                JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD");
-//            }
+            String nick = JOptionPane.showInputDialog(this, "Introduce el nick de usuario", 1);
+            if (cnUsuario.usuarioExiste(nick)){
+                Usuario user = cnUsuario.buscarUsuario(nick);
+                fillTableBuscar(user);
+            } else {
+                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
+            }
 
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -213,7 +205,10 @@ public class Ventas extends javax.swing.JPanel {
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "-");
+        panelModificar.setNick(nick);
+        panelModificar.rellenarCampos();
+        fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +219,6 @@ public class Ventas extends javax.swing.JPanel {
 
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -233,6 +227,7 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
-    private VentaCRUD cnVentas;
+    private UsuarioCRUD cnUsuario;
+    private PanelModificarUsuario panelModificar;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,12 +7,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
-import static utils.Utilidades.RUTA_IMG;
+
 
 public class PanelModificarVenta extends JFrame {
 
 
+
+    private String ruta =  System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"Imagenes"+File.separator;
         /**
          * Creates new form panelModificar
          */
@@ -106,7 +110,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
             add(textoColor, gridBagConstraints);
 
-            labelImagen.setIcon(new ImageIcon(RUTA_IMG+"iconoModificar.png")); // NOI18N
+            labelImagen.setIcon(new ImageIcon(ruta+"iconoModificar.png")); // NOI18N
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;

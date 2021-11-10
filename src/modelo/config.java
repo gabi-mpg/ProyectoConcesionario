@@ -7,7 +7,7 @@ import java.io.*;
 
 public class config implements Serializable{
 
-    private static final long serialVersionUID = 8799656478674716638L;
+
 
     public File ficheroConfig;
     private String[] informacion = {"-", "-", "-"};

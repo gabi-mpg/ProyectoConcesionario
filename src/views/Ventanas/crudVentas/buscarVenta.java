@@ -1,11 +1,13 @@
 package views.Ventanas.crudVentas;
 
 
-import static utils.Utilidades.RUTA_IMG;
+import java.io.File;
 
 public class buscarVenta extends javax.swing.JFrame {
 
     private String valorBusqueda;
+    private String ruta =  System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"Imagenes"+File.separator;
 
     public buscarVenta() {
         setVisible(true);
@@ -46,7 +48,7 @@ public class buscarVenta extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(25, 26, 18, 26);
         getContentPane().add(labelTitulo, gridBagConstraints);
 
-        labelIcono.setIcon(new javax.swing.ImageIcon(RUTA_IMG+"iconoBuscar.png")); // NOI18N
+        labelIcono.setIcon(new javax.swing.ImageIcon(ruta+"iconoBuscar.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;

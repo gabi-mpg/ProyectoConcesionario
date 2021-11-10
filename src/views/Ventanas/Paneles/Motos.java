@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Paneles;
 
-import controllers.UsuarioCRUD;
-import entidades.Usuario;
-import views.Ventanas.crudUsuarios.PanelModificarUsuario;
+import controllers.MotoCRUD;
+import entidades.Moto;
+import views.Ventanas.crudMotos.PanelModificarMoto;
+import views.Ventanas.crudMotos.insertarMoto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,29 +19,14 @@ import java.util.ArrayList;
  *
  * @author Chris
  */
-public class Usuarios extends javax.swing.JPanel {
+public class Motos extends javax.swing.JPanel {
 
-    private int nivelUsuario;
-    
-    public Usuarios() {
+    private insertarMoto insertar;
+
+    public Motos() {
+        this.insertar = new insertarMoto();
+        insertar.setVisible(false);
         initComponents();
-    }
-    
-    public Usuarios(int nivelUsuario){
-        initComponents();
-        this.nivelUsuario = nivelUsuario;
-        cambiarPermisos();
-    }
-    
-    private void cambiarPermisos(){
-        if(nivelUsuario == 0){
-            botonCrear.setEnabled(false);
-            botonEliminar.setEnabled(false);
-            botonModificar.setEnabled(false);
-        }else if(nivelUsuario == 1){
-            botonCrear.setEnabled(false);
-            botonEliminar.setEnabled(false);
-        }
     }
 
     /**
@@ -51,21 +37,20 @@ public class Usuarios extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaResultado = new javax.swing.JTable();
-        botonBuscar = new javax.swing.JButton();
-        botonModificar = new javax.swing.JButton();
-        botonCrear = new javax.swing.JButton();
-        botonEliminar = new javax.swing.JButton();
+        jScrollPane1 = new JScrollPane();
+        tablaResultado = new JTable();
+        botonBuscar = new JButton();
+        botonModificar = new JButton();
+        botonCrear = new JButton();
+        botonEliminar = new JButton();
         model = new DefaultTableModel();
-        cnUsuario = new UsuarioCRUD();
-        panelModificar = new PanelModificarUsuario();
+        cnMoto = new MotoCRUD();
+        panelModificar = new PanelModificarMoto();
         panelModificar.setVisible(false);
-
-        setPreferredSize(new java.awt.Dimension(600, 300));
-        setLayout(new java.awt.GridBagLayout());
+        setPreferredSize(new Dimension(600, 300));
+        setLayout(new GridBagLayout());
 
         setHeaders();
         fillTable();
@@ -123,44 +108,40 @@ public class Usuarios extends javax.swing.JPanel {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 5);
         add(botonEliminar, gridBagConstraints);
-        botonModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarActionPerformed(evt);
-            }
-        });
+
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
     private void setHeaders(){
         this.tablaResultado = new JTable(model);
         jScrollPane1.setViewportView(tablaResultado);
-        model.addColumn("Nick");
-        model.addColumn("Nombre");
-        model.addColumn("Apellidos");
-        model.addColumn("Password");
+        model.addColumn("Matricula");
+        model.addColumn("Marca");
+        model.addColumn("Color");
+        model.addColumn("Tanque");
     }
     public void fillTable(){
-        UsuarioCRUD controlador = new UsuarioCRUD();
-        ArrayList<Usuario> listaUsuarios = controlador.gesListaUsuarios();
+        MotoCRUD controlador = new MotoCRUD();
+        ArrayList<Moto> listaMotos = controlador.getListaMotos();
         model.setRowCount(0);
-        for (Usuario u : listaUsuarios){
-            Object[] datosUsuario = new Object[4];
-            datosUsuario[0] = u.getNick();
-            datosUsuario[1] = u.getNombre();
-            datosUsuario[2] = u.getApellidos();
-            datosUsuario[3] = u.getContra();
-            model.addRow(datosUsuario);
+        for (Moto m : listaMotos){
+            Object[] datosMoto = new Object[4];
+            datosMoto[0] = m.getMatricula();
+            datosMoto[1] = m.getMarca();
+            datosMoto[2] = m.getColor();
+            datosMoto[3] = m.getTanque();
+            model.addRow(datosMoto);
         }
     }
 
-    private void fillTableBuscar(Usuario u){
+    private void fillTableBuscar(Moto m){
         model.setRowCount(0);
-        Object[] datosUser = new Object[4];
-        datosUser[0] = u.getNick();
-        datosUser[1] = u.getNombre();
-        datosUser[2] = u.getApellidos();
-        datosUser[3] = u.getContra();
-        model.addRow(datosUser);
+        Object[] datosMoto = new Object[4];
+        datosMoto[0] = m.getMatricula();
+        datosMoto[1] = m.getMarca();
+        datosMoto[2] = m.getColor();
+        datosMoto[3] = m.getTanque();
+        model.addRow(datosMoto);
     }
 
     private void agregarListeners(){
@@ -191,10 +172,10 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            String nick = JOptionPane.showInputDialog(this, "Introduce el nick de usuario", 1);
-            if (cnUsuario.usuarioExiste(nick)){
-                Usuario user = cnUsuario.buscarUsuario(nick);
-                fillTableBuscar(user);
+            String matricula = pedirMatricula();
+            if (cnMoto.motoExiste(matricula)){
+                Moto moto = cnMoto.buscarMoto(matricula);
+                fillTableBuscar(moto);
             } else {
                 JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
             }
@@ -204,15 +185,25 @@ public class Usuarios extends javax.swing.JPanel {
         }
     }
 
+    private String pedirMatricula(){
+        String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
+
+        while (!cnMoto.comprobarMatricula(matricula)){
+            JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
+            matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
+        }
+        return matricula;
+    }
+
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "-");
-        panelModificar.setNick(nick);
+        String matricula = pedirMatricula();
+        panelModificar.setMatricula(matricula);
         panelModificar.rellenarCampos();
         fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        insertar.setVisible(true);
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +218,7 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
-    private UsuarioCRUD cnUsuario;
-    private PanelModificarUsuario panelModificar;
+    private MotoCRUD cnMoto;
+    private PanelModificarMoto panelModificar;
     // End of variables declaration//GEN-END:variables
 }

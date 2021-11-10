@@ -5,8 +5,7 @@
  */
 package modelo;
 
-import views.Ventanas.interfazLogin;
-import views.Ventanas.mainInterface;
+import views.Ventanas.Interfaces.interfazLogin;
 
 /**
  *

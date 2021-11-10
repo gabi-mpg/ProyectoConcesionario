@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Paneles;
 
+import com.mysql.cj.xdevapi.Client;
+import controllers.ClienteCRUD;
 import controllers.MotoCRUD;
-import entidades.Moto;
-import views.Ventanas.crudMotos.PanelModificarMoto;
-import views.Ventanas.crudMotos.insertarMoto;
+import controllers.UsuarioCRUD;
+import controllers.VentaCRUD;
+import entidades.Cliente;
+import entidades.Usuario;
+import views.Ventanas.crudClientes.PanelModificarCliente;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,14 +23,29 @@ import java.util.ArrayList;
  *
  * @author Chris
  */
-public class Motos extends javax.swing.JPanel {
+public class Clientes extends javax.swing.JPanel {
 
-    private insertarMoto insertar;
-
-    public Motos() {
-        this.insertar = new insertarMoto();
-        insertar.setVisible(false);
+    private int nivelUsuario;
+    
+    public Clientes() {
         initComponents();
+    }
+    
+    public Clientes(int nivelUsuario){
+        initComponents();
+        this.nivelUsuario = nivelUsuario;
+        cambiarPermisos();
+    }
+    
+    private void cambiarPermisos(){
+        if(nivelUsuario == 0){
+            botonCrear.setEnabled(false);
+            botonEliminar.setEnabled(false);
+            botonModificar.setEnabled(false);
+        }else if(nivelUsuario == 1){
+            botonCrear.setEnabled(false);
+            botonEliminar.setEnabled(false);
+        }
     }
 
     /**
@@ -37,20 +56,20 @@ public class Motos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        GridBagConstraints gridBagConstraints;
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new JScrollPane();
-        tablaResultado = new JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
         botonBuscar = new JButton();
         botonModificar = new JButton();
         botonCrear = new JButton();
         botonEliminar = new JButton();
         model = new DefaultTableModel();
-        cnMoto = new MotoCRUD();
-        panelModificar = new PanelModificarMoto();
+        cnCliente = new ClienteCRUD();
+        panelModificar = new PanelModificarCliente();
         panelModificar.setVisible(false);
-        setPreferredSize(new Dimension(600, 300));
-        setLayout(new GridBagLayout());
+
+        setPreferredSize(new java.awt.Dimension(600, 300));
+        setLayout(new java.awt.GridBagLayout());
 
         setHeaders();
         fillTable();
@@ -115,33 +134,33 @@ public class Motos extends javax.swing.JPanel {
     private void setHeaders(){
         this.tablaResultado = new JTable(model);
         jScrollPane1.setViewportView(tablaResultado);
-        model.addColumn("Matricula");
-        model.addColumn("Marca");
-        model.addColumn("Color");
-        model.addColumn("Tanque");
+        model.addColumn("DNI");
+        model.addColumn("Nombre");
+        model.addColumn("Apellidos");
+        model.addColumn("Direccion");
     }
     public void fillTable(){
-        MotoCRUD controlador = new MotoCRUD();
-        ArrayList<Moto> listaMotos = controlador.getListaMotos();
+        ClienteCRUD controlador = new ClienteCRUD();
+        ArrayList<Cliente> listaClientes = controlador.getListaClientes();
         model.setRowCount(0);
-        for (Moto m : listaMotos){
-            Object[] datosMoto = new Object[4];
-            datosMoto[0] = m.getMatricula();
-            datosMoto[1] = m.getMarca();
-            datosMoto[2] = m.getColor();
-            datosMoto[3] = m.getTanque();
-            model.addRow(datosMoto);
+        for (Cliente c : listaClientes){
+            Object[] datosCliente = new Object[4];
+            datosCliente[0] = c.getDni();
+            datosCliente[1] = c.getNombre();
+            datosCliente[2] = c.getApellido();
+            datosCliente[3] = c.getDireccion();
+            model.addRow(datosCliente);
         }
     }
 
-    private void fillTableBuscar(Moto m){
+    private void fillTableBuscar(Cliente c){
         model.setRowCount(0);
-        Object[] datosMoto = new Object[4];
-        datosMoto[0] = m.getMatricula();
-        datosMoto[1] = m.getMarca();
-        datosMoto[2] = m.getColor();
-        datosMoto[3] = m.getTanque();
-        model.addRow(datosMoto);
+            Object[] datosCliente = new Object[4];
+            datosCliente[0] = c.getDni();
+            datosCliente[1] = c.getNombre();
+            datosCliente[2] = c.getApellido();
+            datosCliente[3] = c.getDireccion();
+            model.addRow(datosCliente);
     }
 
     private void agregarListeners(){
@@ -172,12 +191,12 @@ public class Motos extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            String matricula = pedirMatricula();
-            if (cnMoto.motoExiste(matricula)){
-                Moto moto = cnMoto.buscarMoto(matricula);
-                fillTableBuscar(moto);
+            String dni = pedirDNI();
+            if (cnCliente.clienteExiste(dni)){
+                Cliente cliente = cnCliente.buscarCliente(dni);
+                fillTableBuscar(cliente);
             } else {
-                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
+                JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD");
             }
 
         } catch (Exception e){
@@ -185,31 +204,31 @@ public class Motos extends javax.swing.JPanel {
         }
     }
 
-    private String pedirMatricula(){
-        String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
+    private String pedirDNI(){
+        String dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
 
-        while (!cnMoto.comprobarMatricula(matricula)){
-            JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
-            matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
+        while (!cnCliente.comprobarDNI(dni)){
+            JOptionPane.showMessageDialog(this, "Formato DNI incorrecto");
+
+            dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
         }
-        return matricula;
+        return dni;
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        String matricula = pedirMatricula();
-        panelModificar.setMatricula(matricula);
+        String dni = pedirDNI();
+        panelModificar.setDNI(dni);
         panelModificar.rellenarCampos();
         fillTable();
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        insertar.setVisible(true);
+        // TODO add your handling code here:
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -218,7 +237,8 @@ public class Motos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
-    private MotoCRUD cnMoto;
-    private PanelModificarMoto panelModificar;
+    private ClienteCRUD cnCliente;
+    private PanelModificarCliente panelModificar;
+
     // End of variables declaration//GEN-END:variables
 }

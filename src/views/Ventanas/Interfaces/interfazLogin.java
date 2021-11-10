@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Ventanas;
+package views.Ventanas.Interfaces;
 
 import controllers.ControllerConexion;
 
@@ -219,7 +219,7 @@ public class interfazLogin extends javax.swing.JFrame{
                     jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
                     break;
                 case 1:
-                    new mainInterface();
+                    new mainInterface(1, new ControllerConexion());
                     conexion.cerrarCn();
                     this.dispose();
                     break;
