@@ -24,7 +24,6 @@ public class PanelModificarCliente extends JFrame {
         // y así reutilizar el panel
         public PanelModificarCliente() {
             initComponents();
-            setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
         }
@@ -39,121 +38,149 @@ public class PanelModificarCliente extends JFrame {
         private void initComponents() {
             GridBagConstraints gridBagConstraints;
 
-            labelTitulo = new JLabel();
-            textoDireccion = new JTextField();
-            textoApellidos = new JTextField();
-            textoNombre = new JTextField();
-            labelImagen = new JLabel();
-            jLabel1 = new JLabel();
-            jLabel2 = new JLabel();
-            jLabel3 = new JLabel();
-            jLabel4 = new JLabel();
-            botonModificar = new JButton();
-            checkLimpiar = new JCheckBox();
+            panelTitulo = new javax.swing.JPanel();
+            jLabel1 = new javax.swing.JLabel();
+            labelImagen = new javax.swing.JLabel();
+            labelVariable = new javax.swing.JLabel();
+            labelDNI = new javax.swing.JLabel();
+            panelCuerpo = new javax.swing.JPanel();
+            textoNombre = new javax.swing.JTextField();
+            textoApellido = new javax.swing.JTextField();
+            textoDireccion = new javax.swing.JTextField();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            jLabel5 = new javax.swing.JLabel();
+            panelBotton = new javax.swing.JPanel();
+            botonModificar = new javax.swing.JButton();
+            checkLimpiar = new javax.swing.JCheckBox();
             dni = "";
             cnCliente = new ClienteCRUD();
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLayout(new GridBagLayout());
+            panelTitulo = new javax.swing.JPanel();
+            jLabel1 = new javax.swing.JLabel();
+            labelImagen = new javax.swing.JLabel();
+            labelVariable = new javax.swing.JLabel();
+            labelDNI = new javax.swing.JLabel();
+            panelCuerpo = new javax.swing.JPanel();
+            textoNombre = new javax.swing.JTextField();
+            textoApellido = new javax.swing.JTextField();
+            textoDireccion = new javax.swing.JTextField();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            jLabel5 = new javax.swing.JLabel();
+            panelBotton = new javax.swing.JPanel();
+            botonModificar = new javax.swing.JButton();
+            checkLimpiar = new javax.swing.JCheckBox();
 
-            labelTitulo.setFont(new Font("Dialog", 0, 18)); // NOI18N
-            labelTitulo.setText("Modificar cliente");
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(8, 60, 8, 50);
-            add(labelTitulo, gridBagConstraints);
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            getContentPane().setLayout(new java.awt.GridBagLayout());
 
-            textoDireccion.setPreferredSize(new Dimension(75, 25));
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoDireccion, gridBagConstraints);
+            panelTitulo.setPreferredSize(new java.awt.Dimension(270, 100));
+            panelTitulo.setLayout(new java.awt.GridBagLayout());
 
-            textoApellidos.setPreferredSize(new Dimension(75, 25));
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoApellidos, gridBagConstraints);
+            jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+            jLabel1.setText("Modificar cliente");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelTitulo.add(jLabel1, gridBagConstraints);
 
-            textoNombre.setPreferredSize(new Dimension(75, 25));
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoNombre, gridBagConstraints);
+            labelImagen.setIcon(new javax.swing.ImageIcon(ruta+"iconoMod.png")); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelTitulo.add(labelImagen, gridBagConstraints);
 
-            labelImagen.setIcon(new ImageIcon(ruta + "iconoModificar.png")); // NOI18N
-            gridBagConstraints = new GridBagConstraints();
+            labelVariable.setText("Modificar cliente con DNI:");
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
             gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.insets = new Insets(4, 0, 3, 0);
-            add(labelImagen, gridBagConstraints);
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
+            panelTitulo.add(labelVariable, gridBagConstraints);
 
-            gridBagConstraints = new GridBagConstraints();
+            labelDNI.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            labelDNI.setText(" - ");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 1;
+            panelTitulo.add(labelDNI, gridBagConstraints);
+
+            getContentPane().add(panelTitulo, new java.awt.GridBagConstraints());
+
+            panelCuerpo.setPreferredSize(new java.awt.Dimension(270, 270));
+            panelCuerpo.setLayout(new java.awt.GridBagLayout());
+
+            textoNombre.setPreferredSize(new java.awt.Dimension(130, 24));
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(32, 13, 32, 13);
+            panelCuerpo.add(textoNombre, gridBagConstraints);
+
+            textoApellido.setPreferredSize(new java.awt.Dimension(130, 24));
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.insets = new java.awt.Insets(32, 13, 32, 13);
+            panelCuerpo.add(textoApellido, gridBagConstraints);
+
+            textoDireccion.setPreferredSize(new java.awt.Dimension(130, 24));
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel1, gridBagConstraints);
+            gridBagConstraints.insets = new java.awt.Insets(32, 13, 32, 13);
+            panelCuerpo.add(textoDireccion, gridBagConstraints);
 
-            jLabel2.setText("Nombre");
-            gridBagConstraints = new GridBagConstraints();
+            jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel3.setText("Nombre");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(32, 19, 32, 19);
+            panelCuerpo.add(jLabel3, gridBagConstraints);
+
+            jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel4.setText("Apellidos");
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel2, gridBagConstraints);
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(32, 19, 32, 19);
+            panelCuerpo.add(jLabel4, gridBagConstraints);
 
-            jLabel3.setText("Apellidos");
-            gridBagConstraints = new GridBagConstraints();
+            jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel5.setText("Direccion");
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel3, gridBagConstraints);
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(32, 19, 32, 19);
+            panelCuerpo.add(jLabel5, gridBagConstraints);
 
-            jLabel4.setText("Direccion");
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel4, gridBagConstraints);
-
-            botonModificar.setText("Modificar");
-
-            gridBagConstraints = new GridBagConstraints();
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 7;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.insets = new Insets(18, 25, 18, 0);
-            add(botonModificar, gridBagConstraints);
+            gridBagConstraints.gridy = 1;
+            getContentPane().add(panelCuerpo, gridBagConstraints);
+
+            panelBotton.setPreferredSize(new java.awt.Dimension(270, 100));
+            panelBotton.setLayout(new java.awt.GridBagLayout());
+
+            botonModificar.setText("Modificar registro");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelBotton.add(botonModificar, gridBagConstraints);
 
             checkLimpiar.setText("Limpiar campos");
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 7;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.anchor = GridBagConstraints.EAST;
-            gridBagConstraints.insets = new Insets(0, 0, 0, 13);
-            add(checkLimpiar, gridBagConstraints);
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelBotton.add(checkLimpiar, gridBagConstraints);
 
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 2;
+            getContentPane().add(panelBotton, gridBagConstraints);
+            pack();
             agregarListeners();
         }// </editor-fold>
 
@@ -174,9 +201,9 @@ public class PanelModificarCliente extends JFrame {
         public void rellenarCampos(){
             if (cnCliente.clienteExiste(dni)){
                 Cliente cliente = cnCliente.buscarCliente(dni);
-                jLabel1.setText("Modificar cliente con DNI " + dni);
+                labelDNI.setText(dni);
                 textoNombre.setText(cliente.getNombre());
-                textoApellidos.setText(cliente.getApellido());
+                textoApellido.setText(cliente.getApellido());
                 textoDireccion.setText(cliente.getDireccion());
                 setVisible(true);
             } else {
@@ -190,7 +217,7 @@ public class PanelModificarCliente extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            String apellidos = textoApellidos.getText();
+            String apellidos = textoApellido.getText();
             String nombre = textoNombre.getText();
             String direccion = textoDireccion.getText();
             Cliente cliente = new Cliente(dni, nombre, apellidos, direccion, true);
@@ -206,16 +233,21 @@ public class PanelModificarCliente extends JFrame {
         private JButton botonModificar;
         private JCheckBox checkLimpiar;
         private JLabel jLabel1;
-        private JLabel jLabel2;
         private JLabel jLabel3;
         private JLabel jLabel4;
         private JLabel labelImagen;
-        private JLabel labelTitulo;
         private JTextField textoNombre;
-        private JTextField textoApellidos;
         private JTextField textoDireccion;
         private String dni;
         private ClienteCRUD cnCliente;
+        private javax.swing.JLabel jLabel5;
+        private javax.swing.JLabel labelDNI;
+        private javax.swing.JLabel labelVariable;
+        private javax.swing.JPanel panelBotton;
+        private javax.swing.JPanel panelCuerpo;
+        private javax.swing.JTextField textoApellido;
+        private javax.swing.JPanel panelTitulo;
+
         // End of variables declaration
     }
 
