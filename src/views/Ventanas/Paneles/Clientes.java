@@ -231,7 +231,9 @@ public class Clientes extends javax.swing.JPanel {
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-
+        String matricula = pedirDNI();
+        cnCliente.removeCliente(matricula);
+        fillTable();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
