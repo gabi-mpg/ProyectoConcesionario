@@ -115,7 +115,7 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
         add(textoApellido, gridBagConstraints);
 
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Dirección");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -139,7 +139,7 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("Direccion");
+        jLabel6.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -169,7 +169,9 @@ public class insertarCliente extends javax.swing.JFrame {
     private void comprobarCampos(){
         String DNI = textoDNI.getText();
         if (cnCliente.clienteExiste(DNI)){
-            cnCliente.updateExiste(true, DNI);
+            cnCliente.updateExiste(1,DNI);
+            System.out.println("pasa por esta zona");
+            JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
         } else {
             String nombre = textoNombre.getText();
             String apellido = textoApellido.getText();
@@ -178,8 +180,10 @@ public class insertarCliente extends javax.swing.JFrame {
                 if(cnCliente.agregarCliente(DNI,nombre,apellido,direccion)){
                     JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
+                    System.out.println("esta aqui");
                 }else{
                     JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
+                    System.out.println( "viene paca");
                 }
 
             }else{

@@ -6,9 +6,9 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String direccion;
-    private boolean existe;
+    private int existe;
 
-    public Cliente(String dni, String nombre, String apellido, String direccion, boolean existe) {
+    public Cliente(String dni, String nombre, String apellido, String direccion, int existe) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -48,13 +48,14 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public boolean isExiste() {
+    public int getExiste() {
         return existe;
     }
 
-    public void setExiste(boolean existe) {
+    public void setExiste(int existe) {
         this.existe = existe;
     }
+
 
     @Override
     public String toString() {

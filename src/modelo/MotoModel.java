@@ -140,8 +140,8 @@ public class MotoModel{
             pst.setString(1, moto.getMarca());
             pst.setString(2, moto.getColor());
             pst.setInt(3, moto.getTanque());
-            pst.setString(4, moto.getMatricula());
-            pst.setInt(5, moto.isExiste());
+            pst.setString(5, moto.getMatricula());
+            pst.setInt(4, moto.isExiste());
             pst.executeUpdate();
             updateMotoLista(moto);
             return true;

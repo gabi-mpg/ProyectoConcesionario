@@ -2,6 +2,8 @@
   <library name="ConexionBaseDatos">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/dist/ConexionBaseDatos.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Recourses/itextpdf-5.5.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Recourses/itextpdf-5.5.13.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

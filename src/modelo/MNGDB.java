@@ -97,7 +97,7 @@ public class MNGDB {
                   + "Nombre varchar(30),"
                   + "Apellido varchar(30),"
                   + "Direccion varchar(30),"
-                  + "existe bit(1));");
+                  + "existe tinyint);");
           exe.executeUpdate();
           
           exe = conexion.prepareStatement(
@@ -106,7 +106,7 @@ public class MNGDB {
                   + "Marca varchar(30) not null,"
                   + "Color varchar(15),"
                   + "Tanque tinyint," +
-                  "existe bit(1));");
+                  "existe tinyint);");
           exe.executeUpdate();
             
             exe = conexion.prepareStatement(
@@ -116,7 +116,7 @@ public class MNGDB {
                   + "Apellidos varchar(40) not null,"
                   +"Contrasena varchar(15) not null,"
                   + "nivelPermiso char(1)," +
-                  "existe bit(1));");
+                  "existe tinyint);");
             exe.executeUpdate();
 
             exe = conexion.prepareStatement(

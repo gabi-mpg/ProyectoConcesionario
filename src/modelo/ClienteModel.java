@@ -2,8 +2,6 @@ package modelo;
 
 import controllers.ControllerConexion;
 import entidades.Cliente;
-import entidades.Moto;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class ClienteModel {
                 String nombre = rs.getString("Nombre");
                 String apellido = rs.getString("Apellido");
                 String direcc = rs.getString("Direccion");
-                boolean existe = rs.getBoolean("existe");
+                int existe = rs.getInt("existe");
                 Cliente cliente = new Cliente(dni, nombre, apellido, direcc, existe);
                 listaClientes.add(cliente);
             }
@@ -69,6 +67,7 @@ public class ClienteModel {
     }
 
     public ArrayList<Cliente> getListaClientes(){
+        this.listaClientes = new ArrayList<Cliente>();
         saveClientes();
         return listaClientes;
     }
@@ -82,7 +81,7 @@ public class ClienteModel {
             pst.setString(2, cliente.getNombre());
             pst.setString(3, cliente.getApellido());
             pst.setString(4, cliente.getDireccion());
-            pst.setBoolean(5,cliente.isExiste());
+            pst.setInt(5,1);
 
             pst.executeUpdate();
         } catch (Exception e) {
@@ -113,8 +112,8 @@ public class ClienteModel {
         try {
             CallableStatement cst = conexion.prepareCall(sql);
             cst.setString(1, dni);
-            cst.execute();
-            updateExiste(false, dni);
+            cst.executeQuery();
+            //updateExiste(false, dni);
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -122,21 +121,24 @@ public class ClienteModel {
         }
     }
 
-    public void updateExiste(boolean exists, String dni){
+    public void updateExiste(int exists, String dni){
         Cliente cliente = buscarCliente(dni);
         cliente.setExiste(exists);
+        updateCliente(cliente);
     }
 
     public boolean updateCliente(Cliente cliente){
         System.out.println(cliente.toString());
         saveClientes();
-        String sql = "UPDATE t_clientes set Nombre = ?, Apellido = ?, Direccion = ? where DNI like ?";
+        String sql = "UPDATE t_clientes set Nombre = ?, Apellido = ?, Direccion = ?, existe = ? where DNI like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, cliente.getNombre());
             pst.setString(2, cliente.getApellido());
             pst.setString(3, cliente.getDireccion());
-            pst.setString(4, cliente.getDni());
+            pst.setInt(4,cliente.getExiste());
+            pst.setString(5, cliente.getDni());
+
             pst.executeUpdate();
             updateClienteLista(cliente);
             return true;

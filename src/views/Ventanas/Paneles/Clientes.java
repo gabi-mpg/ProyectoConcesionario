@@ -5,13 +5,8 @@
  */
 package views.Ventanas.Paneles;
 
-import com.mysql.cj.xdevapi.Client;
 import controllers.ClienteCRUD;
-import controllers.MotoCRUD;
-import controllers.UsuarioCRUD;
-import controllers.VentaCRUD;
 import entidades.Cliente;
-import entidades.Usuario;
 import views.Ventanas.crudClientes.PanelModificarCliente;
 import views.Ventanas.crudClientes.insertarCliente;
 
@@ -145,7 +140,7 @@ public class Clientes extends javax.swing.JPanel {
         ArrayList<Cliente> listaClientes = controlador.getListaClientes();
         model.setRowCount(0);
         for (Cliente c : listaClientes){
-            if (c.isExiste()){
+            if (c.getExiste() == 1){
                 Object[] datosCliente = new Object[4];
                 datosCliente[0] = c.getDni();
                 datosCliente[1] = c.getNombre();
