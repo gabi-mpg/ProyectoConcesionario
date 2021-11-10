@@ -29,9 +29,10 @@ public class interfazLogin extends javax.swing.JFrame{
     public interfazLogin() {
         conexion = new ControllerConexion();
         configuracion = new modelo.config();
+
+        initComponents();
         conexion.setRegistros();
         conexion.conectarComprobar();
-        initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);

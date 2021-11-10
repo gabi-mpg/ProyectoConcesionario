@@ -127,6 +127,29 @@ public class MNGDB {
                             + "foreign key (DNI) references t_clientes(DNI),"
                             + "foreign key (IDVendedor) references t_usuarios(nick));");
             exe.executeUpdate();
+
+
+            exe = conexion.prepareStatement("USE concesionario$$\n" +
+                    " CREATE PROCEDURE sp_eliminarcliente(IN idcliente varchar(9))\n" +
+                    " BEGIN\n" +
+                    " UPDATE t_ventas SET DNI = 'deleted' where DNI like idcliente;\n" +
+                    " DELETE  FROM t_clientes WHERE DNI like idcliente;\n" +
+                    " END$$;\n" +
+                    " DELIMITER $$\n" +
+                    " USE concesionario$$\n" +
+                    " CREATE PROCEDURE sp_eliminarmoto(IN idmoto varchar(15))\n" +
+                    " BEGIN\n" +
+                    " UPDATE t_ventas SET Matricula = 'deleted' where Matricula like idmoto;\n" +
+                    " DELETE  FROM t_motos WHERE Matricula like idmoto;\n" +
+                    " END$$;\n" +
+                    " DELIMITER $$\n" +
+                    " USE concesionario$$\n" +
+                    " CREATE PROCEDURE sp_eliminarusuario(IN iduser varchar(30))\n" +
+                    " BEGIN\n" +
+                    " UPDATE t_ventas SET IDVendedor = 'deleted' where IDVendedor like iduser;\n" +
+                    " DELETE  FROM t_usuarios WHERE nick like iduser;\n" +
+                    " END$$;");
+            exe.executeUpdate();
             crearRegistros();
           
         } catch (SQLException ex) {
@@ -141,7 +164,8 @@ public class MNGDB {
                     "('fenixabi','Gabriela','Mercado Pérez','gabriela123',1)," +
                     "('delcorral','Christian','Del Corral Remedios','delco123',1)," +
                     "('eduardo','Eduardo','Bethencourt Herrera','edu123',2)," +
-                    "('invitado','-','-','1234',3);");
+                    "('invitado','-','-','1234',3)," +
+                    "('deleted','-','-','1234',0);");
             exe.executeUpdate();
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
