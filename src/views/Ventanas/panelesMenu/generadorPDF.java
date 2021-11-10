@@ -4,6 +4,7 @@ import controllers.ControllerConexion;
 
 import javax.naming.ldap.Control;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,10 +21,12 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
 
     public generadorPDF(ControllerConexion conexion) {
         this.conexion = conexion;
+
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

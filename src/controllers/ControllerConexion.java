@@ -19,6 +19,10 @@ public class ControllerConexion {
         conexionMng.setRegistros(configuracion.getConfig());
     }
 
+    public String[] getRegistros(){
+        return configuracion.getConfig();
+    }
+
     public boolean estadoCn(){
         return conexionMng.isEstado();
     }

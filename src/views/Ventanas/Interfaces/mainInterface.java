@@ -16,11 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import java.io.IOException;
+import javax.swing.*;
 
 /**
  *
@@ -43,6 +40,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_MOTO = "moto";
     private final String PANEL_VENTA = "venta";
     private int nivelUsuario;
+    private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private ControllerConexion conexion;
     private String ruta =System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
@@ -63,7 +61,8 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.conexion = conexion;
         initComponents();
         alterarPermisos();
-        setLocationRelativeTo(null);
+        setLocation(d.width/4+d.width/32,d.height/4);
+
         setResizable(false);
         setVisible(true);
         pack();
@@ -179,6 +178,31 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 new generadorPDF(conexion);
             }
         });
+        abrirBBDD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"Se abrirá SQL Workbench si lo tiene insalado");
+                try {
+                    Desktop.getDesktop().open(new File("C:\\Program Files\\MySQL\\MySQL Workbench 8.0\\MySQLWorkbench.exe"));
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(null,"No está instalado MySQL Workbench o se ha cambiado su ruta");
+                }
+            }
+        });
+        verConexion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarConexionActual();
+            }
+        });
+
+    }
+
+    private void mostrarConexionActual(){
+        String[] datosConexion = conexion.getRegistros();
+        String s = "BBDD: \"Concesionario\"\nRuta: "+datosConexion[0]
+                +"\nUsuario: "+datosConexion[1]+"\nClave: "+datosConexion[2];
+        JOptionPane.showMessageDialog(this,s,"Datos sobre la conexion", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void alterarPermisos(){
@@ -238,11 +262,9 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         //Código para la pestaña de opciones
         menu_opciones = new JMenu("Opciones");
         barra.add(menu_opciones);
-        rutaFicheros = new JMenuItem("Cambiar ruta de ficheros");
         cambiarTema = new JMenuItem("Cambiar tema");
         verConexion = new JMenuItem("Datos sobre la conexión");
         cerrarSesion = new JMenuItem("Cerrar la sesión");
-        menu_opciones.add(rutaFicheros);
         menu_opciones.add(verConexion);
         menu_opciones.add(cambiarTema);
         menu_opciones.add(cerrarSesion);
