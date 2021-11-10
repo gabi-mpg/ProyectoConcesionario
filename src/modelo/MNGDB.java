@@ -96,7 +96,8 @@ public class MNGDB {
                   + "DNI varchar(9) primary key,"
                   + "Nombre varchar(30),"
                   + "Apellido varchar(30),"
-                  + "Direccion varchar(30));");
+                  + "Direccion varchar(30),"
+                  + "existe bit(1));");
           exe.executeUpdate();
           
           exe = conexion.prepareStatement(
@@ -104,7 +105,8 @@ public class MNGDB {
                   + "Matricula varchar(15) not null primary key,"
                   + "Marca varchar(30) not null,"
                   + "Color varchar(15),"
-                  + "Tanque tinyint);");
+                  + "Tanque tinyint," +
+                  "existe bit(1));");
           exe.executeUpdate();
             
             exe = conexion.prepareStatement(
@@ -113,7 +115,8 @@ public class MNGDB {
                   + "Nombre varchar(20) not null,"
                   + "Apellidos varchar(40) not null,"
                   +"Contrasena varchar(15) not null,"
-                  + "nivelPermiso char(1));");
+                  + "nivelPermiso char(1)," +
+                  "existe bit(1));");
             exe.executeUpdate();
 
             exe = conexion.prepareStatement(
@@ -122,50 +125,53 @@ public class MNGDB {
                             + "Matricula varchar(15) not null,"
                             + "DNI varchar(9),"
                             + "Precio decimal(10,2),"
-                            + "IDVendedor varchar(30),"
+                            + "IDVendedor varchar(30)," +
+                            "existe bit(1),"
                             + "foreign key (Matricula) references t_motos(Matricula),"
                             + "foreign key (DNI) references t_clientes(DNI),"
                             + "foreign key (IDVendedor) references t_usuarios(nick));");
             exe.executeUpdate();
 
-
-            exe = conexion.prepareStatement("USE concesionario$$\n" +
-                    " CREATE PROCEDURE sp_eliminarcliente(IN idcliente varchar(9))\n" +
-                    " BEGIN\n" +
-                    " UPDATE t_ventas SET DNI = 'deleted' where DNI like idcliente;\n" +
-                    " DELETE  FROM t_clientes WHERE DNI like idcliente;\n" +
-                    " END$$;\n" +
-                    " DELIMITER $$\n" +
-                    " USE concesionario$$\n" +
-                    " CREATE PROCEDURE sp_eliminarmoto(IN idmoto varchar(15))\n" +
-                    " BEGIN\n" +
-                    " UPDATE t_ventas SET Matricula = 'deleted' where Matricula like idmoto;\n" +
-                    " DELETE  FROM t_motos WHERE Matricula like idmoto;\n" +
-                    " END$$;\n" +
-                    " DELIMITER $$\n" +
-                    " USE concesionario$$\n" +
-                    " CREATE PROCEDURE sp_eliminarusuario(IN iduser varchar(30))\n" +
-                    " BEGIN\n" +
-                    " UPDATE t_ventas SET IDVendedor = 'deleted' where IDVendedor like iduser;\n" +
-                    " DELETE  FROM t_usuarios WHERE nick like iduser;\n" +
-                    " END$$;");
-            exe.executeUpdate();
+//
+//            exe = conexion.prepareStatement("USE concesionario$$\n" +
+//                    " CREATE PROCEDURE sp_eliminarcliente(IN idcliente varchar(9))\n" +
+//                    " BEGIN\n" +
+//                    " UPDATE t_ventas SET DNI = 'deleted' where DNI like idcliente;\n" +
+//                    " DELETE  FROM t_clientes WHERE DNI like idcliente;\n" +
+//                    " END$$;\n" +
+//                    " DELIMITER $$\n" +
+//                    " USE concesionario$$\n" +
+//                    " CREATE PROCEDURE sp_eliminarmoto(IN idmoto varchar(15))\n" +
+//                    " BEGIN\n" +
+//                    " UPDATE t_ventas SET Matricula = 'deleted' where Matricula like idmoto;\n" +
+//                    " DELETE  FROM t_motos WHERE Matricula like idmoto;\n" +
+//                    " END$$;\n" +
+//                    " DELIMITER $$\n" +
+//                    " USE concesionario$$\n" +
+//                    " CREATE PROCEDURE sp_eliminarusuario(IN iduser varchar(30))\n" +
+//                    " BEGIN\n" +
+//                    " UPDATE t_ventas SET IDVendedor = 'deleted' where IDVendedor like iduser;\n" +
+//                    " DELETE  FROM t_usuarios WHERE nick like iduser;\n" +
+//                    " END$$;");
+//            exe.executeUpdate();
             crearRegistros();
           
         } catch (SQLException ex) {
+            System.out.println(ex.toString());
             System.out.println(ex.getMessage());
+            System.out.println(ex.getLocalizedMessage());
+            System.out.println(ex.getErrorCode());
         }
     }
 
     public void crearRegistros(){
         try{
             PreparedStatement exe = conexion.prepareStatement(
-                    "INSERT INTO t_usuarios (nick,Nombre, Apellidos, Contrasena, nivelPermiso) VALUES" +
-                    "('fenixabi','Gabriela','Mercado Pérez','gabriela123',1)," +
-                    "('delcorral','Christian','Del Corral Remedios','delco123',1)," +
-                    "('eduardo','Eduardo','Bethencourt Herrera','edu123',2)," +
-                    "('invitado','-','-','1234',3)," +
-                    "('deleted','-','-','1234',0);");
+                    "INSERT INTO t_usuarios (nick,Nombre, Apellidos, Contrasena, nivelPermiso, existe) VALUES" +
+                    "('fenixabi','Gabriela','Mercado Pérez','gabriela123',1,1)," +
+                    "('delcorral','Christian','Del Corral Remedios','delco123',1,1)," +
+                    "('eduardo','Eduardo','Bethencourt Herrera','edu123',2,1)," +
+                    "('invitado','-','-','1234',3,1)");
             exe.executeUpdate();
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
