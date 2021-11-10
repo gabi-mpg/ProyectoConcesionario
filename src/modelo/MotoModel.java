@@ -77,7 +77,7 @@ public class MotoModel{
 
     public void addMoto(Moto moto){
         saveMotos();
-        String sql = "INSERT INTO t_motos values (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO t_motos (Matricula, Marca, Color, Tanque, existe) values (?, ?, ?, ?,?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, moto.getMatricula());
