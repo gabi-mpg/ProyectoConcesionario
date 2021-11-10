@@ -7,11 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class PanelModificarMoto extends javax.swing.JFrame {
 
 
-        private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
+        private String ruta = System.getProperty("user.dir")+
+                File.separator+"src"+File.separator+"Imagenes"+File.separator;
         /**
          * Creates new form panelModificar
          */

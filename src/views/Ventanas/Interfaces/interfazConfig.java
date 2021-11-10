@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import static utils.Utilidades.jMensaje;
 
@@ -27,7 +28,8 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
 
     private String[] configuracionRecogida;
     private config configuracion;
-    private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
+    private String ruta = System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"Imagenes"+File.separator;
 
 
     public interfazConfig(String[] config, config configuracion) {

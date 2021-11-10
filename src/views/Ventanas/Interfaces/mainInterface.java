@@ -14,6 +14,7 @@ import views.Ventanas.Paneles.Ventas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -40,9 +41,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_CLIENTE = "cliente";
     private final String PANEL_MOTO = "moto";
     private final String PANEL_VENTA = "venta";
-    private int nivelUsuario = 3;
+    private int nivelUsuario;
     private ControllerConexion conexion;
-    private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
+    private String ruta = System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"Imagenes"+File.separator;
 
     public mainInterface() {
         initComponents();
@@ -65,24 +67,14 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
     public mainInterface(int nivelUsuario, ControllerConexion conexion){
         this.nivelUsuario = nivelUsuario;
-        initComponents();
-        setLocationRelativeTo(null);
-        anadirMenu();
-        setResizable(false);
-        pack();
-        this.panelClientes = new Clientes(nivelUsuario);
-        this.panelMotos = new Motos();
-        this.panelUsuario = new Usuarios();
-        this.panelVentas = new Ventas();
-        this.nivelUsuario = nivelUsuario;
         this.conexion = conexion;
+        initComponents();
+        anadirMenu();
         anadirPaneles();
-        botonVentas.addActionListener(this);
-        botonVentas.addActionListener(this);
-        botonClientes.addActionListener(this);
-        botonMotos.addActionListener(this);
-        botonUsuarios.addActionListener(this);
+        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
+        pack();
     }
 
     /**
@@ -93,6 +85,11 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
+        setTitle("Concesonario Mercado Corral");
+
+
+
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
@@ -161,7 +158,17 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         panelSecundario.setLayout(new java.awt.BorderLayout());
         getContentPane().add(panelSecundario, java.awt.BorderLayout.CENTER);
 
-        pack();
+        this.panelClientes = new Clientes(nivelUsuario);
+        this.panelMotos = new Motos();
+        this.panelUsuario = new Usuarios();
+        this.panelVentas = new Ventas();
+
+        botonVentas.addActionListener(this);
+        botonVentas.addActionListener(this);
+        botonClientes.addActionListener(this);
+        botonMotos.addActionListener(this);
+        botonUsuarios.addActionListener(this);
+
     }// </editor-fold>
 
     private void botonVentasActionPerformed(java.awt.event.ActionEvent evt) {

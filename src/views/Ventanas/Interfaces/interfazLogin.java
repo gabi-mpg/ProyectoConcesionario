@@ -9,6 +9,8 @@ import controllers.ControllerConexion;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+
 import static utils.Utilidades.jMensaje;
 
 /**
@@ -20,7 +22,8 @@ public class interfazLogin extends javax.swing.JFrame{
     private modelo.config configuracion;
     private ControllerConexion conexion;
 
-    private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
+    private String ruta = System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"Imagenes"+File.separator;
 
     public interfazLogin() {
         conexion = new ControllerConexion();
@@ -219,7 +222,7 @@ public class interfazLogin extends javax.swing.JFrame{
                     jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
                     break;
                 case 1:
-                    new mainInterface(1, new ControllerConexion());
+                    new mainInterface(n, new ControllerConexion());
                     conexion.cerrarCn();
                     this.dispose();
                     break;
