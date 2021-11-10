@@ -38,11 +38,11 @@ public class Clientes extends javax.swing.JPanel {
     }
     
     private void cambiarPermisos(){
-        if(nivelUsuario == 0){
+        if(nivelUsuario == 3){
             botonCrear.setEnabled(false);
             botonEliminar.setEnabled(false);
             botonModificar.setEnabled(false);
-        }else if(nivelUsuario == 1){
+        }else if(nivelUsuario == 2){
             botonCrear.setEnabled(false);
             botonEliminar.setEnabled(false);
         }

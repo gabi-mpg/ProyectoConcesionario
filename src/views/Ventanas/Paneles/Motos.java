@@ -22,11 +22,31 @@ import java.util.ArrayList;
 public class Motos extends javax.swing.JPanel {
 
     private insertarMoto insertar;
+    private int nivelUsuario;
 
     public Motos() {
         this.insertar = new insertarMoto();
         insertar.setVisible(false);
         initComponents();
+    }
+
+    public Motos(int nivelUsuario){
+        this.insertar = new insertarMoto();
+        this.nivelUsuario = nivelUsuario;
+        insertar.setVisible(false);
+        initComponents();
+        cambiarPermisos();
+    }
+
+    private void cambiarPermisos(){
+        if(nivelUsuario == 3){
+            botonCrear.setEnabled(false);
+            botonEliminar.setEnabled(false);
+            botonModificar.setEnabled(false);
+        }else if(nivelUsuario == 2){
+            botonCrear.setEnabled(false);
+            botonEliminar.setEnabled(false);
+        }
     }
 
     /**

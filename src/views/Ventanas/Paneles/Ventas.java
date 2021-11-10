@@ -34,13 +34,13 @@ public class Ventas extends javax.swing.JPanel {
         this.nivelUsuario = nivelUsuario;
         cambiarPermisos();
     }
-    
+
     private void cambiarPermisos(){
-        if(nivelUsuario == 0){
+        if(nivelUsuario == 3){
             botonCrear.setEnabled(false);
             botonEliminar.setEnabled(false);
             botonModificar.setEnabled(false);
-        }else if(nivelUsuario == 1){
+        }else if(nivelUsuario == 2){
             botonCrear.setEnabled(false);
             botonEliminar.setEnabled(false);
         }

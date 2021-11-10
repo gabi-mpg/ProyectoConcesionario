@@ -63,6 +63,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.nivelUsuario = nivelUsuario;
         this.conexion = conexion;
         initComponents();
+        alterarPermisos();
         anadirMenu();
         anadirPaneles();
         setLocationRelativeTo(null);
@@ -93,6 +94,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonClientes = new javax.swing.JButton();
         botonMotos = new javax.swing.JButton();
         botonUsuarios = new javax.swing.JButton();
+        botonUsuarios.setEnabled(false);
         panelSecundario = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,9 +156,9 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         getContentPane().add(panelSecundario, java.awt.BorderLayout.CENTER);
 
         this.panelClientes = new Clientes(nivelUsuario);
-        this.panelMotos = new Motos();
-        this.panelUsuario = new Usuarios();
-        this.panelVentas = new Ventas();
+        this.panelMotos = new Motos(nivelUsuario);
+        this.panelUsuario = new Usuarios(nivelUsuario);
+        this.panelVentas = new Ventas(nivelUsuario);
 
         botonVentas.addActionListener(this);
         botonVentas.addActionListener(this);
@@ -168,6 +170,12 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
     private void botonVentasActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    private void alterarPermisos(){
+        if(nivelUsuario == 1){
+            this.botonUsuarios.setEnabled(true);
+        }
     }
 
     /**
