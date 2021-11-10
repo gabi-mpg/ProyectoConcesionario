@@ -36,7 +36,7 @@ public class VentaModel {
                 String matricula = rs.getString("Matricula");
                 String dni = rs.getString("DNI");
                 double precio = rs.getDouble("Precio");
-                int idVendedor = rs.getInt("IDVendedor");
+                String idVendedor = rs.getString("IDVendedor");
                 Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor);
                 listaVentas.add(venta);
             }
@@ -47,21 +47,21 @@ public class VentaModel {
 
     }
 
-    public Venta buscarVenta(int pk){
+    public Venta buscarVenta(String pk){
         saveVentas();
         for(Venta v : listaVentas){
-            if (v.getIdVendedor() == pk){
+            if (v.getIdVendedor().equalsIgnoreCase(pk)){
                 return v;
             }
         }
         return null;
     }
 
-    public boolean ventaExiste(int pk){
+    public boolean ventaExiste(String pk){
         return buscarVenta(pk) != null;
     }
 
-    public void listarVenta(int pk){
+    public void listarVenta(String pk){
         if (buscarVenta(pk) != null){
             System.out.println(buscarVenta(pk).toString());
         } else{
@@ -87,7 +87,7 @@ public class VentaModel {
             pst.setString(1, venta.getMatricula());
             pst.setString(2, venta.getDni());
             pst.setDouble(3, venta.getPrecio());
-            pst.setInt(4, venta.getIdVendedor());//esto no lo pediremos al usuario
+            pst.setString(4, venta.getIdVendedor());//esto no lo pediremos al usuario
             //sino que lo mandaremos directamente segun quien haya iniciado sesion
 
             pst.executeUpdate();
@@ -146,8 +146,7 @@ public class VentaModel {
 
     public void conectar(){
         try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
-            conexion = cn;
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
         }

@@ -16,7 +16,7 @@ public class VentaCRUD {
         return model.getListaVentas();
     }
 
-    public boolean agregarVenta(String matricula, String DNI, double precio, int idUsuario){
+    public boolean agregarVenta(String matricula, String DNI, double precio, String idUsuario){
         if (model.buscarExistencia(matricula, DNI)){
             model.addVenta(new Venta(matricula, DNI, precio, idUsuario));
             return true;
@@ -33,15 +33,15 @@ public class VentaCRUD {
         return dni.matches("[0-9]{7,8}[A-Za-z]");
     }
     
-    public Venta buscarVenta(int pk){
+    public Venta buscarVenta(String pk){
         return model.buscarVenta(pk);
     }
 
-    public boolean ventaExiste(int pk){
+    public boolean ventaExiste(String pk){
         return model.ventaExiste(pk);
     }
 
-    public void listarVenta(int pk){
+    public void listarVenta(String pk){
         if (buscarVenta(pk) != null){
             System.out.println(buscarVenta(pk).toString());
         } else{
