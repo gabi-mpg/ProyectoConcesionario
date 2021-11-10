@@ -6,12 +6,14 @@ public class Moto {
     private String marca;
     private String color;
     private int tanque;
+    private boolean existe;
 
-    public Moto(String matricula, String marca, String color, int tanque) {
+    public Moto(String matricula, String marca, String color, int tanque, boolean existe) {
         this.matricula = matricula;
         this.marca = marca;
         this.color = color;
         this.tanque = tanque;
+        this.existe = existe;
     }
 
     public String getMatricula() {
@@ -44,6 +46,14 @@ public class Moto {
 
     public void setTanque(int tanque) {
         this.tanque = tanque;
+    }
+
+    public boolean isExiste() {
+        return existe;
+    }
+
+    public void setExiste(boolean existe) {
+        this.existe = existe;
     }
 
     @Override

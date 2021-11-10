@@ -7,20 +7,23 @@ public class Venta {
     private double precio;
     private String idVendedor;
     private int idVenta;
+    private boolean existe;
 
-    public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor) {
+    public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor, boolean existe) {
         this.idVenta = idVenta;
         this.matricula = matricula;
         this.dni = dni;
         this.precio = precio;
         this.idVendedor = idVendedor;
+        this.existe = existe;
     }
 
-    public Venta(String matricula, String dni, double precio, String idVendedor) {
+    public Venta(String matricula, String dni, double precio, String idVendedor, boolean existe) {
         this.matricula = matricula;
         this.dni = dni;
         this.precio = precio;
         this.idVendedor = idVendedor;
+        this.existe = existe;
     }
 
     public String getMatricula() {
@@ -61,6 +64,14 @@ public class Venta {
 
     public void setIdVenta(int idVenta) {
         this.idVenta = idVenta;
+    }
+
+    public boolean isExiste() {
+        return existe;
+    }
+
+    public void setExiste(boolean existe) {
+        this.existe = existe;
     }
 
     @Override

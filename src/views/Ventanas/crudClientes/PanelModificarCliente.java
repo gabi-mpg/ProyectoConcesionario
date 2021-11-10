@@ -193,7 +193,7 @@ public class PanelModificarCliente extends JFrame {
             String apellidos = textoApellidos.getText();
             String nombre = textoNombre.getText();
             String direccion = textoDireccion.getText();
-            Cliente cliente = new Cliente(dni, nombre, apellidos, direccion);
+            Cliente cliente = new Cliente(dni, nombre, apellidos, direccion, true);
             cnCliente.updateCliente(cliente);
             dispose();
         }

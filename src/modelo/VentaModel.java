@@ -37,7 +37,8 @@ public class VentaModel {
                 String dni = rs.getString("DNI");
                 double precio = rs.getDouble("Precio");
                 String idVendedor = rs.getString("IDVendedor");
-                Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor);
+                boolean existe = rs.getBoolean("existe");
+                Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor, existe);
                 listaVentas.add(venta);
             }
 

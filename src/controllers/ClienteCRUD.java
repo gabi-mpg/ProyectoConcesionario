@@ -23,7 +23,7 @@ public class ClienteCRUD {
         if (model.buscarCliente(dni) != null){
             return false;
         } else {
-            model.addCliente(new Cliente(dni, apellido, nombre, direcc));
+            model.addCliente(new Cliente(dni, apellido, nombre, direcc, true));
             return true;
         }
     }

@@ -18,7 +18,7 @@ public class UsuarioCRUD {
 
     public boolean agregarUsuario(String nick, String nombre, String apellidos, String contra, int nivel){
         if (model.buscarUsuario(nick) == null){
-            model.addUsuario(new Usuario(nick, nombre, apellidos, contra, nivel));
+            model.addUsuario(new Usuario(nick, nombre, apellidos, contra, nivel, true));
             return true;
         } else {
             return false;

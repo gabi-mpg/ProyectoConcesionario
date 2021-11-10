@@ -32,7 +32,8 @@ public class MotoModel{
                 String color = rs.getString("Color");
                 String marca = rs.getString("Marca");
                 int tanque = rs.getInt("Tanque");
-                Moto moto = new Moto(matricula, marca, color, tanque);
+                boolean existe = rs.getBoolean("existe");
+                Moto moto = new Moto(matricula, marca, color, tanque, existe);
                 listaMotos.add(moto);
             }
 

@@ -32,7 +32,8 @@ public class UsuarioModel {
                 String nombre = rs.getString("Nombre");
                 String apellidos = rs.getString("Apellidos");
                 String contra = rs.getString("Contrasena");
-                Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso);
+                boolean existe = rs.getBoolean("existe");
+                Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso, existe);
                 listaUsuarios.add(usuario);
             }
 

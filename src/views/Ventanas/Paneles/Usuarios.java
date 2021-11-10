@@ -144,12 +144,14 @@ public class Usuarios extends javax.swing.JPanel {
         ArrayList<Usuario> listaUsuarios = controlador.gesListaUsuarios();
         model.setRowCount(0);
         for (Usuario u : listaUsuarios){
-            Object[] datosUsuario = new Object[4];
-            datosUsuario[0] = u.getNick();
-            datosUsuario[1] = u.getNombre();
-            datosUsuario[2] = u.getApellidos();
-            datosUsuario[3] = u.getContra();
-            model.addRow(datosUsuario);
+            if(u.isExiste()){
+                Object[] datosUsuario = new Object[4];
+                datosUsuario[0] = u.getNick();
+                datosUsuario[1] = u.getNombre();
+                datosUsuario[2] = u.getApellidos();
+                datosUsuario[3] = u.getContra();
+                model.addRow(datosUsuario);
+            }
         }
     }
 

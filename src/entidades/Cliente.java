@@ -6,12 +6,14 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String direccion;
+    private boolean existe;
 
-    public Cliente(String dni, String nombre, String apellido, String direccion) {
+    public Cliente(String dni, String nombre, String apellido, String direccion, boolean existe) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
+        this.existe = existe;
     }
 
     public String getDni() {
@@ -44,6 +46,14 @@ public class Cliente {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public boolean isExiste() {
+        return existe;
+    }
+
+    public void setExiste(boolean existe) {
+        this.existe = existe;
     }
 
     @Override

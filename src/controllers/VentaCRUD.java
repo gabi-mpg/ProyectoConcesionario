@@ -18,7 +18,7 @@ public class VentaCRUD {
 
     public boolean agregarVenta(String matricula, String DNI, double precio, String idUsuario){
         if (model.buscarExistencia(matricula, DNI)){
-            model.addVenta(new Venta(matricula, DNI, precio, idUsuario));
+            model.addVenta(new Venta(matricula, DNI, precio, idUsuario, true));
             return true;
         } else {
             return false;

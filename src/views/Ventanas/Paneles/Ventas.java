@@ -149,13 +149,16 @@ public class Ventas extends javax.swing.JPanel {
         ArrayList<Venta> listaVentas = controlador.getListaVentas();
         model.setRowCount(0);
         for (Venta v : listaVentas){
-            Object[] datosVenta = new Object[5];
-            datosVenta[0] = v.getIdVenta();
-            datosVenta[1] = v.getDni();
-            datosVenta[2] = v.getMatricula();
-            datosVenta[3] = v.getPrecio();
-            datosVenta[4] = v.getIdVendedor();
-            model.addRow(datosVenta);
+            if (v.isExiste()){
+                Object[] datosVenta = new Object[5];
+                datosVenta[0] = v.getIdVenta();
+                datosVenta[1] = v.getDni();
+                datosVenta[2] = v.getMatricula();
+                datosVenta[3] = v.getPrecio();
+                datosVenta[4] = v.getIdVendedor();
+                model.addRow(datosVenta);
+            }
+
         }
     }
 

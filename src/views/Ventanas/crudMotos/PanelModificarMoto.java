@@ -203,7 +203,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             String marca = textoMarca.getText();
             String color = textoColor.getText();
             int tanque = Integer.parseInt(textoTanque.getText());
-            Moto moto = new Moto(matricula, marca, color, tanque);
+            Moto moto = new Moto(matricula, marca, color, tanque, true);
             cnMoto.updateMoto(moto);
             dispose();
         }

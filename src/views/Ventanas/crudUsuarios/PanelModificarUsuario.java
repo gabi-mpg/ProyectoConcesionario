@@ -194,7 +194,7 @@ public class PanelModificarUsuario extends JFrame {
             String apellidos = textoApellidos.getText();
             String contra = "";
             int permiso = Integer.parseInt(textoPasw.getText());
-            Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso);
+            Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso, true);
             cnUser.updateUsuario(usuario);
             dispose();
         }

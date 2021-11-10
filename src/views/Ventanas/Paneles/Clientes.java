@@ -144,12 +144,14 @@ public class Clientes extends javax.swing.JPanel {
         ArrayList<Cliente> listaClientes = controlador.getListaClientes();
         model.setRowCount(0);
         for (Cliente c : listaClientes){
-            Object[] datosCliente = new Object[4];
-            datosCliente[0] = c.getDni();
-            datosCliente[1] = c.getNombre();
-            datosCliente[2] = c.getApellido();
-            datosCliente[3] = c.getDireccion();
-            model.addRow(datosCliente);
+            if (c.isExiste()){
+                Object[] datosCliente = new Object[4];
+                datosCliente[0] = c.getDni();
+                datosCliente[1] = c.getNombre();
+                datosCliente[2] = c.getApellido();
+                datosCliente[3] = c.getDireccion();
+                model.addRow(datosCliente);
+            }
         }
     }
 

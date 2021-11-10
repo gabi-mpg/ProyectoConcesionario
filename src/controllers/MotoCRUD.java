@@ -22,7 +22,7 @@ public class MotoCRUD {
         if (model.buscarMoto(matricula) != null){
             return false;
         } else {
-            model.addMoto(new Moto(matricula, marca, color, tanque));
+            model.addMoto(new Moto(matricula, marca, color, tanque, true));
             return true;
         }
     }

@@ -33,7 +33,8 @@ public class ClienteModel {
                 String nombre = rs.getString("Nombre");
                 String apellido = rs.getString("Apellido");
                 String direcc = rs.getString("Direccion");
-                Cliente cliente = new Cliente(dni, nombre, apellido, direcc);
+                boolean existe = rs.getBoolean("existe");
+                Cliente cliente = new Cliente(dni, nombre, apellido, direcc, existe);
                 listaClientes.add(cliente);
             }
 

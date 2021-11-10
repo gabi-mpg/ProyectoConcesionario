@@ -7,13 +7,15 @@ public class Usuario {
     private String apellidos;
     private String contra;
     private int permiso;
+    private boolean existe;
 
-    public Usuario(String nick, String nombre, String apellidos, String contra, int permiso) {
+    public Usuario(String nick, String nombre, String apellidos, String contra, int permiso, boolean existe) {
         this.nick = nick;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.contra = contra;
         this.permiso = permiso;
+        this.existe = existe;
     }
 
     public String getNick() {
@@ -54,6 +56,14 @@ public class Usuario {
 
     public void setPermiso(int permiso) {
         this.permiso = permiso;
+    }
+
+    public boolean isExiste() {
+        return existe;
+    }
+
+    public void setExiste(boolean existe) {
+        this.existe = existe;
     }
 
     @Override
