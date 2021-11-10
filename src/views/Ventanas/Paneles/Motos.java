@@ -5,6 +5,7 @@
  */
 package views.Ventanas.Paneles;
 
+import controllers.ControllerConexion;
 import controllers.MotoCRUD;
 import entidades.Moto;
 import views.Ventanas.crudMotos.PanelModificarMoto;
@@ -24,7 +25,8 @@ public class Motos extends javax.swing.JPanel {
     private insertarMoto insertar;
     private int nivelUsuario;
 
-    public Motos() {
+
+    public Motos(ControllerConexion conexion) {
         this.insertar = new insertarMoto();
         insertar.setVisible(false);
         initComponents();

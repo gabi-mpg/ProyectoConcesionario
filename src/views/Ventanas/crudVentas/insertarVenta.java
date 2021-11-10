@@ -20,7 +20,8 @@ public class insertarVenta extends javax.swing.JFrame {
 
     public insertarVenta() {
         this.setVisible(true);
-        setSize(240,410);
+        setLocationRelativeTo(null);
+        setSize(260,410);
         initComponents();
     }
 

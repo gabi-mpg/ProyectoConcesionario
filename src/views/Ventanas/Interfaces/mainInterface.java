@@ -44,7 +44,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private ControllerConexion conexion;
     private String ruta =System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+            +"Imagenes"+ File.separator;
 
     public mainInterface() {
         this.nivelUsuario = 1;
@@ -108,11 +108,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         botonVentas.setText("Ventas");
         botonVentas.setPreferredSize(new Dimension(90, 30));
-        botonVentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVentasActionPerformed(evt);
-            }
-        });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -145,10 +141,13 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
+        JLabel nuevaFoto = new JLabel();
+        nuevaFoto.setIcon(new ImageIcon(ruta+"fotoPrincipal.jpg"));
         panelSecundario.setBackground(new java.awt.Color(153, 255, 153));
         panelSecundario.setForeground(new java.awt.Color(204, 255, 204));
         panelSecundario.setPreferredSize(new java.awt.Dimension(600, 300));
         panelSecundario.setLayout(new java.awt.BorderLayout());
+        panelSecundario.add(nuevaFoto);
         getContentPane().add(panelSecundario, java.awt.BorderLayout.CENTER);
 
         this.panelClientes = new Clientes(nivelUsuario);
@@ -161,6 +160,11 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonClientes.addActionListener(this);
         botonMotos.addActionListener(this);
         botonUsuarios.addActionListener(this);
+        botonVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVentasActionPerformed(evt);
+            }
+        });
         anadirMenu();
         anadirPaneles();
         eventos();

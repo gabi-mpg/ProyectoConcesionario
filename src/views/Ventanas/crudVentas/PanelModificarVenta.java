@@ -42,6 +42,10 @@ public class PanelModificarVenta extends JFrame {
         private void initComponents() {
             GridBagConstraints gridBagConstraints;
 
+            setTitle("Concesonario Mercado Corral");
+            Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+            setIconImage(icono);
+
             labelTitulo = new JLabel();
             textoTanque = new JTextField();
             textoMatricula = new JTextField();

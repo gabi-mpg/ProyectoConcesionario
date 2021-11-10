@@ -20,6 +20,7 @@ public class insertarCliente extends javax.swing.JFrame {
 
     public insertarCliente() {
         this.setVisible(true);
+        setLocationRelativeTo(null);
         setSize(240,410);
         initComponents();
     }

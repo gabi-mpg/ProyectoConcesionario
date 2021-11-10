@@ -11,17 +11,20 @@ import entidades.Cliente;
 import entidades.Usuario;
 import entidades.Venta;
 import views.Ventanas.crudVentas.buscarVenta;
+import views.Ventanas.crudVentas.insertarVenta;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
  *
  * @author Chris
  */
-public class Ventas extends javax.swing.JPanel {
+public class Ventas extends javax.swing.JPanel implements ActionListener {
 
     private int nivelUsuario;
     
@@ -173,30 +176,15 @@ public class Ventas extends javax.swing.JPanel {
     }
 
     private void agregarListeners(){
-        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarActionPerformed(evt);
-            }
-        });
-
-        botonCrear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearActionPerformed(evt);
-            }
-        });
-
-        botonModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarActionPerformed(evt);
-            }
-        });
-
-        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEliminarActionPerformed(evt);
-            }
-        });
+        botonBuscar.addActionListener(this);
+        botonModificar.addActionListener(this);
+        botonEliminar.addActionListener(this);
+        botonCrear.addActionListener(this);
     }
+
+
+
+
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
@@ -237,5 +225,22 @@ public class Ventas extends javax.swing.JPanel {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private VentaCRUD cnVentas;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton b = (JButton) e.getSource();
+        if(b == botonBuscar){
+            buscarVenta ventanaBusqueda = new buscarVenta();
+            String busqueda = ventanaBusqueda.getValorBusqueda();
+            System.out.println(busqueda);
+        }else if(b == botonCrear){
+            new insertarVenta();
+        } else if (b == botonEliminar) {
+
+
+        }else{
+
+        }
+    }
     // End of variables declaration//GEN-END:variables
 }

@@ -71,6 +71,11 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        setTitle("Concesonario Mercado Corral");
+        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+        setIconImage(icono);
+
+
         panelPrincipal = new javax.swing.JPanel();
         boton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();

@@ -8,6 +8,7 @@ package views.Ventanas.Interfaces;
 import controllers.ControllerConexion;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -67,6 +68,11 @@ public class interfazLogin extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
+
+
+        setTitle("Concesonario Mercado Corral");
+        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+        setIconImage(icono);
 
         jLabelSalir = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();

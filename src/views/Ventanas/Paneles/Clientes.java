@@ -13,6 +13,7 @@ import controllers.VentaCRUD;
 import entidades.Cliente;
 import entidades.Usuario;
 import views.Ventanas.crudClientes.PanelModificarCliente;
+import views.Ventanas.crudClientes.insertarCliente;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -225,7 +226,7 @@ public class Clientes extends javax.swing.JPanel {
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        new insertarCliente();
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {

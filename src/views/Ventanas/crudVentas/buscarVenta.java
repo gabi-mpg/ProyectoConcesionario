@@ -4,6 +4,7 @@ package views.Ventanas.crudVentas;
 import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,7 +18,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
 
     public buscarVenta() {
         setVisible(true);
-
+        setLocationRelativeTo(null);
         initComponents();
         this.botonBusqueda.setEnabled(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -39,18 +40,19 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
     public void busquedaVenta(){
         if(!campoBusqueda.getText().isEmpty()){
             if(radio1.isSelected()){
-                String DNI = campoBusqueda.getText();
+                valorBusqueda = campoBusqueda.getText();
                 //Hacer comprobaciones de DNI
             }else if(radio2.isSelected()){
-                String matricula = campoBusqueda.getText();
+                valorBusqueda = campoBusqueda.getText();
                 //Hacer comprobaciones matricula
             }else if(radio3.isSelected()){
-                String IDVenta = campoBusqueda.getText();
+                valorBusqueda = campoBusqueda.getText();
                 //Hacer comprobaciones idVenta
             }else{
-                String IDVendedor = campoBusqueda.getText();
+                valorBusqueda = campoBusqueda.getText();
                 //Hacer comprobaciones idVendedor
             }
+            dispose();
         }else{
             JOptionPane.showMessageDialog(this,"No se ha introducido información");
         }
@@ -77,10 +79,11 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         botonBusqueda = new javax.swing.JButton();
         radio4 = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         labelTitulo.setText("Buscar registros de venta");
+        labelTitulo.setFont(new Font("Serif",Font.BOLD,16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -190,6 +193,10 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
                 new buscarVenta().setVisible(true);
             }
         });
+    }
+
+    public String getValorBusqueda(){
+        return this.valorBusqueda;
     }
 
     // Variables declaration - do not modify

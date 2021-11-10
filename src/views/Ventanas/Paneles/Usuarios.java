@@ -8,6 +8,7 @@ package views.Ventanas.Paneles;
 import controllers.UsuarioCRUD;
 import entidades.Usuario;
 import views.Ventanas.crudUsuarios.PanelModificarUsuario;
+import views.Ventanas.crudUsuarios.insertarUsuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -214,7 +215,7 @@ public class Usuarios extends javax.swing.JPanel {
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+       new insertarUsuario();
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {

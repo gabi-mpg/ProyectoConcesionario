@@ -20,6 +20,7 @@ public class insertarUsuario extends javax.swing.JFrame {
 
     public insertarUsuario() {
         this.setVisible(true);
+        setLocationRelativeTo(null);
         setSize(240,410);
         initComponents();
     }
