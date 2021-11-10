@@ -293,14 +293,12 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
 
     public void cambiarPanel(String panelCambio){
+
         ocultar();
         anadirPaneles();
         switch(panelCambio){
             case PANEL_CLIENTE:
-                panelSecundario.remove(panelMotos);
-                panelSecundario.remove(panelVentas);
-                panelSecundario.remove(panelUsuario);
-                panelSecundario.remove(panelClientes);
+
                 panelClientes.fillTable();
                 panelSecundario.add(panelClientes);
                 this.panelClientes.setVisible(true);
@@ -308,10 +306,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 mostrar();
                 break;
             case PANEL_MOTO:
-                panelSecundario.remove(panelClientes);
-                panelSecundario.remove(panelVentas);
-                panelSecundario.remove(panelUsuario);
-                panelSecundario.remove(panelMotos);
                 panelMotos.fillTable();
                 panelSecundario.add(panelMotos);
                 this.panelMotos.setVisible(true);
@@ -319,10 +313,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 mostrar();
                 break;
             case PANEL_USUARIO:
-                panelSecundario.remove(panelClientes);
-                panelSecundario.remove(panelVentas);
-                panelSecundario.remove(panelMotos);
-                panelSecundario.remove(panelUsuario);
                 panelUsuario.fillTable();
                 panelSecundario.add(panelUsuario);
                 this.panelUsuario.setVisible(true);
@@ -330,10 +320,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 mostrar();
                 break;
             case PANEL_VENTA:
-                panelSecundario.remove(panelClientes);
-                panelSecundario.remove(panelMotos);
-                panelSecundario.remove(panelUsuario);
-                panelSecundario.remove(panelVentas);
                 panelVentas.fillTable();
                 panelSecundario.add(panelVentas);
                 this.panelVentas.setVisible(true);
@@ -370,7 +356,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         public void run() {
             int n = 850;
 
-            while(n > 250){
+            while(n > 260){
                 panel.setSize(n, panel.getHeight());
                 panel.repaint();
                 n-=15;
@@ -403,7 +389,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         public void run() {
             try{
                 Thread.sleep(250);
-                int n = 250;
+                int n = 260;
                 while(n < 865){
                     panel.setSize(n,panel.getHeight());
                     n += 15;
