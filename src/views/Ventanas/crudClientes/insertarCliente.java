@@ -15,7 +15,8 @@ import java.io.File;
 public class insertarCliente extends javax.swing.JFrame {
 
     private String ruta =  System.getProperty("user.dir")+
-    File.separator+"src"+File.separator+"Imagenes"+File.separator;
+            File.separator+"src"+File.separator+"views"+File.separator
+            +"imagenes"+ File.separator;
 
     public insertarCliente() {
         this.setVisible(true);

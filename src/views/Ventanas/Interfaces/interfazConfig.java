@@ -29,7 +29,8 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
     private String[] configuracionRecogida;
     private config configuracion;
     private String ruta = System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"Imagenes"+File.separator;
+            File.separator+"src"+File.separator+"views"+File.separator
+            +"imagenes"+ File.separator;
 
 
     public interfazConfig(String[] config, config configuracion) {

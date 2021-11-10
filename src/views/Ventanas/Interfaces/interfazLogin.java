@@ -23,7 +23,8 @@ public class interfazLogin extends javax.swing.JFrame{
     private ControllerConexion conexion;
 
     private String ruta = System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"Imagenes"+File.separator;
+            File.separator+"src"+File.separator+"views"+File.separator
+            +"imagenes"+ File.separator;
 
     public interfazLogin() {
         conexion = new ControllerConexion();

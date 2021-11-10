@@ -43,26 +43,20 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_VENTA = "venta";
     private int nivelUsuario;
     private ControllerConexion conexion;
-    private String ruta = System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"Imagenes"+File.separator;
+    private String ruta =System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"views"+File.separator
+            +"imagenes"+ File.separator;
 
     public mainInterface() {
+        this.nivelUsuario = 1;
+        this.conexion = new ControllerConexion();
         initComponents();
         anadirMenu();
-        pack();
-        this.panelClientes = new Clientes(nivelUsuario);
-        this.panelMotos = new Motos();
-        this.panelUsuario = new Usuarios();
-        this.panelVentas = new Ventas();
-        setTitle("Concesionario Mercado Del Corral");
         anadirPaneles();
-        botonVentas.addActionListener(this);
-        botonClientes.addActionListener(this);
-        botonMotos.addActionListener(this);
-        botonUsuarios.addActionListener(this);
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+        pack();
     }
 
     public mainInterface(int nivelUsuario, ControllerConexion conexion){
@@ -87,7 +81,8 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private void initComponents() {
 
         setTitle("Concesonario Mercado Corral");
-
+        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+        setIconImage(icono);
 
 
         java.awt.GridBagConstraints gridBagConstraints;
