@@ -74,13 +74,14 @@ public class MotoModel{
 
     public void addMoto(Moto moto){
         saveMotos();
-        String sql = "INSERT INTO t_motos values (?, ?, ?, ?)";
+        String sql = "INSERT INTO t_motos values (?, ?, ?, ?,?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, moto.getMatricula());
             pst.setString(2, moto.getMarca());
             pst.setString(3, moto.getColor());
             pst.setInt(4, moto.getTanque());
+            pst.setBoolean(5,moto.isExiste());
 
             pst.executeUpdate();
         } catch (Exception e) {

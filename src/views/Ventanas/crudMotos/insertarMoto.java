@@ -7,7 +7,14 @@ package views.Ventanas.crudMotos;
 
 
 import controllers.ControllerConexion;
+import controllers.MotoCRUD;
 
+import javax.naming.ldap.Control;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 /**
@@ -20,8 +27,11 @@ public class insertarMoto extends javax.swing.JFrame {
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
+    private MotoCRUD cnMoto;
+    private boolean motoDigito = false;
 
     public insertarMoto() {
+        cnMoto = new MotoCRUD();
         setSize(240,410);
         setLocationRelativeTo(null);
         initComponents();
@@ -125,7 +135,7 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel4, gridBagConstraints);
 
-        jLabel5.setText("Marca");
+        jLabel5.setText("Color");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -133,7 +143,7 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("Color");
+        jLabel6.setText("Marca");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -150,13 +160,50 @@ public class insertarMoto extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        botonInsertar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comprobarCampos();
+            }
+        });
         add(botonInsertar, gridBagConstraints);
+        textoTanque.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String s = textoTanque.getText();{
+                    for (int i = 0 ; i < s.length() ; i++){
+                        if(Character.isDigit(s.charAt(i))){
+                            motoDigito = true;
+                        }else{
+                            motoDigito = false;
+                        }
+                    }
+                }
+            }
+        });
     }// </editor-fold>
 
     private void textoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
+    private void comprobarCampos(){
+        String matricula = textoMatricula.getText();
+        String marca = textoMarca.getText();
+        String color = textoColor.getText();
+        String tanque = textoTanque.getText();
+        if(cnMoto.comprobarMatricula(matricula) && !marca.isEmpty() && !color.isEmpty() && motoDigito){
+            if(cnMoto.agregarMoto(matricula,marca,color,Integer.parseInt(tanque))){
+                JOptionPane.showMessageDialog(this,"Moto agregada","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify
     private javax.swing.JButton botonInsertar;

@@ -55,8 +55,9 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setLayout(new java.awt.GridBagLayout());
 
-            labelTitulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+            labelTitulo.setFont(new java.awt.Font("Dialog", Font.BOLD, 18)); // NOI18N
             labelTitulo.setText("Modificar moto");
+
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;
@@ -119,6 +120,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             gridBagConstraints.gridy = 2;
             gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
+            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(jLabel1, gridBagConstraints);
 
             jLabel2.setText("Marca");
@@ -127,6 +129,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             gridBagConstraints.gridy = 3;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
+            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(jLabel2, gridBagConstraints);
 
             jLabel3.setText("Color");
@@ -135,6 +138,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             gridBagConstraints.gridy = 4;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
+            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(jLabel3, gridBagConstraints);
 
             jLabel4.setText("Tanque");
@@ -143,6 +147,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             gridBagConstraints.gridy = 5;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
+            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
             add(jLabel4, gridBagConstraints);
 
             botonModificar.setText("Modificar");
