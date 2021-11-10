@@ -10,6 +10,7 @@ import views.Ventanas.Paneles.Clientes;
 import views.Ventanas.Paneles.Motos;
 import views.Ventanas.Paneles.Usuarios;
 import views.Ventanas.Paneles.Ventas;
+import views.Ventanas.panelesMenu.generadorPDF;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -170,6 +171,15 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
     private void botonVentasActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    }
+
+    private void eventos(){
+        generarPDF.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new generadorPDF(conexion);
+            }
+        });
     }
 
     private void alterarPermisos(){
