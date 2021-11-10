@@ -20,6 +20,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
 
     public generadorPDF(ControllerConexion conexion) {
         this.conexion = conexion;
+        setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
         initComponents();

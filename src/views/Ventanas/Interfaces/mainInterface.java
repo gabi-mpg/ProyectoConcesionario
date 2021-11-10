@@ -52,8 +52,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.nivelUsuario = 1;
         this.conexion = new ControllerConexion();
         initComponents();
-        anadirMenu();
-        anadirPaneles();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
@@ -65,8 +63,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.conexion = conexion;
         initComponents();
         alterarPermisos();
-        anadirMenu();
-        anadirPaneles();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
@@ -166,6 +162,9 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonClientes.addActionListener(this);
         botonMotos.addActionListener(this);
         botonUsuarios.addActionListener(this);
+        anadirMenu();
+        anadirPaneles();
+        eventos();
 
     }// </editor-fold>
 
