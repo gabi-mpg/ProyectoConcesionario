@@ -197,7 +197,7 @@ public class MNGDB {
                     if(contrasena.equals(r.getString("Contrasena"))){
                         return r.getInt("nivelPermiso");
                     }else{
-                        return 0;
+                        return 3;
                     }
                 }else{
                     return -1;
