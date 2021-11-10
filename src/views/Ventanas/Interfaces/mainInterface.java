@@ -315,6 +315,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        remove(panelClientes);
+        remove(panelMotos);
+        remove(panelVentas);
+        remove(panelUsuario);
         JButton boton = (JButton) ae.getSource();
         if(boton == botonClientes){
             cambiarPanel(PANEL_CLIENTE);
@@ -323,6 +327,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             cambiarPanel(PANEL_MOTO);
 
         }else if(boton == botonVentas){
+            panelVentas.setVisible(false);
             cambiarPanel(PANEL_VENTA);
 
         }else if(boton == botonUsuarios){
@@ -334,49 +339,43 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
 
     public void cambiarPanel(String panelCambio){
-
         ocultar();
         anadirPaneles();
         switch(panelCambio){
             case PANEL_CLIENTE:
-
                 panelClientes.fillTable();
                 panelSecundario.add(panelClientes);
                 this.panelClientes.setVisible(true);
-                panelSecundario.repaint();
                 mostrar();
                 break;
             case PANEL_MOTO:
                 panelMotos.fillTable();
                 panelSecundario.add(panelMotos);
                 this.panelMotos.setVisible(true);
-                panelSecundario.repaint();
+
                 mostrar();
                 break;
             case PANEL_USUARIO:
                 panelUsuario.fillTable();
                 panelSecundario.add(panelUsuario);
                 this.panelUsuario.setVisible(true);
-                panelSecundario.repaint();
+
                 mostrar();
                 break;
             case PANEL_VENTA:
                 panelVentas.fillTable();
                 panelSecundario.add(panelVentas);
                 this.panelVentas.setVisible(true);
-                panelSecundario.repaint();
                 mostrar();
                 break;
         }
+        panelSecundario.repaint();
     }
 
     public void ocultar(){
         Thread t = new Thread(new esconderPanel(this));
         t.start();
-        panelClientes.setVisible(false);
-        panelMotos.setVisible(false);
-        panelVentas.setVisible(false);
-        panelUsuario.setVisible(false);
+
     }
 
     public void mostrar(){
@@ -395,11 +394,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         @Override
         public void run() {
-            int n = 850;
+            int n = 840;
 
-            while(n > 260){
+            while(n > 255){
                 panel.setSize(n, panel.getHeight());
-                panel.repaint();
                 n-=15;
                 try{
                     Thread.sleep(1);
@@ -429,7 +427,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         @Override
         public void run() {
             try{
-                Thread.sleep(250);
+                Thread.sleep(260);
                 int n = 260;
                 while(n < 865){
                     panel.setSize(n,panel.getHeight());

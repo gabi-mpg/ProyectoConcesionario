@@ -7,6 +7,7 @@ package views.Ventanas.Interfaces;
 
 import controllers.ControllerConexion;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -29,10 +30,8 @@ public class interfazLogin extends javax.swing.JFrame{
     public interfazLogin() {
         conexion = new ControllerConexion();
         configuracion = new modelo.config();
-
         initComponents();
         conexion.setRegistros();
-        conexion.conectarComprobar();
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -200,37 +199,43 @@ public class interfazLogin extends javax.swing.JFrame{
 
 
     private void login() {
-        String user = campoUsuario.getText();
-        String pass = new String(campoClave.getPassword());
         conexion.setRegistros();
-        //hay que primero leer los registros antes de hacer el login y despues hacer lo que sea que tal
-        if (user.isEmpty() | pass.isEmpty()) {
-            jMensaje(this, "Faltan campos por completar", "Falta información", 2);
-        } else {
-            int n = conexion.login(user, pass);
-            System.out.println(n);
-            switch (n) {
-                case -4:
-                    jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
-                    break;
-                case -2:
-                    jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
-                    System.exit(0);
-                    break;
-                case -1:
-                case 0:
-                    jMensaje(this, "El usuario " + user + " no existe", "Usuario incorrecto", 2);
-                    break;
-                case-3:
-                    jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
-                    break;
-                default:
-                    new mainInterface(n, new ControllerConexion());
-                    conexion.cerrarCn();
-                    this.dispose();
-                    break;
+        if(!conexion.conectarComprobar()){
+            JOptionPane.showMessageDialog(this,"No hay conexión con la BBDD, revisa la configuración");
+        }else{
+            String user = campoUsuario.getText();
+            String pass = new String(campoClave.getPassword());
+            conexion.setRegistros();
+            //hay que primero leer los registros antes de hacer el login y despues hacer lo que sea que tal
+            if (user.isEmpty() | pass.isEmpty()) {
+                jMensaje(this, "Faltan campos por completar", "Falta información", 2);
+            } else {
+                int n = conexion.login(user, pass);
+                System.out.println(n);
+                switch (n) {
+                    case -4:
+                        jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
+                        break;
+                    case -2:
+                        jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
+                        System.exit(0);
+                        break;
+                    case -1:
+                    case 0:
+                        jMensaje(this, "El usuario " + user + " no existe", "Usuario incorrecto", 2);
+                        break;
+                    case-3:
+                        jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
+                        break;
+                    default:
+                        new mainInterface(n, new ControllerConexion());
+                        conexion.cerrarCn();
+                        this.dispose();
+                        break;
+                }
             }
         }
+
     }
 
 

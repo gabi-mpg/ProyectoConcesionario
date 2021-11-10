@@ -84,6 +84,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
 
         buttonGroup1.add(radioVentasUsuario);
         radioVentasUsuario.setText("Ventas por usuario");
+        radioVentasUsuario.setBackground(new java.awt.Color(165, 165, 165));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -94,6 +95,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
 
         buttonGroup1.add(radioVentasMarca);
         radioVentasMarca.setText("Ventas por marca");
+        radioVentasMarca.setBackground(new java.awt.Color(165, 165, 165));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -102,6 +104,8 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
 
         buttonGroup1.add(radioVentas);
         radioVentas.setText("Ventas general");
+        radioVentas.setBackground(new java.awt.Color(165, 165, 165));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -112,6 +116,8 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
 
         buttonGroup1.add(radioVentasCliente);
         radioVentasCliente.setText("Ventas por cliente");
+        radioVentasCliente.setBackground(new java.awt.Color(165, 165, 165));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
