@@ -14,8 +14,8 @@ public class insertarMoto extends javax.swing.JFrame {
     private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
 
     public insertarMoto() {
-        this.setVisible(true);
         setSize(240,410);
+        setLocationRelativeTo(null);
         initComponents();
     }
 

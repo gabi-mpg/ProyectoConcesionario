@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelModificarMoto extends javax.swing.JFrame {
+public class PanelModificarMoto extends javax.swing.JDialog {
 
 
         private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
@@ -19,6 +19,7 @@ public class PanelModificarMoto extends javax.swing.JFrame {
         // y así reutilizar el panel
         public PanelModificarMoto() {
             initComponents();
+            setModal(true);
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);

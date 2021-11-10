@@ -1,16 +1,14 @@
 package views.Ventanas.crudClientes;
 
 import controllers.ClienteCRUD;
-import controllers.MotoCRUD;
 import entidades.Cliente;
-import entidades.Moto;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelModificarCliente extends JFrame {
+public class PanelModificarCliente extends JDialog {
 
 
         private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
@@ -21,6 +19,7 @@ public class PanelModificarCliente extends JFrame {
         // y así reutilizar el panel
         public PanelModificarCliente() {
             initComponents();
+            setModal(true);
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -38,13 +37,13 @@ public class PanelModificarCliente extends JFrame {
 
             labelTitulo = new JLabel();
             textoDireccion = new JTextField();
+            textoName = new JTextField();
             textoApellidos = new JTextField();
-            textoNombre = new JTextField();
             labelImagen = new JLabel();
-            jLabel1 = new JLabel();
-            jLabel2 = new JLabel();
-            jLabel3 = new JLabel();
-            jLabel4 = new JLabel();
+            jLabelEnun = new JLabel();
+            jlabelNombre = new JLabel();
+            jLabelApellidos = new JLabel();
+            jLabelDireccion = new JLabel();
             botonModificar = new JButton();
             checkLimpiar = new JCheckBox();
             dni = "";
@@ -74,7 +73,7 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
             add(textoDireccion, gridBagConstraints);
 
-            textoApellidos.setPreferredSize(new Dimension(75, 25));
+            textoName.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 3;
@@ -82,9 +81,9 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoApellidos, gridBagConstraints);
+            add(textoName, gridBagConstraints);
 
-            textoNombre.setPreferredSize(new Dimension(75, 25));
+            textoApellidos.setPreferredSize(new Dimension(75, 25));
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 4;
@@ -92,7 +91,7 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.ipadx = 59;
             gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoNombre, gridBagConstraints);
+            add(textoApellidos, gridBagConstraints);
 
             labelImagen.setIcon(new ImageIcon(ruta + "iconoModificar.png")); // NOI18N
             gridBagConstraints = new GridBagConstraints();
@@ -107,31 +106,31 @@ public class PanelModificarCliente extends JFrame {
             gridBagConstraints.gridy = 2;
             gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
-            add(jLabel1, gridBagConstraints);
+            add(jLabelEnun, gridBagConstraints);
 
-            jLabel2.setText("Nombre");
+            jlabelNombre.setText("Nombre");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 3;
             gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
-            add(jLabel2, gridBagConstraints);
+            add(jlabelNombre, gridBagConstraints);
 
-            jLabel3.setText("Apellidos");
+            jLabelApellidos.setText("Apellidos");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 4;
             gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
-            add(jLabel3, gridBagConstraints);
+            add(jLabelApellidos, gridBagConstraints);
 
-            jLabel4.setText("Direccion");
+            jLabelDireccion.setText("Direccion");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 5;
             gridBagConstraints.anchor = GridBagConstraints.WEST;
             gridBagConstraints.weighty = 0.5;
-            add(jLabel4, gridBagConstraints);
+            add(jLabelDireccion, gridBagConstraints);
 
             botonModificar.setText("Modificar");
 
@@ -171,9 +170,9 @@ public class PanelModificarCliente extends JFrame {
         public void rellenarCampos(){
             if (cnCliente.clienteExiste(dni)){
                 Cliente cliente = cnCliente.buscarCliente(dni);
-                jLabel1.setText("Modificar cliente con DNI " + dni);
-                textoNombre.setText(cliente.getNombre());
+                jLabelEnun.setText("Modificar cliente con DNI " + dni);
                 textoApellidos.setText(cliente.getApellido());
+                textoName.setText(cliente.getNombre());
                 textoDireccion.setText(cliente.getDireccion());
                 setVisible(true);
             } else {
@@ -187,8 +186,8 @@ public class PanelModificarCliente extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            String apellidos = textoApellidos.getText();
-            String nombre = textoNombre.getText();
+            String apellidos = textoName.getText();
+            String nombre = textoApellidos.getText();
             String direccion = textoDireccion.getText();
             Cliente cliente = new Cliente(dni, nombre, apellidos, direccion);
             cnCliente.updateCliente(cliente);
@@ -202,14 +201,14 @@ public class PanelModificarCliente extends JFrame {
     // Variables declaration - do not modify
         private JButton botonModificar;
         private JCheckBox checkLimpiar;
-        private JLabel jLabel1;
-        private JLabel jLabel2;
-        private JLabel jLabel3;
-        private JLabel jLabel4;
+        private JLabel jLabelEnun;
+        private JLabel jlabelNombre;
+        private JLabel jLabelApellidos;
+        private JLabel jLabelDireccion;
         private JLabel labelImagen;
         private JLabel labelTitulo;
-        private JTextField textoNombre;
         private JTextField textoApellidos;
+        private JTextField textoName;
         private JTextField textoDireccion;
         private String dni;
         private ClienteCRUD cnCliente;
