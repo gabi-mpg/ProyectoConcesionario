@@ -2,6 +2,7 @@ package modelo;
 
 import controllers.ControllerConexion;
 import entidades.Cliente;
+import entidades.Moto;
 import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 import java.sql.*;
@@ -90,7 +91,7 @@ public class ClienteModel {
         return getListaClientes();
     }
 
-    public boolean removeCliente(String dni){
+    /*public boolean removeCliente(String dni){
         saveClientes();
         String sql = "delete from t_clientes where dni like ?";
         try {
@@ -103,6 +104,26 @@ public class ClienteModel {
             throwables.printStackTrace();
             return false;
         }
+    }*/
+
+    public boolean removeCliente(String dni){
+        saveClientes();
+        String sql = "{call sp_eliminarcliente(?)}";
+        try {
+            CallableStatement cst = conexion.prepareCall(sql);
+            cst.setString(1, dni);
+            cst.execute();
+            updateExiste(false, dni);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+    private void updateExiste(boolean exists, String dni){
+        Cliente cliente = buscarCliente(dni);
+        cliente.setExiste(exists);
     }
 
     public boolean updateCliente(Cliente cliente){
