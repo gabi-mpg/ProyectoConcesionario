@@ -5,10 +5,10 @@ public class Venta {
     private String matricula;
     private String dni;
     private double precio;
-    private int idVendedor;
+    private String idVendedor;
     private int idVenta;
 
-    public Venta(int idVenta, String matricula, String dni, double precio, int idVendedor) {
+    public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor) {
         this.idVenta = idVenta;
         this.matricula = matricula;
         this.dni = dni;
@@ -16,7 +16,7 @@ public class Venta {
         this.idVendedor = idVendedor;
     }
 
-    public Venta(String matricula, String dni, double precio, int idVendedor) {
+    public Venta(String matricula, String dni, double precio, String idVendedor) {
         this.matricula = matricula;
         this.dni = dni;
         this.precio = precio;
@@ -47,11 +47,11 @@ public class Venta {
         this.precio = precio;
     }
 
-    public int getIdVendedor() {
+    public String getIdVendedor() {
         return idVendedor;
     }
 
-    public void setIdVendedor(int idVendedor) {
+    public void setIdVendedor(String idVendedor) {
         this.idVendedor = idVendedor;
     }
 
