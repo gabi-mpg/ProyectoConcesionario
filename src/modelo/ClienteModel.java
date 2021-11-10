@@ -75,13 +75,14 @@ public class ClienteModel {
 
     public ArrayList<Cliente> addCliente(Cliente cliente){
         saveClientes();
-        String sql = "INSERT INTO t_clientes values (?, ?, ?, ?)";
+        String sql = "INSERT INTO t_clientes values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, cliente.getDni());
             pst.setString(2, cliente.getNombre());
             pst.setString(3, cliente.getApellido());
             pst.setString(4, cliente.getDireccion());
+            pst.setBoolean(5,cliente.isExiste());
 
             pst.executeUpdate();
         } catch (Exception e) {

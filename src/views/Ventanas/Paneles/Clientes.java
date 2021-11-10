@@ -227,6 +227,7 @@ public class Clientes extends javax.swing.JPanel {
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
         new insertarCliente();
+        fillTable();
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {

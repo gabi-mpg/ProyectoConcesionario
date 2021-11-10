@@ -5,7 +5,16 @@ package views.Ventanas.crudClientes;
  * and open the template in the editor.
  */
 
+import controllers.ClienteCRUD;
+import entidades.Cliente;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.regex.Pattern;
 
 
 /**
@@ -17,8 +26,11 @@ public class insertarCliente extends javax.swing.JFrame {
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
+    private Cliente cliente;
+    private ClienteCRUD cnCliente;
 
     public insertarCliente() {
+        this.cnCliente = new ClienteCRUD();
         this.setVisible(true);
         setLocationRelativeTo(null);
         setSize(240,410);
@@ -37,10 +49,10 @@ public class insertarCliente extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         iconoInsertar = new javax.swing.JLabel();
-        textoTanque = new javax.swing.JTextField();
-        textoMatricula = new javax.swing.JTextField();
-        textoMarca = new javax.swing.JTextField();
-        textoColor = new javax.swing.JTextField();
+        textoDireccion = new javax.swing.JTextField();
+        textoDNI = new javax.swing.JTextField();
+        textoNombre = new javax.swing.JTextField();
+        textoApellido = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -66,48 +78,44 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
         add(iconoInsertar, gridBagConstraints);
 
-        textoTanque.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoTanque.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoDireccion.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoDireccion.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoTanque, gridBagConstraints);
+        add(textoDireccion, gridBagConstraints);
 
-        textoMatricula.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
-        textoMatricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoMatriculaActionPerformed(evt);
-            }
-        });
+        textoDNI.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoDNI.setPreferredSize(new java.awt.Dimension(130, 24));
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoMatricula, gridBagConstraints);
+        add(textoDNI, gridBagConstraints);
 
-        textoMarca.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoMarca.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoNombre.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoNombre.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoMarca, gridBagConstraints);
+        add(textoNombre, gridBagConstraints);
 
-        textoColor.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoColor.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoApellido.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoApellido.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoColor, gridBagConstraints);
+        add(textoApellido, gridBagConstraints);
 
-        jLabel3.setText("DNI");
+        jLabel3.setText("Nombre");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -115,7 +123,7 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("Nombre");
+        jLabel4.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -123,7 +131,7 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel4, gridBagConstraints);
 
-        jLabel5.setText("Apellidos");
+        jLabel5.setText("Apellido");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -148,12 +156,35 @@ public class insertarCliente extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+
         add(botonInsertar, gridBagConstraints);
+        botonInsertar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comprobarCampos();
+            }
+        });
     }// </editor-fold>
 
-    private void textoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void comprobarCampos(){
+        String DNI = textoDNI.getText();
+        String nombre = textoNombre.getText();
+        String apellido = textoApellido.getText();
+        String direccion = textoDireccion.getText();
+        if(cnCliente.comprobarDNI(DNI) && !nombre.isEmpty() && !apellido.isEmpty() && !direccion.isEmpty()){
+            if(cnCliente.agregarCliente(DNI,nombre,apellido,direccion)){
+                JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+        }
     }
+
+
 
 
     // Variables declaration - do not modify
@@ -164,9 +195,9 @@ public class insertarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField textoColor;
-    private javax.swing.JTextField textoMarca;
-    private javax.swing.JTextField textoMatricula;
-    private javax.swing.JTextField textoTanque;
+    private javax.swing.JTextField textoApellido;
+    private javax.swing.JTextField textoNombre;
+    private javax.swing.JTextField textoDNI;
+    private javax.swing.JTextField textoDireccion;
     // End of variables declaration
 }
