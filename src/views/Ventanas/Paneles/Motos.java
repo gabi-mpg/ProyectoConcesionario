@@ -228,6 +228,7 @@ public class Motos extends javax.swing.JPanel {
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
         insertar.setVisible(true);
+        fillTable();
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {

@@ -122,7 +122,7 @@ public class ClienteModel {
         }
     }
 
-    private void updateExiste(boolean exists, String dni){
+    public void updateExiste(boolean exists, String dni){
         Cliente cliente = buscarCliente(dni);
         cliente.setExiste(exists);
     }

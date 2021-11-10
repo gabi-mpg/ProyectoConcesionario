@@ -356,7 +356,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 panelMotos.fillTable();
                 panelSecundario.add(panelMotos);
                 this.panelMotos.setVisible(true);
-
                 mostrar();
                 break;
             case PANEL_USUARIO:

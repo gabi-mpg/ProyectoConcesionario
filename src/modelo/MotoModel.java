@@ -121,7 +121,7 @@ public class MotoModel{
         }
     }
 
-    private void updateExiste(boolean exists, String matricula){
+    public void updateExiste(boolean exists, String matricula){
         Moto moto = buscarMoto(matricula);
         moto.setExiste(exists);
     }
@@ -129,13 +129,14 @@ public class MotoModel{
     public boolean updateMoto(Moto moto){
         System.out.println(moto.toString());
         saveMotos();
-        String sql = "UPDATE t_motos set Marca = ?, Color = ?, Tanque = ? where matricula like ?";
+        String sql = "UPDATE t_motos set Marca = ?, Color = ?, Tanque = ?, existe = ? where matricula like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, moto.getMarca());
             pst.setString(2, moto.getColor());
             pst.setInt(3, moto.getTanque());
             pst.setString(4, moto.getMatricula());
+            pst.setBoolean(5, moto.isExiste());
             pst.executeUpdate();
             updateMotoLista(moto);
             return true;

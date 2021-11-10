@@ -21,7 +21,7 @@ import java.io.File;
  *
  * @author chris
  */
-public class insertarMoto extends javax.swing.JFrame {
+public class insertarMoto extends javax.swing.JDialog {
 
 
     private String ruta =  System.getProperty("user.dir")+
@@ -32,6 +32,7 @@ public class insertarMoto extends javax.swing.JFrame {
 
     public insertarMoto() {
         cnMoto = new MotoCRUD();
+        setModal(true);
         setSize(240,410);
         setLocationRelativeTo(null);
         initComponents();
@@ -189,20 +190,27 @@ public class insertarMoto extends javax.swing.JFrame {
 
     private void comprobarCampos(){
         String matricula = textoMatricula.getText();
-        String marca = textoMarca.getText();
-        String color = textoColor.getText();
-        String tanque = textoTanque.getText();
-        if(cnMoto.comprobarMatricula(matricula) && !marca.isEmpty() && !color.isEmpty() && motoDigito){
-            if(cnMoto.agregarMoto(matricula,marca,color,Integer.parseInt(tanque))){
-                JOptionPane.showMessageDialog(this,"Moto agregada","Éxito",JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
-            }
+        if (cnMoto.motoExiste(matricula)){
+            cnMoto.updateExiste(true, matricula);
+            JOptionPane.showMessageDialog(this,"Moto agregada","Éxito",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else {
+            String marca = textoMarca.getText();
+            String color = textoColor.getText();
+            String tanque = textoTanque.getText();
+            if(cnMoto.comprobarMatricula(matricula) && !marca.isEmpty() && !color.isEmpty() && motoDigito){
+                if(cnMoto.agregarMoto(matricula,marca,color,Integer.parseInt(tanque))){
+                    JOptionPane.showMessageDialog(this,"Moto agregada","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
+                }
 
-        }else{
-            JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+            }
         }
+
     }
 
     // Variables declaration - do not modify

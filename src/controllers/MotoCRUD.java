@@ -56,6 +56,10 @@ public class MotoCRUD {
         }
     }
 
+    public void updateExiste(boolean existe, String pk){
+        model.updateExiste(existe, pk);
+    }
+
     public void updateMoto(Moto moto){
         if (model.updateMoto(moto)){
             System.out.println("Moto actualizada con exito");

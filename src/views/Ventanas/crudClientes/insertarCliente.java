@@ -168,24 +168,25 @@ public class insertarCliente extends javax.swing.JFrame {
 
     private void comprobarCampos(){
         String DNI = textoDNI.getText();
-        String nombre = textoNombre.getText();
-        String apellido = textoApellido.getText();
-        String direccion = textoDireccion.getText();
-        if(cnCliente.comprobarDNI(DNI) && !nombre.isEmpty() && !apellido.isEmpty() && !direccion.isEmpty()){
-            if(cnCliente.agregarCliente(DNI,nombre,apellido,direccion)){
-                JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
-            }
+        if (cnCliente.clienteExiste(DNI)){
+            cnCliente.updateExiste(true, DNI);
+        } else {
+            String nombre = textoNombre.getText();
+            String apellido = textoApellido.getText();
+            String direccion = textoDireccion.getText();
+            if(cnCliente.comprobarDNI(DNI) && !nombre.isEmpty() && !apellido.isEmpty() && !direccion.isEmpty()){
+                if(cnCliente.agregarCliente(DNI,nombre,apellido,direccion)){
+                    JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
+                }
 
-        }else{
-            JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
-
-
-
 
     // Variables declaration - do not modify
     private javax.swing.JButton botonInsertar;

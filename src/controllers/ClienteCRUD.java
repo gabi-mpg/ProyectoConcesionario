@@ -56,6 +56,10 @@ public class ClienteCRUD {
         }
     }
 
+    public void updateExiste(boolean existe, String pk){
+        model.updateExiste(existe, pk);
+    }
+
     public void updateCliente(Cliente cliente){
         if (model.updateCliente(cliente)){
             System.out.println("Cliente actualizado con exito");
