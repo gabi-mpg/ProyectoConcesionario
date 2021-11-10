@@ -143,8 +143,6 @@ public class ClienteModel {
             throwables.printStackTrace();
             return false;
         }
-
-
     }
 
     private void updateClienteLista(Cliente cliente){

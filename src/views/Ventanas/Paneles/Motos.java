@@ -231,7 +231,9 @@ public class Motos extends javax.swing.JPanel {
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-
+        String matricula = pedirMatricula();
+        cnMoto.removeMoto(matricula);
+        fillTable();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
