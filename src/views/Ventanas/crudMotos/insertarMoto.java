@@ -8,6 +8,7 @@ package views.Ventanas.crudMotos;
 
 import controllers.ControllerConexion;
 import controllers.MotoCRUD;
+import entidades.Moto;
 
 import javax.naming.ldap.Control;
 import javax.swing.*;
@@ -190,9 +191,13 @@ public class insertarMoto extends javax.swing.JDialog {
 
     private void comprobarCampos(){
         String matricula = textoMatricula.getText();
+        System.out.println("en comprobar campos " + matricula);
         if (cnMoto.motoExiste(matricula)){
-            cnMoto.updateExiste(true, matricula);
-            JOptionPane.showMessageDialog(this,"Moto agregada","Éxito",JOptionPane.INFORMATION_MESSAGE);
+            Moto moto = cnMoto.buscarMoto(matricula);
+            moto.setExiste(1);
+            System.out.println("en comprobar campos " + moto.toString());
+            cnMoto.updateMoto(moto);
+            JOptionPane.showMessageDialog(this,"Moto agregada existe","Éxito",JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
             String marca = textoMarca.getText();

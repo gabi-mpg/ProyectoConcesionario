@@ -33,7 +33,7 @@ public class MotoModel{
                 String color = rs.getString("Color");
                 String marca = rs.getString("Marca");
                 int tanque = rs.getInt("Tanque");
-                boolean existe = rs.getBoolean("existe");
+                int existe = rs.getByte("existe");
                 Moto moto = new Moto(matricula, marca, color, tanque, existe);
                 listaMotos.add(moto);
             }
@@ -69,6 +69,9 @@ public class MotoModel{
 
     public ArrayList<Moto> getListaMotos(){
         saveMotos();
+        for (Moto m : listaMotos){
+            System.out.println(m.toString());
+        }
         return listaMotos;
     }
 
@@ -81,7 +84,7 @@ public class MotoModel{
             pst.setString(2, moto.getMarca());
             pst.setString(3, moto.getColor());
             pst.setInt(4, moto.getTanque());
-            pst.setBoolean(5,moto.isExiste());
+            pst.setInt(5,moto.isExiste());
 
             pst.executeUpdate();
         } catch (Exception e) {
@@ -113,7 +116,7 @@ public class MotoModel{
             CallableStatement cst = conexion.prepareCall(sql);
             cst.setString(1, matricula);
             cst.execute();
-            updateExiste(false, matricula);
+            updateExiste(0, matricula);
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -121,13 +124,15 @@ public class MotoModel{
         }
     }
 
-    public void updateExiste(boolean exists, String matricula){
+    public void updateExiste(int exists, String matricula){
         Moto moto = buscarMoto(matricula);
         moto.setExiste(exists);
+        updateMotoLista(moto);
+        updateMoto(moto);
     }
 
     public boolean updateMoto(Moto moto){
-        System.out.println(moto.toString());
+        System.out.println("en MotoModel " + moto.toString());
         saveMotos();
         String sql = "UPDATE t_motos set Marca = ?, Color = ?, Tanque = ?, existe = ? where matricula like ?";
         try {
@@ -136,7 +141,7 @@ public class MotoModel{
             pst.setString(2, moto.getColor());
             pst.setInt(3, moto.getTanque());
             pst.setString(4, moto.getMatricula());
-            pst.setBoolean(5, moto.isExiste());
+            pst.setInt(5, moto.isExiste());
             pst.executeUpdate();
             updateMotoLista(moto);
             return true;
@@ -154,6 +159,7 @@ public class MotoModel{
                 m.setColor(moto.getColor());
                 m.setMarca(moto.getMarca());
                 m.setTanque(moto.getTanque());
+                m.setExiste(moto.isExiste());
             }
         }
     }

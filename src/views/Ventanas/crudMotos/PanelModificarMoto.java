@@ -209,7 +209,7 @@ public class PanelModificarMoto extends javax.swing.JDialog {
             String marca = textoMarca.getText();
             String color = textoColor.getText();
             int tanque = Integer.parseInt(textoTanque.getText());
-            Moto moto = new Moto(matricula, marca, color, tanque, true);
+            Moto moto = new Moto(matricula, marca, color, tanque, 1);
             cnMoto.updateMoto(moto);
             dispose();
         }

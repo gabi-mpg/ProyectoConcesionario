@@ -22,7 +22,7 @@ public class MotoCRUD {
         if (model.buscarMoto(matricula) != null){
             return false;
         } else {
-            model.addMoto(new Moto(matricula, marca, color, tanque, true));
+            model.addMoto(new Moto(matricula, marca, color, tanque, 1));
             return true;
         }
     }
@@ -56,7 +56,7 @@ public class MotoCRUD {
         }
     }
 
-    public void updateExiste(boolean existe, String pk){
+    public void updateExiste(int existe, String pk){
         model.updateExiste(existe, pk);
     }
 

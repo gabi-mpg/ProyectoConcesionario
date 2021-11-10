@@ -6,9 +6,9 @@ public class Moto {
     private String marca;
     private String color;
     private int tanque;
-    private boolean existe;
+    private int existe;
 
-    public Moto(String matricula, String marca, String color, int tanque, boolean existe) {
+    public Moto(String matricula, String marca, String color, int tanque, int existe) {
         this.matricula = matricula;
         this.marca = marca;
         this.color = color;
@@ -48,11 +48,11 @@ public class Moto {
         this.tanque = tanque;
     }
 
-    public boolean isExiste() {
+    public int isExiste() {
         return existe;
     }
 
-    public void setExiste(boolean existe) {
+    public void setExiste(int existe) {
         this.existe = existe;
     }
 
@@ -63,6 +63,7 @@ public class Moto {
                 ", marca='" + marca + '\'' +
                 ", color='" + color + '\'' +
                 ", tanque=" + tanque +
+                ", existe=" + existe +
                 '}';
     }
 }

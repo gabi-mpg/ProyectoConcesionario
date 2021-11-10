@@ -147,7 +147,7 @@ public class Motos extends javax.swing.JPanel {
         ArrayList<Moto> listaMotos = controlador.getListaMotos();
         model.setRowCount(0);
         for (Moto m : listaMotos){
-            if(m.isExiste()){
+            if(m.isExiste() == 1){
                 Object[] datosMoto = new Object[4];
                 datosMoto[0] = m.getMatricula();
                 datosMoto[1] = m.getMarca();
