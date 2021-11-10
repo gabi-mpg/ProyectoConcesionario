@@ -5,6 +5,7 @@ import entidades.Moto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class MotoModel{
 
@@ -89,7 +90,7 @@ public class MotoModel{
         getListaMotos();
     }
 
-    public boolean removeMoto(String matricula){
+    /*public boolean removeMoto(String matricula){
         saveMotos();
         String sql = "delete from t_motos where matricula like ?";
         try {
@@ -102,6 +103,26 @@ public class MotoModel{
             throwables.printStackTrace();
             return false;
         }
+    }*/
+
+    public boolean removeMoto(String matricula){
+        saveMotos();
+        String sql = "{call sp_eliminarmoto(?)}";
+        try {
+            CallableStatement cst = conexion.prepareCall(sql);
+            cst.setString(1, matricula);
+            cst.execute();
+            updateExiste(false, matricula);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+    private void updateExiste(boolean exists, String matricula){
+        Moto moto = buscarMoto(matricula);
+        moto.setExiste(exists);
     }
 
     public boolean updateMoto(Moto moto){
@@ -137,8 +158,7 @@ public class MotoModel{
 
     public void conectar(){
         try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
-            conexion = cn;
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/concesionario?useSSL=false", "root", "");
         }catch(SQLException e){
             System.err.println("Error en la conexión local " + e);
         }
