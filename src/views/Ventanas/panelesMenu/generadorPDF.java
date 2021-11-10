@@ -1,6 +1,8 @@
 package views.Ventanas.panelesMenu;
 
 import controllers.ControllerConexion;
+import controllers.VentaCRUD;
+import modelo.Informes;
 
 import javax.naming.ldap.Control;
 import javax.swing.*;
@@ -56,6 +58,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
         labeDirectorio = new javax.swing.JLabel();
         botonGenerarPDF = new javax.swing.JButton();
         botonSeleccionarDirectorio = new javax.swing.JButton();
+        cnVentas = new VentaCRUD();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -197,9 +200,53 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
         this.botonGenerarPDF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Aquí hay que hacer lo de generar el PDF
+                generarPDFs();
             }
         });
+    }
+
+    private void generarPDFs(){
+        if (radioVentas.isSelected()){
+            Informes informe = new Informes(cnVentas, "Ventas", rutaGenerarPDF);
+            if(informe.generarInformeVentas()){
+                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (radioVentasMarca.isSelected()){
+            String marca = JOptionPane.showInputDialog("Introduce la marca");
+            Informes informe = new Informes(cnVentas, "Ventas de la marca " + marca, rutaGenerarPDF);
+            if(informe.generarInformeVentasMarca(marca)){
+                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (radioVentasCliente.isSelected()){
+            String dni = JOptionPane.showInputDialog("Introduce el DNI del cliente");
+            Informes informe = new Informes(cnVentas, "Ventas del cliente con DNI " + dni, rutaGenerarPDF);
+
+            if(informe.generarInformeVentasMarca(dni)){
+                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (radioVentasUsuario.isSelected()){
+            String nick = JOptionPane.showInputDialog("Introduce el nick del usuario");
+            Informes informe = new Informes(cnVentas, "Ventas del usuario " + nick, rutaGenerarPDF);
+
+            if(informe.generarInformeVentasMarca(nick)){
+                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }
 
     private void botonMostarChooser(){
@@ -272,6 +319,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JRadioButton radioVentasCliente;
     private javax.swing.JRadioButton radioVentasMarca;
     private javax.swing.JRadioButton radioVentasUsuario;
+    private VentaCRUD cnVentas;
 
     @Override
     public void actionPerformed(ActionEvent e) {

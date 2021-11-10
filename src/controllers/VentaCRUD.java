@@ -1,5 +1,6 @@
 package controllers;
 
+import entidades.Moto;
 import entidades.Venta;
 import modelo.VentaModel;
 
@@ -23,6 +24,10 @@ public class VentaCRUD {
         } else {
             return false;
         }
+    }
+
+    public Moto buscarMoto(String matricula){
+        return model.buscarMoto(matricula);
     }
 
     public boolean comprobarMatricula(String matricula){

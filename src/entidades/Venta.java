@@ -9,6 +9,9 @@ public class Venta {
     private int idVenta;
     private boolean existe;
 
+    public Venta(){
+
+    }
     public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor, boolean existe) {
         this.idVenta = idVenta;
         this.matricula = matricula;

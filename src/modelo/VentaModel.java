@@ -1,6 +1,7 @@
 package modelo;
 
 import controllers.ControllerConexion;
+import entidades.Moto;
 import entidades.Venta;
 
 import java.sql.*;
@@ -78,6 +79,10 @@ public class VentaModel {
 
     public boolean buscarExistencia(String matricula, String dni){
         return modelM.motoExiste(matricula) && modelC.clienteExiste(dni);
+    }
+
+    public Moto buscarMoto(String matricula){
+        return modelM.buscarMoto(matricula);
     }
 
     public void addVenta(Venta venta){
