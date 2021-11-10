@@ -1,19 +1,59 @@
 package views.Ventanas.crudVentas;
 
 
+import javafx.scene.control.RadioButton;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
-public class buscarVenta extends javax.swing.JFrame {
+public class buscarVenta extends javax.swing.JFrame implements ActionListener{
 
     private String valorBusqueda;
     private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"Imagenes"+File.separator;
+            File.separator+"src"+File.separator+"views"
+            +File.separator+"Imagenes"+File.separator;
 
     public buscarVenta() {
         setVisible(true);
-        setLocationRelativeTo(null);
+
         initComponents();
+        this.botonBusqueda.setEnabled(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        radio1.addActionListener(this);
+        radio2.addActionListener(this);
+        radio3.addActionListener(this);
+        radio4.addActionListener(this);
+        botonBusqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                busquedaVenta();
+            }
+        });
+
+    }
+
+
+
+    public void busquedaVenta(){
+        if(!campoBusqueda.getText().isEmpty()){
+            if(radio1.isSelected()){
+                String DNI = campoBusqueda.getText();
+                //Hacer comprobaciones de DNI
+            }else if(radio2.isSelected()){
+                String matricula = campoBusqueda.getText();
+                //Hacer comprobaciones matricula
+            }else if(radio3.isSelected()){
+                String IDVenta = campoBusqueda.getText();
+                //Hacer comprobaciones idVenta
+            }else{
+                String IDVendedor = campoBusqueda.getText();
+                //Hacer comprobaciones idVendedor
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"No se ha introducido información");
+        }
     }
 
     /**
@@ -29,13 +69,13 @@ public class buscarVenta extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         labelTitulo = new javax.swing.JLabel();
         labelIcono = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radio1 = new javax.swing.JRadioButton();
+        radio2 = new javax.swing.JRadioButton();
+        radio3 = new javax.swing.JRadioButton();
         campoBusqueda = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         botonBusqueda = new javax.swing.JButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        radio4 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -55,27 +95,29 @@ public class buscarVenta extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(13, 14, 6, 14);
         getContentPane().add(labelIcono, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("DNI");
+        buttonGroup1.add(radio1);
+        radio1.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        getContentPane().add(jRadioButton1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        getContentPane().add(radio1, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Matrícula");
+        buttonGroup1.add(radio2);
+        radio2.setText("Matrícula");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
-        getContentPane().add(jRadioButton2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        getContentPane().add(radio2, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("ID Venta");
+        buttonGroup1.add(radio3);
+        radio3.setText("ID Venta");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
-        getContentPane().add(jRadioButton3, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        getContentPane().add(radio3, gridBagConstraints);
 
         campoBusqueda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoBusqueda.setPreferredSize(new java.awt.Dimension(140, 24));
@@ -104,13 +146,13 @@ public class buscarVenta extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(22, 19, 19, 19);
         getContentPane().add(botonBusqueda, gridBagConstraints);
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("ID Vendedor");
+        buttonGroup1.add(radio4);
+        radio4.setText("ID Vendedor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 10);
-        getContentPane().add(jRadioButton4, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
+        getContentPane().add(radio4, gridBagConstraints);
 
         pack();
     }// </editor-fold>
@@ -155,11 +197,19 @@ public class buscarVenta extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton radio1;
+    private javax.swing.JRadioButton radio2;
+    private javax.swing.JRadioButton radio3;
+    private javax.swing.JRadioButton radio4;
     private javax.swing.JLabel labelIcono;
     private javax.swing.JLabel labelTitulo;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JRadioButton radio = (JRadioButton) e.getSource();
+        if(radio.isSelected()){
+            this.botonBusqueda.setEnabled(true);
+        }
+    }
     // End of variables declaration
 }
