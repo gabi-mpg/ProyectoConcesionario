@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelModificarUsuario extends JDialog {
+public class PanelModificarUsuario extends JFrame {
 
 
         private String ruta = System.getProperty("user.dir")+"\\src\\views\\Imagenes\\";
@@ -20,7 +20,7 @@ public class PanelModificarUsuario extends JDialog {
         // y así reutilizar el panel
         public PanelModificarUsuario() {
             initComponents();
-            setModal(true);
+            labelTitulo.setText("Modificar usuario");
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -54,7 +54,7 @@ public class PanelModificarUsuario extends JDialog {
             setLayout(new GridBagLayout());
 
             labelTitulo.setFont(new Font("Dialog", 0, 18)); // NOI18N
-            labelTitulo.setText("Modificar usuario");
+            labelTitulo.setText("Modificar una moto");
             gridBagConstraints = new GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 0;

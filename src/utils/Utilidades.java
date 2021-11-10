@@ -8,6 +8,7 @@ package utils;
 import java.awt.Component;
 
 import java.awt.Image;
+import java.io.File;
 import javax.swing.*;
 
 
@@ -16,7 +17,11 @@ import javax.swing.*;
  * @author chris
  */
 public class Utilidades {
- 
+
+    public static final String RUTA_IMG = System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"Imagenes"+File.separator;
+
+
     public static ImageIcon reescalarImagen(ImageIcon imagen, int h, int w){
         Image reescalada = imagen.getImage();
         return new ImageIcon(reescalada.getScaledInstance(h, w, Image.SCALE_SMOOTH));

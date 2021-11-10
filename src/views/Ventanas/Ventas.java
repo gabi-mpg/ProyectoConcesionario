@@ -10,6 +10,7 @@ import controllers.VentaCRUD;
 import entidades.Cliente;
 import entidades.Usuario;
 import entidades.Venta;
+import views.Ventanas.crudVentas.buscarVenta;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -196,13 +197,15 @@ public class Ventas extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            int IDVenta = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el IDVenta", 1));
-            if (cnVentas.ventaExiste(IDVenta)){
-                Venta venta = cnVentas.buscarVenta(IDVenta);
-                fillTableBuscar(venta);
-            } else {
-                JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD");
-            }
+            new buscarVenta();
+            String valorBusqueda = "";
+//            int IDVenta = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el IDVenta", 1));
+//            if (cnVentas.ventaExiste(IDVenta)){
+//                Venta venta = cnVentas.buscarVenta(IDVenta);
+//                fillTableBuscar(venta);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD");
+//            }
 
         } catch (Exception e){
             System.out.println(e.getMessage());
