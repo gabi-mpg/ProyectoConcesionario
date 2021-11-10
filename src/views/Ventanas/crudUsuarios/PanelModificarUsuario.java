@@ -23,6 +23,7 @@ public class PanelModificarUsuario extends JFrame {
         // y así reutilizar el panel
         public PanelModificarUsuario() {
             initComponents();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
         }
@@ -130,7 +131,7 @@ public class PanelModificarUsuario extends JFrame {
             panelCuerpo.add(jLabel4, gridBagConstraints);
 
             jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-            jLabel5.setText("Contraseña");
+            jLabel5.setText("Permiso");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 2;
@@ -174,7 +175,7 @@ public class PanelModificarUsuario extends JFrame {
                 labelDNI.setText(nick);
                 textoApellido.setText(usuario.getApellidos());
                 textoNombre.setText(usuario.getNombre());
-                textoDireccion.setText(usuario.getContra());
+                textoDireccion.setText(String.valueOf(usuario.getPermiso()));
             } else {
                 JOptionPane.showMessageDialog(this, "El usuario no existe en la BD");
                 this.dispose();
@@ -185,7 +186,10 @@ public class PanelModificarUsuario extends JFrame {
     private void agregarListeners(){
         checkLimpiar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                checkLimpiarActionPerformed(evt);
+                textoApellido.setText("");
+                textoDireccion.setText("");
+                textoNombre.setText("");
+                checkLimpiar.setSelected(false);
             }
         });
 
@@ -202,14 +206,19 @@ public class PanelModificarUsuario extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            String nombre = textoNombre.getText();
-            String apellidos = textoApellido.getText();
-            String contra = "";
-            int permiso = Integer.parseInt(textoDireccion.getText());
-            Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso, true);
-            cnUser.updateUsuario(usuario);
-            this.dispose();
+                String nombre = textoNombre.getText();
+                String apellidos = textoApellido.getText();
+                Usuario usuario = cnUser.buscarUsuario(nick);
+                String contra = usuario.getContra();
+                int permiso = Integer.parseInt(textoDireccion.getText());
+                usuario.setNombre(nombre);
+                usuario.setApellidos(apellidos);
+                usuario.setPermiso(permiso);
+                //Usuario usuario = new Usuario(nick, nombre, apellidos, contra, permiso, true);
+                cnUser.updateUsuario(usuario);
+                dispose();
         }
+
 
         public void setNick(String nick) {
             this.nick = nick;

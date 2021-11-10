@@ -23,7 +23,9 @@ public class PanelModificarCliente extends JFrame {
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
         public PanelModificarCliente() {
+
             initComponents();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
         }
@@ -213,7 +215,10 @@ public class PanelModificarCliente extends JFrame {
 
         }
         private void checkLimpiarActionPerformed(ActionEvent evt) {
-            // TODO add your handling code here:
+            textoApellido.setText("");
+            textoDireccion.setText("");
+            textoNombre.setText("");
+            checkLimpiar.setSelected(false);
         }
 
         private void modificar(ActionEvent evt) {
