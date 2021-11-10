@@ -10,6 +10,7 @@ import controllers.VentaCRUD;
 import entidades.Cliente;
 import entidades.Usuario;
 import entidades.Venta;
+import views.Ventanas.crudVentas.PanelModificarVenta;
 import views.Ventanas.crudVentas.buscarVenta;
 import views.Ventanas.crudVentas.insertarVenta;
 
@@ -225,6 +226,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private VentaCRUD cnVentas;
+    private PanelModificarVenta panelModificar;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -239,7 +241,12 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
 
 
         }else{
-
+            String ID = JOptionPane.showInputDialog(this,"Introduce el ID de la venta");
+            if(cnVentas.ventaExiste(ID)){
+                panelModificar = new PanelModificarVenta();
+                panelModificar.setID(ID);
+                panelModificar.rellenarCampos();
+            }
         }
     }
     // End of variables declaration//GEN-END:variables

@@ -1,7 +1,9 @@
 package views.Ventanas.crudVentas;
 
 import controllers.MotoCRUD;
+import controllers.VentaCRUD;
 import entidades.Moto;
+import entidades.Venta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +27,6 @@ public class PanelModificarVenta extends JFrame {
         // y así reutilizar el panel
         public PanelModificarVenta() {
             initComponents();
-            labelTitulo.setText("Modificar moto");
             setSize(350, 500);
             setLocationRelativeTo(null);
             setResizable(false);
@@ -46,188 +47,201 @@ public class PanelModificarVenta extends JFrame {
             Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
             setIconImage(icono);
 
-            labelTitulo = new JLabel();
-            textoTanque = new JTextField();
-            textoMatricula = new JTextField();
-            textoMarca = new JTextField();
-            textoColor = new JTextField();
-            labelImagen = new JLabel();
-            jLabel1 = new JLabel();
-            jLabel2 = new JLabel();
-            jLabel3 = new JLabel();
-            jLabel4 = new JLabel();
-            botonModificar = new JButton();
-            checkLimpiar = new JCheckBox();
-            matricula = "";
-            cnMoto = new MotoCRUD();
+            panelTitulo = new javax.swing.JPanel();
+            jLabel1 = new javax.swing.JLabel();
+            labelImagen = new javax.swing.JLabel();
+            labelVariable = new javax.swing.JLabel();
+            labelIDVenta = new javax.swing.JLabel();
+            panelCuerpo = new javax.swing.JPanel();
+            textoMatricula = new javax.swing.JTextField();
+            textoDNI = new javax.swing.JTextField();
+            textoPrecio = new javax.swing.JTextField();
+            jLabel3 = new javax.swing.JLabel();
+            jLabel4 = new javax.swing.JLabel();
+            jLabel5 = new javax.swing.JLabel();
+            textoVendedor = new javax.swing.JTextField();
+            jLabel2 = new javax.swing.JLabel();
+            panelBotton = new javax.swing.JPanel();
+            botonModificar = new javax.swing.JButton();
+            checkLimpiar = new javax.swing.JCheckBox();
+            ID = "";
+            cnVenta = new VentaCRUD();
 
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setLayout(new GridBagLayout());
 
-            labelTitulo.setFont(new Font("Dialog", 0, 18)); // NOI18N
-            labelTitulo.setText("Modificar una moto");
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(8, 60, 8, 50);
-            add(labelTitulo, gridBagConstraints);
 
-            textoTanque.setPreferredSize(new Dimension(75, 25));
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoTanque, gridBagConstraints);
 
-            /*textoMatricula.setPreferredSize(new java.awt.Dimension(75, 25));
+            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            getContentPane().setLayout(new java.awt.GridBagLayout());
+
+            panelTitulo.setPreferredSize(new java.awt.Dimension(270, 100));
+            panelTitulo.setLayout(new java.awt.GridBagLayout());
+
+            jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+            jLabel1.setText("Modificar venta");
             gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 2;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            gridBagConstraints.insets = new java.awt.Insets(20, 25, 20, 28);
-            add(textoMatricula, gridBagConstraints);*/
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelTitulo.add(jLabel1, gridBagConstraints);
 
-            textoMarca.setPreferredSize(new Dimension(75, 25));
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoMarca, gridBagConstraints);
+            labelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelmodificar/iconoMod.png"))); // NOI18N
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelTitulo.add(labelImagen, gridBagConstraints);
 
-            textoColor.setPreferredSize(new Dimension(75, 25));
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipadx = 59;
-            gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-            gridBagConstraints.insets = new Insets(20, 25, 20, 28);
-            add(textoColor, gridBagConstraints);
-
-            labelImagen.setIcon(new ImageIcon(ruta+"iconoModificar.png")); // NOI18N
-            gridBagConstraints = new GridBagConstraints();
+            labelVariable.setText("Modificar venta con ID: ");
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
             gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.insets = new Insets(4, 0, 3, 0);
-            add(labelImagen, gridBagConstraints);
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
+            panelTitulo.add(labelVariable, gridBagConstraints);
 
-            gridBagConstraints = new GridBagConstraints();
+            labelIDVenta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            labelIDVenta.setText("-");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 1;
+            panelTitulo.add(labelIDVenta, gridBagConstraints);
+
+            getContentPane().add(panelTitulo, new java.awt.GridBagConstraints());
+
+            panelCuerpo.setPreferredSize(new java.awt.Dimension(270, 270));
+            panelCuerpo.setLayout(new java.awt.GridBagLayout());
+
+            textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(18, 10, 18, 10);
+            panelCuerpo.add(textoMatricula, gridBagConstraints);
+
+            textoDNI.setPreferredSize(new java.awt.Dimension(130, 24));
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.insets = new java.awt.Insets(18, 10, 18, 10);
+            panelCuerpo.add(textoDNI, gridBagConstraints);
+
+            textoPrecio.setPreferredSize(new java.awt.Dimension(130, 24));
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 2;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel1, gridBagConstraints);
+            gridBagConstraints.insets = new java.awt.Insets(18, 10, 18, 10);
+            panelCuerpo.add(textoPrecio, gridBagConstraints);
 
-            jLabel2.setText("Marca");
-            gridBagConstraints = new GridBagConstraints();
+            jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel3.setText("Matricula");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(18, 19, 18, 19);
+            panelCuerpo.add(jLabel3, gridBagConstraints);
+
+            jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel4.setText("DNI");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(18, 19, 18, 19);
+            panelCuerpo.add(jLabel4, gridBagConstraints);
+
+            jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel5.setText("Precio");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 1;
+            gridBagConstraints.gridy = 2;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+            gridBagConstraints.insets = new java.awt.Insets(18, 19, 18, 19);
+            panelCuerpo.add(jLabel5, gridBagConstraints);
+
+            textoVendedor.setPreferredSize(new java.awt.Dimension(130, 24));
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 3;
+            gridBagConstraints.insets = new java.awt.Insets(18, 0, 18, 0);
+            panelCuerpo.add(textoVendedor, gridBagConstraints);
+
+            jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            jLabel2.setText("Vendedor");
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 3;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel2, gridBagConstraints);
+            gridBagConstraints.insets = new java.awt.Insets(18, 0, 18, 0);
+            panelCuerpo.add(jLabel2, gridBagConstraints);
 
-            jLabel3.setText("Color");
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 4;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel3, gridBagConstraints);
-
-            jLabel4.setText("Tanque");
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridx = 1;
-            gridBagConstraints.gridy = 5;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.weighty = 0.5;
-            add(jLabel4, gridBagConstraints);
-
-            botonModificar.setText("Modificar");
-            botonModificar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    modificar(actionEvent);
-                }
-            });
-            gridBagConstraints = new GridBagConstraints();
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 7;
-            gridBagConstraints.anchor = GridBagConstraints.WEST;
-            gridBagConstraints.insets = new Insets(18, 25, 18, 0);
-            add(botonModificar, gridBagConstraints);
+            gridBagConstraints.gridy = 1;
+            getContentPane().add(panelCuerpo, gridBagConstraints);
+
+            panelBotton.setPreferredSize(new java.awt.Dimension(270, 100));
+            panelBotton.setLayout(new java.awt.GridBagLayout());
+
+            botonModificar.setText("Modificar registro");
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = 0;
+            gridBagConstraints.gridy = 1;
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelBotton.add(botonModificar, gridBagConstraints);
 
             checkLimpiar.setText("Limpiar campos");
-            checkLimpiar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    checkLimpiarActionPerformed(evt);
-                }
-            });
-            gridBagConstraints = new GridBagConstraints();
+            gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
+            panelBotton.add(checkLimpiar, gridBagConstraints);
+
+            gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 7;
-            gridBagConstraints.gridwidth = 2;
-            gridBagConstraints.anchor = GridBagConstraints.EAST;
-            gridBagConstraints.insets = new Insets(0, 0, 0, 13);
-            add(checkLimpiar, gridBagConstraints);
+            gridBagConstraints.gridy = 2;
+            getContentPane().add(panelBotton, gridBagConstraints);
+
+            pack();
         }// </editor-fold>
 
         public void rellenarCampos(){
-            if (cnMoto.motoExiste(matricula)){
-                Moto moto = cnMoto.buscarMoto(matricula);
-                jLabel1.setText("Modificar moto con matricula " + matricula);
-                textoColor.setText(moto.getColor());
-                textoMarca.setText(moto.getMarca());
-                textoTanque.setText(String.valueOf(moto.getTanque()));
-            } else {
-                JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
-                this.dispose();
-            }
-
+                Venta venta = cnVenta.buscarVenta(ID);
+                labelIDVenta.setText(ID);
+                textoMatricula.setText(venta.getMatricula());
+                textoDNI.setText(venta.getDni());
+                textoPrecio.setText(String.valueOf(venta.getPrecio()));
+                textoVendedor.setText(String.valueOf(venta.getIdVendedor()));
         }
         private void checkLimpiarActionPerformed(ActionEvent evt) {
             // TODO add your handling code here:
         }
 
         private void modificar(ActionEvent evt) {
-            String marca = textoMarca.getText();
-            String color = textoColor.getText();
-            int tanque = Integer.parseInt(textoTanque.getText());
-            Moto moto = new Moto(matricula, marca, color, tanque, 1);
-            cnMoto.updateMoto(moto);
+            Venta venta = cnVenta.buscarVenta(ID);
+            venta.setDni(textoDNI.getText());
+            venta.setMatricula(textoDNI.getText());
+            venta.setPrecio(Double.parseDouble(textoPrecio.getText()));
+            venta.setIdVendedor(textoVendedor.getText());
+            cnVenta.updateVenta(venta);
             dispose();
         }
 
-        public void setMatricula(String matricula) {
-            this.matricula = matricula;
+        public void setID(String ID) {
+            this.ID = ID;
         }
 
     // Variables declaration - do not modify
-        private JButton botonModificar;
-        private JCheckBox checkLimpiar;
-        private JLabel jLabel1;
-        private JLabel jLabel2;
-        private JLabel jLabel3;
-        private JLabel jLabel4;
-        private JLabel labelImagen;
-        private JLabel labelTitulo;
-        private JTextField textoColor;
-        private JTextField textoMarca;
-        private JTextField textoMatricula;
-        private JTextField textoTanque;
-        private String matricula;
-        private MotoCRUD cnMoto;
+    private javax.swing.JButton botonModificar;
+    private javax.swing.JCheckBox checkLimpiar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel labelIDVenta;
+    private javax.swing.JLabel labelImagen;
+    private javax.swing.JLabel labelVariable;
+    private javax.swing.JPanel panelBotton;
+    private javax.swing.JPanel panelCuerpo;
+    private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTextField textoDNI;
+    private javax.swing.JTextField textoMatricula;
+    private javax.swing.JTextField textoPrecio;
+    private javax.swing.JTextField textoVendedor;
+        private String ID;
+        private VentaCRUD cnVenta;
         // End of variables declaration
     }
 

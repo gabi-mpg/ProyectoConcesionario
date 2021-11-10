@@ -63,7 +63,7 @@ public class PanelModificarUsuario extends JFrame {
             panelTitulo.setLayout(new java.awt.GridBagLayout());
 
             jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-            jLabel1.setText("Modificar cliente");
+            jLabel1.setText("Modificar usuario");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(jLabel1, gridBagConstraints);
