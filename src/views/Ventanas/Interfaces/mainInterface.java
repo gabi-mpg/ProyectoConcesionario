@@ -81,6 +81,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         setTitle("Concesonario Mercado Corral");
         Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
         setIconImage(icono);
+        Image logo = Toolkit.getDefaultToolkit().getImage(ruta + "welcomelogo.png");
 
 
         java.awt.GridBagConstraints gridBagConstraints;
