@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  *
  * @author chris
  */
-public class insertarCliente extends javax.swing.JFrame {
+public class insertarCliente extends javax.swing.JDialog {
 
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
@@ -31,10 +31,11 @@ public class insertarCliente extends javax.swing.JFrame {
 
     public insertarCliente() {
         this.cnCliente = new ClienteCRUD();
-        this.setVisible(true);
+        setModal(true);
         setLocationRelativeTo(null);
         setSize(240,410);
         initComponents();
+        this.setVisible(true);
     }
 
     /**
