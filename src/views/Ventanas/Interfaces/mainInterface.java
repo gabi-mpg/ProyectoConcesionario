@@ -288,8 +288,8 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         //Código del menu acerca de
         menu_acerca = new JMenu("Acerca de");
         barra.add(menu_acerca);
-        quienesSomos = new JMenuItem("Quiénes somos?");
-        contacto = new JMenuItem("Contacta con nosotros!");
+        quienesSomos = new JMenuItem("¿Quiénes somos?");
+        contacto = new JMenuItem("¡Contacta con nosotros!");
         menu_acerca.add(quienesSomos);
         menu_acerca.add(contacto);
 
