@@ -71,6 +71,7 @@ public class Motos extends javax.swing.JPanel {
         cnMoto = new MotoCRUD();
         panelModificar = new PanelModificarMoto();
         panelModificar.setVisible(false);
+        tema = 1;
         setPreferredSize(new Dimension(600, 300));
         setLayout(new GridBagLayout());
 
@@ -131,6 +132,8 @@ public class Motos extends javax.swing.JPanel {
         gridBagConstraints.insets = new Insets(15, 30, 0, 5);
         add(botonEliminar, gridBagConstraints);
 
+
+        this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,6 +169,29 @@ public class Motos extends javax.swing.JPanel {
         datosMoto[2] = m.getColor();
         datosMoto[3] = m.getTanque();
         model.addRow(datosMoto);
+    }
+
+    public void cambiarTema(){
+        if (tema == 1){
+            botonBuscar.setBackground(new Color(162, 0, 212));
+            botonEliminar.setBackground(new Color(162, 0, 212));
+            botonModificar.setBackground(new Color(162, 0, 212));
+            botonCrear.setBackground(new Color(162, 0, 212));
+            this.setBackground(new Color(53, 52, 53));
+            setTema(0);
+        } else {
+            botonBuscar.setBackground(new Color(218, 218, 218));
+            botonCrear.setBackground(new Color(218, 218, 218));
+            botonEliminar.setBackground(new Color(218, 218, 218));
+            botonModificar.setBackground(new Color(218, 218, 218));
+            this.setBackground(new java.awt.Color(204, 255, 204));
+            setTema(1);
+        }
+        System.out.println(tema);
+    }
+
+    public void setTema(int tema) {
+        this.tema = tema;
     }
 
     private void agregarListeners(){
@@ -210,13 +236,17 @@ public class Motos extends javax.swing.JPanel {
     }
 
     private String pedirMatricula(){
-        String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
+        try{
+            String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
 
-        while (!cnMoto.comprobarMatricula(matricula)){
-            JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
-            matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
+            while (!cnMoto.comprobarMatricula(matricula)){
+                JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
+                matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
+            }
+            return matricula;
+        } catch (Exception e){
+            return null;
         }
-        return matricula;
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,8 +263,10 @@ public class Motos extends javax.swing.JPanel {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
         String matricula = pedirMatricula();
-        cnMoto.removeMoto(matricula);
-        fillTable();
+        if (matricula != null){
+            cnMoto.removeMoto(matricula);
+            fillTable();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,5 +279,6 @@ public class Motos extends javax.swing.JPanel {
     private DefaultTableModel model;
     private MotoCRUD cnMoto;
     private PanelModificarMoto panelModificar;
+    private int tema;
     // End of variables declaration//GEN-END:variables
 }

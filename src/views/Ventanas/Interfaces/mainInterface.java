@@ -40,6 +40,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_MOTO = "moto";
     private final String PANEL_VENTA = "venta";
     private int nivelUsuario;
+    private int tema;
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private ControllerConexion conexion;
     private String ruta =System.getProperty("user.dir")+
@@ -92,6 +93,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonUsuarios = new javax.swing.JButton();
         botonUsuarios.setEnabled(false);
         panelSecundario = new javax.swing.JPanel();
+        this.tema = 1;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,6 +203,45 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 cerrarSesion();
             }
         });
+
+        cambiarTema.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                cambiarTema();
+            }
+        });
+
+    }
+
+    private void cambiarTema(){
+        if (tema == 1){
+            botonVentas.setBackground(new Color(162, 0, 212));
+            botonClientes.setBackground(new Color(162, 0, 212));
+            botonMotos.setBackground(new Color(162, 0, 212));
+            botonUsuarios.setBackground(new Color(162, 0, 212));
+            jPanel1.setBackground(new Color(118, 118, 118));
+            panelSecundario.setBackground(new Color(53, 52, 53));
+            panelSecundario.setForeground(new Color(128, 128, 128));
+            panelMotos.cambiarTema();
+            panelClientes.cambiarTema();
+            panelUsuario.cambiarTema();
+            panelVentas.cambiarTema();
+            setTema(0);
+        } else {
+            botonVentas.setBackground(new Color(218, 218, 218));
+            botonClientes.setBackground(new Color(218, 218, 218));
+            botonMotos.setBackground(new Color(218, 218, 218));
+            botonUsuarios.setBackground(new Color(218, 218, 218));
+            panelSecundario.setBackground(new java.awt.Color(153, 255, 153));
+            panelSecundario.setForeground(new java.awt.Color(204, 255, 204));
+            jPanel1.setBackground(new java.awt.Color(255, 153, 204));
+            panelMotos.cambiarTema();
+            panelClientes.cambiarTema();
+            panelUsuario.cambiarTema();
+            panelVentas.cambiarTema();
+            setTema(1);
+        }
+        System.out.println(tema);
 
     }
 
@@ -405,6 +446,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     public void mostrar(){
         Thread o = new Thread(new mostrarPanel(this));
         o.start();
+    }
+
+    public void setTema(int tema) {
+        this.tema = tema;
     }
 
     class esconderPanel implements Runnable{
