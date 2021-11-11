@@ -192,7 +192,12 @@ public class Clientes extends javax.swing.JPanel {
             String dni = pedirDNI();
             if (cnCliente.clienteExiste(dni)){
                 Cliente cliente = cnCliente.buscarCliente(dni);
-                fillTableBuscar(cliente);
+                if (cliente.getExiste() == 1){
+                    fillTableBuscar(cliente);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Los datos de ese cliente ya no están disponibles");
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD");
             }

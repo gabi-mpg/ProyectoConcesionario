@@ -209,7 +209,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
         if (radioVentas.isSelected()){
             Informes informe = new Informes(cnVentas, "Ventas", rutaGenerarPDF);
             if(informe.generarInformeVentas()){
-                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
             }
@@ -219,7 +219,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
             String marca = JOptionPane.showInputDialog("Introduce la marca");
             Informes informe = new Informes(cnVentas, "Ventas de la marca " + marca, rutaGenerarPDF);
             if(informe.generarInformeVentasMarca(marca)){
-                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
             }
@@ -230,9 +230,9 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
             Informes informe = new Informes(cnVentas, "Ventas del cliente con DNI " + dni, rutaGenerarPDF);
 
             if(informe.generarInformeVentasClientes(dni)){
-                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El pdf no se ha podido crear","Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -241,7 +241,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
             Informes informe = new Informes(cnVentas, "Ventas del usuario " + nick, rutaGenerarPDF);
 
             if(informe.generarInformeVentasUsuario(nick)){
-                JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
             }
