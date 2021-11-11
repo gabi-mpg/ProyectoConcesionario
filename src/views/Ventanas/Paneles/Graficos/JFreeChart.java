@@ -7,29 +7,33 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JFreeChart extends JFrame {
 
     org.jfree.chart.JFreeChart grafico; //Objeto grafica
     private DefaultCategoryDataset datos; //Objeto q almacena los datos
+    private JButton botonCerrar;
 
     public JFreeChart(){
-        datos = new DefaultCategoryDataset();
 
-        //El valor a graficar, identificador, etiqutea de la comulmna
-        datos.addValue(1, "Prueba1","Lunes");
-        datos.addValue(2, "Prueba1","Martes");
-        datos.addValue(4, "Prueba1","Miercoles");
-        datos.addValue(4, "Prueba1","Jueves");
-
-        grafico = ChartFactory.createBarChart("Diagrama de barras","Prueba x","Prueba y",
-                datos, PlotOrientation.HORIZONTAL, true, true, false);
-
-        //Esto es com un Jpanel pero de puras graficas
-        ChartPanel panel = new ChartPanel(grafico);
-        add(panel);
-        setVisible(true);
-        pack();
+        botonCerrar = new JButton()
+//        datos = new DefaultCategoryDataset();
+//
+//        //El valor a graficar, identificador, etiqutea de la comulmna
+//        datos.addValue(1, "Prueba1","Lunes");
+//        datos.addValue(2, "Prueba1","Martes");
+//        datos.addValue(4, "Prueba1","Miercoles");
+//        datos.addValue(4, "Prueba1","Jueves");
+//
+//        grafico = ChartFactory.createBarChart("Diagrama de barras","Prueba x","Prueba y",
+//                datos, PlotOrientation.HORIZONTAL, true, true, false);
+//
+//        //Esto es com un Jpanel pero de puras graficas
+//        ChartPanel panel = new ChartPanel(grafico);
+//        add(panel);
+//        setVisible(true);
+//        pack();
     }
 
 
@@ -44,8 +48,15 @@ public class JFreeChart extends JFrame {
         grafico = ChartFactory.createBarChart("Ventas por usuario","Nombre de usuario","Numero de ventas",
                 datos, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel panel = new ChartPanel(grafico);
-        get
+        this.removeAll();
+        add(panel, BorderLayout.CENTER);
+        setVisible(true);
+
+        pack();
     }
+
+
+
 
     public static void main(String[] args){
         new JFreeChart();
