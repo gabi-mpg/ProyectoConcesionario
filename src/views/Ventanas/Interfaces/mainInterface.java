@@ -455,6 +455,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.tema = tema;
     }
 
+
     class esconderPanel implements Runnable{
 
         private JFrame panel;
@@ -466,11 +467,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         @Override
         public void run() {
-            int n = 840;
-
+            int n = panel.getWidth();
             while(n > 255){
                 panel.setSize(n, panel.getHeight());
-                n-=15;
+                n-=30;
                 try{
                     Thread.sleep(1);
                 }catch(InterruptedException io){
@@ -499,11 +499,13 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         @Override
         public void run() {
             try{
-                Thread.sleep(260);
-                int n = 260;
-                while(n < 865){
+                Thread.sleep(100);
+
+                int target = panel.getWidth();
+                int n = panel.getWidth();
+                while(n < 850){
                     panel.setSize(n,panel.getHeight());
-                    n += 15;
+                    n += 25;
                     panel.repaint();
                     Thread.sleep(1);
                 }

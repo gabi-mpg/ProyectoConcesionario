@@ -90,7 +90,8 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 2.0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(18, 5, 6, 5);
+        jScrollPane1.setPreferredSize(new Dimension(572,400));
+        gridBagConstraints.insets = new java.awt.Insets(18, 10, 6, 10);
         add(jScrollPane1, gridBagConstraints);
 
         botonBuscar.setText("Buscar");
@@ -100,7 +101,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(15, 5, 0, 12);
+        gridBagConstraints.insets = new Insets(15, 10, 0, 12);
         add(botonBuscar, gridBagConstraints);
 
         botonModificar.setText("Modificar");
@@ -130,14 +131,13 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(15, 30, 0, 5);
+        gridBagConstraints.insets = new Insets(15, 30, 0, 10);
         add(botonEliminar, gridBagConstraints);
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarActionPerformed(evt);
             }
         });
-
 
         this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
@@ -147,8 +147,8 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         this.tablaResultado = new JTable(model);
         jScrollPane1.setViewportView(tablaResultado);
         model.addColumn("ID");
-        model.addColumn("Matricula");
         model.addColumn("DNI");
+        model.addColumn("Matricula");
         model.addColumn("Precio");
         model.addColumn("Vendedor");
     }
