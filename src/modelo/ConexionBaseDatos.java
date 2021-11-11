@@ -10,6 +10,8 @@ import views.Ventanas.Interfaces.interfazLogin;
 import views.Ventanas.Interfaces.mainInterface;
 import views.Ventanas.Paneles.Graficos.JFreeChart;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author chris
@@ -25,7 +27,11 @@ public class ConexionBaseDatos {
         //new mainInterface(1,"delcorral",new ControllerConexion());
         //new interfazLogin();
         //new NewJFrame();
-        new JFreeChart();
+        JFreeChart diagrama = new JFreeChart();
+        ArrayList<String> nombres = new ArrayList<>();
+        nombres.add("");
+        diagrama.generarGraficoVentas();
+
 
 
     }
