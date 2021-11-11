@@ -88,7 +88,7 @@ public class VentaModel {
     public void addVenta(Venta venta){
         saveVentas();
         System.out.println("Dentro VentaModel addVenta");
-        String sql = "INSERT INTO t_ventas values (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO t_ventas (Matricula, DNI, Precio, IDVendedor, existe) values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, venta.getMatricula());
