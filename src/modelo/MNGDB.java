@@ -69,13 +69,7 @@ public class MNGDB {
                     opciones,
                     opciones[0]);
             if(n == 0){
-                try {
-                PreparedStatement exe = conexion.prepareStatement("CREATE DATABASE Concesionario;");
-                exe.executeUpdate();
                 crearTablas();
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
-                }
             }else{
                 System.exit(0);
             }       
@@ -88,35 +82,38 @@ public class MNGDB {
         }
     }
     
-    public void crearTablas(){
+    public boolean crearTablas(){
         try {
-          conexion.prepareStatement("use Concesionario;").executeUpdate();
-          PreparedStatement exe = conexion.prepareStatement(
-                   "CREATE TABLE t_clientes("
-                  + "DNI varchar(9) primary key,"
-                  + "Nombre varchar(30),"
-                  + "Apellido varchar(30),"
-                  + "Direccion varchar(30),"
-                  + "existe tinyint);");
-          exe.executeUpdate();
-          
-          exe = conexion.prepareStatement(
-                  "CREATE TABLE t_motos("
-                  + "Matricula varchar(15) not null primary key,"
-                  + "Marca varchar(30) not null,"
-                  + "Color varchar(15),"
-                  + "Tanque tinyint," +
-                  "existe tinyint);");
-          exe.executeUpdate();
-            
+            conexion.setAutoCommit(false);
+            PreparedStatement exe = conexion.prepareStatement("CREATE DATABASE Concesionario;");
+            exe.executeUpdate();
+            conexion.prepareStatement("use Concesionario;").executeUpdate();
             exe = conexion.prepareStatement(
-                  "Create table t_usuarios("
-                  + "nick varchar(30) not null primary key,"
-                  + "Nombre varchar(20) not null,"
-                  + "Apellidos varchar(40) not null,"
-                  +"Contrasena varchar(15) not null,"
-                  + "nivelPermiso char(1)," +
-                  "existe tinyint);");
+                    "CREATE TABLE t_clientes("
+                            + "DNI varchar(9) primary key,"
+                            + "Nombre varchar(30),"
+                            + "Apellido varchar(30),"
+                            + "Direccion varchar(30),"
+                            + "existe tinyint);");
+            exe.executeUpdate();
+
+            exe = conexion.prepareStatement(
+                    "CREATE TABLE t_motos("
+                            + "Matricula varchar(15) not null primary key,"
+                            + "Marca varchar(30) not null,"
+                            + "Color varchar(15),"
+                            + "Tanque tinyint," +
+                            "existe tinyint);");
+            exe.executeUpdate();
+
+            exe = conexion.prepareStatement(
+                    "Create table t_usuarios("
+                            + "nick varchar(30) not null primary key,"
+                            + "Nombre varchar(20) not null,"
+                            + "Apellidos varchar(40) not null,"
+                            +"Contrasena varchar(15) not null,"
+                            + "nivelPermiso char(1)," +
+                            "existe tinyint);");
             exe.executeUpdate();
 
             exe = conexion.prepareStatement(
@@ -132,36 +129,24 @@ public class MNGDB {
                             + "foreign key (IDVendedor) references t_usuarios(nick),"
                             + "constraint pk_venta primary key (IDVenta,Matricula));");
             exe.executeUpdate();
-
-//
-//            exe = conexion.prepareStatement("USE concesionario$$\n" +
-//                    " CREATE PROCEDURE sp_eliminarcliente(IN idcliente varchar(9))\n" +
-//                    " BEGIN\n" +
-//                    " UPDATE t_ventas SET DNI = 'deleted' where DNI like idcliente;\n" +
-//                    " DELETE  FROM t_clientes WHERE DNI like idcliente;\n" +
-//                    " END$$;\n" +
-//                    " DELIMITER $$\n" +
-//                    " USE concesionario$$\n" +
-//                    " CREATE PROCEDURE sp_eliminarmoto(IN idmoto varchar(15))\n" +
-//                    " BEGIN\n" +
-//                    " UPDATE t_ventas SET Matricula = 'deleted' where Matricula like idmoto;\n" +
-//                    " DELETE  FROM t_motos WHERE Matricula like idmoto;\n" +
-//                    " END$$;\n" +
-//                    " DELIMITER $$\n" +
-//                    " USE concesionario$$\n" +
-//                    " CREATE PROCEDURE sp_eliminarusuario(IN iduser varchar(30))\n" +
-//                    " BEGIN\n" +
-//                    " UPDATE t_ventas SET IDVendedor = 'deleted' where IDVendedor like iduser;\n" +
-//                    " DELETE  FROM t_usuarios WHERE nick like iduser;\n" +
-//                    " END$$;");
-//            exe.executeUpdate();
+            conexion.commit();
             crearRegistros();
-          
+            conexion.setAutoCommit(true);
+            return true;
+
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
-            System.out.println(ex.getMessage());
-            System.out.println(ex.getLocalizedMessage());
-            System.out.println(ex.getErrorCode());
+            if (conexion != null){
+                System.out.println(ex.getMessage());
+                System.out.println(ex.getLocalizedMessage());
+                System.out.println(ex.getErrorCode());
+                try {
+                    conexion.rollback();
+                    conexion.setAutoCommit(true);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            return false;
         }
     }
 
@@ -174,8 +159,14 @@ public class MNGDB {
                     "('eduardo','Eduardo','Bethencourt Herrera','edu123',2,1)," +
                     "('invitado','-','-','1234',3,1)");
             exe.executeUpdate();
+            conexion.commit();
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
+            try {
+                conexion.rollback();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
     public boolean comprobarExsite(String nombreDatabase){
