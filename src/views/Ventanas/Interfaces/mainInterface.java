@@ -179,18 +179,13 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         generarPDF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new generadorPDF(conexion);
+                new generadorPDF();
             }
         });
         abrirBBDD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"Se abrirá SQL Workbench si lo tiene insalado");
-                try {
-                    Desktop.getDesktop().open(new File("C:\\Program Files\\MySQL\\MySQL Workbench 8.0\\MySQLWorkbench.exe"));
-                } catch (IOException ioException) {
-                    JOptionPane.showMessageDialog(null,"No está instalado MySQL Workbench o se ha cambiado su ruta");
-                }
+                abrirBBDD();
             }
         });
         verConexion.addActionListener(new ActionListener() {
@@ -200,6 +195,32 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             }
         });
 
+        cerrarSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                cerrarSesion();
+            }
+        });
+
+    }
+
+    private void cerrarSesion(){
+        this.dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new interfazLogin().setVisible(true);
+            }
+        });
+
+    }
+
+    private void abrirBBDD(){
+        JOptionPane.showMessageDialog(null,"Se abrirá SQL Workbench si lo tiene insalado");
+        try {
+            Desktop.getDesktop().open(new File("C:\\Program Files\\MySQL\\MySQL Workbench 8.0\\MySQLWorkbench.exe"));
+        } catch (IOException ioException) {
+            JOptionPane.showMessageDialog(null,"No está instalado MySQL Workbench o se ha cambiado su ruta");
+        }
     }
 
     private void mostrarConexionActual(){

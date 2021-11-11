@@ -17,13 +17,8 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
     private String rutaGenerarPDF;
-    private ControllerConexion conexion;
 
-    public generadorPDF(){}
-
-    public generadorPDF(ControllerConexion conexion) {
-        this.conexion = conexion;
-
+    public generadorPDF() {
         setVisible(true);
         setLocationRelativeTo(null);
         setResizable(false);
