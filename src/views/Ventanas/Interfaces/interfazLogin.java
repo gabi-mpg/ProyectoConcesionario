@@ -234,7 +234,7 @@ public class interfazLogin extends javax.swing.JFrame{
                         jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
                         break;
                     default:
-                        new mainInterface(n, new ControllerConexion());
+                        new mainInterface(n, user, new ControllerConexion());
                         conexion.cerrarCn();
                         this.dispose();
                         break;

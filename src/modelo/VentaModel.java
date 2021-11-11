@@ -109,7 +109,7 @@ public class VentaModel {
     //Cambiar a cero removeVEntas
     public boolean removeVenta(int pk){
         saveVentas();
-        String sql = "delete from t_ventas where pk = ?";
+        String sql = "delete from t_ventas where IDVenta = ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setInt(1, pk);

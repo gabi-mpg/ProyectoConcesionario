@@ -6,6 +6,7 @@
 package views.Ventanas.Paneles;
 
 import controllers.ClienteCRUD;
+import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
 import entidades.Cliente;
 import entidades.Usuario;
@@ -28,12 +29,14 @@ import java.util.ArrayList;
 public class Ventas extends javax.swing.JPanel implements ActionListener {
 
     private int nivelUsuario;
+    private String nombreUsuario;
     
     public Ventas() {
         initComponents();
     }
     
-    public Ventas(int nivelUsuario){
+    public Ventas(int nivelUsuario, String nombreUsuario){
+        this.nombreUsuario = nombreUsuario;
         initComponents();
         this.nivelUsuario = nivelUsuario;
         cambiarPermisos();
@@ -250,6 +253,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private VentaCRUD cnVentas;
+
     private PanelModificarVenta panelModificar;
     private int tema;
 
@@ -261,7 +265,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
             String busqueda = ventanaBusqueda.getValorBusqueda();
             System.out.println(busqueda);
         }else if(b == botonCrear){
-            new insertarVenta();
+            new insertarVenta(nombreUsuario);
         } else if (b == botonEliminar) {
 
 

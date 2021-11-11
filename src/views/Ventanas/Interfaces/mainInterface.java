@@ -26,6 +26,7 @@ import javax.swing.*;
 public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
     private JMenuBar barra;
+    private String nombreUsuario;
     private JMenu menu_archivo, menu_opciones, menu_ayuda, menu_acerca;
     private JMenuItem abrirBBDD,generarPDF,estadistica;
     private JMenuItem rutaFicheros, cambiarTema,verConexion,cerrarSesion;
@@ -57,9 +58,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         pack();
     }
 
-    public mainInterface(int nivelUsuario, ControllerConexion conexion){
+    public mainInterface(int nivelUsuario, String nombreUsuario, ControllerConexion conexion){
         this.nivelUsuario = nivelUsuario;
         this.conexion = conexion;
+        this.nombreUsuario = nombreUsuario;
         initComponents();
         alterarPermisos();
         setLocation(d.width/4+d.width/32,d.height/4);
@@ -156,7 +158,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.panelClientes = new Clientes(nivelUsuario);
         this.panelMotos = new Motos(nivelUsuario);
         this.panelUsuario = new Usuarios(nivelUsuario);
-        this.panelVentas = new Ventas(nivelUsuario);
+        this.panelVentas = new Ventas(nivelUsuario, nombreUsuario);
 
         botonVentas.addActionListener(this);
         botonVentas.addActionListener(this);

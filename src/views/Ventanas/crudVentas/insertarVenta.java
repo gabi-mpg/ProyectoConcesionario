@@ -28,8 +28,10 @@ public class insertarVenta extends javax.swing.JFrame {
             +"imagenes"+ File.separator;
     private boolean DNICorrecto = false;
     private boolean MatriculaCorrecta = false;
+    private String nombreUsuario;
 
-    public insertarVenta() {
+    public insertarVenta(String nombreUsuarioLogeado) {
+        this.nombreUsuario = nombreUsuarioLogeado;
         this.setVisible(true);
         setLocationRelativeTo(null);
         setSize(260,410);
@@ -85,6 +87,8 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
         add(textoIDVendedor, gridBagConstraints);
+        textoIDVendedor.setText(nombreUsuario);
+        textoIDVendedor.setEnabled(false);
 
         textoDNI.setMinimumSize(new java.awt.Dimension(130, 24));
         textoDNI.setPreferredSize(new java.awt.Dimension(130, 24));
@@ -198,9 +202,6 @@ public class insertarVenta extends javax.swing.JFrame {
         }
         if(textoPrecio.getText().isEmpty()){
             mensajeError+=" Campo precio, ";
-        }
-        if(textoIDVendedor.getText().isEmpty()){
-            mensajeError+=" Campo ID vendedor, ";
         }
         if(!mensajeError.isEmpty()){
             mensajeError = mensajeError.substring(0,mensajeError.lastIndexOf(","));
