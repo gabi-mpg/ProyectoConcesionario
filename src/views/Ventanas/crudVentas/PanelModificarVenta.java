@@ -73,7 +73,7 @@ public class PanelModificarVenta extends JFrame {
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             getContentPane().setLayout(new java.awt.GridBagLayout());
 
-            panelTitulo.setPreferredSize(new java.awt.Dimension(270, 100));
+            panelTitulo.setPreferredSize(new java.awt.Dimension(280, 100));
             panelTitulo.setLayout(new java.awt.GridBagLayout());
 
             jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -87,7 +87,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(labelImagen, gridBagConstraints);
 
-            labelVariable.setText("Modificar venta con ID: ");
+            labelVariable.setText("Modificar venta de matrícula: ");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
@@ -105,7 +105,7 @@ public class PanelModificarVenta extends JFrame {
 
             getContentPane().add(panelTitulo, new java.awt.GridBagConstraints());
 
-            panelCuerpo.setPreferredSize(new java.awt.Dimension(270, 270));
+            panelCuerpo.setPreferredSize(new java.awt.Dimension(280, 270));
             panelCuerpo.setLayout(new java.awt.GridBagLayout());
 
             textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
@@ -173,7 +173,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.gridy = 1;
             getContentPane().add(panelCuerpo, gridBagConstraints);
 
-            panelBotton.setPreferredSize(new java.awt.Dimension(270, 100));
+            panelBotton.setPreferredSize(new java.awt.Dimension(280, 100));
             panelBotton.setLayout(new java.awt.GridBagLayout());
 
             botonModificar.setText("Modificar registro");
