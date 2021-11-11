@@ -59,6 +59,16 @@ public class VentaModel {
         return null;
     }
 
+    public Venta buscarVenta(int pk){
+        saveVentas();
+        for(Venta v : listaVentas){
+            if (v.getIdVenta() == (pk)){
+                return v;
+            }
+        }
+        return null;
+    }
+
     public boolean ventaExiste(String pk){
         return buscarVenta(pk) != null;
     }
@@ -107,7 +117,7 @@ public class VentaModel {
     }
 
     //Cambiar a cero removeVEntas
-    public boolean removeVenta(int pk){
+    /*public boolean removeVenta(int pk){
         saveVentas();
         String sql = "delete from t_ventas where IDVenta = ?";
         try {
@@ -120,6 +130,28 @@ public class VentaModel {
             throwables.printStackTrace();
             return false;
         }
+    }*/
+
+    public boolean removeVenta(int pk){
+        saveVentas();
+        String sql = "{call sp_eliminarVenta(?)}";
+        try {
+            CallableStatement cst = conexion.prepareCall(sql);
+            cst.setInt(1, pk);
+            cst.execute();
+            updateExiste(0, pk);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+    public void updateExiste(int exists, int pk){
+        Venta venta = buscarVenta(pk);
+        venta.setExiste(exists);
+        updateVentaLista(venta);
+        updateVenta(venta);
     }
 
     public boolean updateVenta(Venta venta){

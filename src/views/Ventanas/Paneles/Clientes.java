@@ -221,11 +221,11 @@ public class Clientes extends javax.swing.JPanel {
                 if (cliente.getExiste() == 1){
                     fillTableBuscar(cliente);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Los datos de ese cliente ya no están disponibles");
+                    JOptionPane.showMessageDialog(this, "Los datos de ese cliente ya no están disponibles", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD");
+                JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD", "Aviso", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e){
@@ -234,14 +234,19 @@ public class Clientes extends javax.swing.JPanel {
     }
 
     private String pedirDNI(){
-        String dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
+        try{
+            String dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", "DNI", JOptionPane.PLAIN_MESSAGE);
 
-        while (!cnCliente.comprobarDNI(dni)){
-            JOptionPane.showMessageDialog(this, "Formato DNI incorrecto");
+            while (!cnCliente.comprobarDNI(dni)){
+                JOptionPane.showMessageDialog(this, "Formato DNI incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 
-            dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", 1);
+                dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", "DNI", JOptionPane.PLAIN_MESSAGE);
+            }
+            return dni;
+        } catch (Exception e) {
+            return null;
         }
-        return dni;
+
     }
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,8 +263,10 @@ public class Clientes extends javax.swing.JPanel {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
         String matricula = pedirDNI();
-        cnCliente.removeCliente(matricula);
-        fillTable();
+        if (matricula != null){
+            cnCliente.removeCliente(matricula);
+            fillTable();
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;

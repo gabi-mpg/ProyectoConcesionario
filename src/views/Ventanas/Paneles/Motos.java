@@ -27,15 +27,13 @@ public class Motos extends javax.swing.JPanel {
 
 
     public Motos(ControllerConexion conexion) {
-        this.insertar = new insertarMoto();
-        insertar.setVisible(false);
+
         initComponents();
     }
 
     public Motos(int nivelUsuario){
-        this.insertar = new insertarMoto();
+
         this.nivelUsuario = nivelUsuario;
-        insertar.setVisible(false);
         initComponents();
         cambiarPermisos();
     }
@@ -257,7 +255,7 @@ public class Motos extends javax.swing.JPanel {
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        insertar.setVisible(true);
+        insertar = new insertarMoto();
         fillTable();
     }
 
