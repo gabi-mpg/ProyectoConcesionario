@@ -8,6 +8,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class JFreeChart extends JFrame {
 
@@ -16,8 +18,14 @@ public class JFreeChart extends JFrame {
     private JButton botonCerrar;
 
     public JFreeChart(){
-
-        botonCerrar = new JButton()
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        botonCerrar = new JButton("Cerrar la gráfica");
+        botonCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
 //        datos = new DefaultCategoryDataset();
 //
 //        //El valor a graficar, identificador, etiqutea de la comulmna
@@ -51,7 +59,7 @@ public class JFreeChart extends JFrame {
         this.removeAll();
         add(panel, BorderLayout.CENTER);
         setVisible(true);
-
+        add(botonCerrar,BorderLayout.SOUTH);
         pack();
     }
 
