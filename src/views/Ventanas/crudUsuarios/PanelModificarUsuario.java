@@ -29,7 +29,7 @@ public class PanelModificarUsuario extends JDialog {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
-
+            setVisible(true);
         }
 
         /**

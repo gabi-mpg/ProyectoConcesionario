@@ -48,7 +48,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private String ruta =System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"Imagenes"+ File.separator;
-    private config configuracionTema;
+    boolean modoOscuro = false;
 
     public mainInterface() {
         this.nivelUsuario = 1;
@@ -161,7 +161,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.panelUsuario = new Usuarios(nivelUsuario);
         this.panelVentas = new Ventas(nivelUsuario, nombreUsuario);
 
-        configuracionTema = new config();
         botonVentas.addActionListener(this);
         botonVentas.addActionListener(this);
         botonClientes.addActionListener(this);
@@ -220,7 +219,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     }
 
     private void cambiarTema(){
-        if (configuracionTema.getModoNocturno().equals(configuracionTema.NOCTURNO_ACTIVADO)){
+        if (modoOscuro){
             botonVentas.setBackground(new Color(162, 0, 212));
             botonClientes.setBackground(new Color(162, 0, 212));
             botonMotos.setBackground(new Color(162, 0, 212));
@@ -232,7 +231,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             panelClientes.cambiarTema();
             panelUsuario.cambiarTema();
             panelVentas.cambiarTema();
-            configuracionTema.setModoNocturno(configuracionTema.NOCTURNO_DESACTIVADO);
+            modoOscuro = false;
         } else {
             botonVentas.setBackground(new Color(218, 218, 218));
             botonClientes.setBackground(new Color(218, 218, 218));
@@ -245,7 +244,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             panelClientes.cambiarTema();
             panelUsuario.cambiarTema();
             panelVentas.cambiarTema();
-            configuracionTema.setModoNocturno(configuracionTema.NOCTURNO_ACTIVADO);
+            modoOscuro = true;
         }
         System.out.println(tema);
 
