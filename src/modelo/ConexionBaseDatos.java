@@ -8,6 +8,7 @@ package modelo;
 import controllers.ControllerConexion;
 import views.Ventanas.Interfaces.interfazLogin;
 import views.Ventanas.Interfaces.mainInterface;
+import views.Ventanas.Paneles.Graficos.JFreeChart;
 
 /**
  *
@@ -21,9 +22,10 @@ public class ConexionBaseDatos {
     public static void main(String[] args) {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
-        new mainInterface(1,"delcorral",new ControllerConexion());
+        //new mainInterface(1,"delcorral",new ControllerConexion());
         //new interfazLogin();
         //new NewJFrame();
+        new JFreeChart();
 
 
     }

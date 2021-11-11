@@ -157,7 +157,7 @@ public class insertarUsuario extends JDialog {
         botonInsertar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                insertarUsuario();
             }
         });
     }// </editor-fold>
