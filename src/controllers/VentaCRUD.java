@@ -17,7 +17,7 @@ public class VentaCRUD {
         return model.getListaVentas();
     }
 
-    public boolean agregarVenta(String matricula, String DNI, double precio, String idUsuario){
+    public boolean agregarVenta(String matricula, String DNI, float precio, String idUsuario){
         if (model.buscarExistencia(matricula, DNI)){
             System.out.println("Venta CRUD if de matricula y dni existen");
             model.addVenta(new Venta(matricula, DNI, precio, idUsuario, 1));

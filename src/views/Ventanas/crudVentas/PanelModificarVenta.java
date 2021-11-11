@@ -212,7 +212,7 @@ public class PanelModificarVenta extends JFrame {
             Venta venta = cnVenta.buscarVenta(ID);
             venta.setDni(textoDNI.getText());
             venta.setMatricula(textoDNI.getText());
-            venta.setPrecio(Double.parseDouble(textoPrecio.getText()));
+            venta.setPrecio(Float.parseFloat(textoPrecio.getText()));
             venta.setIdVendedor(textoVendedor.getText());
             cnVenta.updateVenta(venta);
             dispose();

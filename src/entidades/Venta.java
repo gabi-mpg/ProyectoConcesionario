@@ -6,7 +6,7 @@ public class Venta implements Comparator<Venta> {
 
     private String matricula;
     private String dni;
-    private double precio;
+    private float precio;
     private String idVendedor;
     private int idVenta;
     private int existe;
@@ -14,7 +14,7 @@ public class Venta implements Comparator<Venta> {
     public Venta(){
 
     }
-    public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor, int existe) {
+    public Venta(int idVenta, String matricula, String dni, float precio, String idVendedor, int existe) {
         this.idVenta = idVenta;
         this.matricula = matricula;
         this.dni = dni;
@@ -23,7 +23,7 @@ public class Venta implements Comparator<Venta> {
         this.existe = existe;
     }
 
-    public Venta(String matricula, String dni, double precio, String idVendedor, int existe) {
+    public Venta(String matricula, String dni, float precio, String idVendedor, int existe) {
         this.matricula = matricula;
         this.dni = dni;
         this.precio = precio;
@@ -47,11 +47,11 @@ public class Venta implements Comparator<Venta> {
         this.dni = dni;
     }
 
-    public double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 

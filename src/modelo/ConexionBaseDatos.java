@@ -27,20 +27,11 @@ public class ConexionBaseDatos {
         //new mainInterface(1,"delcorral",new ControllerConexion());
         //new interfazLogin();
         //new NewJFrame();
-        JFreeChart diagrama = new JFreeChart();
-        ArrayList<String> nombres = new ArrayList<>();
-        nombres.add("gabriela");
-        nombres.add("asdad");
-        nombres.add("gabridsgfgjela");
-        nombres.add("gabriela");
+        //JFreeChart diagrama = new JFreeChart();
 
-        ArrayList<Float> ventas = new ArrayList<>();
-        ventas.add((float) 34524.45);
-        ventas.add((float) 235460.2);
-        ventas.add(3);
-        ventas.add(4);
-        ventas.add(5);
-        diagrama.dineroUsuarios(nombres,ventas);
+
+
+        //diagrama.dineroUsuarios(nombres,ventas);
 
 
 

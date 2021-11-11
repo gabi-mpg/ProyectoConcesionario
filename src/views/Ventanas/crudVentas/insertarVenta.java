@@ -222,7 +222,7 @@ public class insertarVenta extends javax.swing.JFrame {
        }else{
             if(cnVenta.agregarVenta(textoMatricula.getText(),
                     textoDNI.getText(),
-                    Double.parseDouble(textoPrecio.getText()),
+                    Float.parseFloat(textoPrecio.getText()),
                     textoIDVendedor.getText())){
                 JOptionPane.showMessageDialog(this,"Registro creado","Se ha añadido la nueva venta",JOptionPane.INFORMATION_MESSAGE);
             }else{

@@ -6,6 +6,8 @@
 package views.Ventanas.Interfaces;
 
 import controllers.ControllerConexion;
+import controllers.UsuarioCRUD;
+import controllers.VentaCRUD;
 import modelo.config;
 import views.Ventanas.Paneles.Clientes;
 import views.Ventanas.Paneles.Graficos.JFreeChart;
@@ -39,6 +41,8 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private Clientes panelClientes;
     private Motos panelMotos;
     private Ventas panelVentas;
+    private UsuarioCRUD cnUser;
+    private VentaCRUD cnVentas;
     private final String PANEL_USUARIO = "usuario";
     private final String PANEL_CLIENTE = "cliente";
     private final String PANEL_MOTO = "moto";
@@ -92,6 +96,8 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         java.awt.GridBagConstraints gridBagConstraints;
 
+        cnUser = new UsuarioCRUD();
+        cnVentas = new VentaCRUD();
         jPanel1 = new javax.swing.JPanel();
         logoMain = new javax.swing.JLabel();
         botonVentas = new javax.swing.JButton();
@@ -103,7 +109,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 204));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 450));
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -151,8 +156,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
 
         JLabel nuevaFoto = new JLabel();
         nuevaFoto.setIcon(new ImageIcon(ruta+"fotoPrincipal.jpg"));
-        panelSecundario.setBackground(new java.awt.Color(153, 255, 153));
-        panelSecundario.setForeground(new java.awt.Color(204, 255, 204));
         panelSecundario.setPreferredSize(new java.awt.Dimension(600, 300));
         panelSecundario.setLayout(new java.awt.BorderLayout());
         panelSecundario.add(nuevaFoto);
@@ -228,15 +231,15 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     }
 
     private void generarGrafico(){
-        new JFreeChart().generarGraficoVentas(new ArrayList<String>(), new ArrayList<Integer>());
+        new JFreeChart(cnUser.gesListaUsuarios(), cnVentas.getListaVentas()).dineroUsuarios();
     }
 
     private void cambiarTema(){
         if (modoOscuro){
-            botonVentas.setBackground(new Color(162, 0, 212));
-            botonClientes.setBackground(new Color(162, 0, 212));
-            botonMotos.setBackground(new Color(162, 0, 212));
-            botonUsuarios.setBackground(new Color(162, 0, 212));
+            botonVentas.setBackground(new Color(246, 231, 23));
+            botonClientes.setBackground(new Color(246, 231, 23));
+            botonMotos.setBackground(new Color(246, 231, 23));
+            botonUsuarios.setBackground(new Color(246, 231, 23));
             jPanel1.setBackground(new Color(118, 118, 118));
             panelSecundario.setBackground(new Color(53, 52, 53));
             panelSecundario.setForeground(new Color(128, 128, 128));

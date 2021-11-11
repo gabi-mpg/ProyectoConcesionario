@@ -227,20 +227,20 @@ public class Usuarios extends javax.swing.JPanel {
     }
 
     public void cambiarTema(){
-        if (tema == 1){
-            botonBuscar.setBackground(new Color(162, 0, 212));
-            botonEliminar.setBackground(new Color(162, 0, 212));
-            botonModificar.setBackground(new Color(162, 0, 212));
-            botonCrear.setBackground(new Color(162, 0, 212));
+        if (tema == 0){
+            botonBuscar.setBackground(new Color(246, 231, 23));
+            botonEliminar.setBackground(new Color(246, 231, 23));
+            botonModificar.setBackground(new Color(246, 231, 23));
+            botonCrear.setBackground(new Color(246, 231, 23));
             this.setBackground(new Color(53, 52, 53));
-            setTema(0);
+            setTema(1);
         } else {
             botonBuscar.setBackground(new Color(218, 218, 218));
             botonCrear.setBackground(new Color(218, 218, 218));
             botonEliminar.setBackground(new Color(218, 218, 218));
             botonModificar.setBackground(new Color(218, 218, 218));
             this.setBackground(new java.awt.Color(204, 255, 204));
-            setTema(1);
+            setTema(0);
         }
         System.out.println(tema);
 

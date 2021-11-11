@@ -36,7 +36,7 @@ public class VentaModel {
                 int idVenta = rs.getInt("IDVenta");
                 String matricula = rs.getString("Matricula");
                 String dni = rs.getString("DNI");
-                double precio = rs.getDouble("Precio");
+                float precio = rs.getFloat("Precio");
                 String idVendedor = rs.getString("IDVendedor");
                 int existe = rs.getInt("existe");
                 Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor, existe);
