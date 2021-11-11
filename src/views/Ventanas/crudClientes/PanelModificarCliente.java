@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class PanelModificarCliente extends JFrame {
+public class PanelModificarCliente extends JDialog {
 
 
     private String ruta =  System.getProperty("user.dir")+
@@ -22,12 +22,16 @@ public class PanelModificarCliente extends JFrame {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public PanelModificarCliente() {
-
+        public PanelModificarCliente(String dni) {
+            setModal(true);
             initComponents();
+            this.dni = (dni);
+            rellenarCampos();
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
+
+            setVisible(true);
         }
 
         /**
@@ -55,10 +59,8 @@ public class PanelModificarCliente extends JFrame {
             panelBotton = new javax.swing.JPanel();
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
-            dni = "";
             cnCliente = new ClienteCRUD();
 
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             panelTitulo = new javax.swing.JPanel();
             jLabel1 = new javax.swing.JLabel();
             labelImagen = new javax.swing.JLabel();
@@ -75,7 +77,6 @@ public class PanelModificarCliente extends JFrame {
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             getContentPane().setLayout(new java.awt.GridBagLayout());
 
             panelTitulo.setPreferredSize(new java.awt.Dimension(270, 100));
@@ -207,7 +208,6 @@ public class PanelModificarCliente extends JFrame {
                 textoNombre.setText(cliente.getNombre());
                 textoApellido.setText(cliente.getApellido());
                 textoDireccion.setText(cliente.getDireccion());
-                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "EL cliente no existe en la BD");
                 this.dispose();

@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class PanelModificarMoto extends javax.swing.JFrame {
+public class PanelModificarMoto extends javax.swing.JDialog {
 
 
         private String ruta = System.getProperty("user.dir")+
@@ -20,10 +20,14 @@ public class PanelModificarMoto extends javax.swing.JFrame {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public PanelModificarMoto() {
+        public PanelModificarMoto(String matricula) {
+            setModal(true);
+            this.matricula = matricula;
             initComponents();
+            rellenarCampos();
             setLocationRelativeTo(null);
             setResizable(false);
+            setVisible(true);
         }
 
         /**
@@ -51,7 +55,6 @@ public class PanelModificarMoto extends javax.swing.JFrame {
             panelBotton = new javax.swing.JPanel();
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
-            matricula = "";
             cnMoto = new MotoCRUD();
 
             setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -181,7 +184,6 @@ public class PanelModificarMoto extends javax.swing.JFrame {
                 textoApellido.setText(moto.getColor());
                 textoNombre.setText(moto.getMarca());
                 textoDireccion.setText(String.valueOf(moto.getTanque()));
-                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
                 this.dispose();

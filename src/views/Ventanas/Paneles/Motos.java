@@ -67,8 +67,7 @@ public class Motos extends javax.swing.JPanel {
         botonEliminar = new JButton();
         model = new DefaultTableModel();
         cnMoto = new MotoCRUD();
-        panelModificar = new PanelModificarMoto();
-        panelModificar.setVisible(false);
+
         tema = 1;
         setPreferredSize(new Dimension(600, 300));
         setLayout(new GridBagLayout());
@@ -249,9 +248,11 @@ public class Motos extends javax.swing.JPanel {
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
         String matricula = pedirMatricula();
-        panelModificar.setMatricula(matricula);
-        panelModificar.rellenarCampos();
-        fillTable();
+        if(matricula != null){
+            new PanelModificarMoto(matricula);
+            fillTable();
+        }
+
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
