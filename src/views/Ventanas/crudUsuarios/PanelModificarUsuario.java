@@ -25,11 +25,10 @@ public class PanelModificarUsuario extends JDialog {
             setModal(true);
             initComponents();
             this.nick = (nick);
-            rellenarCampos();
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
-
+            rellenarCampos();
         }
 
         /**

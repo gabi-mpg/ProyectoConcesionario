@@ -26,10 +26,10 @@ public class PanelModificarCliente extends JDialog {
             setModal(true);
             initComponents();
             this.dni = (dni);
-            rellenarCampos();
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
+            rellenarCampos();
         }
 
         /**

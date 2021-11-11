@@ -28,7 +28,6 @@ public class PanelModificarVenta extends JFrame {
         // y así reutilizar el panel
         public PanelModificarVenta(String ID) {
             initComponents();
-            //setSize(350, 800);
             setLocationRelativeTo(null);
             setResizable(true);
             this.ID = ID;
@@ -106,7 +105,7 @@ public class PanelModificarVenta extends JFrame {
 
             getContentPane().add(panelTitulo, new java.awt.GridBagConstraints());
 
-            panelCuerpo.setPreferredSize(new java.awt.Dimension(600, 290));
+            panelCuerpo.setPreferredSize(new java.awt.Dimension(300, 320));
             panelCuerpo.setLayout(new java.awt.GridBagLayout());
 
             textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));

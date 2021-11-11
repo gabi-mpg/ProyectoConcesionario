@@ -24,9 +24,9 @@ public class PanelModificarMoto extends javax.swing.JDialog {
             setModal(true);
             this.matricula = matricula;
             initComponents();
-            rellenarCampos();
             setLocationRelativeTo(null);
             setResizable(false);
+            rellenarCampos();
         }
 
         /**
