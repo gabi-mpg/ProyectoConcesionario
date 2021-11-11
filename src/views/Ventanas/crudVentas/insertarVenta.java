@@ -6,6 +6,9 @@ package views.Ventanas.crudVentas;
  */
 
 
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 /**
@@ -77,9 +80,15 @@ public class insertarVenta extends javax.swing.JFrame {
 
         textoDNI.setMinimumSize(new java.awt.Dimension(130, 24));
         textoDNI.setPreferredSize(new java.awt.Dimension(130, 24));
-        textoDNI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoMatriculaActionPerformed(evt);
+        textoDNI.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String dni = textoDNI.getText();
+                if(dni.matches("[0-9]{7,8}[A-Za-z]")){
+                    textoDNI.setForeground(new Color(0,143,57));
+                }else{
+                    textoDNI.setForeground(Color.BLACK);
+                }
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -151,9 +160,7 @@ public class insertarVenta extends javax.swing.JFrame {
         add(botonInsertar, gridBagConstraints);
     }// </editor-fold>
 
-    private void textoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+
 
 
     // Variables declaration - do not modify
