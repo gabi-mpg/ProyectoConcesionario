@@ -7,6 +7,8 @@ package views.Ventanas.crudUsuarios;
 
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
@@ -42,7 +44,7 @@ public class insertarUsuario extends JDialog {
         textoNick = new javax.swing.JTextField();
         textoNombre = new javax.swing.JTextField();
         textoApellidos = new javax.swing.JTextField();
-        textoColor = new javax.swing.JTextField();
+        tectoContra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -100,14 +102,14 @@ public class insertarUsuario extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
         add(textoApellidos, gridBagConstraints);
 
-        textoColor.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoColor.setPreferredSize(new java.awt.Dimension(130, 24));
+        tectoContra.setMinimumSize(new java.awt.Dimension(130, 24));
+        tectoContra.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoColor, gridBagConstraints);
+        add(tectoContra, gridBagConstraints);
 
         jLabel3.setText("Nick");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -151,6 +153,13 @@ public class insertarUsuario extends JDialog {
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         add(botonInsertar, gridBagConstraints);
+
+        botonInsertar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
     }// </editor-fold>
 
     private void textoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +175,7 @@ public class insertarUsuario extends JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField textoColor;
+    private javax.swing.JTextField tectoContra;
     private javax.swing.JTextField textoApellidos;
     private javax.swing.JTextField textoNombre;
     private javax.swing.JTextField textoNick;

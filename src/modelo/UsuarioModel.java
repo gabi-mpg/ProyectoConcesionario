@@ -77,7 +77,7 @@ public class UsuarioModel {
 
     public void addUsuario(Usuario usuario){
         saveUsuario();
-        String sql = "INSERT INTO t_usuarios values (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO t_usuarios values (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, usuario.getNick());
@@ -85,6 +85,7 @@ public class UsuarioModel {
             pst.setString(3, usuario.getApellidos());
             pst.setString(4, usuario.getContra());
             pst.setInt(5, usuario.getPermiso());
+            pst.setInt(6, 1);
 
             pst.executeUpdate();
         } catch (Exception e) {
@@ -96,7 +97,7 @@ public class UsuarioModel {
 
     public boolean removeUsuario(String pk){
         saveUsuario();
-        String sql = "delete from t_usuarios where pk like ?";
+        String sql = "delete from t_usuarios where nick like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, pk);
@@ -112,13 +113,14 @@ public class UsuarioModel {
     public boolean updateUsuario(Usuario usuario){
         System.out.println(usuario.toString());
         saveUsuario();
-        String sql = "UPDATE t_usuarios set Nombre = ?, Apellidos = ?, Contrasena = ?, nivelPermiso = ? where IDVenta = ?";
+        String sql = "UPDATE t_usuarios set Nombre = ?, Apellidos = ?, Contrasena = ?, nivelPermiso = ?, exite = ? where nick like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, usuario.getNombre());
             pst.setString(2, usuario.getApellidos());
             pst.setString(3, usuario.getContra());
             pst.setInt(4, usuario.getPermiso());
+            pst.setString(5, usuario.getNombre());
             pst.executeUpdate();
             updateVentaLista(usuario);
             return true;
@@ -137,6 +139,7 @@ public class UsuarioModel {
                 u.setApellidos(usuario.getApellidos());
                 u.setContra(usuario.getContra());
                 u.setPermiso(usuario.getPermiso());
+                u.setExiste(usuario.isExiste());
             }
         }
     }
