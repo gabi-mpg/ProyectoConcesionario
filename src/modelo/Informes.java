@@ -118,6 +118,8 @@ public class Informes {
                 }
             }
 
+            listaVentasFiltrada.sort(new Venta());
+
             float[] anchosTablaDatos = {150, 150, 150, 150, 150};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
 
@@ -187,6 +189,8 @@ public class Informes {
                 }
             }
 
+            listaVentasFiltrada.sort(new Venta());
+
             float[] anchosTablaDatos = {150, 150, 150, 150, 150};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
 
@@ -255,6 +259,8 @@ public class Informes {
                 }
             }
 
+            listaVentasFiltrada.sort(new Venta());
+
             float[] anchosTablaDatos = {150, 150, 150, 150, 150};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
 
@@ -264,7 +270,7 @@ public class Informes {
             p_titulo.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_IDVenta = new Paragraph("ID Venta", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
-            p_n_IDVenta.setAlignment(Element.ALIGN_CENTER);
+            p_n_IDVenta.setAlignment(Element.ALIGN_MIDDLE);
 
             Paragraph p_n_Matricula = new Paragraph("Matricula", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
             p_n_Matricula.setAlignment(Element.ALIGN_CENTER);

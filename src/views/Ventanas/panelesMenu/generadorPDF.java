@@ -229,7 +229,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
             String dni = JOptionPane.showInputDialog("Introduce el DNI del cliente");
             Informes informe = new Informes(cnVentas, "Ventas del cliente con DNI " + dni, rutaGenerarPDF);
 
-            if(informe.generarInformeVentasMarca(dni)){
+            if(informe.generarInformeVentasClientes(dni)){
                 JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
@@ -240,7 +240,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
             String nick = JOptionPane.showInputDialog("Introduce el nick del usuario");
             Informes informe = new Informes(cnVentas, "Ventas del usuario " + nick, rutaGenerarPDF);
 
-            if(informe.generarInformeVentasMarca(nick)){
+            if(informe.generarInformeVentasUsuario(nick)){
                 JOptionPane.showMessageDialog(this, "Informe generado", "En la ruta " + rutaGenerarPDF, JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);

@@ -1,6 +1,8 @@
 package entidades;
 
-public class Venta {
+import java.util.Comparator;
+
+public class Venta implements Comparator<Venta> {
 
     private String matricula;
     private String dni;
@@ -85,5 +87,10 @@ public class Venta {
                 ", precio=" + precio +
                 ", idVendedor=" + idVendedor +
                 '}';
+    }
+
+    @Override
+    public int compare(Venta v1, Venta v2) {
+        return String.valueOf(v1.getIdVenta()).compareTo(String.valueOf(v2.getIdVenta()));
     }
 }
