@@ -6,14 +6,21 @@ package views.Ventanas.panelesMenu;
  * and open the template in the editor.
  */
 
+import controllers.UsuarioCRUD;
+import controllers.VentaCRUD;
+import javafx.scene.control.RadioButton;
+import views.Ventanas.Paneles.Graficos.JFreeChart;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
  *
  * @author chris
  */
-public class generadorGraficos extends javax.swing.JFrame {
+public class generadorGraficos extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form estadisticas
@@ -21,9 +28,12 @@ public class generadorGraficos extends javax.swing.JFrame {
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
-
+    private UsuarioCRUD cnUsuario;
+    private VentaCRUD cnVenta;
 
     public generadorGraficos() {
+        cnUsuario = new UsuarioCRUD();
+        cnVenta = new VentaCRUD();
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -52,6 +62,7 @@ public class generadorGraficos extends javax.swing.JFrame {
         radioBarras = new javax.swing.JRadioButton();
         botonGenerarGrafico = new javax.swing.JButton();
         botonGenerarGrafico.setEnabled(false);
+        comboBox.setEnabled(false);
         buttonGroup1.add(radioBarras);
         buttonGroup1.add(radioQuesito);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -98,11 +109,7 @@ public class generadorGraficos extends javax.swing.JFrame {
         jPanel2.add(jLabel3, gridBagConstraints);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cantidad de ventas por usuario", "Capital de venta por usuario"}));
-        comboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxActionPerformed(evt);
-            }
-        });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -144,13 +151,40 @@ public class generadorGraficos extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         getContentPane().add(jPanel2, gridBagConstraints);
-
+        anadirEventos();
         pack();
     }// </editor-fold>
 
-    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+
+
+    private void anadirEventos(){
+        radioBarras.addActionListener(this);
+        radioQuesito.addActionListener(this);
+        botonGenerarGrafico.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generarGraficos();
+            }
+        });
     }
+
+    private void generarGraficos(){
+        JFreeChart tabla = new JFreeChart(cnUsuario.gesListaUsuarios(), cnVenta.getListaVentas());
+        if(radioBarras.isSelected()){
+            if(comboBox.getSelectedIndex() == 0){
+                tabla.generarGraficoVentas();
+            }else{
+                tabla.dineroUsuarios();
+            }
+        }else{
+            if(comboBox.getSelectedIndex() == 0){
+                tabla.generarGraficoVentasTarta();
+            }else{
+                tabla.generarGraficoDineroTartas();
+            }
+        }
+    }
+
 
     /**
      * @param args the command line arguments
@@ -200,5 +234,14 @@ public class generadorGraficos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton radioBarras;
     private javax.swing.JRadioButton radioQuesito;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JRadioButton radio = (JRadioButton) e.getSource();
+        if(radio.isSelected()){
+            this.comboBox.setEnabled(true);
+            this.botonGenerarGrafico.setEnabled(true);
+        }
+    }
     // End of variables declaration
 }

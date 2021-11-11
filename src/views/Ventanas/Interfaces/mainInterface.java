@@ -231,7 +231,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     }
 
     private void generarGrafico(){
-        new JFreeChart(cnUser.gesListaUsuarios(), cnVentas.getListaVentas()).dineroUsuarios();
+//        new JFreeChart(cnUser.gesListaUsuarios(), cnVentas.getListaVentas()).dineroUsuarios();
     }
 
     private void cambiarTema(){

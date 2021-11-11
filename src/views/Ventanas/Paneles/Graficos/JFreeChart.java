@@ -5,8 +5,10 @@ import entidades.Usuario;
 import entidades.Venta;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ public class JFreeChart extends JFrame {
 
     org.jfree.chart.JFreeChart grafico; //Objeto grafica
     private DefaultCategoryDataset datos; //Objeto q almacena los datos
+    private DefaultPieDataset datosTarta;
     private JButton botonCerrar;
     private ArrayList<Usuario> listaUsers;
     private ArrayList<Venta> listaVentas;
@@ -115,6 +118,59 @@ public class JFreeChart extends JFrame {
         ChartPanel panel = new ChartPanel(grafico);
         add(panel, BorderLayout.CENTER);
         add(botonCerrar,BorderLayout.SOUTH);
+        setVisible(true);
+        pack();
+    }
+
+
+    public void generarGraficoVentasTarta(){
+        ArrayList<String> nombreUsuarios = new ArrayList<>();
+        ArrayList<Integer> numeroVentas = new ArrayList<>();
+
+        rellenarArraysNumV(nombreUsuarios, numeroVentas);
+
+        botonCerrar = new JButton("Cerrar la gráfica");
+
+        botonCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        datosTarta = new DefaultPieDataset();
+        for(int i = 0 ; i < nombreUsuarios.size() ; i++){
+            datosTarta.setValue(nombreUsuarios.get(i),numeroVentas.get(i));
+        }
+        org.jfree.chart.JFreeChart chart = ChartFactory.createPieChart("Ventas por usuario",datosTarta, true, true, false);
+        ChartPanel panel = new ChartPanel(chart);
+        add(panel);
+        setVisible(true);
+        pack();
+    }
+
+    public void generarGraficoDineroTartas(){
+        ArrayList<String> nombreUsuarios = new ArrayList<>();
+        ArrayList<Float> numeroVentas = new ArrayList<>();
+
+        rellenarArraysCapitalV(nombreUsuarios, numeroVentas);
+
+        botonCerrar = new JButton("Cerrar la gráfica");
+
+        botonCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        datosTarta = new DefaultPieDataset();
+        for(int i = 0 ; i < nombreUsuarios.size() ; i++){
+            datosTarta.setValue(nombreUsuarios.get(i),numeroVentas.get(i));
+        }
+        org.jfree.chart.JFreeChart chart = ChartFactory.createPieChart("Total capital de ventas",datosTarta, true, true, false);
+        ChartPanel panel = new ChartPanel(chart);
+        add(panel);
         setVisible(true);
         pack();
     }
