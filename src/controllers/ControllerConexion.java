@@ -15,6 +15,8 @@ public class ControllerConexion {
         this.configuracion = new config();
     }
 
+
+
     public void setRegistros(){
         conexionMng.setRegistros(configuracion.getConfig());
     }

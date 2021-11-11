@@ -133,11 +133,11 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 10);
         add(botonEliminar, gridBagConstraints);
-//        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                botonEliminarActionPerformed(evt);
-//            }
-//        });
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
         this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
@@ -237,20 +237,20 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         // TODO add your handling code here:
     }
 
-//    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-//        String matricula = pedirMatricula();
-//        if(matricula != null){
-//            try{
-//                cnVentas.removevENTA(matricula);
-//                if(!cnVentas.ventaExiste(cnVentas.){
-//
-//                }
-//                fillTable();
-//            }catch (NumberFormatException ex){
-//                JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
-//    }
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+        String matricula = pedirMatricula();
+        if(matricula != null){
+            try{
+                cnVentas.removevENTA(matricula);
+                if(!cnVentas.ventaExiste(cnVentas.){
+
+                }
+                fillTable();
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

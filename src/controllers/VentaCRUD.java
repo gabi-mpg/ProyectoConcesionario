@@ -57,7 +57,7 @@ public class VentaCRUD {
     }
 
     public void removevENTA(int pk){
-        if (model.removeVenta(pk)){
+        if (model.removeVenta(buscarVenta(pk).getIdVenta())){
             System.out.println("Venta eliminada con exito");
         } else {
             System.out.println("Error eliminando la venta");

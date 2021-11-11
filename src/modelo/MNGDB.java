@@ -7,7 +7,10 @@ package modelo;
 
 import static utils.Utilidades.reescalarImagen;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 
 import javax.swing.ImageIcon;
@@ -159,7 +162,7 @@ public class MNGDB {
                     "('eduardo','Eduardo','Bethencourt Herrera','edu123',2,1)," +
                     "('invitado','-','-','1234',3,1)");
             exe.executeUpdate();
-            conexion.commit();
+            insertarDatos();
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
             try {
@@ -169,6 +172,35 @@ public class MNGDB {
             }
         }
     }
+
+    private void insertarDatos(){
+        String ruta = System.getProperty("user.dir") + File.separator + "INSERTS.txt";
+        File inserts = new File(ruta);
+
+        try {
+            FileReader fr = new FileReader(inserts);
+            BufferedReader br = new BufferedReader(fr);
+            String line = "";
+            conexion.setAutoCommit(false);
+            while ((line = br.readLine()) != null){
+                PreparedStatement exe = conexion.prepareStatement(line);
+                exe.executeUpdate();
+            }
+            conexion.commit();
+            conexion.setAutoCommit(true);
+            System.out.println("Hizo bien los inserts");
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            System.out.println("NO INSERTS");
+            try {
+                conexion.rollback();
+                conexion.setAutoCommit(true);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
     public boolean comprobarExsite(String nombreDatabase){
         try{
         PreparedStatement ps;
