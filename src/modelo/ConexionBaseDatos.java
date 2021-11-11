@@ -25,13 +25,9 @@ public class ConexionBaseDatos {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
         //new mainInterface(1,"delcorral",new ControllerConexion());
-        //new interfazLogin();
+        new interfazLogin();
         //new NewJFrame();
-        //JFreeChart diagrama = new JFreeChart();
 
-
-
-        //diagrama.dineroUsuarios(nombres,ventas);
 
 
 

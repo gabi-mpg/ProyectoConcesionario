@@ -31,22 +31,6 @@ public class JFreeChart extends JFrame {
         this.listaUsers = listaUsers;
         this.listaVentas = listaVentas;
 
-//        datos = new DefaultCategoryDataset();
-//
-//        //El valor a graficar, identificador, etiqutea de la comulmna
-//        datos.addValue(1, "Prueba1","Lunes");
-//        datos.addValue(2, "Prueba1","Martes");
-//        datos.addValue(4, "Prueba1","Miercoles");
-//        datos.addValue(4, "Prueba1","Jueves");
-//
-//        grafico = ChartFactory.createBarChart("Diagrama de barras","Prueba x","Prueba y",
-//                datos, PlotOrientation.HORIZONTAL, true, true, false);
-//
-//        //Esto es com un Jpanel pero de puras graficas
-//        ChartPanel panel = new ChartPanel(grafico);
-//        add(panel);
-//        setVisible(true);
-//        pack();
     }
 
     private void rellenarArraysNumV(ArrayList<String> nombreUsuarios, ArrayList<Integer> numeroVentas){

@@ -409,16 +409,20 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         JButton boton = (JButton) ae.getSource();
         if(boton == botonClientes){
             cambiarPanel(PANEL_CLIENTE);
+            setTitle("Concesionario Mercado Corral - Clientes");
 
         }else if(boton == botonMotos){
             cambiarPanel(PANEL_MOTO);
+            setTitle("Concesionario Mercado Corral - Motos");
 
         }else if(boton == botonVentas){
             panelVentas.setVisible(false);
             cambiarPanel(PANEL_VENTA);
+            setTitle("Concesionario Mercado Corral - Ventas");
 
         }else if(boton == botonUsuarios){
             cambiarPanel(PANEL_USUARIO);
+            setTitle("Concesionario Mercado Corral - Usuarios");
 
         }
 
