@@ -8,12 +8,11 @@ package views.Ventanas.Interfaces;
 import controllers.ControllerConexion;
 import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
-import modelo.config;
 import views.Ventanas.Paneles.Clientes;
-import views.Ventanas.Paneles.Graficos.JFreeChart;
 import views.Ventanas.Paneles.Motos;
 import views.Ventanas.Paneles.Usuarios;
 import views.Ventanas.Paneles.Ventas;
+import views.Ventanas.panelesMenu.contacto;
 import views.Ventanas.panelesMenu.generadorGraficos;
 import views.Ventanas.panelesMenu.generadorPDF;
 
@@ -22,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -37,7 +35,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private JMenuItem abrirBBDD,generarPDF,estadistica;
     private JMenuItem rutaFicheros, cambiarTema,verConexion,cerrarSesion;
     private JMenuItem infoConsulta,infoElimina, infoModif, infoInsertar;
-    private JMenuItem quienesSomos, contacto;
+    private JMenuItem quienesSomos, contactoNosotros;
     private Usuarios panelUsuario;
     private Clientes panelClientes;
     private Motos panelMotos;
@@ -92,8 +90,8 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         setTitle("Concesonario Mercado Corral");
         Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
         setIconImage(icono);
-        Image logo = Toolkit.getDefaultToolkit().getImage(ruta + "welcomelogo.png");
-
+        JLabel imagenLoco = new JLabel();
+        imagenLoco.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(ruta + "motoamarillalogo.png")));
 
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -228,7 +226,12 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
                 new generadorGraficos();
             }
         });
-
+        contactoNosotros.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new contacto();
+            }
+        });
     }
 
     private void cambiarTema(){
@@ -354,24 +357,15 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         menu_opciones.add(cerrarSesion);
 
         //Código del menu ayuda
-        menu_ayuda = new JMenu("Ayuda");
-        barra.add(menu_ayuda);
-        infoConsulta = new JMenuItem("Cómo consultar");
-        infoElimina = new JMenuItem("Cómo eliminar");
-        infoModif = new JMenuItem("Cómo modificar");
-        infoInsertar = new JMenuItem("Cómo insertar");
-        menu_ayuda.add(infoInsertar);
-        menu_ayuda.add(infoConsulta);
-        menu_ayuda.add(infoModif);
-        menu_ayuda.add(infoElimina);
+
 
         //Código del menu acerca de
         menu_acerca = new JMenu("Acerca de");
         barra.add(menu_acerca);
         quienesSomos = new JMenuItem("¿Quiénes somos?");
-        contacto = new JMenuItem("¡Contacta con nosotros!");
+        contactoNosotros = new JMenuItem("¡Contacta con nosotros!");
         menu_acerca.add(quienesSomos);
-        menu_acerca.add(contacto);
+        menu_acerca.add(contactoNosotros);
 
         setJMenuBar(barra);
     }

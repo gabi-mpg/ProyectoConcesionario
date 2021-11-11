@@ -64,13 +64,7 @@ public class VentaCRUD {
         }
     }
 
-    public void removevENTA(String pk){
-        if (model.removeVenta(pk)){
-            System.out.println("Venta eliminada con exito");
-        } else {
-            System.out.println("Error eliminando la venta");
-        }
-    }
+
 
     public void updateVenta(Venta venta){
         if (model.updateVenta(venta)){

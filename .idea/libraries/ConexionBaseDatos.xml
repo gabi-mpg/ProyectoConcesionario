@@ -4,8 +4,11 @@
       <root url="jar://$PROJECT_DIR$/dist/ConexionBaseDatos.jar!/" />
       <root url="jar://$PROJECT_DIR$/Recourses/itextpdf-5.5.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/Recourses/itextpdf-5.5.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Recourses/javax.mail.jar!/" />
+      <root url="file://$PROJECT_DIR$/dist" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/dist" recursive="false" />
   </library>
 </component>

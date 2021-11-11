@@ -1,26 +1,42 @@
 package views.Ventanas.panelesMenu;
 
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.Properties;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil.matches;
 
-public class contacto extends javax.swing.JFrame {
+public class contacto extends javax.swing.JDialog {
 
-    private String ruta =  System.getProperty("user.dir")+
+    private final String RUTA_REC =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
+    private final String EMAIL_REGEX = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private final Pattern pat = Pattern.compile(EMAIL_REGEX);
     /**
      * Creates new form contacto
      */
     public contacto() {
         initComponents();
+        setModal(true);
         setLocationRelativeTo(null);
+        setVisible(true);
         this.textoArea.setLineWrap(true);
         pack();
     }
@@ -35,7 +51,7 @@ public class contacto extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
         setTitle("Contacta con nosotros");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoCorreo.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(RUTA_REC +"iconoCorreo.png"));
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         textoCorreo = new javax.swing.JTextField();
@@ -46,7 +62,7 @@ public class contacto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         this.botonEnviarCorreo.setEnabled(false);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(560, 560));
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -129,9 +145,8 @@ public class contacto extends javax.swing.JFrame {
         textoCorreo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                String s = textoCorreo.getText();
-                if(matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",s)){
-                    textoCorreo.setForeground(new Color(0,143,57));
+                if(pat.matcher(textoCorreo.getText()).find()){
+                    textoCorreo.setForeground(new Color(0,143,37));
                     botonEnviarCorreo.setEnabled(true);
                 }else{
                     textoCorreo.setForeground(Color.BLACK);
@@ -139,12 +154,59 @@ public class contacto extends javax.swing.JFrame {
                 }
             }
         });
+        botonEnviarCorreo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String correo = "gabrielamercadoperez@gmail.com";
+                if(enviarConGMail(correo,"Nueva solicitud de ayuda programa \"Proyecto Concesionario\"",generarCuerpoCorreo())){
+                    JOptionPane.showMessageDialog(null,"Se ha enviado el mensaje correctamente","Correo enviado",JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null,"No se ha enviado el mensaje","Correo enviado",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         pack();
     }// </editor-fold>
 
-    /**
-     * @param args the command line arguments
-     */
+
+    private boolean enviarConGMail(String destinatario, String asunto, String cuerpo) {
+        // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
+        String remitente = "concesionariomercadocorral";  //Para la dirección nomcuenta@gmail.com
+
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+        props.put("mail.smtp.user", remitente);
+        props.put("mail.smtp.clave", "concesionario1");    //La clave de la cuenta
+        props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+        props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+        props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            message.setFrom(new InternetAddress(remitente));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("gabrielamercadoperez@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("christiandelcorral00@gmail.com"));//Se podrían añadir varios de la misma manera
+            message.setSubject(asunto);
+            message.setText(cuerpo);
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", remitente, "concesionario1");
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            return true;
+        }
+        catch (javax.mail.MessagingException me) {
+            me.printStackTrace();   //Si se produce un error
+        }
+        return false;
+    }
+
+    private String generarCuerpoCorreo(){
+        return textoArea.getText()+"\n\n Mensaje enviado del cliente con correo: "+textoCorreo.getText();
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
