@@ -6,6 +6,7 @@
 package views.Ventanas.Interfaces;
 
 import controllers.ControllerConexion;
+import modelo.config;
 import views.Ventanas.Paneles.Clientes;
 import views.Ventanas.Paneles.Motos;
 import views.Ventanas.Paneles.Usuarios;
@@ -47,6 +48,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private String ruta =System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"Imagenes"+ File.separator;
+    private config configuracionTema;
 
     public mainInterface() {
         this.nivelUsuario = 1;
@@ -62,10 +64,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.nivelUsuario = nivelUsuario;
         this.conexion = conexion;
         this.nombreUsuario = nombreUsuario;
+
         initComponents();
         alterarPermisos();
         setLocation(d.width/4+d.width/32,d.height/4);
-
         setResizable(false);
         setVisible(true);
         pack();
@@ -96,7 +98,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonUsuarios = new javax.swing.JButton();
         botonUsuarios.setEnabled(false);
         panelSecundario = new javax.swing.JPanel();
-        this.tema = 1;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,6 +161,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.panelUsuario = new Usuarios(nivelUsuario);
         this.panelVentas = new Ventas(nivelUsuario, nombreUsuario);
 
+        configuracionTema = new config();
         botonVentas.addActionListener(this);
         botonVentas.addActionListener(this);
         botonClientes.addActionListener(this);
@@ -172,6 +174,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         });
         anadirMenu();
         anadirPaneles();
+        cambiarTema();
         eventos();
 
     }// </editor-fold>
@@ -217,7 +220,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     }
 
     private void cambiarTema(){
-        if (tema == 1){
+        if (configuracionTema.getModoNocturno().equals(configuracionTema.NOCTURNO_ACTIVADO)){
             botonVentas.setBackground(new Color(162, 0, 212));
             botonClientes.setBackground(new Color(162, 0, 212));
             botonMotos.setBackground(new Color(162, 0, 212));
@@ -229,7 +232,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             panelClientes.cambiarTema();
             panelUsuario.cambiarTema();
             panelVentas.cambiarTema();
-            setTema(0);
+            configuracionTema.setModoNocturno(configuracionTema.NOCTURNO_DESACTIVADO);
         } else {
             botonVentas.setBackground(new Color(218, 218, 218));
             botonClientes.setBackground(new Color(218, 218, 218));
@@ -242,7 +245,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             panelClientes.cambiarTema();
             panelUsuario.cambiarTema();
             panelVentas.cambiarTema();
-            setTema(1);
+            configuracionTema.setModoNocturno(configuracionTema.NOCTURNO_ACTIVADO);
         }
         System.out.println(tema);
 

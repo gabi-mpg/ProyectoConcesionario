@@ -21,7 +21,7 @@ public class ConexionBaseDatos {
     public static void main(String[] args) {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
-        //new mainInterface(1,new ControllerConexion());
+        new mainInterface(1,"delcorral",new ControllerConexion());
         //new interfazLogin();
         //new NewJFrame();
 
