@@ -270,12 +270,22 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
 
 
         }else{
-            String ID = JOptionPane.showInputDialog(this,"Introduce el ID de la venta");
-            if(cnVentas.ventaExiste(ID)){
-                panelModificar = new PanelModificarVenta();
-                panelModificar.setID(ID);
-                panelModificar.rellenarCampos();
+            String matricula = JOptionPane.showInputDialog(this,"Introduce la matricula de la venta");
+                new PanelModificarVenta(matricula);
+        }
+    }
+
+    private String pedirMatricula(){
+        try{
+            String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
+
+            while (!cnVentas.comprobarMatricula(matricula)){
+                JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
+                matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
             }
+            return matricula;
+        } catch (Exception e){
+            return null;
         }
     }
     // End of variables declaration//GEN-END:variables

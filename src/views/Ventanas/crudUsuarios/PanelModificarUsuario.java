@@ -29,7 +29,7 @@ public class PanelModificarUsuario extends JDialog {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
-            setVisible(true);
+
         }
 
         /**
@@ -178,6 +178,7 @@ public class PanelModificarUsuario extends JDialog {
                 textoApellido.setText(usuario.getApellidos());
                 textoNombre.setText(usuario.getNombre());
                 textoDireccion.setText(String.valueOf(usuario.getPermiso()));
+                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "El usuario no existe en la BD");
                 this.dispose();
@@ -211,7 +212,7 @@ public class PanelModificarUsuario extends JDialog {
                 String nombre = textoNombre.getText();
                 String apellidos = textoApellido.getText();
                 Usuario usuario = cnUser.buscarUsuario(nick);
-                String contra = usuario.getContra();
+                //String contra = usuario.getContra();
                 int permiso = Integer.parseInt(textoDireccion.getText());
                 usuario.setNombre(nombre);
                 usuario.setApellidos(apellidos);

@@ -27,7 +27,6 @@ public class PanelModificarMoto extends javax.swing.JDialog {
             rellenarCampos();
             setLocationRelativeTo(null);
             setResizable(false);
-            setVisible(true);
         }
 
         /**
@@ -184,6 +183,7 @@ public class PanelModificarMoto extends javax.swing.JDialog {
                 textoApellido.setText(moto.getColor());
                 textoNombre.setText(moto.getMarca());
                 textoDireccion.setText(String.valueOf(moto.getTanque()));
+                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "La moto no existe en la BD");
                 this.dispose();

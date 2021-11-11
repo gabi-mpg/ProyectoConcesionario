@@ -30,8 +30,6 @@ public class PanelModificarCliente extends JDialog {
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
-
-            setVisible(true);
         }
 
         /**
@@ -208,6 +206,7 @@ public class PanelModificarCliente extends JDialog {
                 textoNombre.setText(cliente.getNombre());
                 textoApellido.setText(cliente.getApellido());
                 textoDireccion.setText(cliente.getDireccion());
+                setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "EL cliente no existe en la BD");
                 this.dispose();

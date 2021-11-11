@@ -2,6 +2,7 @@ package views.Ventanas.crudVentas;
 
 import controllers.MotoCRUD;
 import controllers.VentaCRUD;
+import entidades.Cliente;
 import entidades.Moto;
 import entidades.Venta;
 
@@ -25,12 +26,13 @@ public class PanelModificarVenta extends JFrame {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public PanelModificarVenta() {
+        public PanelModificarVenta(String ID) {
             initComponents();
-            setSize(350, 500);
+            //setSize(350, 800);
             setLocationRelativeTo(null);
-            setResizable(false);
-            setVisible(true);
+            setResizable(true);
+            this.ID = ID;
+            rellenarCampos();
         }
 
         /**
@@ -64,19 +66,18 @@ public class PanelModificarVenta extends JFrame {
             panelBotton = new javax.swing.JPanel();
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
-            ID = "";
             cnVenta = new VentaCRUD();
 
 
 
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             getContentPane().setLayout(new java.awt.GridBagLayout());
 
-            panelTitulo.setPreferredSize(new java.awt.Dimension(280, 100));
+            panelTitulo.setPreferredSize(new java.awt.Dimension(290, 120));
             panelTitulo.setLayout(new java.awt.GridBagLayout());
 
-            jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+            jLabel1.setFont(new java.awt.Font("Dialog", Font.BOLD, 18)); // NOI18N
             jLabel1.setText("Modificar venta");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
@@ -96,7 +97,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
             panelTitulo.add(labelVariable, gridBagConstraints);
 
-            labelIDVenta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+            labelIDVenta.setFont(new java.awt.Font("Dialog", Font.BOLD, 14)); // NOI18N
             labelIDVenta.setText("-");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
@@ -105,7 +106,7 @@ public class PanelModificarVenta extends JFrame {
 
             getContentPane().add(panelTitulo, new java.awt.GridBagConstraints());
 
-            panelCuerpo.setPreferredSize(new java.awt.Dimension(280, 270));
+            panelCuerpo.setPreferredSize(new java.awt.Dimension(600, 290));
             panelCuerpo.setLayout(new java.awt.GridBagLayout());
 
             textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
@@ -173,7 +174,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.gridy = 1;
             getContentPane().add(panelCuerpo, gridBagConstraints);
 
-            panelBotton.setPreferredSize(new java.awt.Dimension(280, 100));
+            panelBotton.setPreferredSize(new java.awt.Dimension(290, 100));
             panelBotton.setLayout(new java.awt.GridBagLayout());
 
             botonModificar.setText("Modificar registro");
@@ -182,11 +183,23 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.gridy = 1;
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelBotton.add(botonModificar, gridBagConstraints);
+            botonModificar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    modificar(actionEvent);
+                }
+            });
 
             checkLimpiar.setText("Limpiar campos");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelBotton.add(checkLimpiar, gridBagConstraints);
+            checkLimpiar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    checkLimpiarActionPerformed(actionEvent);
+                }
+            });
 
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
@@ -196,16 +209,26 @@ public class PanelModificarVenta extends JFrame {
             pack();
         }// </editor-fold>
 
-        public void rellenarCampos(){
+        public void rellenarCampos() {
+            if (cnVenta.ventaExiste(ID)) {
                 Venta venta = cnVenta.buscarVenta(ID);
                 labelIDVenta.setText(ID);
                 textoMatricula.setText(venta.getMatricula());
                 textoDNI.setText(venta.getDni());
                 textoPrecio.setText(String.valueOf(venta.getPrecio()));
                 textoVendedor.setText(String.valueOf(venta.getIdVendedor()));
+                setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "La venta no existe en la BD");
+                this.dispose();
+            }
         }
+
         private void checkLimpiarActionPerformed(ActionEvent evt) {
-            // TODO add your handling code here:
+            textoDNI.setText("");
+            textoMatricula.setText("");
+            textoPrecio.setText("");
+            checkLimpiar.setSelected(false);
         }
 
         private void modificar(ActionEvent evt) {
@@ -216,10 +239,6 @@ public class PanelModificarVenta extends JFrame {
             venta.setIdVendedor(textoVendedor.getText());
             cnVenta.updateVenta(venta);
             dispose();
-        }
-
-        public void setID(String ID) {
-            this.ID = ID;
         }
 
     // Variables declaration - do not modify
