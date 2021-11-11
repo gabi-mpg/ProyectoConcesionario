@@ -40,6 +40,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private final String PANEL_MOTO = "moto";
     private final String PANEL_VENTA = "venta";
     private int nivelUsuario;
+    private int tema;
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private ControllerConexion conexion;
     private String ruta =System.getProperty("user.dir")+
@@ -80,6 +81,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         setTitle("Concesonario Mercado Corral");
         Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
         setIconImage(icono);
+        Image logo = Toolkit.getDefaultToolkit().getImage(ruta + "welcomelogo.png");
 
 
         java.awt.GridBagConstraints gridBagConstraints;
@@ -92,6 +94,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonUsuarios = new javax.swing.JButton();
         botonUsuarios.setEnabled(false);
         panelSecundario = new javax.swing.JPanel();
+        this.tema = 1;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,18 +182,13 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         generarPDF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new generadorPDF(conexion);
+                new generadorPDF();
             }
         });
         abrirBBDD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"Se abrirá SQL Workbench si lo tiene insalado");
-                try {
-                    Desktop.getDesktop().open(new File("C:\\Program Files\\MySQL\\MySQL Workbench 8.0\\MySQLWorkbench.exe"));
-                } catch (IOException ioException) {
-                    JOptionPane.showMessageDialog(null,"No está instalado MySQL Workbench o se ha cambiado su ruta");
-                }
+                abrirBBDD();
             }
         });
         verConexion.addActionListener(new ActionListener() {
@@ -200,6 +198,71 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             }
         });
 
+        cerrarSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                cerrarSesion();
+            }
+        });
+
+        cambiarTema.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                cambiarTema();
+            }
+        });
+
+    }
+
+    private void cambiarTema(){
+        if (tema == 1){
+            botonVentas.setBackground(new Color(162, 0, 212));
+            botonClientes.setBackground(new Color(162, 0, 212));
+            botonMotos.setBackground(new Color(162, 0, 212));
+            botonUsuarios.setBackground(new Color(162, 0, 212));
+            jPanel1.setBackground(new Color(118, 118, 118));
+            panelSecundario.setBackground(new Color(53, 52, 53));
+            panelSecundario.setForeground(new Color(128, 128, 128));
+            panelMotos.cambiarTema();
+            panelClientes.cambiarTema();
+            panelUsuario.cambiarTema();
+            panelVentas.cambiarTema();
+            setTema(0);
+        } else {
+            botonVentas.setBackground(new Color(218, 218, 218));
+            botonClientes.setBackground(new Color(218, 218, 218));
+            botonMotos.setBackground(new Color(218, 218, 218));
+            botonUsuarios.setBackground(new Color(218, 218, 218));
+            panelSecundario.setBackground(new java.awt.Color(153, 255, 153));
+            panelSecundario.setForeground(new java.awt.Color(204, 255, 204));
+            jPanel1.setBackground(new java.awt.Color(255, 153, 204));
+            panelMotos.cambiarTema();
+            panelClientes.cambiarTema();
+            panelUsuario.cambiarTema();
+            panelVentas.cambiarTema();
+            setTema(1);
+        }
+        System.out.println(tema);
+
+    }
+
+    private void cerrarSesion(){
+        this.dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new interfazLogin().setVisible(true);
+            }
+        });
+
+    }
+
+    private void abrirBBDD(){
+        JOptionPane.showMessageDialog(null,"Se abrirá SQL Workbench si lo tiene insalado");
+        try {
+            Desktop.getDesktop().open(new File("C:\\Program Files\\MySQL\\MySQL Workbench 8.0\\MySQLWorkbench.exe"));
+        } catch (IOException ioException) {
+            JOptionPane.showMessageDialog(null,"No está instalado MySQL Workbench o se ha cambiado su ruta");
+        }
     }
 
     private void mostrarConexionActual(){
@@ -384,6 +447,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     public void mostrar(){
         Thread o = new Thread(new mostrarPanel(this));
         o.start();
+    }
+
+    public void setTema(int tema) {
+        this.tema = tema;
     }
 
     class esconderPanel implements Runnable{

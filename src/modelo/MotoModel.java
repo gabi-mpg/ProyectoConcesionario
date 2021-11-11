@@ -69,9 +69,6 @@ public class MotoModel{
 
     public ArrayList<Moto> getListaMotos(){
         saveMotos();
-        for (Moto m : listaMotos){
-            System.out.println(m.toString());
-        }
         return listaMotos;
     }
 

@@ -68,6 +68,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
         cnVentas = new VentaCRUD();
+        tema = 1;
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -135,6 +136,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         });
 
 
+        this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,8 +186,28 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     }
 
 
+    public void cambiarTema(){
+        if (tema == 1){
+            botonBuscar.setBackground(new Color(162, 0, 212));
+            botonEliminar.setBackground(new Color(162, 0, 212));
+            botonModificar.setBackground(new Color(162, 0, 212));
+            botonCrear.setBackground(new Color(162, 0, 212));
+            this.setBackground(new Color(53, 52, 53));
+            setTema(0);
+        } else {
+            botonBuscar.setBackground(new Color(218, 218, 218));
+            botonCrear.setBackground(new Color(218, 218, 218));
+            botonEliminar.setBackground(new Color(218, 218, 218));
+            botonModificar.setBackground(new Color(218, 218, 218));
+            this.setBackground(new java.awt.Color(204, 255, 204));
+            setTema(1);
+        }
+        System.out.println(tema);
+    }
 
-
+    public void setTema(int tema) {
+        this.tema = tema;
+    }
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
@@ -213,7 +235,9 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-
+        int ID = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "Eliminar", JOptionPane.PLAIN_MESSAGE));
+        cnVentas.removevENTA(ID);
+        fillTable();
     }
 
 
@@ -227,6 +251,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     private DefaultTableModel model;
     private VentaCRUD cnVentas;
     private PanelModificarVenta panelModificar;
+    private int tema;
 
     @Override
     public void actionPerformed(ActionEvent e) {

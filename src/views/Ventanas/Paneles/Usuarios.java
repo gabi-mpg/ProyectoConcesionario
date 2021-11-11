@@ -64,6 +64,7 @@ public class Usuarios extends javax.swing.JPanel {
         cnUsuario = new UsuarioCRUD();
         panelModificar = new PanelModificarUsuario();
         panelModificar.setVisible(false);
+        tema = 1;
 
         setPreferredSize(new java.awt.Dimension(600, 300));
         setLayout(new java.awt.GridBagLayout());
@@ -129,6 +130,8 @@ public class Usuarios extends javax.swing.JPanel {
                 botonModificarActionPerformed(evt);
             }
         });
+
+        this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -219,7 +222,36 @@ public class Usuarios extends javax.swing.JPanel {
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+        String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "Eliminar", JOptionPane.PLAIN_MESSAGE);
+        if (nick != null){
+            cnUsuario.removeUsuario(nick);
+            fillTable();
+        }
 
+    }
+
+    public void cambiarTema(){
+        if (tema == 1){
+            botonBuscar.setBackground(new Color(162, 0, 212));
+            botonEliminar.setBackground(new Color(162, 0, 212));
+            botonModificar.setBackground(new Color(162, 0, 212));
+            botonCrear.setBackground(new Color(162, 0, 212));
+            this.setBackground(new Color(53, 52, 53));
+            setTema(0);
+        } else {
+            botonBuscar.setBackground(new Color(218, 218, 218));
+            botonCrear.setBackground(new Color(218, 218, 218));
+            botonEliminar.setBackground(new Color(218, 218, 218));
+            botonModificar.setBackground(new Color(218, 218, 218));
+            this.setBackground(new java.awt.Color(204, 255, 204));
+            setTema(1);
+        }
+        System.out.println(tema);
+
+    }
+
+    public void setTema(int tema) {
+        this.tema = tema;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -232,5 +264,6 @@ public class Usuarios extends javax.swing.JPanel {
     private DefaultTableModel model;
     private UsuarioCRUD cnUsuario;
     private PanelModificarUsuario panelModificar;
+    private int tema;
     // End of variables declaration//GEN-END:variables
 }
