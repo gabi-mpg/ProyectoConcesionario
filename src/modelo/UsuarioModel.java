@@ -1,6 +1,7 @@
 package modelo;
 
 import controllers.ControllerConexion;
+import entidades.Cliente;
 import entidades.Usuario;
 
 import java.sql.*;
@@ -142,6 +143,12 @@ public class UsuarioModel {
                 u.setExiste(usuario.isExiste());
             }
         }
+    }
+
+    public void updateExiste(boolean exists, String nick){
+        Usuario user = buscarUsuario(nick);
+        user.setExiste(exists);
+        updateUsuario(user);
     }
 
     public void conectar(){

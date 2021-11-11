@@ -1,5 +1,6 @@
 package controllers;
 
+import entidades.Cliente;
 import entidades.Usuario;
 import modelo.UsuarioModel;
 
@@ -49,6 +50,10 @@ public class UsuarioCRUD {
         }
     }
 
+    public void updateExiste(boolean existe, String pk){
+        model.updateExiste(existe, pk);
+    }
+
     public void updateUsuario(Usuario usuario){
         if (model.updateUsuario(usuario)){
             System.out.println("Usuario actualizado con exito");
@@ -56,4 +61,6 @@ public class UsuarioCRUD {
             System.out.println("Error actualizando el usuario");
         }
     }
+
+
 }

@@ -6,6 +6,8 @@ package views.Ventanas.crudUsuarios;
  */
 
 
+import controllers.UsuarioCRUD;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,12 +46,13 @@ public class insertarUsuario extends JDialog {
         textoNick = new javax.swing.JTextField();
         textoNombre = new javax.swing.JTextField();
         textoApellidos = new javax.swing.JTextField();
-        tectoContra = new javax.swing.JTextField();
+        textoContra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         botonInsertar = new javax.swing.JButton();
+        cnUser = new UsuarioCRUD();
 
         setPreferredSize(new java.awt.Dimension(230, 390));
         setLayout(new java.awt.GridBagLayout());
@@ -102,14 +105,14 @@ public class insertarUsuario extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
         add(textoApellidos, gridBagConstraints);
 
-        tectoContra.setMinimumSize(new java.awt.Dimension(130, 24));
-        tectoContra.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoContra.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoContra.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(tectoContra, gridBagConstraints);
+        add(textoContra, gridBagConstraints);
 
         jLabel3.setText("Nick");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -166,7 +169,38 @@ public class insertarUsuario extends JDialog {
         // TODO add your handling code here:
     }
 
+    private void insertarUsuario(){
+            String nick = textoNick.getText();
+            if (cnUser.usuarioExiste(nick)){
+                if(cnUser.buscarUsuario(nick).isExiste() == false){
+                    cnUser.updateExiste(true, nick);
+                    System.out.println("pasa por esta zona");
+                    JOptionPane.showMessageDialog(this, "Cliente agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this,"Usuario agregado","Aviso",JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+            }
 
+            } else {
+                String nombre = textoNombre.getText();
+                String apellido = textoApellidos.getText();
+                String contra = textoContra.getText();
+                nick = textoNick.getText();
+                if(!contra.isEmpty() && !nick.isEmpty() && !nombre.isEmpty() && !apellido.isEmpty()){
+                    if(cnUser.agregarUsuario(nick, nombre, apellido, contra, 0)){
+                        JOptionPane.showMessageDialog(this,"Usuario agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
+                        System.out.println("esta aqui");
+                    }else{
+                        JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
+                        System.out.println( "viene paca");
+                    }
+
+                }else{
+                    JOptionPane.showMessageDialog(this,"Faltan campos","Informacion",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+    }
     // Variables declaration - do not modify
     private javax.swing.JButton botonInsertar;
     private javax.swing.JLabel iconoInsertar;
@@ -175,9 +209,11 @@ public class insertarUsuario extends JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField tectoContra;
+    private javax.swing.JTextField textoContra;
     private javax.swing.JTextField textoApellidos;
     private javax.swing.JTextField textoNombre;
     private javax.swing.JTextField textoNick;
+    private UsuarioCRUD cnUser;
+
     // End of variables declaration
 }
