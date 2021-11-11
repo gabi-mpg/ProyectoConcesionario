@@ -13,6 +13,7 @@ import views.Ventanas.crudUsuarios.insertarUsuario;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 /**
@@ -62,8 +63,6 @@ public class Usuarios extends javax.swing.JPanel {
         botonEliminar = new javax.swing.JButton();
         model = new DefaultTableModel();
         cnUsuario = new UsuarioCRUD();
-        panelModificar = new PanelModificarUsuario();
-        panelModificar.setVisible(false);
         tema = 1;
 
         setPreferredSize(new java.awt.Dimension(600, 300));
@@ -125,11 +124,6 @@ public class Usuarios extends javax.swing.JPanel {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 5);
         add(botonEliminar, gridBagConstraints);
-        botonModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarActionPerformed(evt);
-            }
-        });
 
         this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
@@ -197,12 +191,12 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            String nick = JOptionPane.showInputDialog(this, "Introduce el nick de usuario", 1);
+            String nick = JOptionPane.showInputDialog(this, "Introduce el nick de usuario", "Nick", JOptionPane.PLAIN_MESSAGE);
             if (cnUsuario.usuarioExiste(nick)){
                 Usuario user = cnUsuario.buscarUsuario(nick);
                 fillTableBuscar(user);
             } else {
-                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
+                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (Exception e){
@@ -210,15 +204,17 @@ public class Usuarios extends javax.swing.JPanel {
         }
     }
 
-    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "-");
-        panelModificar.setNick(nick);
-        panelModificar.rellenarCampos();
-        fillTable();
+    private void botonModificarActionPerformed(ActionEvent evt){
+        String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario - MOD2", "Nick", JOptionPane.PLAIN_MESSAGE);
+        if (nick != null){
+            new PanelModificarUsuario(nick);
+            fillTable();
+        }
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
        new insertarUsuario();
+       fillTable();
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,7 +259,6 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JTable tablaResultado;
     private DefaultTableModel model;
     private UsuarioCRUD cnUsuario;
-    private PanelModificarUsuario panelModificar;
     private int tema;
     // End of variables declaration//GEN-END:variables
 }

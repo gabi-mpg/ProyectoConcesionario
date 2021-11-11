@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class PanelModificarUsuario extends JFrame {
+public class PanelModificarUsuario extends JDialog {
 
 
         private String ruta = System.getProperty("user.dir")+
@@ -21,11 +21,15 @@ public class PanelModificarUsuario extends JFrame {
          */
         //Para meter motos, {matricula,marca,gasolina,etc}
         // y así reutilizar el panel
-        public PanelModificarUsuario() {
+        public PanelModificarUsuario(String nick) {
+            setModal(true);
             initComponents();
+            this.nick = (nick);
+            rellenarCampos();
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
             setResizable(false);
+
         }
 
         /**
@@ -53,10 +57,8 @@ public class PanelModificarUsuario extends JFrame {
             panelBotton = new javax.swing.JPanel();
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
-            nick = "";
             cnUser = new UsuarioCRUD();
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             getContentPane().setLayout(new java.awt.GridBagLayout());
 
             panelTitulo.setPreferredSize(new java.awt.Dimension(270, 100));
@@ -168,8 +170,8 @@ public class PanelModificarUsuario extends JFrame {
             agregarListeners();
         }// </editor-fold>
 
-        public void rellenarCampos(){
-            setVisible(true);
+        public void
+        rellenarCampos(){
             if (cnUser.usuarioExiste(nick)){
                 Usuario usuario = cnUser.buscarUsuario(nick);
                 labelDNI.setText(nick);

@@ -6,23 +6,25 @@ package views.Ventanas.crudUsuarios;
  */
 
 
+import javax.swing.*;
 import java.io.File;
 
 /**
  *
  * @author chris
  */
-public class insertarUsuario extends javax.swing.JFrame {
+public class insertarUsuario extends JDialog {
 
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
 
     public insertarUsuario() {
-        this.setVisible(true);
+        setModal(true);
         setLocationRelativeTo(null);
         setSize(260,410);
         initComponents();
+        this.setVisible(true);
     }
 
     /**
