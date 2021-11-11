@@ -19,7 +19,7 @@ public class VentaCRUD {
 
     public boolean agregarVenta(String matricula, String DNI, double precio, String idUsuario){
         if (model.buscarExistencia(matricula, DNI)){
-            model.addVenta(new Venta(matricula, DNI, precio, idUsuario, true));
+            model.addVenta(new Venta(matricula, DNI, precio, idUsuario, 1));
             return true;
         } else {
             return false;
@@ -69,4 +69,14 @@ public class VentaCRUD {
             System.out.println("Error actualizando la venta");
         }
     }
+
+    public void cambioExsite(Venta venta){
+        if(model.cambiarExiste(venta)){
+            System.out.println("Moto cambiada");
+        }else{
+            System.out.println("No se ha podido cambiar");
+        }
+    }
+
+
 }

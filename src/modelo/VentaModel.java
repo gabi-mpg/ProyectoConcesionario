@@ -38,7 +38,7 @@ public class VentaModel {
                 String dni = rs.getString("DNI");
                 double precio = rs.getDouble("Precio");
                 String idVendedor = rs.getString("IDVendedor");
-                boolean existe = rs.getBoolean("existe");
+                int existe = rs.getInt("existe");
                 Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor, existe);
                 listaVentas.add(venta);
             }
@@ -52,7 +52,7 @@ public class VentaModel {
     public Venta buscarVenta(String pk){
         saveVentas();
         for(Venta v : listaVentas){
-            if (v.getIdVendedor().equalsIgnoreCase(pk)){
+            if (v.getMatricula().equals(pk)){
                 return v;
             }
         }
@@ -87,13 +87,14 @@ public class VentaModel {
 
     public void addVenta(Venta venta){
         saveVentas();
-        String sql = "INSERT INTO t_ventas values (?, ?, ?, ?)";
+        String sql = "INSERT INTO t_ventas values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, venta.getMatricula());
             pst.setString(2, venta.getDni());
             pst.setDouble(3, venta.getPrecio());
             pst.setString(4, venta.getIdVendedor());//esto no lo pediremos al usuario
+            pst.setInt(5,1);
             //sino que lo mandaremos directamente segun quien haya iniciado sesion
 
             pst.executeUpdate();
@@ -104,6 +105,7 @@ public class VentaModel {
         getListaVentas();
     }
 
+    //Cambiar a cero removeVEntas
     public boolean removeVenta(int pk){
         saveVentas();
         String sql = "delete from t_ventas where pk = ?";
@@ -136,8 +138,22 @@ public class VentaModel {
             throwables.printStackTrace();
             return false;
         }
+    }
 
-
+    public boolean cambiarExiste(Venta venta){
+        saveVentas();
+        String sql = "UPDATE t_ventas set existe = ? where Matricula = ?";
+        try {
+            PreparedStatement pst = conexion.prepareStatement(sql);
+            pst.setInt(1, 1);
+            pst.setString(2, venta.getMatricula());
+            pst.executeUpdate();
+            updateVentaLista(venta);
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
     }
 
     private void updateVentaLista(Venta venta){

@@ -6,7 +6,13 @@ package views.Ventanas.crudVentas;
  */
 
 
+import controllers.VentaCRUD;
+import entidades.Venta;
+
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -20,6 +26,8 @@ public class insertarVenta extends javax.swing.JFrame {
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
             +"imagenes"+ File.separator;
+    private boolean DNICorrecto = false;
+    private boolean MatriculaCorrecta = false;
 
     public insertarVenta() {
         this.setVisible(true);
@@ -82,14 +90,15 @@ public class insertarVenta extends javax.swing.JFrame {
         textoDNI.setPreferredSize(new java.awt.Dimension(130, 24));
         textoDNI.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                String dni = textoDNI.getText();
-                if(dni.matches("[0-9]{7,8}[A-Za-z]")){
+            public void keyReleased(KeyEvent e) {
+                if(textoDNI.getText().matches("[0-9]{7,8}[A-Za-z]")){
                     textoDNI.setForeground(new Color(0,143,57));
+                    DNICorrecto = true;
                 }else{
                     textoDNI.setForeground(Color.BLACK);
+                    DNICorrecto = false;
                 }
-            }
+        }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -115,8 +124,20 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
         add(textoMatricula, gridBagConstraints);
+        textoMatricula.addKeyListener(new KeyAdapter() {
+          @Override
+          public void keyReleased(KeyEvent e) {
+              if(textoMatricula.getText().matches("^[0-9]{4}[A-Z]{3}$")){
+                  textoMatricula.setForeground(new Color(0,143,57));
+                  MatriculaCorrecta = true;
+              }else{
+                  textoMatricula.setForeground(Color.BLACK);
+                  MatriculaCorrecta = false;
+              }
+          }
+      });
 
-        jLabel3.setText("ID Vendedor");
+                jLabel3.setText("Nick vendedor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -158,10 +179,55 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         add(botonInsertar, gridBagConstraints);
+        botonInsertar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comprobarCampos();
+            }
+        });
     }// </editor-fold>
 
 
+    private void comprobarCampos(){
+        String mensajeError = "";
+        if(!DNICorrecto){
+            mensajeError+=" DNI, ";
+        }
+        if(!MatriculaCorrecta){
+            mensajeError+=" Matricula, ";
+        }
+        if(textoPrecio.getText().isEmpty()){
+            mensajeError+=" Campo precio, ";
+        }
+        if(textoIDVendedor.getText().isEmpty()){
+            mensajeError+=" Campo ID vendedor, ";
+        }
+        if(!mensajeError.isEmpty()){
+            mensajeError = mensajeError.substring(0,mensajeError.lastIndexOf(","));
+            mensajeError+= " incorrecto/s";
+            JOptionPane.showMessageDialog(this,mensajeError,"Error en los datos",JOptionPane.ERROR_MESSAGE);
+        }else{
+            anadirVenta();
+        }
+    }
 
+    private void anadirVenta(){
+        cnVenta = new VentaCRUD();
+       if(cnVenta.ventaExiste(textoMatricula.getText())){
+           Venta venta = cnVenta.buscarVenta(textoMatricula.getText());
+           venta.setExiste(1);
+           cnVenta.cambioExsite(venta);
+       }else{
+            if(cnVenta.agregarVenta(textoMatricula.getText(),
+                    textoDNI.getText(),
+                    Double.parseDouble(textoPrecio.getText()),
+                    textoIDVendedor.getText())){
+                JOptionPane.showMessageDialog(this,"Registro creado","Se ha añadido la nueva venta",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Error al crear","No se ha registrado la nueva venta",JOptionPane.ERROR_MESSAGE);
+            }
+       }
+    }
 
     // Variables declaration - do not modify
     private javax.swing.JButton botonInsertar;
@@ -175,5 +241,6 @@ public class insertarVenta extends javax.swing.JFrame {
     private javax.swing.JTextField textoPrecio;
     private javax.swing.JTextField textoDNI;
     private javax.swing.JTextField textoIDVendedor;
+    private VentaCRUD cnVenta;
     // End of variables declaration
 }

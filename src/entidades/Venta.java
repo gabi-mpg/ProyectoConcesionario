@@ -9,12 +9,12 @@ public class Venta implements Comparator<Venta> {
     private double precio;
     private String idVendedor;
     private int idVenta;
-    private boolean existe;
+    private int existe;
 
     public Venta(){
 
     }
-    public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor, boolean existe) {
+    public Venta(int idVenta, String matricula, String dni, double precio, String idVendedor, int existe) {
         this.idVenta = idVenta;
         this.matricula = matricula;
         this.dni = dni;
@@ -23,7 +23,7 @@ public class Venta implements Comparator<Venta> {
         this.existe = existe;
     }
 
-    public Venta(String matricula, String dni, double precio, String idVendedor, boolean existe) {
+    public Venta(String matricula, String dni, double precio, String idVendedor, int existe) {
         this.matricula = matricula;
         this.dni = dni;
         this.precio = precio;
@@ -71,11 +71,11 @@ public class Venta implements Comparator<Venta> {
         this.idVenta = idVenta;
     }
 
-    public boolean isExiste() {
+    public int isExiste() {
         return existe;
     }
 
-    public void setExiste(boolean existe) {
+    public void setExiste(int existe) {
         this.existe = existe;
     }
 

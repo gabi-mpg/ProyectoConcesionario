@@ -155,7 +155,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         ArrayList<Venta> listaVentas = controlador.getListaVentas();
         model.setRowCount(0);
         for (Venta v : listaVentas){
-            if (v.isExiste()){
+            if (v.isExiste() == 1){
                 Object[] datosVenta = new Object[5];
                 datosVenta[0] = v.getIdVenta();
                 datosVenta[1] = v.getDni();
