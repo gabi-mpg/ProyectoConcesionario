@@ -118,7 +118,7 @@ public class Informes {
                 }
             }
 
-            listaVentasFiltrada.sort(new Venta());
+            //Collections.sort(listaVentasFiltrada, new Venta());
 
             float[] anchosTablaDatos = {150, 150, 150, 150, 150};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
@@ -189,7 +189,7 @@ public class Informes {
                 }
             }
 
-            listaVentasFiltrada.sort(new Venta());
+            //Collections.sort(listaVentasFiltrada, new Venta());
 
             float[] anchosTablaDatos = {150, 150, 150, 150, 150};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
@@ -259,7 +259,7 @@ public class Informes {
                 }
             }
 
-            listaVentasFiltrada.sort(new Venta());
+            //Collections.sort(listaVentasFiltrada, new Venta());
 
             float[] anchosTablaDatos = {100, 100, 100, 100, 100};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
