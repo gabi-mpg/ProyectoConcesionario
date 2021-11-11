@@ -112,7 +112,6 @@ public class UsuarioModel {
     }
 
     public boolean updateUsuario(Usuario usuario){
-        System.out.println(usuario.toString());
         saveUsuario();
         String sql = "UPDATE t_usuarios set Nombre = ?, Apellidos = ?, Contrasena = ?, nivelPermiso = ?, existe = ? where nick like ?";
         try {
