@@ -37,10 +37,10 @@ public class insertarVenta extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         iconoInsertar = new javax.swing.JLabel();
-        textoTanque = new javax.swing.JTextField();
+        textoIDVendedor = new javax.swing.JTextField();
+        textoDNI = new javax.swing.JTextField();
+        textoPrecio = new javax.swing.JTextField();
         textoMatricula = new javax.swing.JTextField();
-        textoMarca = new javax.swing.JTextField();
-        textoColor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -66,18 +66,18 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
         add(iconoInsertar, gridBagConstraints);
 
-        textoTanque.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoTanque.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoIDVendedor.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoIDVendedor.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoTanque, gridBagConstraints);
+        add(textoIDVendedor, gridBagConstraints);
 
-        textoMatricula.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
-        textoMatricula.addActionListener(new java.awt.event.ActionListener() {
+        textoDNI.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoDNI.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textoMatriculaActionPerformed(evt);
             }
@@ -87,27 +87,27 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoMatricula, gridBagConstraints);
+        add(textoDNI, gridBagConstraints);
 
-        textoMarca.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoMarca.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoPrecio.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoPrecio.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoMarca, gridBagConstraints);
+        add(textoPrecio, gridBagConstraints);
 
-        textoColor.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoColor.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoMatricula.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoColor, gridBagConstraints);
+        add(textoMatricula, gridBagConstraints);
 
-        jLabel3.setText("Matricula");
+        jLabel3.setText("ID Vendedor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -131,7 +131,7 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 8);
         add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("IDVendedor");
+        jLabel6.setText("Matricula");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -164,9 +164,9 @@ public class insertarVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField textoColor;
-    private javax.swing.JTextField textoMarca;
     private javax.swing.JTextField textoMatricula;
-    private javax.swing.JTextField textoTanque;
+    private javax.swing.JTextField textoPrecio;
+    private javax.swing.JTextField textoDNI;
+    private javax.swing.JTextField textoIDVendedor;
     // End of variables declaration
 }

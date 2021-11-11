@@ -121,15 +121,16 @@ public class MNGDB {
 
             exe = conexion.prepareStatement(
                     "Create table t_ventas("
-                            + "IDVenta int (10) AUTO_INCREMENT not null primary key,"
+                            + "IDVenta int (10) AUTO_INCREMENT not null,"
                             + "Matricula varchar(15) not null,"
                             + "DNI varchar(9),"
                             + "Precio decimal(10,2),"
-                            + "IDVendedor varchar(30)," +
-                            "existe bit(1),"
+                            + "IDVendedor varchar(30), "
+                            + "existe bit(1),"
                             + "foreign key (Matricula) references t_motos(Matricula),"
                             + "foreign key (DNI) references t_clientes(DNI),"
-                            + "foreign key (IDVendedor) references t_usuarios(nick));");
+                            + "foreign key (IDVendedor) references t_usuarios(nick),"
+                            + "constraint pk_venta primary key (IDVenta,Matricula));");
             exe.executeUpdate();
 
 //
