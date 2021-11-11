@@ -114,14 +114,15 @@ public class UsuarioModel {
     public boolean updateUsuario(Usuario usuario){
         System.out.println(usuario.toString());
         saveUsuario();
-        String sql = "UPDATE t_usuarios set Nombre = ?, Apellidos = ?, Contrasena = ?, nivelPermiso = ?, exite = ? where nick like ?";
+        String sql = "UPDATE t_usuarios set Nombre = ?, Apellidos = ?, Contrasena = ?, nivelPermiso = ?, existe = ? where nick like ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
             pst.setString(1, usuario.getNombre());
             pst.setString(2, usuario.getApellidos());
             pst.setString(3, usuario.getContra());
             pst.setInt(4, usuario.getPermiso());
-            pst.setString(5, usuario.getNombre());
+            pst.setBoolean(5, true);
+            pst.setString(6, usuario.getNick());
             pst.executeUpdate();
             updateVentaLista(usuario);
             return true;
