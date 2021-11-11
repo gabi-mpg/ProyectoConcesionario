@@ -39,9 +39,9 @@ public class insertarUsuario extends JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         iconoInsertar = new javax.swing.JLabel();
-        textoTanque = new javax.swing.JTextField();
-        textoMatricula = new javax.swing.JTextField();
-        textoMarca = new javax.swing.JTextField();
+        textoNick = new javax.swing.JTextField();
+        textoNombre = new javax.swing.JTextField();
+        textoApellidos = new javax.swing.JTextField();
         textoColor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -68,18 +68,18 @@ public class insertarUsuario extends JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
         add(iconoInsertar, gridBagConstraints);
 
-        textoTanque.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoTanque.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoNick.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoNick.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoTanque, gridBagConstraints);
+        add(textoNick, gridBagConstraints);
 
-        textoMatricula.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoMatricula.setPreferredSize(new java.awt.Dimension(130, 24));
-        textoMatricula.addActionListener(new java.awt.event.ActionListener() {
+        textoNombre.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoNombre.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textoMatriculaActionPerformed(evt);
             }
@@ -89,16 +89,16 @@ public class insertarUsuario extends JDialog {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoMatricula, gridBagConstraints);
+        add(textoNombre, gridBagConstraints);
 
-        textoMarca.setMinimumSize(new java.awt.Dimension(130, 24));
-        textoMarca.setPreferredSize(new java.awt.Dimension(130, 24));
+        textoApellidos.setMinimumSize(new java.awt.Dimension(130, 24));
+        textoApellidos.setPreferredSize(new java.awt.Dimension(130, 24));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(22, 14, 16, 14);
-        add(textoMarca, gridBagConstraints);
+        add(textoApellidos, gridBagConstraints);
 
         textoColor.setMinimumSize(new java.awt.Dimension(130, 24));
         textoColor.setPreferredSize(new java.awt.Dimension(130, 24));
@@ -167,8 +167,8 @@ public class insertarUsuario extends JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField textoColor;
-    private javax.swing.JTextField textoMarca;
-    private javax.swing.JTextField textoMatricula;
-    private javax.swing.JTextField textoTanque;
+    private javax.swing.JTextField textoApellidos;
+    private javax.swing.JTextField textoNombre;
+    private javax.swing.JTextField textoNick;
     // End of variables declaration
 }
