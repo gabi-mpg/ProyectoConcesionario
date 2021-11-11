@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class JFreeChart extends JFrame {
+public class JFreeChart extends JDialog {
 
     org.jfree.chart.JFreeChart grafico; //Objeto grafica
     private DefaultCategoryDataset datos; //Objeto q almacena los datos
@@ -29,6 +29,8 @@ public class JFreeChart extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setUndecorated(false);
+        setVisible(true);
+        setModal(true);
         pack();
 
         this.listaUsers = listaUsers;
@@ -144,7 +146,8 @@ public class JFreeChart extends JFrame {
         }
         org.jfree.chart.JFreeChart chart = ChartFactory.createPieChart("Ventas por usuario",datosTarta, true, true, false);
         ChartPanel panel = new ChartPanel(chart);
-        add(panel);
+        add(panel, BorderLayout.CENTER);
+        add(botonCerrar,BorderLayout.SOUTH);
         setVisible(true);
         pack();
     }
@@ -170,7 +173,8 @@ public class JFreeChart extends JFrame {
         }
         org.jfree.chart.JFreeChart chart = ChartFactory.createPieChart("Total capital de ventas",datosTarta, true, true, false);
         ChartPanel panel = new ChartPanel(chart);
-        add(panel);
+        add(panel, BorderLayout.CENTER);
+        add(botonCerrar,BorderLayout.SOUTH);
         setVisible(true);
         pack();
     }

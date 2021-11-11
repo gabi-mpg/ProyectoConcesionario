@@ -14,6 +14,7 @@ import views.Ventanas.Paneles.Graficos.JFreeChart;
 import views.Ventanas.Paneles.Motos;
 import views.Ventanas.Paneles.Usuarios;
 import views.Ventanas.Paneles.Ventas;
+import views.Ventanas.panelesMenu.generadorGraficos;
 import views.Ventanas.panelesMenu.generadorPDF;
 
 import java.awt.*;
@@ -224,14 +225,10 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         estadistica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                generarGrafico();
+                new generadorGraficos();
             }
         });
 
-    }
-
-    private void generarGrafico(){
-//        new JFreeChart(cnUser.gesListaUsuarios(), cnVentas.getListaVentas()).dineroUsuarios();
     }
 
     private void cambiarTema(){

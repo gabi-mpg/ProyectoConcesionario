@@ -238,9 +238,18 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-        int ID = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "Eliminar", JOptionPane.PLAIN_MESSAGE));
-        cnVentas.removevENTA(ID);
-        fillTable();
+        String matricula = pedirMatricula();
+        if(matricula != null){
+            try{
+                cnVentas.removevENTA(matricula);
+                if(!cnVentas.ventaExiste(cnVentas.){
+
+                }
+                fillTable();
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
 

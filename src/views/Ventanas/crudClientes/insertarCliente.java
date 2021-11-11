@@ -9,6 +9,7 @@ import controllers.ClienteCRUD;
 import entidades.Cliente;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -47,6 +48,9 @@ public class insertarCliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
+
+        setTitle("Insertar cliente");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoInsertar.png"));
 
         jLabel1 = new javax.swing.JLabel();
         iconoInsertar = new javax.swing.JLabel();

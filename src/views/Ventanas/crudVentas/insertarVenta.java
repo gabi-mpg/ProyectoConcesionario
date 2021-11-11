@@ -46,6 +46,9 @@ public class insertarVenta extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
+        setTitle("Insertar venta");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoInsertar.png"));
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();

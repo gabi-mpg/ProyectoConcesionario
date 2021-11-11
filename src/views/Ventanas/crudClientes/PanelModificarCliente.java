@@ -40,6 +40,9 @@ public class PanelModificarCliente extends JDialog {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">
         private void initComponents() {
+
+            setTitle("Modificar cliente");
+            setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoMod.png"));
             GridBagConstraints gridBagConstraints;
 
             panelTitulo = new javax.swing.JPanel();

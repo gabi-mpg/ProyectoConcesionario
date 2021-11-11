@@ -36,6 +36,7 @@ public class generadorGraficos extends javax.swing.JFrame implements ActionListe
         cnVenta = new VentaCRUD();
         initComponents();
         setResizable(false);
+        setVisible(true);
         setLocationRelativeTo(null);
     }
 

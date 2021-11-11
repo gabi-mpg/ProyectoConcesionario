@@ -39,6 +39,8 @@ public class PanelModificarMoto extends javax.swing.JDialog {
         private void initComponents() {
             java.awt.GridBagConstraints gridBagConstraints;
 
+            setTitle("Modificar moto");
+            setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoMod.png"));
             panelTitulo = new javax.swing.JPanel();
             jLabel1 = new javax.swing.JLabel();
             labelImagen = new javax.swing.JLabel();

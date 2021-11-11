@@ -9,6 +9,7 @@ package views.Ventanas.crudUsuarios;
 import controllers.UsuarioCRUD;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -39,6 +40,9 @@ public class insertarUsuario extends JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
+        setTitle("Insertar usuario");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoInsertar.png"));
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
