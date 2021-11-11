@@ -21,15 +21,10 @@ public class JFreeChart extends JFrame {
     private JButton botonCerrar;
 
     public JFreeChart(){
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(false);
-        botonCerrar = new JButton("Cerrar la gráfica");
-        botonCerrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        pack();
+
 //        datos = new DefaultCategoryDataset();
 //
 //        //El valor a graficar, identificador, etiqutea de la comulmna
@@ -53,25 +48,35 @@ public class JFreeChart extends JFrame {
     public void generarGraficoVentas(ArrayList<String> nombreUsuarios, ArrayList<Integer> numeroVentas){
         //La posición del usuario en Stiring[] nombreUsuario debe ser la misma que el número de sus ventas
         // en int[] numero ventas, por ejemplo, nombreUsuarios[0] = fenixabi, numeroVentas[0] = ventasFenixabi
+        botonCerrar = new JButton("Cerrar la gráfica");
+
+        botonCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
         datos = new DefaultCategoryDataset();
-        for(int i = 0 ; i< nombreUsuarios.size() ; i++){
+        for(int i = 0 ; i < nombreUsuarios.size() ; i++){
             datos.addValue(numeroVentas.get(i), "Usuarios", nombreUsuarios.get(i));
         }
         grafico = ChartFactory.createBarChart("Ventas por usuario","Nombre de usuario","Numero de ventas",
                 datos, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel panel = new ChartPanel(grafico);
-        this.removeAll();
         add(panel, BorderLayout.CENTER);
-        setVisible(true);
+
         add(botonCerrar,BorderLayout.SOUTH);
+        setVisible(true);
         pack();
     }
 
 
+    public void dineroUsuarios(ArrayList<String> nombreUsuario, ArrayList<Float> ventaTotal){
 
-
-    public static void main(String[] args){
-        new JFreeChart();
     }
+
+
+
+
 
 }

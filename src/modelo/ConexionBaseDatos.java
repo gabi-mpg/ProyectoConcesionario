@@ -29,8 +29,18 @@ public class ConexionBaseDatos {
         //new NewJFrame();
         JFreeChart diagrama = new JFreeChart();
         ArrayList<String> nombres = new ArrayList<>();
-        nombres.add("");
-        diagrama.generarGraficoVentas();
+        nombres.add("gabriela");
+        nombres.add("asdad");
+        nombres.add("gabridsgfgjela");
+        nombres.add("gabriela");
+
+        ArrayList<Integer> ventas = new ArrayList<>();
+        ventas.add(1);
+        ventas.add(2);
+        ventas.add(3);
+        ventas.add(4);
+        ventas.add(5);
+        diagrama.generarGraficoVentas(nombres,ventas);
 
 
 
