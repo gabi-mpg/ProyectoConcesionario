@@ -8,10 +8,7 @@ package views.Ventanas.Interfaces;
 import controllers.ControllerConexion;
 import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
-import views.Ventanas.Paneles.Clientes;
-import views.Ventanas.Paneles.Motos;
-import views.Ventanas.Paneles.Usuarios;
-import views.Ventanas.Paneles.Ventas;
+import views.Ventanas.Paneles.*;
 import views.Ventanas.panelesMenu.contacto;
 import views.Ventanas.panelesMenu.generadorGraficos;
 import views.Ventanas.panelesMenu.generadorPDF;
@@ -90,8 +87,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         setTitle("Concesonario Mercado Corral");
         Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
         setIconImage(icono);
-        JLabel imagenLoco = new JLabel();
-        imagenLoco.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(ruta + "motoamarillalogo.png")));
 
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -104,7 +99,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonMotos = new javax.swing.JButton();
         botonUsuarios = new javax.swing.JButton();
         botonUsuarios.setEnabled(false);
-        panelSecundario = new javax.swing.JPanel();
+        panelSecundario = new panelPrincipal();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

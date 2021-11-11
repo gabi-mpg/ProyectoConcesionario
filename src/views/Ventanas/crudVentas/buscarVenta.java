@@ -1,8 +1,6 @@
 package views.Ventanas.crudVentas;
 
 
-import javafx.scene.control.RadioButton;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +10,7 @@ import java.io.File;
 public class buscarVenta extends javax.swing.JFrame implements ActionListener{
 
     private String valorBusqueda;
-    private String ruta =  System.getProperty("user.dir")+
+    private final String RUTA_REC =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"
             +File.separator+"Imagenes"+File.separator;
 
@@ -91,7 +89,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         gridBagConstraints.insets = new java.awt.Insets(25, 26, 18, 26);
         getContentPane().add(labelTitulo, gridBagConstraints);
 
-        labelIcono.setIcon(new javax.swing.ImageIcon(ruta+"iconoBuscar.png")); // NOI18N
+        labelIcono.setIcon(new javax.swing.ImageIcon(RUTA_REC +"iconoBuscar.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
