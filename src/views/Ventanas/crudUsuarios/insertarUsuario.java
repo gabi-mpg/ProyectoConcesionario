@@ -160,7 +160,7 @@ public class insertarUsuario extends JDialog {
         botonInsertar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                insertarUsuario();
+                insertarUser();
             }
         });
     }// </editor-fold>
@@ -169,13 +169,13 @@ public class insertarUsuario extends JDialog {
         // TODO add your handling code here:
     }
 
-    private void insertarUsuario(){
+    private void insertarUser(){
             String nick = textoNick.getText();
             if (cnUser.usuarioExiste(nick)){
-                if(cnUser.buscarUsuario(nick).isExiste() == false){
+                if(!cnUser.buscarUsuario(nick).isExiste()){
                     cnUser.updateExiste(true, nick);
                     System.out.println("pasa por esta zona");
-                    JOptionPane.showMessageDialog(this, "Cliente agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Usuario agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this,"Usuario agregado","Aviso",JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
