@@ -34,13 +34,13 @@ public class ConexionBaseDatos {
         nombres.add("gabridsgfgjela");
         nombres.add("gabriela");
 
-        ArrayList<Integer> ventas = new ArrayList<>();
-        ventas.add(1);
-        ventas.add(2);
+        ArrayList<Float> ventas = new ArrayList<>();
+        ventas.add((float) 34524.45);
+        ventas.add((float) 235460.2);
         ventas.add(3);
         ventas.add(4);
         ventas.add(5);
-        diagrama.generarGraficoVentas(nombres,ventas);
+        diagrama.dineroUsuarios(nombres,ventas);
 
 
 

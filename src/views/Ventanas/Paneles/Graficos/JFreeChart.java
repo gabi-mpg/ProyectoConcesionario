@@ -64,17 +64,34 @@ public class JFreeChart extends JFrame {
                 datos, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel panel = new ChartPanel(grafico);
         add(panel, BorderLayout.CENTER);
-
         add(botonCerrar,BorderLayout.SOUTH);
         setVisible(true);
         pack();
     }
 
 
+
     public void dineroUsuarios(ArrayList<String> nombreUsuario, ArrayList<Float> ventaTotal){
+        botonCerrar = new JButton("Cerrar la gráfica");
 
+        botonCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        datos = new DefaultCategoryDataset();
+        for(int i = 0 ; i < nombreUsuario.size() ; i++){
+            datos.addValue(ventaTotal.get(i), "Usuarios", nombreUsuario.get(i));
+        }
+        grafico = ChartFactory.createBarChart("Total capital de ventas","Nombre de usuario","Total de ventas",
+                datos, PlotOrientation.VERTICAL, true, true, false);
+        ChartPanel panel = new ChartPanel(grafico);
+        add(panel, BorderLayout.CENTER);
+        add(botonCerrar,BorderLayout.SOUTH);
+        setVisible(true);
+        pack();
     }
-
 
 
 

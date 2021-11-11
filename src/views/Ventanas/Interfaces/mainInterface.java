@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -227,7 +228,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     }
 
     private void generarGrafico(){
-        new JFreeChart().generarGraficoVentas();
+        new JFreeChart().generarGraficoVentas(new ArrayList<String>(), new ArrayList<Integer>());
     }
 
     private void cambiarTema(){
