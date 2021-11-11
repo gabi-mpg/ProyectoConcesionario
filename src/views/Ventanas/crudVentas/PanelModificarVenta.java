@@ -82,7 +82,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(jLabel1, gridBagConstraints);
 
-            labelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelmodificar/iconoMod.png"))); // NOI18N
+            labelImagen.setIcon(new javax.swing.ImageIcon(ruta + "iconoMod.png")); // NOI18N
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(labelImagen, gridBagConstraints);

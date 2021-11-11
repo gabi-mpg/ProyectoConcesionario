@@ -95,7 +95,7 @@ public class insertarVenta extends javax.swing.JFrame {
                     textoDNI.setForeground(new Color(0,143,57));
                     DNICorrecto = true;
                 }else{
-                    textoDNI.setForeground(Color.BLACK);
+                    textoDNI.setForeground(Color.RED);
                     DNICorrecto = false;
                 }
         }
@@ -127,17 +127,17 @@ public class insertarVenta extends javax.swing.JFrame {
         textoMatricula.addKeyListener(new KeyAdapter() {
           @Override
           public void keyReleased(KeyEvent e) {
-              if(textoMatricula.getText().matches("^[0-9]{4}[A-Z]{3}$")){
+              if(textoMatricula.getText().matches("^[0-9]{4}[A-Za-z]{3}$")){
                   textoMatricula.setForeground(new Color(0,143,57));
                   MatriculaCorrecta = true;
               }else{
-                  textoMatricula.setForeground(Color.BLACK);
+                  textoMatricula.setForeground(Color.RED);
                   MatriculaCorrecta = false;
               }
           }
       });
 
-                jLabel3.setText("Nick vendedor");
+                jLabel3.setText("Vendedor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;

@@ -87,6 +87,7 @@ public class VentaModel {
 
     public void addVenta(Venta venta){
         saveVentas();
+        System.out.println("Dentro VentaModel addVenta");
         String sql = "INSERT INTO t_ventas values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -96,10 +97,10 @@ public class VentaModel {
             pst.setString(4, venta.getIdVendedor());//esto no lo pediremos al usuario
             pst.setInt(5,1);
             //sino que lo mandaremos directamente segun quien haya iniciado sesion
-
+            System.out.println("dentro try addVenta VentaModel");
             pst.executeUpdate();
         } catch (Exception e) {
-            System.err.println("Error registrando la venta. " + e);
+            System.err.println("Error registrando la venta: " + e);
         }
 
         getListaVentas();
@@ -124,13 +125,12 @@ public class VentaModel {
     public boolean updateVenta(Venta venta){
         System.out.println(venta.toString());
         saveVentas();
-        String sql = "UPDATE t_ventas set Matricula = ?, DNI = ?, Precio = ? where IDVenta = ?";
+        String sql = "UPDATE t_ventas set Precio = ?, existe = ? where IDVenta = ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
-            pst.setString(1, venta.getMatricula());
-            pst.setString(2, venta.getDni());
-            pst.setDouble(3, venta.getPrecio());
-            pst.setInt(4, venta.getIdVenta());
+            pst.setDouble(1, venta.getPrecio());
+            pst.setInt(2, 1);
+            pst.setInt(3, venta.getIdVenta());
             pst.executeUpdate();
             updateVentaLista(venta);
             return true;

@@ -19,6 +19,7 @@ public class VentaCRUD {
 
     public boolean agregarVenta(String matricula, String DNI, double precio, String idUsuario){
         if (model.buscarExistencia(matricula, DNI)){
+            System.out.println("Venta CRUD if de matricula y dni existen");
             model.addVenta(new Venta(matricula, DNI, precio, idUsuario, 1));
             return true;
         } else {
@@ -31,7 +32,7 @@ public class VentaCRUD {
     }
 
     public boolean comprobarMatricula(String matricula){
-        return matricula.matches("^[0-9]{4}[A-Z]{3}$");
+        return matricula.matches("^[0-9]{4}[A-Za-z]{3}$");
     }
     
     public boolean comprobarDNI(String dni){
