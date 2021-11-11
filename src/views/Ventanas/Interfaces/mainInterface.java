@@ -8,6 +8,7 @@ package views.Ventanas.Interfaces;
 import controllers.ControllerConexion;
 import modelo.config;
 import views.Ventanas.Paneles.Clientes;
+import views.Ventanas.Paneles.Graficos.JFreeChart;
 import views.Ventanas.Paneles.Motos;
 import views.Ventanas.Paneles.Usuarios;
 import views.Ventanas.Paneles.Ventas;
@@ -216,6 +217,17 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             }
         });
 
+        estadistica.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                generarGrafico();
+            }
+        });
+
+    }
+
+    private void generarGrafico(){
+        new JFreeChart().generarGraficoVentas();
     }
 
     private void cambiarTema(){
