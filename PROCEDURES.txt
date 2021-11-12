@@ -1,24 +1,27 @@
 drop procedure if exists sp_eliminarcliente;
-CREATE PROCEDURE 'sp_eliminarcliente'(IN idcliente varchar(9))
-proc_main:BEGIN
+*
+CREATE PROCEDURE sp_eliminarcliente(IN idcliente varchar(9))
+BEGIN
 UPDATE t_clientes SET existe = 0 where DNI like idcliente;
-END proc_main #
-DELIMITER ;
--
+END
+*
 drop procedure if exists sp_eliminarmoto;
-CREATE PROCEDURE 'sp_eliminarmoto'(IN idmoto varchar(15))
-proc_main:BEGIN
+*
+CREATE PROCEDURE sp_eliminarmoto(IN idmoto varchar(15))
+BEGIN
 UPDATE t_motos SET existe = 0 where Matricula like idmoto;
-END proc_main #
--
+END
+*
 drop procedure if exists sp_eliminarusuario;
-CREATE PROCEDURE 'sp_eliminarusuario'(IN iduser varchar(30))
-proc_main:BEGIN
+*
+CREATE PROCEDURE sp_eliminarusuario(IN iduser varchar(30))
+BEGIN
 UPDATE t_usuarios SET existe = 0 where nick like iduser;
-END proc_main #
--
+END
+*
 drop procedure if exists sp_eliminarVenta;
-CREATE PROCEDURE 'sp_eliminarVenta'(IN idmoto varchar(15))
-proc_main:BEGIN
+*
+CREATE PROCEDURE sp_eliminarVenta(IN idmoto varchar(15))
+BEGIN
 UPDATE t_ventas SET existe = 0 where Matricula like idmoto;
-END proc_main #
+END

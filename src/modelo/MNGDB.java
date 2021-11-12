@@ -166,13 +166,8 @@ public class MNGDB {
             conexion.commit();
             conexion.setAutoCommit(true);
 
-//            if (crearProcedures() && insertarDatos()){
-//                return true;
-//            } else {
-//                return false;
-//            }
-            insertarDatos();
-            return true;
+            return crearProcedures() && insertarDatos();
+
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
             try {
@@ -197,7 +192,7 @@ public class MNGDB {
         try {
             fr = new FileReader(inserts);
             br = new BufferedReader(fr);
-            separador = "-";
+            separador = "\\*";
             conexion.setAutoCommit(false);
             while ((line = br.readLine()) != null){
                 todo += line + "\n";
@@ -208,7 +203,15 @@ public class MNGDB {
                 PreparedStatement exe = conexion.prepareStatement(p);
                 exe.executeUpdate();
             }
-
+//            String drop = "drop procedure if exists sp_eliminarcliente; ";
+//            String procedure = "CREATE PROCEDURE sp_eliminarcliente(IN idcliente varchar(9)) " +
+//                    "BEGIN " +
+//                    "UPDATE t_clientes SET existe = 0 where DNI like idcliente; " +
+//                    "END";
+//            PreparedStatement exe = conexion.prepareStatement(procedure);
+//            exe.executeUpdate();
+//            exe = conexion.prepareStatement(drop);
+//            exe.executeUpdate();
             conexion.commit();
             conexion.setAutoCommit(true);
             System.out.println("Hizo bien los procedimientos");
