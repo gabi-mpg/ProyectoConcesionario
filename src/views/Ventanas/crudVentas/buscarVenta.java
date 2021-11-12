@@ -17,7 +17,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 
-public class buscarVenta extends javax.swing.JFrame implements ActionListener, ItemListener {
+public class buscarVenta extends javax.swing.JDialog implements ActionListener, ItemListener {
 
     private String valorBusqueda;
 
@@ -27,6 +27,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
         setLocationRelativeTo(null);
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setModal(true);
         setVisible(true);
     }
 
@@ -275,12 +276,25 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
             }
         } else if(rbIDVendedor.isSelected()) {
             if (cnUser.buscarUsuario(campoBusqueda.getText()) != null) {
-                listaV.add(cnVenta.buscarVenta(campoBusqueda.getText()));
+                listaV = cnVenta.buscarVentasNick(campoBusqueda.getText());
+            } else {
+                JOptionPane.showMessageDialog(this, "El usuario no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else if(rbIDVenta.isSelected()) {
+            if (cnVenta.buscarVenta(Integer.parseInt(campoBusqueda.getText())) != null) {
+                listaV.add(cnVenta.buscarVenta(Integer.parseInt(campoBusqueda.getText())));
             } else {
                 JOptionPane.showMessageDialog(this, "La moto no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+
+        dispose();
     }
+
+    public ArrayList<Venta> getListaV() {
+        return listaV;
+    }
+
     /**
      * @param args the command line arguments
      */

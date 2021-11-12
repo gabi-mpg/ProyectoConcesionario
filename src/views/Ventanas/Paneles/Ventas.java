@@ -182,15 +182,11 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            new buscarVenta(cnVentas);
-//            Venta v = buscarVenta.recogerVenta();//este metodo nos devolvera la venta
-//            if (v != null){
-//                fillTableBuscar(v);
-//            } else {
-//                //mensaje no existe
-//                //QUIZAS METER LO DEL MS EN EL PANEL
-//            }
-
+            buscarVenta bv = new buscarVenta(cnVentas);
+            ArrayList<Venta> listaV = bv.getListaV();//este metodo nos devolvera la venta
+            if (listaV != null){
+                fillTableBuscar(listaV);
+            }
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
