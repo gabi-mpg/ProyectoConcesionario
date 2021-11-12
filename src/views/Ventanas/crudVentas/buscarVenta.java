@@ -4,14 +4,13 @@ package views.Ventanas.crudVentas;
 import controllers.VentaCRUD;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 
-public class buscarVenta extends javax.swing.JFrame implements ActionListener{
+public class buscarVenta extends javax.swing.JFrame implements ActionListener, ItemListener {
 
     private String valorBusqueda;
     private final String RUTA_REC =  System.getProperty("user.dir")+
@@ -159,9 +158,14 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
 
 
         rbDNI.addActionListener(this);
+        rbDNI.addItemListener(this);
         rbMatricula.addActionListener(this);
+        rbMatricula.addItemListener(this);
         rbIDVenta.addActionListener(this);
+        rbIDVenta.addItemListener(this);
         rbIDVendedor.addActionListener(this);
+        rbIDVendedor.addItemListener(this);
+
     }
 
     //Para activar el campo de busqueda
@@ -211,6 +215,13 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
 
         if (campoCorrecto){
             botonBusqueda.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.DESELECTED) {
+            campoBusqueda.setText("");
         }
     }
 
@@ -285,6 +296,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JLabel labelTitulo;
     private VentaCRUD cnVenta;
     boolean campoCorrecto;
+
 
 
     // End of variables declaration

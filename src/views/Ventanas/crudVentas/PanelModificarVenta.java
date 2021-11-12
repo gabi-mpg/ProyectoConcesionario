@@ -1,9 +1,6 @@
 package views.Ventanas.crudVentas;
 
-import controllers.MotoCRUD;
 import controllers.VentaCRUD;
-import entidades.Cliente;
-import entidades.Moto;
 import entidades.Venta;
 
 import javax.swing.*;
@@ -64,7 +61,7 @@ public class PanelModificarVenta extends JFrame {
             panelBotton = new javax.swing.JPanel();
             botonModificar = new javax.swing.JButton();
             checkLimpiar = new javax.swing.JCheckBox();
-            cnVenta = new VentaCRUD();
+            cnVentas = new VentaCRUD();
 
 
 
@@ -208,19 +205,26 @@ public class PanelModificarVenta extends JFrame {
         }// </editor-fold>
 
         public void rellenarCampos() {
-            if (cnVenta.ventaExiste(ID)) {
-                Venta venta = cnVenta.buscarVenta(ID);
-                labelIDVenta.setText(ID);
-                textoMatricula.setText(venta.getMatricula());
-                textoDNI.setText(venta.getDni());
-                textoPrecio.setText(String.valueOf(venta.getPrecio()));
-                textoVendedor.setText(String.valueOf(venta.getIdVendedor()));
-                setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "La venta no existe en la BD");
-                this.dispose();
+                try{
+                    if(ID != null) {
+                        int IDint = Integer.parseInt(ID);
+                        if (cnVentas.ventaExiste(IDint)) {
+                            Venta venta = cnVentas.buscarVenta(IDint);
+                            labelIDVenta.setText(ID);
+                            textoMatricula.setText(venta.getMatricula());
+                            textoDNI.setText(venta.getDni());
+                            textoPrecio.setText(String.valueOf(venta.getPrecio()));
+                            textoVendedor.setText(String.valueOf(venta.getIdVendedor()));
+                            setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "La venta no existe en la BD");
+                            this.dispose();
+                        }
+                    }
+                }catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }
 
         private void checkLimpiarActionPerformed(ActionEvent evt) {
             textoDNI.setText("");
@@ -230,12 +234,12 @@ public class PanelModificarVenta extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            Venta venta = cnVenta.buscarVenta(ID);
+            Venta venta = cnVentas.buscarVenta(ID);
             venta.setDni(textoDNI.getText());
             venta.setMatricula(textoDNI.getText());
             venta.setPrecio(Float.parseFloat(textoPrecio.getText()));
             venta.setIdVendedor(textoVendedor.getText());
-            cnVenta.updateVenta(venta);
+            cnVentas.updateVenta(venta);
             dispose();
         }
 
@@ -258,7 +262,7 @@ public class PanelModificarVenta extends JFrame {
     private javax.swing.JTextField textoPrecio;
     private javax.swing.JTextField textoVendedor;
         private String ID;
-        private VentaCRUD cnVenta;
+        private VentaCRUD cnVentas;
         // End of variables declaration
     }
 

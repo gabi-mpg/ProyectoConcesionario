@@ -129,12 +129,6 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 30, 0, 10);
         add(botonEliminar, gridBagConstraints);
-        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEliminarActionPerformed(evt);
-            }
-        });
-
         this.setBackground(new java.awt.Color(204, 255, 204));
         agregarListeners();
     }// </editor-fold>//GEN-END:initComponents
@@ -203,7 +197,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         }
     }
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void botonEliminarActionPerformed(ActionEvent evt) {
         String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
         if(ID != null){
             try{
@@ -232,11 +226,13 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         }else if(b == botonCrear){
             new insertarVenta(nombreUsuario);
         } else if (b == botonEliminar) {
-
-
+            botonEliminarActionPerformed(e);
         }else{
-            String matricula = JOptionPane.showInputDialog(this,"Introduce la matricula de la venta");
-            new PanelModificarVenta(matricula);
+            String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
+            if (!ID.isEmpty()){
+                new PanelModificarVenta(ID);
+                fillTable();
+            }
         }
     }
 
