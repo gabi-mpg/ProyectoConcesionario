@@ -22,9 +22,7 @@ import java.io.File;
  */
 public class insertarCliente extends javax.swing.JDialog {
 
-    private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+
     private Cliente cliente;
     private ClienteCRUD cnCliente;
 
@@ -73,7 +71,7 @@ public class insertarCliente extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(16, 32, 6, 32);
         add(jLabel1, gridBagConstraints);
 
-        iconoInsertar.setIcon(new javax.swing.ImageIcon(ruta+"iconoInsertar.png")); // NOI18N
+        iconoInsertar.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"iconoInsertar.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

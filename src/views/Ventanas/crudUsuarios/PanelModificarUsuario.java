@@ -3,6 +3,7 @@ package views.Ventanas.crudUsuarios;
 import controllers.UsuarioCRUD;
 import entidades.Moto;
 import entidades.Usuario;
+import utils.estaticas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +14,6 @@ import java.io.File;
 public class PanelModificarUsuario extends JDialog {
 
 
-        private String ruta = System.getProperty("user.dir")+
-                File.separator+"src"+File.separator+"views"+File.separator
-                +"imagenes"+ File.separator;
         /**
          * Creates new form panelModificar
          */
@@ -40,7 +38,7 @@ public class PanelModificarUsuario extends JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">
         private void initComponents() {
             setTitle("Modificar usuario");
-            setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoMod.png"));
+            setIconImage(Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"iconoMod.png"));
             GridBagConstraints gridBagConstraints;
 
             panelTitulo = new javax.swing.JPanel();
@@ -71,7 +69,7 @@ public class PanelModificarUsuario extends JDialog {
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(jLabel1, gridBagConstraints);
 
-            labelImagen.setIcon(new javax.swing.ImageIcon(ruta+"iconoMod.png")); // NOI18N
+            labelImagen.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"iconoMod.png")); // NOI18N
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(labelImagen, gridBagConstraints);

@@ -2,6 +2,7 @@ package views.Ventanas.crudVentas;
 
 import controllers.VentaCRUD;
 import entidades.Venta;
+import utils.estaticas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +16,7 @@ public class PanelModificarVenta extends JFrame {
 
 
 
-    private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+
         /**
          * Creates new form panelModificar
          */
@@ -42,7 +41,7 @@ public class PanelModificarVenta extends JFrame {
             GridBagConstraints gridBagConstraints;
 
             setTitle("Modificar venta");
-            setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoMod.png"));
+            setIconImage(Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"iconoMod.png"));
 
             panelTitulo = new javax.swing.JPanel();
             jLabel1 = new javax.swing.JLabel();
@@ -78,7 +77,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(jLabel1, gridBagConstraints);
 
-            labelImagen.setIcon(new javax.swing.ImageIcon(ruta + "iconoMod.png")); // NOI18N
+            labelImagen.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES + "iconoMod.png")); // NOI18N
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(labelImagen, gridBagConstraints);

@@ -8,6 +8,7 @@ package views.Ventanas.crudVentas;
 
 import controllers.VentaCRUD;
 import entidades.Venta;
+import utils.estaticas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +24,6 @@ import java.io.File;
  */
 public class insertarVenta extends javax.swing.JFrame {
 
-    private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
     private boolean DNICorrecto = false;
     private boolean MatriculaCorrecta = false;
     private String nombreUsuario;
@@ -48,7 +46,7 @@ public class insertarVenta extends javax.swing.JFrame {
     private void initComponents() {
 
         setTitle("Insertar venta");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoInsertar.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"iconoInsertar.png"));
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
@@ -74,7 +72,7 @@ public class insertarVenta extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(16, 32, 6, 32);
         add(jLabel1, gridBagConstraints);
 
-        iconoInsertar.setIcon(new javax.swing.ImageIcon(ruta+"iconoInsertar.png")); // NOI18N
+        iconoInsertar.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"iconoInsertar.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
