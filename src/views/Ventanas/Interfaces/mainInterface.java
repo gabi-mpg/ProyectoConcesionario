@@ -63,7 +63,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     Se encarga de inicializar cada uno de los componentes del frame, dándoles posición, tamaño y funcionalidad
      */
     private void initComponents() {
-        setTitle("Concesonario Mercado Corral");
+        setTitle("Concesionario Mercado Corral");
         Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"icono.png");
         setIconImage(icono);
 
