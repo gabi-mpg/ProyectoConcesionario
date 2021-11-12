@@ -221,7 +221,7 @@ public class insertarVenta extends javax.swing.JFrame {
            Venta venta = cnVenta.buscarVenta(textoMatricula.getText());
            venta.setExiste(1);
            cnVenta.cambioExsite(venta);
-           JOptionPane.showMessageDialog(this,"Esta venta ya exsite","Venta existente",JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(this,"Venta recuperada","Venta preexistente",JOptionPane.INFORMATION_MESSAGE);
        }else{
             if(cnVenta.agregarVenta(textoMatricula.getText(),
                     textoDNI.getText(),

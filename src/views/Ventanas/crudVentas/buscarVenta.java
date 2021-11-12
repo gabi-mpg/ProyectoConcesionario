@@ -1,6 +1,8 @@
 package views.Ventanas.crudVentas;
 
 
+import controllers.VentaCRUD;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +16,8 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
             File.separator+"src"+File.separator+"views"
             +File.separator+"Imagenes"+File.separator;
 
-    public buscarVenta() {
-        setVisible(true);
+    public buscarVenta(VentaCRUD cnVenta) {
+
         setLocationRelativeTo(null);
         initComponents();
         this.botonBusqueda.setEnabled(false);
@@ -30,7 +32,8 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
                 busquedaVenta();
             }
         });
-
+        this.cnVenta = cnVenta;
+        setVisible(true);
     }
 
 
@@ -186,11 +189,11 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new buscarVenta().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new buscarVenta().setVisible(true);
+//            }
+//        });
     }
 
     public String getValorBusqueda(){
@@ -208,6 +211,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JRadioButton radio4;
     private javax.swing.JLabel labelIcono;
     private javax.swing.JLabel labelTitulo;
+    private VentaCRUD cnVenta;
 
     @Override
     public void actionPerformed(ActionEvent e) {

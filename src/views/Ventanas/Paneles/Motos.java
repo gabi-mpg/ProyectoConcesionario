@@ -234,11 +234,11 @@ public class Motos extends javax.swing.JPanel {
 
     private String pedirMatricula(){
         try{
-            String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
+            String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", "Matricula",JOptionPane.PLAIN_MESSAGE);
 
             while (!cnMoto.comprobarMatricula(matricula)){
                 JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
-                matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
+                matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", "Matricula",JOptionPane.PLAIN_MESSAGE);
             }
             return matricula;
         } catch (Exception e){

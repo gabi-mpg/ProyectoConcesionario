@@ -153,8 +153,9 @@ public class MNGDB {
         }
     }
 
-    public void crearRegistros(){
+    public boolean crearRegistros(){
         try{
+            conexion.setAutoCommit(false);
             PreparedStatement exe = conexion.prepareStatement(
                     "INSERT INTO t_usuarios (nick,Nombre, Apellidos, Contrasena, nivelPermiso, existe) VALUES" +
                     "('fenixabi','Gabriela','Mercado Pérez','gabriela123',1,1)," +
@@ -162,24 +163,78 @@ public class MNGDB {
                     "('eduardo','Eduardo','Bethencourt Herrera','edu123',2,1)," +
                     "('invitado','-','-','1234',3,1)");
             exe.executeUpdate();
+            conexion.commit();
+            conexion.setAutoCommit(true);
+
+//            if (crearProcedures() && insertarDatos()){
+//                return true;
+//            } else {
+//                return false;
+//            }
             insertarDatos();
+            return true;
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
             try {
                 conexion.rollback();
+                conexion.setAutoCommit(true);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            return false;
         }
     }
 
-    private void insertarDatos(){
+    private boolean crearProcedures(){
+        String ruta = System.getProperty("user.dir") + File.separator + "PROCEDURES.txt";
+        File inserts = new File(ruta);
+        FileReader fr;
+        BufferedReader br;
+        String separador;
+        String line;
+        String todo = "";
+        String[] procedures;
+        try {
+            fr = new FileReader(inserts);
+            br = new BufferedReader(fr);
+            separador = "-";
+            conexion.setAutoCommit(false);
+            while ((line = br.readLine()) != null){
+                todo += line + "\n";
+            }
+            procedures = todo.split(separador);
+            for (String p : procedures){
+                System.out.println(p + "\nCambio de procedure\n");
+                PreparedStatement exe = conexion.prepareStatement(p);
+                exe.executeUpdate();
+            }
+
+            conexion.commit();
+            conexion.setAutoCommit(true);
+            System.out.println("Hizo bien los procedimientos");
+            br.close();
+            return true;
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            System.out.println("NO PROCEDURES");
+            try {
+                conexion.rollback();
+                conexion.setAutoCommit(true);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            return false;
+        }
+    }
+
+    private boolean insertarDatos(){
         String ruta = System.getProperty("user.dir") + File.separator + "INSERTS.txt";
         File inserts = new File(ruta);
 
         try {
             FileReader fr = new FileReader(inserts);
             BufferedReader br = new BufferedReader(fr);
+
             String line = "";
             conexion.setAutoCommit(false);
             while ((line = br.readLine()) != null){
@@ -189,6 +244,7 @@ public class MNGDB {
             conexion.commit();
             conexion.setAutoCommit(true);
             System.out.println("Hizo bien los inserts");
+            return true;
         } catch (SQLException | IOException e) {
             e.printStackTrace();
             System.out.println("NO INSERTS");
@@ -198,6 +254,7 @@ public class MNGDB {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            return false;
         }
     }
 

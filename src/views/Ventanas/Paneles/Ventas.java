@@ -5,11 +5,7 @@
  */
 package views.Ventanas.Paneles;
 
-import controllers.ClienteCRUD;
-import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
-import entidades.Cliente;
-import entidades.Usuario;
 import entidades.Venta;
 import views.Ventanas.crudVentas.PanelModificarVenta;
 import views.Ventanas.crudVentas.buscarVenta;
@@ -157,6 +153,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         VentaCRUD controlador = new VentaCRUD();
         ArrayList<Venta> listaVentas = controlador.getListaVentas();
         model.setRowCount(0);
+        System.out.println(listaVentas.size());
         for (Venta v : listaVentas){
             if (v.isExiste() == 1){
                 Object[] datosVenta = new Object[5];
@@ -188,6 +185,72 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         botonCrear.addActionListener(this);
     }
 
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+            new buscarVenta(cnVentas);
+            /*Venta v = buscarVenta.recogerVenta();//este metodo nos devolvera la venta
+            if (v != null){
+                fillTableBuscar(v);
+            } else {
+                //mensaje no existe
+                //QUIZAS METER LO DEL MS EN EL PANEL
+            }*/
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+        String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
+        if(ID != null){
+            try{
+                int IDint = Integer.parseInt(ID);
+                System.out.println(IDint + "ID VENTAAAAAA");
+                System.out.println(cnVentas.ventaExiste(IDint) + "VENTASSSS");
+                if(cnVentas.ventaExiste(IDint)){
+                    System.out.println("ENtra en el if de venta existe");
+                    cnVentas.removeVenta(cnVentas.buscarVenta(IDint).getMatricula());
+                    fillTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton b = (JButton) e.getSource();
+        if(b == botonBuscar){
+            botonBuscarActionPerformed(e);
+        }else if(b == botonCrear){
+            new insertarVenta(nombreUsuario);
+        } else if (b == botonEliminar) {
+
+
+        }else{
+            String matricula = JOptionPane.showInputDialog(this,"Introduce la matricula de la venta");
+            new PanelModificarVenta(matricula);
+        }
+    }
+
+    private String pedirMatricula(){
+        try{
+            String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
+
+            while (!cnVentas.comprobarMatricula(matricula)){
+                JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
+                matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
+            }
+            return matricula;
+        } catch (Exception e){
+            return null;
+        }
+    }
 
     public void cambiarTema(){
         if (tema == 0){
@@ -211,51 +274,6 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     public void setTema(int tema) {
         this.tema = tema;
     }
-
-    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-        try{
-            new buscarVenta();
-            String valorBusqueda = "";
-//            int IDVenta = Integer.parseInt(JOptionPane.showInputDialog(this, "Introduce el IDVenta", 1));
-//            if (cnVentas.ventaExiste(IDVenta)){
-//                Venta venta = cnVentas.buscarVenta(IDVenta);
-//                fillTableBuscar(venta);
-//            } else {
-//                JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD");
-//            }
-
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-        String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
-        if(ID != null){
-            try{
-                int IDint = Integer.parseInt(ID);
-                if(!cnVentas.ventaExiste(IDint)){
-                    cnVentas.removevENTA(IDint);
-                    fillTable();
-                } else {
-                    JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                }
-
-            }catch (NumberFormatException ex){
-                JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrear;
@@ -269,36 +287,6 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     private PanelModificarVenta panelModificar;
     private int tema;
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton b = (JButton) e.getSource();
-        if(b == botonBuscar){
-            buscarVenta ventanaBusqueda = new buscarVenta();
-            String busqueda = ventanaBusqueda.getValorBusqueda();
-            System.out.println(busqueda);
-        }else if(b == botonCrear){
-            new insertarVenta(nombreUsuario);
-        } else if (b == botonEliminar) {
 
-
-        }else{
-            String matricula = JOptionPane.showInputDialog(this,"Introduce la matricula de la venta");
-                new PanelModificarVenta(matricula);
-        }
-    }
-
-    private String pedirMatricula(){
-        try{
-            String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", 1);
-
-            while (!cnVentas.comprobarMatricula(matricula)){
-                JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
-                matricula = JOptionPane.showInputDialog(this, "Introduce la matrícula de la moto", 1);
-            }
-            return matricula;
-        } catch (Exception e){
-            return null;
-        }
-    }
     // End of variables declaration//GEN-END:variables
 }

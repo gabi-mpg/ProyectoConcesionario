@@ -42,9 +42,9 @@ public class VentaModel {
                 Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor, existe);
                 listaVentas.add(venta);
             }
-            for(Venta v : listaVentas){
-                System.out.println(v.toString());
-            }
+//            for(Venta v : listaVentas){
+//                System.out.println(v.toString());
+//            }
 
 
         } catch (SQLException throwables) {
@@ -66,7 +66,9 @@ public class VentaModel {
     public Venta buscarVenta(int pk){
         //saveVentas();
         for(Venta v : listaVentas){
+            System.out.println(v.toString());
             if (v.getIdVenta() == (pk)){
+                System.out.println("La v coincide");
                 return v;
             }
         }
@@ -140,14 +142,15 @@ public class VentaModel {
         }
     }*/
 
-    public boolean removeVenta(int pk){
+    public boolean removeVenta(String pk){
         //saveVentas();
         String sql = "{call sp_eliminarVenta(?)}";
+        System.out.println(pk + " MODEL PK REMOVE");
         try {
             CallableStatement cst = conexion.prepareCall(sql);
-            cst.setInt(1, pk);
+            cst.setString(1, pk);
             cst.execute();
-            updateExiste(0, pk);
+            //updateExiste(0, pk);
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -185,7 +188,7 @@ public class VentaModel {
         String sql = "UPDATE t_ventas set existe = ? where Matricula = ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
-            pst.setInt(1, 1);
+            pst.setInt(1, venta.isExiste());
             pst.setString(2, venta.getMatricula());
             pst.executeUpdate();
             updateVentaLista(venta);
