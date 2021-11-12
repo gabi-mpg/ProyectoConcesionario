@@ -42,6 +42,10 @@ public class VentaModel {
                 Venta venta = new Venta(idVenta, matricula, dni, precio, idVendedor, existe);
                 listaVentas.add(venta);
             }
+            for(Venta v : listaVentas){
+                System.out.println(v.toString());
+            }
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -50,7 +54,7 @@ public class VentaModel {
     }
 
     public Venta buscarVenta(String pk){
-        saveVentas();
+        //saveVentas();
         for(Venta v : listaVentas){
             if (v.getMatricula().equals(pk)){
                 return v;
@@ -60,7 +64,7 @@ public class VentaModel {
     }
 
     public Venta buscarVenta(int pk){
-        saveVentas();
+        //saveVentas();
         for(Venta v : listaVentas){
             if (v.getIdVenta() == (pk)){
                 return v;
@@ -70,6 +74,10 @@ public class VentaModel {
     }
 
     public boolean ventaExiste(String pk){
+        return buscarVenta(pk) != null;
+    }
+
+    public boolean ventaExiste(int pk){
         return buscarVenta(pk) != null;
     }
 
@@ -96,7 +104,7 @@ public class VentaModel {
     }
 
     public void addVenta(Venta venta){
-        saveVentas();
+        //saveVentas();
         System.out.println("Dentro VentaModel addVenta");
         String sql = "INSERT INTO t_ventas (Matricula, DNI, Precio, IDVendedor, existe) values (?, ?, ?, ?, ?)";
         try {
@@ -133,7 +141,7 @@ public class VentaModel {
     }*/
 
     public boolean removeVenta(int pk){
-        saveVentas();
+        //saveVentas();
         String sql = "{call sp_eliminarVenta(?)}";
         try {
             CallableStatement cst = conexion.prepareCall(sql);
@@ -156,7 +164,7 @@ public class VentaModel {
 
     public boolean updateVenta(Venta venta){
         System.out.println(venta.toString());
-        saveVentas();
+        //saveVentas();
         String sql = "UPDATE t_ventas set Precio = ?, existe = ? where IDVenta = ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -173,7 +181,7 @@ public class VentaModel {
     }
 
     public boolean cambiarExiste(Venta venta){
-        saveVentas();
+        //saveVentas();
         String sql = "UPDATE t_ventas set existe = ? where Matricula = ?";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);

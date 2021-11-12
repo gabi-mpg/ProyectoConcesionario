@@ -224,7 +224,7 @@ public class Motos extends javax.swing.JPanel {
                 Moto moto = cnMoto.buscarMoto(matricula);
                 fillTableBuscar(moto);
             } else {
-                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD");
+                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } catch (Exception e){
@@ -263,8 +263,13 @@ public class Motos extends javax.swing.JPanel {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
         String matricula = pedirMatricula();
         if (matricula != null){
-            cnMoto.removeMoto(matricula);
-            fillTable();
+            if (cnMoto.motoExiste(matricula)){
+                cnMoto.removeMoto(matricula);
+                fillTable();
+            } else{
+                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         }
     }
 

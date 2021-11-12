@@ -47,6 +47,9 @@ public class VentaCRUD {
         return model.ventaExiste(pk);
     }
 
+    public boolean ventaExiste(int pk){
+        return model.ventaExiste(pk);
+    }
 
     public void listarVenta(String pk){
         if (buscarVenta(pk) != null){
@@ -56,7 +59,7 @@ public class VentaCRUD {
         }
     }
 
-    public void removevENTA(int pk){
+    public void removevENTA(String pk){
         if (model.removeVenta(buscarVenta(pk).getIdVenta())){
             System.out.println("Venta eliminada con exito");
         } else {
@@ -64,7 +67,13 @@ public class VentaCRUD {
         }
     }
 
-
+    public void removevENTA(int pk){
+        if (model.removeVenta(pk)){
+            System.out.println("Venta eliminada con exito");
+        } else {
+            System.out.println("Error eliminando la venta");
+        }
+    }
 
     public void updateVenta(Venta venta){
         if (model.updateVenta(venta)){
