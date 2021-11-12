@@ -187,8 +187,8 @@ public class contacto extends javax.swing.JDialog {
 
         try {
             message.setFrom(new InternetAddress(remitente));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("nancyremedios2@gmail.com"));
-            //message.addRecipient(Message.RecipientType.TO, new InternetAddress("christiandelcorral00@gmail.com"));//Se podrían añadir varios de la misma manera
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("gabrielamercadoperez@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("christiandelcorral00@gmail.com"));//Se podrían añadir varios de la misma manera
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport transport = session.getTransport("smtp");

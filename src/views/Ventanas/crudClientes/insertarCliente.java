@@ -7,15 +7,13 @@ package views.Ventanas.crudClientes;
 
 import controllers.ClienteCRUD;
 import entidades.Cliente;
+import utils.estaticas;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
-import java.util.regex.Pattern;
 
 
 /**
@@ -50,7 +48,7 @@ public class insertarCliente extends javax.swing.JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         setTitle("Insertar cliente");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(ruta+"iconoInsertar.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES +"iconoInsertar.png"));
 
         jLabel1 = new javax.swing.JLabel();
         iconoInsertar = new javax.swing.JLabel();

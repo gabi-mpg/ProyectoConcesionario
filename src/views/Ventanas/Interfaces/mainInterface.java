@@ -10,6 +10,7 @@ import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
 import views.Ventanas.Paneles.*;
 import views.Ventanas.panelesMenu.contacto;
+import views.Ventanas.panelesMenu.frameNosotros;
 import views.Ventanas.panelesMenu.generadorGraficos;
 import views.Ventanas.panelesMenu.generadorPDF;
 
@@ -225,6 +226,12 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new contacto();
+            }
+        });
+        quienesSomos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new frameNosotros();
             }
         });
     }
