@@ -26,7 +26,7 @@ public class PanelModificarVenta extends JFrame {
         public PanelModificarVenta(String ID) {
             initComponents();
             setLocationRelativeTo(null);
-            setResizable(true);
+            setResizable(false);
             this.ID = ID;
             rellenarCampos();
         }
@@ -83,7 +83,7 @@ public class PanelModificarVenta extends JFrame {
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 7, 7);
             panelTitulo.add(labelImagen, gridBagConstraints);
 
-            labelVariable.setText("Modificar venta de matrícula: ");
+            labelVariable.setText("Modificar venta con ID: ");
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
@@ -209,6 +209,7 @@ public class PanelModificarVenta extends JFrame {
                     if(ID != null) {
                         int IDint = Integer.parseInt(ID);
                         if (cnVentas.ventaExiste(IDint)) {
+                            System.out.println(textoDNI.getText());
                             Venta venta = cnVentas.buscarVenta(IDint);
                             labelIDVenta.setText(ID);
                             textoMatricula.setText(venta.getMatricula());
@@ -234,7 +235,8 @@ public class PanelModificarVenta extends JFrame {
         }
 
         private void modificar(ActionEvent evt) {
-            Venta venta = cnVentas.buscarVenta(ID);
+            Venta venta = cnVentas.buscarVenta(Integer.parseInt(ID));
+            System.out.println(textoDNI.getText());
             venta.setDni(textoDNI.getText());
             venta.setMatricula(textoDNI.getText());
             venta.setPrecio(Float.parseFloat(textoPrecio.getText()));

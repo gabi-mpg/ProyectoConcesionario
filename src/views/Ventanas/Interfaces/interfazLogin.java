@@ -230,14 +230,18 @@ public class interfazLogin extends javax.swing.JFrame{
                     case 0:
                         jMensaje(this, "El usuario " + user + " no existe", "Usuario incorrecto", 2);
                         break;
-                    case-3:
-                        jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
-                        break;
-                    default:
+                    case 1:
+                    case 2:
+                    case 3:
+                        System.out.println("Esta llegando el ID "+n);
                         new mainInterface(n, user, new ControllerConexion());
                         conexion.cerrarCn();
                         this.dispose();
                         break;
+                    default:
+                        jMensaje(this, "La contraseña introducida no coincide con el usuario", "Contraseña incorrecta", 2);
+                        break;
+
                 }
             }
         }
