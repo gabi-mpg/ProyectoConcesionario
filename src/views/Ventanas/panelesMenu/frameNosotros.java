@@ -19,11 +19,13 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.tools.Tool;
 
+import static java.awt.Cursor.HAND_CURSOR;
+
 /**
  *
  * @author chris
  */
-public class frameNosotros extends javax.swing.JFrame {
+public class frameNosotros extends javax.swing.JDialog {
 
     private String ruta =System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
@@ -32,8 +34,9 @@ public class frameNosotros extends javax.swing.JFrame {
     public frameNosotros() {
         initComponents();
         anadirEnlaces();
-        setVisible(true);
+        setModal(true);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.

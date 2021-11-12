@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class generadorPDF extends javax.swing.JFrame implements ActionListener {
+public class generadorPDF extends javax.swing.JDialog implements ActionListener {
 
     private String ruta =  System.getProperty("user.dir")+
             File.separator+"src"+File.separator+"views"+File.separator
@@ -19,11 +19,13 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
     private String rutaGenerarPDF;
 
     public generadorPDF() {
-        setVisible(true);
-        setLocationRelativeTo(null);
+
         setResizable(false);
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setModal(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -35,7 +37,9 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
-
+        setTitle("Generador de PDF");
+        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"iconoPDF.png");
+        setIconImage(icono);
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
@@ -55,7 +59,6 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
         botonSeleccionarDirectorio = new javax.swing.JButton();
         cnVentas = new VentaCRUD();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));

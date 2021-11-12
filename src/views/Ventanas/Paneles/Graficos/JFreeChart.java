@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 public class JFreeChart extends JDialog {
@@ -24,13 +25,17 @@ public class JFreeChart extends JDialog {
     private JButton botonCerrar;
     private ArrayList<Usuario> listaUsers;
     private ArrayList<Venta> listaVentas;
+    private String ruta =  System.getProperty("user.dir")+
+            File.separator+"src"+File.separator+"views"+File.separator
+            +"imagenes"+ File.separator;
 
     public JFreeChart(ArrayList<Usuario> listaUsers, ArrayList<Venta> listaVentas){
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        Image imagen = Toolkit.getDefaultToolkit().getImage(ruta+"estadisticaLogo.png");
         setUndecorated(false);
-        setVisible(true);
-        setModal(true);
+
+        setLocationRelativeTo(null);
+        setVisible(false);
         pack();
 
         this.listaUsers = listaUsers;
@@ -70,6 +75,7 @@ public class JFreeChart extends JDialog {
     public void generarGraficoVentas(){
         //La posición del usuario en Stiring[] nombreUsuario debe ser la misma que el número de sus ventas
         // en int[] numero ventas, por ejemplo, nombreUsuarios[0] = fenixabi, numeroVentas[0] = ventasFenixabi
+        setTitle("Cantidad de ventas por usuario (Barras)");
         ArrayList<String> nombreUsuarios = new ArrayList<>();
         ArrayList<Integer> numeroVentas = new ArrayList<>();
 
@@ -99,9 +105,10 @@ public class JFreeChart extends JDialog {
 
 
     public void dineroUsuarios(){
+
         ArrayList<String> nombreUsuario = new ArrayList<>();
         ArrayList<Float> ventaTotal = new ArrayList<>();
-
+        setTitle("Capital de ventas por usuario (Barras)");
         rellenarArraysCapitalV(nombreUsuario, ventaTotal);
         botonCerrar = new JButton("Cerrar la gráfica");
 
@@ -128,7 +135,7 @@ public class JFreeChart extends JDialog {
     public void generarGraficoVentasTarta(){
         ArrayList<String> nombreUsuarios = new ArrayList<>();
         ArrayList<Integer> numeroVentas = new ArrayList<>();
-
+        setTitle("Cantidad de ventas por usuario (Tarta)");
         rellenarArraysNumV(nombreUsuarios, numeroVentas);
 
         botonCerrar = new JButton("Cerrar la gráfica");
@@ -155,7 +162,7 @@ public class JFreeChart extends JDialog {
     public void generarGraficoDineroTartas(){
         ArrayList<String> nombreUsuarios = new ArrayList<>();
         ArrayList<Float> numeroVentas = new ArrayList<>();
-
+        setTitle("Capital de ventas por usuario (Tarta)");
         rellenarArraysCapitalV(nombreUsuarios, numeroVentas);
 
         botonCerrar = new JButton("Cerrar la gráfica");
