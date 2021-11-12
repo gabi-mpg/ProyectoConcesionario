@@ -250,6 +250,7 @@ public class generadorPDF extends javax.swing.JFrame implements ActionListener {
         directorios.showDialog(this,"Seleccionar carpeta");
         rutaGenerarPDF = directorios.getSelectedFile().getAbsolutePath();
         this.labeDirectorio.setText(truncarRuta(rutaGenerarPDF));
+
     }
 
     public String truncarRuta(String ruta){

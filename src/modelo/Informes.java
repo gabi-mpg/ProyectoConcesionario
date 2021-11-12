@@ -44,7 +44,7 @@ public class Informes {
             e.printStackTrace();
         }
 
-    }//ventas, ventasclientes, ventasmarca, ventasusuario
+    }
 
     public boolean generarInformeVentas(){
         try{
@@ -55,7 +55,7 @@ public class Informes {
 
             Paragraph espacios = new Paragraph("\n");
 
-            Paragraph p_titulo = new Paragraph("VENTAS", FontFactory.getFont("Times New Roman", 14, BaseColor.BLACK));
+            Paragraph p_titulo = new Paragraph("VENTAS GENERAL", FontFactory.getFont("Times New Roman", 14, BaseColor.BLACK));
             p_titulo.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_IDVenta = new Paragraph("ID Venta", FontFactory.getFont("Times New Roman", 9, BaseColor.RED));
@@ -64,7 +64,7 @@ public class Informes {
             Paragraph p_n_Matricula = new Paragraph("Matricula", FontFactory.getFont("Times New Roman", 9, BaseColor.RED));
             p_n_Matricula.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph p_n_DNI = new Paragraph("DNI", FontFactory.getFont("Times New Roman", 9, BaseColor.RED));
+            Paragraph p_n_DNI = new Paragraph("Comprador", FontFactory.getFont("Times New Roman", 9, BaseColor.RED));
             p_n_DNI.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_Vendedor = new Paragraph("Vendedor", FontFactory.getFont("Times New Roman", 9, BaseColor.RED));
@@ -118,14 +118,12 @@ public class Informes {
                 }
             }
 
-            //Collections.sort(listaVentasFiltrada, new Venta());
-
             float[] anchosTablaDatos = {150, 150, 150, 150, 150};
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
 
             Paragraph espacios = new Paragraph("\n");
-
-            Paragraph p_titulo = new Paragraph("VENTAS", FontFactory.getFont("Times New Roman", 14, BaseColor.BLACK));
+            String titulo = "VENTAS DEL CLIENTE CON DNI " + DNI;
+            Paragraph p_titulo = new Paragraph(titulo, FontFactory.getFont("Times New Roman", 14, BaseColor.BLACK));
             p_titulo.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_IDVenta = new Paragraph("ID Venta", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
@@ -134,7 +132,7 @@ public class Informes {
             Paragraph p_n_Matricula = new Paragraph("Matricula", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
             p_n_Matricula.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph p_n_DNI = new Paragraph("DNI", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
+            Paragraph p_n_DNI = new Paragraph("Comprador", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
             p_n_DNI.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_Vendedor = new Paragraph("Vendedor", FontFactory.getFont("Times New Roman", 9, BaseColor.BLUE));
@@ -195,8 +193,8 @@ public class Informes {
             PdfPTable tablaDatos = new PdfPTable(anchosTablaDatos);
 
             Paragraph espacios = new Paragraph("\n");
-
-            Paragraph p_titulo = new Paragraph("VENTAS", FontFactory.getFont("Times New Roman", 14, BaseColor.DARK_GRAY));
+            String titulo = "VENTAS DE MOTOS " + marca.toUpperCase();
+            Paragraph p_titulo = new Paragraph(titulo, FontFactory.getFont("Times New Roman", 14, BaseColor.DARK_GRAY));
             p_titulo.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_IDVenta = new Paragraph("ID Venta", FontFactory.getFont("Times New Roman", 9, BaseColor.DARK_GRAY));
@@ -205,7 +203,7 @@ public class Informes {
             Paragraph p_n_Matricula = new Paragraph("Matricula", FontFactory.getFont("Times New Roman", 9, BaseColor.DARK_GRAY));
             p_n_Matricula.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph p_n_DNI = new Paragraph("marca", FontFactory.getFont("Times New Roman", 9, BaseColor.DARK_GRAY));
+            Paragraph p_n_DNI = new Paragraph("Comprador", FontFactory.getFont("Times New Roman", 9, BaseColor.DARK_GRAY));
             p_n_DNI.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_Vendedor = new Paragraph("Vendedor", FontFactory.getFont("Times New Roman", 9, BaseColor.DARK_GRAY));
@@ -266,7 +264,8 @@ public class Informes {
 
             Paragraph espacios = new Paragraph("\n");
 
-            Paragraph p_titulo = new Paragraph("VENTAS", FontFactory.getFont("Times New Roman", 14, BaseColor.MAGENTA));
+            String titulo = "VENTAS DEL/LA VENDEDOR/A " + nick.toUpperCase();
+            Paragraph p_titulo = new Paragraph(titulo, FontFactory.getFont("Times New Roman", 14, BaseColor.MAGENTA));
             p_titulo.setAlignment(Element.ALIGN_CENTER);
 
             Paragraph p_n_IDVenta = new Paragraph("ID Venta", FontFactory.getFont("Times New Roman", 9, BaseColor.MAGENTA));
