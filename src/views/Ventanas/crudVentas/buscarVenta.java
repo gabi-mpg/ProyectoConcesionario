@@ -2,6 +2,7 @@ package views.Ventanas.crudVentas;
 
 
 import controllers.VentaCRUD;
+import utils.estaticas;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -13,9 +14,7 @@ import java.io.File;
 public class buscarVenta extends javax.swing.JFrame implements ActionListener, ItemListener {
 
     private String valorBusqueda;
-    private final String RUTA_REC =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"
-            +File.separator+"Imagenes"+File.separator;
+
 
     public buscarVenta(VentaCRUD cnVenta) {
         this.cnVenta = cnVenta;
@@ -37,6 +36,10 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        setTitle("Buscar una venta");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"iconoBuscar.png");
+        setIconImage(icono);
+
         buttonGroup1 = new javax.swing.ButtonGroup();
         labelTitulo = new javax.swing.JLabel();
         labelIcono = new javax.swing.JLabel();
@@ -55,7 +58,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         labelTitulo.setText("Buscar registros de venta");
-        labelTitulo.setFont(new Font("Serif",Font.BOLD,16));
+        labelTitulo.setFont(new Font("Dialog",Font.BOLD,16));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -63,7 +66,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
         gridBagConstraints.insets = new java.awt.Insets(25, 26, 18, 26);
         getContentPane().add(labelTitulo, gridBagConstraints);
 
-        labelIcono.setIcon(new javax.swing.ImageIcon(RUTA_REC +"iconoBuscar.png")); // NOI18N
+        labelIcono.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES +"iconoBuscar.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -134,18 +137,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
     }// </editor-fold>
 
 
-//    private void addEventByRadio(){
-//        if(rbDNI.isSelected()){
-//            campoBusqueda.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    procesarCampoDNI();
-//                }
-//            });
-//        }else if(rbMatricula.isSelected()){
-//
-//        }
-//    }
+
 
     //Para hacer la búsqeuda con todo okey
     private void agregarListeners(){
@@ -214,6 +206,8 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.DESELECTED) {
             campoBusqueda.setText("");
+            campoBusqueda.setForeground(Color.black);
+            botonBusqueda.setEnabled(false);
         }
     }
 
@@ -223,10 +217,39 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
         }else if(rbMatricula.isSelected()){
             valorBusqueda = campoBusqueda.getText();
             procesarCampoMatricula();
+        }else if(rbIDVendedor.isSelected()){
+            comprobarVacio();
         }else{
-            valorBusqueda = campoBusqueda.getText();
-            botonBusqueda.setEnabled(true);
+            comprobarNumero();
         }
+    }
+
+    private void comprobarNumero(){
+        campoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e){
+                char caracter = e.getKeyChar();
+                    if(((caracter < '0') ||(caracter > '9')) &&(caracter != '\b'))  {
+                        botonBusqueda.setEnabled(false);
+                        e.consume();  // ignorar el evento de teclado
+                    }else{
+                        botonBusqueda.setEnabled(true);
+                    }
+                }
+        });
+    }
+
+    private void comprobarVacio(){
+        campoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if(!campoBusqueda.getText().isEmpty()){
+                    botonBusqueda.setEnabled(true);
+                }else{
+                    botonBusqueda.setEnabled(true);
+                }
+            }
+        });
     }
 
     private void enviarArray(){

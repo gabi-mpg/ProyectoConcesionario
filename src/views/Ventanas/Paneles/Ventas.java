@@ -224,11 +224,18 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         } else if (b == botonEliminar) {
             botonEliminarActionPerformed(e);
         }else{
-            String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
-            if (!ID.isEmpty()){
-                new PanelModificarVenta(ID);
-                fillTable();
+            try{
+                String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
+                if (!ID.isEmpty()){
+                    new PanelModificarVenta(ID);
+                    fillTable();
+                }else{
+                    JOptionPane.showMessageDialog(this,"No se ha introducido búsqueda","Entrada vacía",JOptionPane.ERROR_MESSAGE);
+                }
+            }catch (NullPointerException ex){
+                System.out.println(ex.getMessage());
             }
+
         }
     }
 
