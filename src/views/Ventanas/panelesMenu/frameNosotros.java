@@ -198,7 +198,9 @@ public class frameNosotros extends javax.swing.JFrame {
     }
 
     public void anadirEnlaces(){
-        gitGabriela.setText("Pincha aquí para ver GitHub");
+
+
+        gitGabriela.setText("<html>Pincha <FONT color=\"#000099\"><U>aquí</U></FONT> para ver GitHub.</HTML>");
         gitGabriela.setCursor(new Cursor(HAND_CURSOR));
         gitGabriela.addMouseListener(new MouseAdapter() {
             @Override
@@ -218,7 +220,7 @@ public class frameNosotros extends javax.swing.JFrame {
             }
 
         });
-        gitChristian.setText("Pincha aquí para ver GitHub");
+        gitChristian.setText("<html>Pincha <FONT color=\"#000099\"><U>aquí</U></FONT> para ver GitHub.</HTML>");
         gitChristian.setCursor(new Cursor(HAND_CURSOR));
         gitChristian.addMouseListener(new MouseAdapter() {
             @Override
