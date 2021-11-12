@@ -85,7 +85,9 @@ public class Venta implements Comparator<Venta> {
                 "matricula='" + matricula + '\'' +
                 ", dni='" + dni + '\'' +
                 ", precio=" + precio +
-                ", idVendedor=" + idVendedor +
+                ", idVendedor='" + idVendedor + '\'' +
+                ", idVenta=" + idVenta +
+                ", existe=" + existe +
                 '}';
     }
 
