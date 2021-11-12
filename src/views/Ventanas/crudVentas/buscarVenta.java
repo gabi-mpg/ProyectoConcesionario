@@ -185,17 +185,13 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
             public void keyReleased(KeyEvent e) {
                 if(campoBusqueda.getText().matches("[0-9]{7,8}[A-Za-z]")){
                     campoBusqueda.setForeground(new Color(0,143,57));
-                    campoCorrecto = true;
+                    botonBusqueda.setEnabled(true);
                 }else{
                     campoBusqueda.setForeground(Color.RED);
-                    campoCorrecto = false;
+                    botonBusqueda.setEnabled(false);
                 }
             }
         });
-
-        if (campoCorrecto){
-            botonBusqueda.setEnabled(true);
-        }
     }
 
     //comprueba matricula
@@ -205,17 +201,13 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
             public void keyReleased(KeyEvent e) {
                 if(campoBusqueda.getText().matches("^[0-9]{4}[A-Za-z]{3}$")){
                     campoBusqueda.setForeground(new Color(0,143,57));
-                    campoCorrecto = true;
+                    botonBusqueda.setEnabled(true);
                 }else{
                     campoBusqueda.setForeground(Color.RED);
-                    campoCorrecto = false;
+                    botonBusqueda.setEnabled(false);
                 }
             }
         });
-
-        if (campoCorrecto){
-            botonBusqueda.setEnabled(true);
-        }
     }
 
     @Override
@@ -235,8 +227,6 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
             valorBusqueda = campoBusqueda.getText();
             botonBusqueda.setEnabled(true);
         }
-
-
     }
 
     private void enviarArray(){
