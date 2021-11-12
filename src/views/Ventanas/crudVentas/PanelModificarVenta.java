@@ -181,7 +181,7 @@ public class PanelModificarVenta extends JFrame {
             botonModificar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    modificar(actionEvent);
+                    modificar();
                 }
             });
 
@@ -209,7 +209,6 @@ public class PanelModificarVenta extends JFrame {
                     if(ID != null) {
                         int IDint = Integer.parseInt(ID);
                         if (cnVentas.ventaExiste(IDint)) {
-                            System.out.println(textoDNI.getText());
                             Venta venta = cnVentas.buscarVenta(IDint);
                             labelIDVenta.setText(ID);
                             textoMatricula.setText(venta.getMatricula());
@@ -234,9 +233,8 @@ public class PanelModificarVenta extends JFrame {
             checkLimpiar.setSelected(false);
         }
 
-        private void modificar(ActionEvent evt) {
+        private void modificar() {
             Venta venta = cnVentas.buscarVenta(Integer.parseInt(ID));
-            System.out.println(textoDNI.getText());
             venta.setDni(textoDNI.getText());
             venta.setMatricula(textoDNI.getText());
             venta.setPrecio(Float.parseFloat(textoPrecio.getText()));

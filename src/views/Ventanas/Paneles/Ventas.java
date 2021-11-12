@@ -147,7 +147,6 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         VentaCRUD controlador = new VentaCRUD();
         ArrayList<Venta> listaVentas = controlador.getListaVentas();
         model.setRowCount(0);
-        System.out.println(listaVentas.size());
         for (Venta v : listaVentas){
             if (v.isExiste() == 1){
                 Object[] datosVenta = new Object[5];
@@ -202,10 +201,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         if(ID != null){
             try{
                 int IDint = Integer.parseInt(ID);
-                System.out.println(IDint + "ID VENTAAAAAA");
-                System.out.println(cnVentas.ventaExiste(IDint) + "VENTASSSS");
                 if(cnVentas.ventaExiste(IDint)){
-                    System.out.println("ENtra en el if de venta existe");
                     cnVentas.removeVenta(cnVentas.buscarVenta(IDint).getMatricula());
                     fillTable();
                 } else {
@@ -266,7 +262,6 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
             this.setBackground(new java.awt.Color(204, 255, 204));
             setTema(0);
         }
-        System.out.println(tema);
     }
 
     public void setTema(int tema) {
