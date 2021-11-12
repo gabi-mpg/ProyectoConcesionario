@@ -12,6 +12,8 @@ package views.Ventanas.Interfaces;
  */
 
 import modelo.config;
+import utils.estaticas;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,9 +30,6 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
 
     private String[] configuracionRecogida;
     private config configuracion;
-    private String ruta = System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
 
 
     public interfazConfig(String[] config, config configuracion) {
@@ -72,7 +71,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         java.awt.GridBagConstraints gridBagConstraints;
 
         setTitle("Concesonario Mercado Corral");
-        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"icono.png");
         setIconImage(icono);
 
 
@@ -158,7 +157,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         gridBagConstraints.insets = new java.awt.Insets(4, 40, 0, 10);
         panelPrincipal.add(jLabel3, gridBagConstraints);
 
-        configWallpaper.setIcon(new javax.swing.ImageIcon(ruta+"fondoConfig.jpg")); // NOI18N
+        configWallpaper.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"fondoConfig.jpg")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

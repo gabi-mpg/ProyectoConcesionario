@@ -5,6 +5,8 @@ package views.Ventanas.panelesMenu;
  * and open the template in the editor.
 */
 
+import utils.estaticas;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,9 +29,6 @@ import static java.awt.Cursor.HAND_CURSOR;
  */
 public class frameNosotros extends javax.swing.JDialog {
 
-    private String ruta =System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"Imagenes"+ File.separator;
 
     public frameNosotros() {
         initComponents();
@@ -49,7 +48,7 @@ public class frameNosotros extends javax.swing.JDialog {
         java.awt.GridBagConstraints gridBagConstraints;
 
         setTitle("Quiénes somos");
-        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"iconoMundo.png");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"iconoMundo.png");
         setIconImage(icono);
 
         jPanel1 = new javax.swing.JPanel();
@@ -72,6 +71,7 @@ public class frameNosotros extends javax.swing.JDialog {
         jPanel1.setMinimumSize(new java.awt.Dimension(313, 40));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 50));
         jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("¿Quiénes somos?");
@@ -115,13 +115,14 @@ public class frameNosotros extends javax.swing.JDialog {
 
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 210));
         jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel2.setBackground(new java.awt.Color(165, 165, 165));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(ruta+"fotoGaby.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"fotoGaby.jpg")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(19, 19, 12, 19);
         jPanel2.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(ruta+"fotoChris.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"fotoChris.jpg")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(19, 19, 12, 19);
         jPanel2.add(jLabel2, gridBagConstraints);

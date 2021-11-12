@@ -2,6 +2,7 @@ package views.Ventanas.panelesMenu;
 
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import utils.estaticas;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -24,9 +25,7 @@ import static com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil.matches
 
 public class contacto extends javax.swing.JDialog {
 
-    private final String RUTA_REC =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+
     private final String EMAIL_REGEX = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private final Pattern pat = Pattern.compile(EMAIL_REGEX);
     /**
@@ -51,7 +50,7 @@ public class contacto extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
         setTitle("Contacta con nosotros");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(RUTA_REC +"iconoCorreo.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES +"iconoCorreo.png"));
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         textoCorreo = new javax.swing.JTextField();

@@ -8,6 +8,7 @@ package views.Ventanas.Interfaces;
 import controllers.ControllerConexion;
 import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
+import utils.estaticas;
 import views.Ventanas.Paneles.*;
 import views.Ventanas.panelesMenu.contacto;
 import views.Ventanas.panelesMenu.frameNosotros;
@@ -48,9 +49,6 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private int tema;
     private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private ControllerConexion conexion;
-    private String ruta =System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"Imagenes"+ File.separator;
     boolean modoOscuro = false;
 
     public mainInterface() {
@@ -86,7 +84,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
     private void initComponents() {
 
         setTitle("Concesonario Mercado Corral");
-        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"icono.png");
         setIconImage(icono);
 
         java.awt.GridBagConstraints gridBagConstraints;
@@ -108,7 +106,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 450));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        logoMain.setIcon(new javax.swing.ImageIcon(ruta+"imagenLogo (Personalizado)_1.png")); // NOI18N
+        logoMain.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"imagenLogo (Personalizado)_1.png")); // NOI18N
         logoMain.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.ipady = 3;
@@ -150,7 +148,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         JLabel nuevaFoto = new JLabel();
-        nuevaFoto.setIcon(new ImageIcon(ruta+"fotoPrincipal.jpg"));
+        nuevaFoto.setIcon(new ImageIcon(estaticas.RUTA_IMAGENES+"fotoPrincipal.jpg"));
         panelSecundario.setPreferredSize(new java.awt.Dimension(600, 300));
         panelSecundario.setLayout(new java.awt.BorderLayout());
         panelSecundario.add(nuevaFoto);

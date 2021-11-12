@@ -3,6 +3,7 @@ package views.Ventanas.panelesMenu;
 import controllers.ControllerConexion;
 import controllers.VentaCRUD;
 import modelo.Informes;
+import utils.estaticas;
 
 import javax.naming.ldap.Control;
 import javax.swing.*;
@@ -13,9 +14,7 @@ import java.io.File;
 
 public class generadorPDF extends javax.swing.JDialog implements ActionListener {
 
-    private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+
     private String rutaGenerarPDF;
 
     public generadorPDF() {
@@ -38,7 +37,7 @@ public class generadorPDF extends javax.swing.JDialog implements ActionListener 
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
         setTitle("Generador de PDF");
-        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"iconoPDF.png");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"iconoPDF.png");
         setIconImage(icono);
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -71,7 +70,7 @@ public class generadorPDF extends javax.swing.JDialog implements ActionListener 
         gridBagConstraints.insets = new java.awt.Insets(9, 0, 9, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        labelImagen.setIcon(new javax.swing.ImageIcon(ruta+"iconoPDF.png")); // NOI18N
+        labelImagen.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"iconoPDF.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

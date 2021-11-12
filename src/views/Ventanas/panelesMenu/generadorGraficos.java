@@ -9,6 +9,7 @@ package views.Ventanas.panelesMenu;
 import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
 import javafx.scene.control.RadioButton;
+import utils.estaticas;
 import views.Ventanas.Paneles.Graficos.JFreeChart;
 
 import javax.swing.*;
@@ -25,9 +26,7 @@ public class generadorGraficos extends javax.swing.JFrame implements ActionListe
     /**
      * Creates new form estadisticas
      */
-    private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+
     private UsuarioCRUD cnUsuario;
     private VentaCRUD cnVenta;
 
@@ -84,7 +83,7 @@ public class generadorGraficos extends javax.swing.JFrame implements ActionListe
         gridBagConstraints.insets = new java.awt.Insets(26, 16, 0, 16);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        etiqueLogo.setIcon(new javax.swing.ImageIcon(ruta+"estadisticaLogo.png")); // NOI18N
+        etiqueLogo.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"estadisticaLogo.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;

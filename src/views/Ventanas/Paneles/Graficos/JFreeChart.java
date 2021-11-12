@@ -9,6 +9,7 @@ import org.jfree.chart.ChartTheme;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import utils.estaticas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,13 +26,11 @@ public class JFreeChart extends JDialog {
     private JButton botonCerrar;
     private ArrayList<Usuario> listaUsers;
     private ArrayList<Venta> listaVentas;
-    private String ruta =  System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
+
 
     public JFreeChart(ArrayList<Usuario> listaUsers, ArrayList<Venta> listaVentas){
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        Image imagen = Toolkit.getDefaultToolkit().getImage(ruta+"estadisticaLogo.png");
+        Image imagen = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"estadisticaLogo.png");
         setUndecorated(false);
 
         setLocationRelativeTo(null);

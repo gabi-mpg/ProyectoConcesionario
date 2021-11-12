@@ -6,6 +6,7 @@
 package views.Ventanas.Interfaces;
 
 import controllers.ControllerConexion;
+import utils.estaticas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +24,6 @@ public class interfazLogin extends javax.swing.JFrame{
 
     private modelo.config configuracion;
     private ControllerConexion conexion;
-
-    private String ruta = System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
 
     public interfazLogin() {
         conexion = new ControllerConexion();
@@ -71,7 +68,7 @@ public class interfazLogin extends javax.swing.JFrame{
 
 
         setTitle("Concesonario Mercado Corral");
-        Image icono = Toolkit.getDefaultToolkit().getImage(ruta+"icono.png");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"icono.png");
         setIconImage(icono);
 
         jLabelSalir = new javax.swing.JLabel();
@@ -90,7 +87,7 @@ public class interfazLogin extends javax.swing.JFrame{
         setUndecorated(true);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabelSalir.setIcon(new javax.swing.ImageIcon(ruta+"iconoSalir.png")); // NOI18N
+        jLabelSalir.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"iconoSalir.png")); // NOI18N
         jLabelSalir.setToolTipText("Cerrar la aplicación");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -100,14 +97,14 @@ public class interfazLogin extends javax.swing.JFrame{
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 10);
         getContentPane().add(jLabelSalir, gridBagConstraints);
 
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(ruta+"imagenLogo.png")); // NOI18N
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"imagenLogo.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
         getContentPane().add(jLabelLogo, gridBagConstraints);
 
-        configLabel.setIcon(new javax.swing.ImageIcon(ruta+"iconoConfig.png")); // NOI18N
+        configLabel.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"iconoConfig.png")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -179,7 +176,7 @@ public class interfazLogin extends javax.swing.JFrame{
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        fondoPantalla.setIcon(new javax.swing.ImageIcon(ruta+"wallpaper (Pequeño) (1).jpg")); // NOI18N
+        fondoPantalla.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"wallpaper (Pequeño) (1).jpg")); // NOI18N
         fondoPantalla.setMinimumSize(new java.awt.Dimension(0, 0));
         fondoPantalla.setPreferredSize(new java.awt.Dimension(250, 400));
         jPanel1.add(fondoPantalla, java.awt.BorderLayout.CENTER);
