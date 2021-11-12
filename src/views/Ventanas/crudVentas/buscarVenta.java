@@ -1,7 +1,12 @@
 package views.Ventanas.crudVentas;
 
 
+import controllers.ClienteCRUD;
+import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
+import entidades.Usuario;
+import entidades.Venta;
+import jdk.nashorn.internal.scripts.JO;
 import utils.estaticas;
 
 import javax.swing.*;
@@ -10,6 +15,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public class buscarVenta extends javax.swing.JFrame implements ActionListener, ItemListener {
 
@@ -53,6 +59,8 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
         campoCorrecto = false;
         campoBusqueda.setEnabled(false);
         botonBusqueda.setEnabled(false);
+        listaV = new ArrayList<>();
+        cnUser = new UsuarioCRUD();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -253,7 +261,25 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
     }
 
     private void enviarArray(){
-
+        if (rbDNI.isSelected()){
+            if (cnVenta.buscarCliente(campoBusqueda.getText()) != null){
+                listaV = cnVenta.buscarVentasCliente(campoBusqueda.getText());
+            } else {
+                JOptionPane.showMessageDialog(this, "El cliente no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else if(rbMatricula.isSelected()) {
+            if (cnVenta.buscarMoto(campoBusqueda.getText()) != null){
+                listaV.add(cnVenta.buscarVenta(campoBusqueda.getText()));
+            } else {
+                JOptionPane.showMessageDialog(this, "La moto no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else if(rbIDVendedor.isSelected()) {
+            if (cnUser.buscarUsuario(campoBusqueda.getText()) != null) {
+                listaV.add(cnVenta.buscarVenta(campoBusqueda.getText()));
+            } else {
+                JOptionPane.showMessageDialog(this, "La moto no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
     /**
      * @param args the command line arguments
@@ -308,7 +334,9 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener, I
     private javax.swing.JLabel labelIcono;
     private javax.swing.JLabel labelTitulo;
     private VentaCRUD cnVenta;
+    private UsuarioCRUD cnUser;
     boolean campoCorrecto;
+    private ArrayList<Venta> listaV;
 
 
 

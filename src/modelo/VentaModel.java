@@ -67,13 +67,31 @@ public class VentaModel {
     public Venta buscarVenta(int pk){
         //saveVentas();
         for(Venta v : listaVentas){
-            System.out.println(v.toString());
             if (v.getIdVenta() == (pk)){
-                System.out.println("La v coincide");
                 return v;
             }
         }
         return null;
+    }
+
+    public ArrayList<Venta> buscarVentasCliente(String dni){
+        ArrayList<Venta> listaVCliente = new ArrayList<>();
+        for (Venta v : listaVentas){
+            if (v.getDni().equalsIgnoreCase(dni)){
+                listaVCliente.add(v);
+            }
+        }
+        return  listaVCliente;
+    }
+
+    public ArrayList<Venta> buscarVentasNick(String nick){
+        ArrayList<Venta> listaVCliente = new ArrayList<>();
+        for (Venta v : listaVentas){
+            if (v.getIdVendedor().equalsIgnoreCase(nick)){
+                listaVCliente.add(v);
+            }
+        }
+        return  listaVCliente;
     }
 
     public boolean ventaExiste(String pk){

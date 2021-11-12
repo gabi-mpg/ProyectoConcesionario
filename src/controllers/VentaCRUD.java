@@ -1,5 +1,6 @@
 package controllers;
 
+import entidades.Cliente;
 import entidades.Moto;
 import entidades.Venta;
 import modelo.VentaModel;
@@ -31,6 +32,10 @@ public class VentaCRUD {
         return model.buscarMoto(matricula);
     }
 
+    public Cliente buscarCliente(String dni){
+        return model.buscarCliente(dni);
+    }
+
     public boolean comprobarMatricula(String matricula){
         return matricula.matches("^[0-9]{4}[A-Za-z]{3}$");
     }
@@ -41,6 +46,14 @@ public class VentaCRUD {
     
     public Venta buscarVenta(String pk){
         return model.buscarVenta(pk);
+    }
+
+    public ArrayList<Venta> buscarVentasCliente(String dni){
+        return model.buscarVentasCliente(dni);
+    }
+
+    public ArrayList<Venta> buscarVentasNick(String nick){
+        return model.buscarVentasNick(nick);
     }
 
     public Venta buscarVenta(int pk){
