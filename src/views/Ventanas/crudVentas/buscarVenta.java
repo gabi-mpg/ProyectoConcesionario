@@ -26,60 +26,7 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         setVisible(true);
     }
 
-    private void procesarCampoDNI(){
-        campoBusqueda.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(campoBusqueda.getText().matches("[0-9]{7,8}[A-Za-z]")){
-                    campoBusqueda.setForeground(new Color(0,143,57));
-                    campoCorrecto = true;
-                }else{
-                    campoBusqueda.setForeground(Color.RED);
-                    campoCorrecto = false;
-                }
-            }
-        });
 
-        if (campoCorrecto){
-            botonBusqueda.setEnabled(true);
-        }
-    }
-
-    private void procesarCampoMatricula(){
-        campoBusqueda.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if(campoBusqueda.getText().matches("^[0-9]{4}[A-Za-z]{3}$")){
-                    campoBusqueda.setForeground(new Color(0,143,57));
-                    campoCorrecto = true;
-                }else{
-                    campoBusqueda.setForeground(Color.RED);
-                    campoCorrecto = false;
-                }
-            }
-        });
-
-        if (campoCorrecto){
-            botonBusqueda.setEnabled(true);
-        }
-    }
-
-    public void busquedaVenta(){
-        if(!campoBusqueda.getText().isEmpty()){
-            if(rbDNI.isSelected()){
-                procesarCampoDNI();
-            }else if(rbMatricula.isSelected()){
-                valorBusqueda = campoBusqueda.getText();
-                procesarCampoMatricula();
-            }else{
-                valorBusqueda = campoBusqueda.getText();
-                botonBusqueda.setEnabled(true);
-            }
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(this,"No se ha introducido información", "Aviso", JOptionPane.WARNING_MESSAGE);
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -187,6 +134,21 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         agregarListeners();
     }// </editor-fold>
 
+
+//    private void addEventByRadio(){
+//        if(rbDNI.isSelected()){
+//            campoBusqueda.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    procesarCampoDNI();
+//                }
+//            });
+//        }else if(rbMatricula.isSelected()){
+//
+//        }
+//    }
+
+    //Para hacer la búsqeuda con todo okey
     private void agregarListeners(){
         botonBusqueda.addActionListener(new ActionListener() {
             @Override
@@ -195,12 +157,14 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
             }
         });
 
+
         rbDNI.addActionListener(this);
         rbMatricula.addActionListener(this);
         rbIDVenta.addActionListener(this);
         rbIDVendedor.addActionListener(this);
     }
 
+    //Para activar el campo de busqueda
     @Override
     public void actionPerformed(ActionEvent e) {
         JRadioButton radio = (JRadioButton) e.getSource();
@@ -208,6 +172,60 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
             this.campoBusqueda.setEnabled(true);
             busquedaVenta();
         }
+    }
+
+    //Comprueba dni
+    private void procesarCampoDNI(){
+        campoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(campoBusqueda.getText().matches("[0-9]{7,8}[A-Za-z]")){
+                    campoBusqueda.setForeground(new Color(0,143,57));
+                    campoCorrecto = true;
+                }else{
+                    campoBusqueda.setForeground(Color.RED);
+                    campoCorrecto = false;
+                }
+            }
+        });
+
+        if (campoCorrecto){
+            botonBusqueda.setEnabled(true);
+        }
+    }
+
+    //comprueba matricula
+    private void procesarCampoMatricula(){
+        campoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(campoBusqueda.getText().matches("^[0-9]{4}[A-Za-z]{3}$")){
+                    campoBusqueda.setForeground(new Color(0,143,57));
+                    campoCorrecto = true;
+                }else{
+                    campoBusqueda.setForeground(Color.RED);
+                    campoCorrecto = false;
+                }
+            }
+        });
+
+        if (campoCorrecto){
+            botonBusqueda.setEnabled(true);
+        }
+    }
+
+    public void busquedaVenta(){
+        if(rbDNI.isSelected()){
+            procesarCampoDNI();
+        }else if(rbMatricula.isSelected()){
+            valorBusqueda = campoBusqueda.getText();
+            procesarCampoMatricula();
+        }else{
+            valorBusqueda = campoBusqueda.getText();
+            botonBusqueda.setEnabled(true);
+        }
+
+
     }
 
     private void enviarArray(){

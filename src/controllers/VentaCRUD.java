@@ -51,9 +51,9 @@ public class VentaCRUD {
         return model.ventaExiste(pk);
     }
 
-    public boolean ventaExisteDNI(String pk){
-        return model.ventaExisteDNI(pk);
-    }
+//    public boolean ventaExisteDNI(String pk){
+//        return model.ventaExisteDNI(pk);
+//    }
 
     public boolean ventaExiste(int pk){
         System.out.println(model.ventaExiste(pk));
