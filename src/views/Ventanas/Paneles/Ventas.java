@@ -168,14 +168,16 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         }
     }
 
-    private void fillTableBuscar(Venta v){
+    private void fillTableBuscar(ArrayList<Venta> listaV){
         model.setRowCount(0);
-        Object[] datosVenta = new Object[4];
-        datosVenta[0] = v.getIdVenta();
-        datosVenta[1] = v.getDni();
-        datosVenta[2] = v.getMatricula();
-        datosVenta[3] = v.getPrecio();
-        model.addRow(datosVenta);
+        for (Venta v : listaV){
+            Object[] datosVenta = new Object[4];
+            datosVenta[0] = v.getIdVenta();
+            datosVenta[1] = v.getDni();
+            datosVenta[2] = v.getMatricula();
+            datosVenta[3] = v.getPrecio();
+            model.addRow(datosVenta);
+        }
     }
 
     private void agregarListeners(){
@@ -188,13 +190,13 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
             new buscarVenta(cnVentas);
-            /*Venta v = buscarVenta.recogerVenta();//este metodo nos devolvera la venta
-            if (v != null){
-                fillTableBuscar(v);
-            } else {
-                //mensaje no existe
-                //QUIZAS METER LO DEL MS EN EL PANEL
-            }*/
+//            Venta v = buscarVenta.recogerVenta();//este metodo nos devolvera la venta
+//            if (v != null){
+//                fillTableBuscar(v);
+//            } else {
+//                //mensaje no existe
+//                //QUIZAS METER LO DEL MS EN EL PANEL
+//            }
 
         } catch (Exception e){
             System.out.println(e.getMessage());

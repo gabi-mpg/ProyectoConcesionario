@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class buscarVenta extends javax.swing.JFrame implements ActionListener{
@@ -17,45 +19,65 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
             +File.separator+"Imagenes"+File.separator;
 
     public buscarVenta(VentaCRUD cnVenta) {
-
+        this.cnVenta = cnVenta;
         setLocationRelativeTo(null);
         initComponents();
-        this.botonBusqueda.setEnabled(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        radio1.addActionListener(this);
-        radio2.addActionListener(this);
-        radio3.addActionListener(this);
-        radio4.addActionListener(this);
-        botonBusqueda.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                busquedaVenta();
-            }
-        });
-        this.cnVenta = cnVenta;
         setVisible(true);
     }
 
+    private void procesarCampoDNI(){
+        campoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(campoBusqueda.getText().matches("[0-9]{7,8}[A-Za-z]")){
+                    campoBusqueda.setForeground(new Color(0,143,57));
+                    campoCorrecto = true;
+                }else{
+                    campoBusqueda.setForeground(Color.RED);
+                    campoCorrecto = false;
+                }
+            }
+        });
 
+        if (campoCorrecto){
+            botonBusqueda.setEnabled(true);
+        }
+    }
+
+    private void procesarCampoMatricula(){
+        campoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(campoBusqueda.getText().matches("^[0-9]{4}[A-Za-z]{3}$")){
+                    campoBusqueda.setForeground(new Color(0,143,57));
+                    campoCorrecto = true;
+                }else{
+                    campoBusqueda.setForeground(Color.RED);
+                    campoCorrecto = false;
+                }
+            }
+        });
+
+        if (campoCorrecto){
+            botonBusqueda.setEnabled(true);
+        }
+    }
 
     public void busquedaVenta(){
         if(!campoBusqueda.getText().isEmpty()){
-            if(radio1.isSelected()){
+            if(rbDNI.isSelected()){
+                procesarCampoDNI();
+            }else if(rbMatricula.isSelected()){
                 valorBusqueda = campoBusqueda.getText();
-                //Hacer comprobaciones de DNI
-            }else if(radio2.isSelected()){
-                valorBusqueda = campoBusqueda.getText();
-                //Hacer comprobaciones matricula
-            }else if(radio3.isSelected()){
-                valorBusqueda = campoBusqueda.getText();
-                //Hacer comprobaciones idVenta
+                procesarCampoMatricula();
             }else{
                 valorBusqueda = campoBusqueda.getText();
-                //Hacer comprobaciones idVendedor
+                botonBusqueda.setEnabled(true);
             }
             dispose();
         }else{
-            JOptionPane.showMessageDialog(this,"No se ha introducido información");
+            JOptionPane.showMessageDialog(this,"No se ha introducido información", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -72,13 +94,16 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         buttonGroup1 = new javax.swing.ButtonGroup();
         labelTitulo = new javax.swing.JLabel();
         labelIcono = new javax.swing.JLabel();
-        radio1 = new javax.swing.JRadioButton();
-        radio2 = new javax.swing.JRadioButton();
-        radio3 = new javax.swing.JRadioButton();
+        rbDNI = new javax.swing.JRadioButton();
+        rbMatricula = new javax.swing.JRadioButton();
+        rbIDVenta = new javax.swing.JRadioButton();
         campoBusqueda = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         botonBusqueda = new javax.swing.JButton();
-        radio4 = new javax.swing.JRadioButton();
+        rbIDVendedor = new javax.swing.JRadioButton();
+        campoCorrecto = false;
+        campoBusqueda.setEnabled(false);
+        botonBusqueda.setEnabled(false);
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -99,29 +124,29 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         gridBagConstraints.insets = new java.awt.Insets(13, 14, 6, 14);
         getContentPane().add(labelIcono, gridBagConstraints);
 
-        buttonGroup1.add(radio1);
-        radio1.setText("DNI");
+        buttonGroup1.add(rbDNI);
+        rbDNI.setText("DNI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
-        getContentPane().add(radio1, gridBagConstraints);
+        getContentPane().add(rbDNI, gridBagConstraints);
 
-        buttonGroup1.add(radio2);
-        radio2.setText("Matrícula");
+        buttonGroup1.add(rbMatricula);
+        rbMatricula.setText("Matrícula");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
-        getContentPane().add(radio2, gridBagConstraints);
+        getContentPane().add(rbMatricula, gridBagConstraints);
 
-        buttonGroup1.add(radio3);
-        radio3.setText("ID Venta");
+        buttonGroup1.add(rbIDVenta);
+        rbIDVenta.setText("ID Venta");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
-        getContentPane().add(radio3, gridBagConstraints);
+        getContentPane().add(rbIDVenta, gridBagConstraints);
 
         campoBusqueda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoBusqueda.setPreferredSize(new java.awt.Dimension(140, 24));
@@ -150,17 +175,44 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
         gridBagConstraints.insets = new java.awt.Insets(22, 19, 19, 19);
         getContentPane().add(botonBusqueda, gridBagConstraints);
 
-        buttonGroup1.add(radio4);
-        radio4.setText("ID Vendedor");
+        buttonGroup1.add(rbIDVendedor);
+        rbIDVendedor.setText("ID Vendedor");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
-        getContentPane().add(radio4, gridBagConstraints);
+        getContentPane().add(rbIDVendedor, gridBagConstraints);
 
         pack();
+        agregarListeners();
     }// </editor-fold>
 
+    private void agregarListeners(){
+        botonBusqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                enviarArray();
+            }
+        });
+
+        rbDNI.addActionListener(this);
+        rbMatricula.addActionListener(this);
+        rbIDVenta.addActionListener(this);
+        rbIDVendedor.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JRadioButton radio = (JRadioButton) e.getSource();
+        if(radio.isSelected()){
+            this.campoBusqueda.setEnabled(true);
+            busquedaVenta();
+        }
+    }
+
+    private void enviarArray(){
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -196,6 +248,8 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
 //        });
     }
 
+
+
     public String getValorBusqueda(){
         return this.valorBusqueda;
     }
@@ -205,20 +259,15 @@ public class buscarVenta extends javax.swing.JFrame implements ActionListener{
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField campoBusqueda;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton radio1;
-    private javax.swing.JRadioButton radio2;
-    private javax.swing.JRadioButton radio3;
-    private javax.swing.JRadioButton radio4;
+    private javax.swing.JRadioButton rbDNI;
+    private javax.swing.JRadioButton rbMatricula;
+    private javax.swing.JRadioButton rbIDVenta;
+    private javax.swing.JRadioButton rbIDVendedor;
     private javax.swing.JLabel labelIcono;
     private javax.swing.JLabel labelTitulo;
     private VentaCRUD cnVenta;
+    boolean campoCorrecto;
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JRadioButton radio = (JRadioButton) e.getSource();
-        if(radio.isSelected()){
-            this.botonBusqueda.setEnabled(true);
-        }
-    }
+
     // End of variables declaration
 }

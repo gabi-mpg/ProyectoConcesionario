@@ -1,6 +1,7 @@
 package modelo;
 
 import controllers.ControllerConexion;
+import entidades.Cliente;
 import entidades.Moto;
 import entidades.Venta;
 
@@ -105,6 +106,9 @@ public class VentaModel {
         return modelM.buscarMoto(matricula);
     }
 
+    public Cliente buscarCliente(String DNI){
+        return modelC.buscarCliente(DNI);
+    }
     public void addVenta(Venta venta){
         //saveVentas();
         System.out.println("Dentro VentaModel addVenta");
