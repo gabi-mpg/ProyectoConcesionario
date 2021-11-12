@@ -220,13 +220,14 @@ public class Motos extends javax.swing.JPanel {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
             String matricula = pedirMatricula();
-            if (cnMoto.motoExiste(matricula)){
-                Moto moto = cnMoto.buscarMoto(matricula);
-                fillTableBuscar(moto);
-            } else {
-                JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            if (matricula != null){
+                if (cnMoto.motoExiste(matricula)){
+                    Moto moto = cnMoto.buscarMoto(matricula);
+                    fillTableBuscar(moto);
+                } else {
+                    JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
