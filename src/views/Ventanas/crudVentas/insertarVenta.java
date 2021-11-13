@@ -225,9 +225,9 @@ public class insertarVenta extends javax.swing.JFrame {
                     textoDNI.getText(),
                     Float.parseFloat(textoPrecio.getText()),
                     textoIDVendedor.getText())){
-                JOptionPane.showMessageDialog(this,"Registro creado","Se ha añadido la nueva venta",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Se ha añadido la nueva venta","Registro creado",JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(this,"Error al crear","No se ha registrado la nueva venta",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"No se ha registrado la nueva venta", "Error al crear",JOptionPane.ERROR_MESSAGE);
             }
        }
     }

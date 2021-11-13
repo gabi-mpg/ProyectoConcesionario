@@ -136,6 +136,7 @@ public class Usuarios extends javax.swing.JPanel {
         model.addColumn("Nombre");
         model.addColumn("Apellidos");
         model.addColumn("Password");
+        model.addColumn("Permiso");
     }
     public void fillTable(){
         UsuarioCRUD controlador = new UsuarioCRUD();
@@ -143,11 +144,12 @@ public class Usuarios extends javax.swing.JPanel {
         model.setRowCount(0);
         for (Usuario u : listaUsuarios){
             if(u.isExiste()){
-                Object[] datosUsuario = new Object[4];
+                Object[] datosUsuario = new Object[5];
                 datosUsuario[0] = u.getNick();
                 datosUsuario[1] = u.getNombre();
                 datosUsuario[2] = u.getApellidos();
                 datosUsuario[3] = u.getContra();
+                datosUsuario[4] = u.getPermiso();
                 model.addRow(datosUsuario);
             }
         }
@@ -155,11 +157,12 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void fillTableBuscar(Usuario u){
         model.setRowCount(0);
-        Object[] datosUser = new Object[4];
+        Object[] datosUser = new Object[5];
         datosUser[0] = u.getNick();
         datosUser[1] = u.getNombre();
         datosUser[2] = u.getApellidos();
         datosUser[3] = u.getContra();
+        datosUser[4] = u.getPermiso();
         model.addRow(datosUser);
     }
 
@@ -235,7 +238,6 @@ public class Usuarios extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
         }
-
     }
 
     public void cambiarTema(){

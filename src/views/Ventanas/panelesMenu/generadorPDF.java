@@ -208,7 +208,7 @@ public class generadorPDF extends javax.swing.JDialog implements ActionListener 
             if(informe.generarInformeVentas()){
                 JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "El pdf no se ha podido crear", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -218,7 +218,7 @@ public class generadorPDF extends javax.swing.JDialog implements ActionListener 
             if(informe.generarInformeVentasMarca(marca)){
                 JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "El pdf no se ha podido crear", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -240,7 +240,7 @@ public class generadorPDF extends javax.swing.JDialog implements ActionListener 
             if(informe.generarInformeVentasUsuario(nick)){
                 JOptionPane.showMessageDialog(this,  "En la ruta " + rutaGenerarPDF, "Informe generado",JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Error", "El pdf no se ha podido crear", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,  "El pdf no se ha podido crear", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
 

@@ -218,10 +218,10 @@ public class interfazLogin extends javax.swing.JFrame{
                 int n = conexion.login(user, pass);
                 switch (n) {
                     case -4:
-                        jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
+                        jMensaje(this,  "Error en la conexion", "Ha ocurrido un error",0);
                         break;
                     case -2:
-                        jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
+                        jMensaje(this,  "Error en la conexion", "Ha ocurrido un error",0);
                         System.exit(0);
                         break;
                     case -1:
