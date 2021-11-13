@@ -18,18 +18,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import static utils.Utilidades.jMensaje;
-
 /**
  *
  * @author chris
  */
-public class interfazConfig extends javax.swing.JFrame implements ActionListener{
+public class interfazConfig extends javax.swing.JFrame implements ActionListener {
 
-    private String[] configuracionRecogida;
-    private config configuracion;
+    private final String[] configuracionRecogida;
+    private final config configuracion;
+    private javax.swing.JButton boton;
+    private javax.swing.JLabel configWallpaper;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField textoClave;
+    private javax.swing.JTextField textoRuta;
+    private javax.swing.JTextField textoUser;
 
 
     public interfazConfig(String[] config, config configuracion) {
@@ -41,25 +47,41 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-        configWallpaper.setSize(370,410);
+        configWallpaper.setSize(370, 410);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.boton.addActionListener(this);
     }
 
-    public interfazConfig() {
-        initComponents();
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        this.boton.addActionListener(this);
-    }
 
-    private void colorTextos(){
+    private void colorTextos() {
         this.jLabel1.setForeground(Color.WHITE);
         this.jLabel2.setForeground(Color.WHITE);
         this.jLabel3.setForeground(Color.WHITE);
     }
+
+    private void modificarTexto() {
+        textoRuta.setText(configuracionRecogida[0]);
+        textoUser.setText(configuracionRecogida[1]);
+        textoClave.setText(configuracionRecogida[2]);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String ruta, user, pass;
+        ruta = textoRuta.getText();
+        user = textoUser.getText();
+        pass = textoClave.getText();
+        if (ruta.isEmpty() | user.isEmpty()) {
+            jMensaje(this, "No se ha introducida toda la información", "Falta informacion", 2);
+            System.out.println("aqui 1");
+        } else {
+            String[] registros = {ruta, user, pass};
+            this.configuracion.setConfig(registros);
+            System.out.println("aqui dos");
+            this.dispose();
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,14 +90,12 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         setTitle("Concesonario Mercado Corral");
-        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"icono.png");
+        Image icono = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES + "icono.png");
         setIconImage(icono);
 
-
-        panelPrincipal = new javax.swing.JPanel();
+        JPanel panelPrincipal = new JPanel();
         boton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         textoClave = new javax.swing.JTextField();
@@ -85,6 +105,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         jLabel3 = new javax.swing.JLabel();
         configWallpaper = new javax.swing.JLabel();
 
+        java.awt.GridBagConstraints gridBagConstraints;
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(false);
 
@@ -92,7 +113,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         panelPrincipal.setPreferredSize(new java.awt.Dimension(300, 400));
         panelPrincipal.setLayout(new java.awt.GridBagLayout());
 
-        boton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        boton.setFont(new java.awt.Font("Dialog", Font.BOLD, 14)); // NOI18N
         boton.setText("Guardar configuración");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -101,7 +122,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         gridBagConstraints.insets = new java.awt.Insets(29, 0, 0, 0);
         panelPrincipal.add(boton, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", Font.BOLD, 14)); // NOI18N
         jLabel1.setText("URL");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -127,11 +148,6 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         panelPrincipal.add(textoRuta, gridBagConstraints);
 
         textoUser.setColumns(15);
-        textoUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoUserActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -157,7 +173,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         gridBagConstraints.insets = new java.awt.Insets(4, 40, 0, 10);
         panelPrincipal.add(jLabel3, gridBagConstraints);
 
-        configWallpaper.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES+"fondoConfig.jpg")); // NOI18N
+        configWallpaper.setIcon(new javax.swing.ImageIcon(estaticas.RUTA_IMAGENES + "fondoConfig.jpg")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -179,89 +195,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         );
 
         pack();
-    }// </editor-fold>
-
-    private void textoUserActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new interfazConfig().setVisible(true);
-            }
-        });
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(interfazConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(interfazConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(interfazConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(interfazConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new interfazConfig().setVisible(true);
-//            }
-//        });
     }
 
 
-    private void modificarTexto(){
-        textoRuta.setText(configuracionRecogida[0]);
-        textoUser.setText(configuracionRecogida[1]);
-        textoClave.setText(configuracionRecogida[2]);
-    }
-
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton boton;
-    private javax.swing.JLabel configWallpaper;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel panelPrincipal;
-    private javax.swing.JTextField textoClave;
-    private javax.swing.JTextField textoRuta;
-    private javax.swing.JTextField textoUser;
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String ruta,user,pass;
-        ruta = textoRuta.getText();
-        user = textoUser.getText();
-        pass = textoClave.getText();
-        if(ruta.isEmpty() | user.isEmpty()){
-            jMensaje(this, "No se ha introducida toda la información","Falta informacion",2);
-            System.out.println("aqui 1");
-        }else{
-            String[] registros = {ruta,user,pass};
-            this.configuracion.setConfig(registros);
-            System.out.println("aqui dos");
-            this.dispose();
-        }
-    }
-    // End of variables declaration
 }
-
-
