@@ -11,6 +11,7 @@ import controllers.VentaCRUD;
 import utils.estaticas;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,6 +47,11 @@ public class generadorGraficos extends javax.swing.JFrame implements ActionListe
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
+        setTitle("Generador de gráficos");
+        Image image = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"estadisticaLogo.png");
+        setIconImage(image);
+
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();

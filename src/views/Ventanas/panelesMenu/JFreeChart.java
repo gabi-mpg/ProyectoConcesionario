@@ -31,6 +31,7 @@ public class JFreeChart extends JDialog {
     public JFreeChart(ArrayList<Usuario> listaUsers, ArrayList<Venta> listaVentas){
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Image imagen = Toolkit.getDefaultToolkit().getImage(estaticas.RUTA_IMAGENES+"estadisticaLogo.png");
+        setIconImage(imagen);
         setUndecorated(false);
 
         setLocationRelativeTo(null);
