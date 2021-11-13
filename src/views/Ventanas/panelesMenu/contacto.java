@@ -148,7 +148,7 @@ public class contacto extends javax.swing.JDialog {
                     textoCorreo.setForeground(new Color(0,143,37));
                     botonEnviarCorreo.setEnabled(true);
                 }else{
-                    textoCorreo.setForeground(Color.BLACK);
+                    textoCorreo.setForeground(Color.RED);
                     botonEnviarCorreo.setEnabled(false);
                 }
             }
