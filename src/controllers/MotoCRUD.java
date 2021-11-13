@@ -60,10 +60,4 @@ public class MotoCRUD {
         model.updateMoto(moto);
     }
 
-    public static void main(String[] args) {
-        MotoCRUD mc = new MotoCRUD();
-        mc.agregarMoto("0677fwj", "suzuki", "negra", 70);
-        mc.listarMoto("0677fwj");
-    }
-
 }

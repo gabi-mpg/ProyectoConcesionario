@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author chris
  */
-public class ConexionBaseDatos {
+public class main {
 
     /**
      * @param args the command line arguments
