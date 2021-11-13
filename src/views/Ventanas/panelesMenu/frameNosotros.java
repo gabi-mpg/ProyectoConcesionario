@@ -93,13 +93,13 @@ public class frameNosotros extends javax.swing.JDialog {
         gridBagConstraints.gridy = 2;
         jPanel1.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("que buscan de acercar la programación a toda la gente");
+        jLabel6.setText("que buscan acercar la programación a todo el mundo");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         jPanel1.add(jLabel6, gridBagConstraints);
 
-        jLabel7.setText("y hacer del mundo, un lugar mejor.");
+        jLabel7.setText("y hacer del planeta, un lugar mejor.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
