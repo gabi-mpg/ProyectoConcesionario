@@ -10,6 +10,7 @@ import controllers.MotoCRUD;
 import entidades.Moto;
 import views.Ventanas.crudMotos.PanelModificarMoto;
 import views.Ventanas.crudMotos.insertarMoto;
+import views.Ventanas.crudUsuarios.PanelModificarUsuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -236,12 +237,16 @@ public class Motos extends javax.swing.JPanel {
     private String pedirMatricula(){
         try{
             String matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", "Matricula",JOptionPane.PLAIN_MESSAGE);
-
-            while (!cnMoto.comprobarMatricula(matricula)){
-                JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
-                matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", "Matricula",JOptionPane.PLAIN_MESSAGE);
+            if (!matricula.isEmpty()){
+                while (!cnMoto.comprobarMatricula(matricula)){
+                    JOptionPane.showMessageDialog(this, "Formato matrícula incorrecto");
+                    matricula = JOptionPane.showInputDialog(this, "Introduce la matricula de la moto", "Matricula",JOptionPane.PLAIN_MESSAGE);
+                }
+                return matricula;
+            } else {
+                JOptionPane.showMessageDialog(this, "No introdujo ninguna matricula", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return null;
             }
-            return matricula;
         } catch (Exception e){
             return null;
         }
