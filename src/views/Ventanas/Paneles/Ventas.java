@@ -195,7 +195,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
 
     private void botonEliminarActionPerformed(ActionEvent evt) {
         String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
-        if(ID != null){
+        if(!ID.equalsIgnoreCase("")){
             try{
                 int IDint = Integer.parseInt(ID);
                 if(cnVentas.ventaExiste(IDint)){
@@ -208,6 +208,8 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
             }catch (NumberFormatException ex){
                 JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se introdujo ningun ID", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 

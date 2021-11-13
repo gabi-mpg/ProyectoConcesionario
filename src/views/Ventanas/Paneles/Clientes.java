@@ -227,8 +227,6 @@ public class Clientes extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD", "Aviso", JOptionPane.ERROR_MESSAGE);
                 }
             }
-
-
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -237,13 +235,17 @@ public class Clientes extends javax.swing.JPanel {
     private String pedirDNI(){
         try{
             String dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
+            if (!dni.equalsIgnoreCase("")){
+                while (!cnCliente.comprobarDNI(dni)){
+                    JOptionPane.showMessageDialog(this, "Formato DNI incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 
-            while (!cnCliente.comprobarDNI(dni)){
-                JOptionPane.showMessageDialog(this, "Formato DNI incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-
-                dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
+                    dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
+                }
+                return dni;
+            } else {
+                JOptionPane.showMessageDialog(this, "No introdujo ningun DNI", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return null;
             }
-            return dni;
         } catch (Exception e) {
             return null;
         }
