@@ -8,14 +8,11 @@ package views.Ventanas.panelesMenu;
 
 import controllers.UsuarioCRUD;
 import controllers.VentaCRUD;
-import javafx.scene.control.RadioButton;
 import utils.estaticas;
-import views.Ventanas.Paneles.Graficos.JFreeChart;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 /**
  *

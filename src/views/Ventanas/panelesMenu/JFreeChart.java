@@ -1,4 +1,4 @@
-package views.Ventanas.Paneles.Graficos;
+package views.Ventanas.panelesMenu;
 
 
 import entidades.Usuario;

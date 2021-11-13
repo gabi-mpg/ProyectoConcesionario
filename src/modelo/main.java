@@ -5,12 +5,7 @@
  */
 package modelo;
 
-import controllers.ControllerConexion;
 import views.Ventanas.Interfaces.interfazLogin;
-import views.Ventanas.Interfaces.mainInterface;
-import views.Ventanas.Paneles.Graficos.JFreeChart;
-
-import java.util.ArrayList;
 
 /**
  *
