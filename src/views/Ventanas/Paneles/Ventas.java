@@ -195,7 +195,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
 
     private void botonEliminarActionPerformed(ActionEvent evt) {
         String ID = JOptionPane.showInputDialog(this, "Introduce el ID de la venta", "ID Venta", JOptionPane.PLAIN_MESSAGE);
-        if(!ID.equalsIgnoreCase("")){
+        if(ID != null){
             try{
                 int IDint = Integer.parseInt(ID);
                 if(cnVentas.ventaExiste(IDint)){

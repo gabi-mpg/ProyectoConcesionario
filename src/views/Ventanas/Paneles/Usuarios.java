@@ -209,12 +209,14 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void botonModificarActionPerformed(ActionEvent evt){
         String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "Nick", JOptionPane.PLAIN_MESSAGE);
-        if (!nick.isEmpty()){
-            new PanelModificarUsuario(nick);
-            fillTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
+        if (nick != null){
+            if (!nick.isEmpty()){
+                new PanelModificarUsuario(nick);
+                fillTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
 
+            }
         }
     }
 
@@ -225,12 +227,15 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
         String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "Eliminar", JOptionPane.PLAIN_MESSAGE);
-        if (!nick.isEmpty()){
-            cnUsuario.removeUsuario(nick);
-            fillTable();
-        } else {
-            JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
+        if (nick != null){
+            if (!nick.isEmpty()){
+                cnUsuario.removeUsuario(nick);
+                fillTable();
+            } else {
+                JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         }
+
     }
 
     public void cambiarTema(){
