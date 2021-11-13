@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ConexionBaseDatos:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ConexionBaseDatos_jar</output-path>
+    <root id="archive" name="ConexionBaseDatos.jar">
+      <element id="module-output" name="ConexionBaseDatos" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Recourses/mysql-connector-java-8.0.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Recourses/itextpdf-5.5.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Recourses/itextpdf-5.5.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Recourses/jfreechart-1.0.19.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Recourses/javax.mail.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Recourses/jcommon-1.0.23.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

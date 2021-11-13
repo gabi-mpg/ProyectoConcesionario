@@ -200,7 +200,7 @@ public class Usuarios extends javax.swing.JPanel {
                     Usuario user = cnUsuario.buscarUsuario(nick);
                     fillTableBuscar(user);
                 } else {
-                    JOptionPane.showMessageDialog(this, "La moto con esa matrícula no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "El usuario con este nick no existe en la BBDD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
