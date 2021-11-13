@@ -155,7 +155,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         gridBagConstraints.insets = new java.awt.Insets(33, 35, 29, 22);
         panelPrincipal.add(textoUser, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", Font.BOLD, 14)); // NOI18N
         jLabel2.setText("Usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -164,7 +164,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         gridBagConstraints.insets = new java.awt.Insets(4, 40, 0, 10);
         panelPrincipal.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", Font.BOLD, 14)); // NOI18N
         jLabel3.setText("Clave");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
