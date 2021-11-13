@@ -23,12 +23,10 @@ import java.util.ArrayList;
  */
 public class Motos extends javax.swing.JPanel {
 
-    private insertarMoto insertar;
     private int nivelUsuario;
 
 
-    public Motos(ControllerConexion conexion) {
-
+    public Motos() {
         initComponents();
     }
 
@@ -261,7 +259,7 @@ public class Motos extends javax.swing.JPanel {
     }
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
-        insertar = new insertarMoto();
+        new insertarMoto();
         fillTable();
     }
 
