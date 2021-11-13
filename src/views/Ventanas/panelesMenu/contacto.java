@@ -26,8 +26,8 @@ import static com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil.matches
 public class contacto extends javax.swing.JDialog {
 
 
-    private final String EMAIL_REGEX = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    private final Pattern pat = Pattern.compile(EMAIL_REGEX);
+
+
     /**
      * Creates new form contacto
      */
@@ -35,8 +35,10 @@ public class contacto extends javax.swing.JDialog {
         initComponents();
         setModal(true);
         setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
         this.textoArea.setLineWrap(true);
+        textoArea.setColumns(40);
         pack();
     }
 
@@ -144,7 +146,7 @@ public class contacto extends javax.swing.JDialog {
         textoCorreo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if(pat.matcher(textoCorreo.getText()).find()){
+                if(estaticas.pat.matcher(textoCorreo.getText()).find()){
                     textoCorreo.setForeground(new Color(0,143,37));
                     botonEnviarCorreo.setEnabled(true);
                 }else{

@@ -232,13 +232,15 @@ public class Usuarios extends javax.swing.JPanel {
         String nick = JOptionPane.showInputDialog(this, "Introduce el nick del usuario", "Eliminar", JOptionPane.PLAIN_MESSAGE);
         if (nick != null){
             if (!nick.isEmpty()){
-                cnUsuario.removeUsuario(nick);
-                fillTable();
+                if(cnUsuario.usuarioExiste(nick)){
+                    cnUsuario.removeUsuario(nick);
+                    fillTable();
+                }else{
+                    JOptionPane.showMessageDialog(this,"No existe un usuario con este nick","No se ha encotrado usuario",JOptionPane.INFORMATION_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "No se encontró un usuario con este nick", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 
