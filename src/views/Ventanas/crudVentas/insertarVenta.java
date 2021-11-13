@@ -30,10 +30,10 @@ public class insertarVenta extends javax.swing.JFrame {
 
     public insertarVenta(String nombreUsuarioLogeado) {
         this.nombreUsuario = nombreUsuarioLogeado;
-        this.setVisible(true);
-        setLocationRelativeTo(null);
         setSize(260,410);
         initComponents();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**

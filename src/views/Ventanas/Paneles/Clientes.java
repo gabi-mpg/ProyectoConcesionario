@@ -214,17 +214,20 @@ public class Clientes extends javax.swing.JPanel {
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         try{
             String dni = pedirDNI();
-            if (cnCliente.clienteExiste(dni)){
-                Cliente cliente = cnCliente.buscarCliente(dni);
-                if (cliente.getExiste() == 1){
-                    fillTableBuscar(cliente);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Los datos de ese cliente ya no están disponibles", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                }
+            if (dni != null){
+                if (cnCliente.clienteExiste(dni)){
+                    Cliente cliente = cnCliente.buscarCliente(dni);
+                    if (cliente.getExiste() == 1){
+                        fillTableBuscar(cliente);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Los datos de ese cliente ya no están disponibles", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    }
 
-            } else {
-                JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD", "Aviso", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "El cliente con ese DNI no existe en la BD", "Aviso", JOptionPane.ERROR_MESSAGE);
+                }
             }
+
 
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -233,12 +236,12 @@ public class Clientes extends javax.swing.JPanel {
 
     private String pedirDNI(){
         try{
-            String dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", "DNI", JOptionPane.PLAIN_MESSAGE);
+            String dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
 
             while (!cnCliente.comprobarDNI(dni)){
                 JOptionPane.showMessageDialog(this, "Formato DNI incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 
-                dni = JOptionPane.showInputDialog(this, "Introduce el DNI a buscar", "DNI", JOptionPane.PLAIN_MESSAGE);
+                dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
             }
             return dni;
         } catch (Exception e) {

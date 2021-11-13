@@ -225,9 +225,13 @@ public class PanelModificarCliente extends JDialog {
             String apellidos = textoApellido.getText();
             String nombre = textoNombre.getText();
             String direccion = textoDireccion.getText();
-            Cliente cliente = new Cliente(dni, nombre, apellidos, direccion, 1);
-            cnCliente.updateCliente(cliente);
-            dispose();
+            if (!apellidos.equalsIgnoreCase("") && !nombre.equalsIgnoreCase("") && !direccion.equalsIgnoreCase("")){
+                Cliente cliente = new Cliente(dni, nombre, apellidos, direccion, 1);
+                cnCliente.updateCliente(cliente);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Rellene los campos", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         }
 
         public void setDNI(String dni) {

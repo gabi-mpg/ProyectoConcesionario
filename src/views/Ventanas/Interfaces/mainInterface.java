@@ -45,17 +45,11 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.nivelUsuario = nivelUsuario;
         this.conexion = conexion;
         this.nombreUsuario = nombreUsuario;
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation(d.width/4+ d.width/32, d.height/4);
-        setLocationRelativeTo(null);
         initComponents();
-        anadirMenu();
-        anadirPaneles();
-        cambiarTema();
-        eventos();
-        alterarPermisos();
         setResizable(false);
+        //setLocationRelativeTo(null);
         setVisible(true);
+        //setLocationRelativeTo(null);
         pack();
     }
 
@@ -142,7 +136,14 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         botonMotos.addActionListener(this);
         botonUsuarios.addActionListener(this);
 
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(d.width/4+ d.width/32, d.height/4);
 
+        anadirMenu();
+        anadirPaneles();
+        cambiarTema();
+        eventos();
+        alterarPermisos();
 
     }
 

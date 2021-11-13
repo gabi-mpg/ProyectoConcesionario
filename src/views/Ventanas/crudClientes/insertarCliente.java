@@ -29,10 +29,12 @@ public class insertarCliente extends javax.swing.JDialog {
     public insertarCliente() {
         this.cnCliente = new ClienteCRUD();
         setModal(true);
-        setLocationRelativeTo(null);
+
         setSize(240,410);
+
         initComponents();
-        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -172,7 +174,7 @@ public class insertarCliente extends javax.swing.JDialog {
         if (cnCliente.clienteExiste(DNI)){
             cnCliente.updateExiste(1,DNI);
             System.out.println("pasa por esta zona");
-            JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Cliente recuperado","Éxito",JOptionPane.INFORMATION_MESSAGE);
         } else {
             String nombre = textoNombre.getText();
             String apellido = textoApellido.getText();

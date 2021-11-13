@@ -164,11 +164,12 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
     private void fillTableBuscar(ArrayList<Venta> listaV){
         model.setRowCount(0);
         for (Venta v : listaV){
-            Object[] datosVenta = new Object[4];
+            Object[] datosVenta = new Object[5];
             datosVenta[0] = v.getIdVenta();
             datosVenta[1] = v.getDni();
             datosVenta[2] = v.getMatricula();
             datosVenta[3] = v.getPrecio();
+            datosVenta[4] = v.getIdVendedor();
             model.addRow(datosVenta);
         }
     }
@@ -184,7 +185,7 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
         try{
             buscarVenta bv = new buscarVenta(cnVentas);
             ArrayList<Venta> listaV = bv.getListaV();//este metodo nos devolvera la venta
-            if (listaV != null){
+            if (listaV.size() > 0){
                 fillTableBuscar(listaV);
             }
         } catch (Exception e){

@@ -58,7 +58,9 @@ public class VentaModel {
         //saveVentas();
         for(Venta v : listaVentas){
             if (v.getMatricula().equals(pk)){
+                System.out.println(v.toString());
                 return v;
+
             }
         }
         return null;

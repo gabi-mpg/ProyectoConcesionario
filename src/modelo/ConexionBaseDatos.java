@@ -25,7 +25,8 @@ public class ConexionBaseDatos {
 
         //Esto es para hacer pruebas evitando tener que logearse cada vez
         //new mainInterface(1,"delcorral",new ControllerConexion());
-        new interfazLogin();
+        //new interfazLogin();
+        new mainInterface(1, "fenixabi", new ControllerConexion());
         //new NewJFrame();
 
 

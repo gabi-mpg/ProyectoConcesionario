@@ -24,8 +24,8 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
 
     public buscarVenta(VentaCRUD cnVenta) {
         this.cnVenta = cnVenta;
-        setLocationRelativeTo(null);
         initComponents();
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setModal(true);
         setVisible(true);

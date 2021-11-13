@@ -12,7 +12,7 @@ import java.io.File;
 
 
 
-public class PanelModificarVenta extends JFrame {
+public class PanelModificarVenta extends JDialog {
 
 
 
@@ -24,9 +24,10 @@ public class PanelModificarVenta extends JFrame {
         // y así reutilizar el panel
         public PanelModificarVenta(String ID) {
             initComponents();
-            setLocationRelativeTo(null);
+            setModal(true);
             setResizable(false);
             this.ID = ID;
+            setLocationRelativeTo(null);
             rellenarCampos();
         }
 
@@ -233,13 +234,21 @@ public class PanelModificarVenta extends JFrame {
         }
 
         private void modificar() {
-            Venta venta = cnVentas.buscarVenta(Integer.parseInt(ID));
-            venta.setDni(textoDNI.getText());
-            venta.setMatricula(textoDNI.getText());
-            venta.setPrecio(Float.parseFloat(textoPrecio.getText()));
-            venta.setIdVendedor(textoVendedor.getText());
-            cnVentas.updateVenta(venta);
-            dispose();
+            String dni = textoDNI.getText();
+            String mat = textoMatricula.getText();
+            String precio = textoPrecio.getText();
+            if (!dni.equalsIgnoreCase("") && !mat.equalsIgnoreCase("") && !precio.equalsIgnoreCase("")){
+                Venta venta = cnVentas.buscarVenta(Integer.parseInt(ID));
+                venta.setDni(dni);
+                venta.setMatricula(mat);
+                venta.setPrecio(Float.parseFloat(precio));
+                venta.setIdVendedor(textoVendedor.getText());
+                cnVentas.updateVenta(venta);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Rellene los campos", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+
         }
 
     // Variables declaration - do not modify
