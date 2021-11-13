@@ -47,9 +47,7 @@ public class mainInterface extends javax.swing.JFrame implements ActionListener{
         this.nombreUsuario = nombreUsuario;
         initComponents();
         setResizable(false);
-        //setLocationRelativeTo(null);
         setVisible(true);
-        //setLocationRelativeTo(null);
         pack();
     }
 

@@ -5,12 +5,10 @@
  */
 package views.Ventanas.Paneles;
 
-import controllers.ControllerConexion;
 import controllers.MotoCRUD;
 import entidades.Moto;
 import views.Ventanas.crudMotos.PanelModificarMoto;
 import views.Ventanas.crudMotos.insertarMoto;
-import views.Ventanas.crudUsuarios.PanelModificarUsuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

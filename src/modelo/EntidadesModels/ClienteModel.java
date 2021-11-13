@@ -1,7 +1,8 @@
-package modelo;
+package modelo.EntidadesModels;
 
 import controllers.ControllerConexion;
 import entidades.Cliente;
+import modelo.config;
 
 import java.sql.*;
 import java.util.ArrayList;

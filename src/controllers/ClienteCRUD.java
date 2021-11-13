@@ -1,10 +1,8 @@
 package controllers;
 
 import entidades.Cliente;
-import entidades.Moto;
-import modelo.ClienteModel;
+import modelo.EntidadesModels.ClienteModel;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 public class ClienteCRUD {

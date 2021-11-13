@@ -1,11 +1,9 @@
 package controllers;
 
 import entidades.Moto;
-import modelo.ClienteModel;
-import modelo.MotoModel;
+import modelo.EntidadesModels.MotoModel;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MotoCRUD {
 

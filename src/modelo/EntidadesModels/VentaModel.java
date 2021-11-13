@@ -1,9 +1,11 @@
-package modelo;
+package modelo.EntidadesModels;
 
 import controllers.ControllerConexion;
 import entidades.Cliente;
 import entidades.Moto;
 import entidades.Venta;
+import modelo.EntidadesModels.ClienteModel;
+import modelo.EntidadesModels.MotoModel;
 
 import java.sql.*;
 import java.util.ArrayList;

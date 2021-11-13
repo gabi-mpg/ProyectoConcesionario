@@ -1,8 +1,7 @@
 package controllers;
 
-import entidades.Cliente;
 import entidades.Usuario;
-import modelo.UsuarioModel;
+import modelo.EntidadesModels.UsuarioModel;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package modelo;
+package modelo.EntidadesModels;
 
 import controllers.ControllerConexion;
 import entidades.Cliente;
