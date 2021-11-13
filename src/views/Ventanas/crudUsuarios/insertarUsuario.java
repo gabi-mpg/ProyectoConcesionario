@@ -188,7 +188,7 @@ public class insertarUsuario extends JDialog {
                 String contra = textoContra.getText();
                 nick = textoNick.getText();
                 if(!contra.isEmpty() && !nick.isEmpty() && !nombre.isEmpty() && !apellido.isEmpty()){
-                    if(cnUser.agregarUsuario(nick, nombre, apellido, contra, 0)){
+                    if(cnUser.agregarUsuario(nick, nombre, apellido, contra, 3)){
                         JOptionPane.showMessageDialog(this,"Usuario agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
                     }else{
