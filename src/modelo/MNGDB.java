@@ -41,7 +41,6 @@ public class MNGDB {
         return true;
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("no");
              estado = false;
              return false;
         }
@@ -199,7 +198,6 @@ public class MNGDB {
             }
             procedures = todo.split(separador);
             for (String p : procedures){
-                System.out.println(p + "\nCambio de procedure\n");
                 PreparedStatement exe = conexion.prepareStatement(p);
                 exe.executeUpdate();
             }
@@ -214,7 +212,6 @@ public class MNGDB {
 //            exe.executeUpdate();
             conexion.commit();
             conexion.setAutoCommit(true);
-            System.out.println("Hizo bien los procedimientos");
             br.close();
             return true;
         } catch (SQLException | IOException e) {
@@ -246,11 +243,9 @@ public class MNGDB {
             }
             conexion.commit();
             conexion.setAutoCommit(true);
-            System.out.println("Hizo bien los inserts");
             return true;
         } catch (SQLException | IOException e) {
             e.printStackTrace();
-            System.out.println("NO INSERTS");
             try {
                 conexion.rollback();
                 conexion.setAutoCommit(true);

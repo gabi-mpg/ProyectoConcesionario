@@ -58,14 +58,6 @@ public class MotoModel{
         return buscarMoto(pk) != null;
     }
 
-    public void listarMoto(String pk){
-        if (buscarMoto(pk) != null){
-            System.out.println(buscarMoto(pk).toString());
-        } else{
-            System.out.println("La moto no existe en la bd");
-        }
-
-    }
 
     public ArrayList<Moto> getListaMotos(){
         saveMotos();
@@ -129,7 +121,6 @@ public class MotoModel{
     }
 
     public boolean updateMoto(Moto moto){
-        System.out.println("en MotoModel " + moto.toString());
         saveMotos();
         String sql = "UPDATE t_motos set Marca = ?, Color = ?, Tanque = ?, existe = ? where matricula like ?";
         try {

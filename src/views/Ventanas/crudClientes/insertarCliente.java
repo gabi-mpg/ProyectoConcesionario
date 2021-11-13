@@ -173,7 +173,6 @@ public class insertarCliente extends javax.swing.JDialog {
         String DNI = textoDNI.getText();
         if (cnCliente.clienteExiste(DNI)){
             cnCliente.updateExiste(1,DNI);
-            System.out.println("pasa por esta zona");
             JOptionPane.showMessageDialog(this,"Cliente recuperado","Éxito",JOptionPane.INFORMATION_MESSAGE);
         } else {
             String nombre = textoNombre.getText();
@@ -183,10 +182,8 @@ public class insertarCliente extends javax.swing.JDialog {
                 if(cnCliente.agregarCliente(DNI,nombre,apellido,direccion)){
                     JOptionPane.showMessageDialog(this,"Cliente agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
-                    System.out.println("esta aqui");
                 }else{
                     JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
-                    System.out.println( "viene paca");
                 }
 
             }else{

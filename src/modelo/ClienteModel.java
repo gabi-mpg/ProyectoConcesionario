@@ -57,14 +57,6 @@ public class ClienteModel {
         return buscarCliente(pk) != null;
     }
 
-    public void listarCliente(String pk){
-        if (buscarCliente(pk) != null){
-            System.out.println(buscarCliente(pk).toString());
-        } else{
-            System.out.println("El cliente no existe en la bd");
-        }
-
-    }
 
     public ArrayList<Cliente> getListaClientes(){
         this.listaClientes = new ArrayList<Cliente>();

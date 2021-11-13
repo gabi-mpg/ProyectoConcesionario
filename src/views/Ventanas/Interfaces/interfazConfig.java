@@ -74,11 +74,9 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         pass = textoClave.getText();
         if (ruta.isEmpty() | user.isEmpty()) {
             jMensaje(this, "No se ha introducida toda la información", "Falta informacion", 2);
-            System.out.println("aqui 1");
         } else {
             String[] registros = {ruta, user, pass};
             this.configuracion.setConfig(registros);
-            System.out.println("aqui dos");
             this.dispose();
         }
     }

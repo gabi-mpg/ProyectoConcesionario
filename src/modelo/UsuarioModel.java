@@ -58,14 +58,6 @@ public class UsuarioModel {
         return buscarUsuario(pk) != null;
     }
 
-    public void listarUsuario(String pk){
-        if (buscarUsuario(pk) != null){
-            System.out.println(buscarUsuario(pk).toString());
-        } else{
-            System.out.println("La venta no existe en la bd");
-        }
-
-    }
 
     public ArrayList<Usuario> getListaUsuarios(){
         saveUsuario();

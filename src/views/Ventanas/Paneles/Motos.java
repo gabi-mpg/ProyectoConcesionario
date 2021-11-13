@@ -185,7 +185,6 @@ public class Motos extends javax.swing.JPanel {
             this.setBackground(new java.awt.Color(204, 255, 204));
             setTema(0);
         }
-        System.out.println(tema);
     }
 
     public void setTema(int tema) {

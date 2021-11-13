@@ -176,7 +176,6 @@ public class insertarUsuario extends JDialog {
             if (cnUser.usuarioExiste(nick)){
                 if(!cnUser.buscarUsuario(nick).isExiste()){
                     cnUser.updateExiste(true, nick);
-                    System.out.println("pasa por esta zona");
                     JOptionPane.showMessageDialog(this, "Usuario agregado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this,"Usuario agregado","Aviso",JOptionPane.INFORMATION_MESSAGE);
@@ -192,10 +191,8 @@ public class insertarUsuario extends JDialog {
                     if(cnUser.agregarUsuario(nick, nombre, apellido, contra, 0)){
                         JOptionPane.showMessageDialog(this,"Usuario agregado","Éxito",JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
-                        System.out.println("esta aqui");
                     }else{
                         JOptionPane.showMessageDialog(this,"No se ha podido agregar","Error",JOptionPane.ERROR_MESSAGE);
-                        System.out.println( "viene paca");
                     }
 
                 }else{

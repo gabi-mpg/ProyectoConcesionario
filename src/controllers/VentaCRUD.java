@@ -20,7 +20,6 @@ public class VentaCRUD {
 
     public boolean agregarVenta(String matricula, String DNI, float precio, String idUsuario){
         if (model.buscarExistencia(matricula, DNI)){
-            System.out.println("Venta CRUD if de matricula y dni existen");
             model.addVenta(new Venta(matricula, DNI, precio, idUsuario, 1));
             return true;
         } else {
@@ -64,53 +63,21 @@ public class VentaCRUD {
         return model.ventaExiste(pk);
     }
 
-//    public boolean ventaExisteDNI(String pk){
-//        return model.ventaExisteDNI(pk);
-//    }
 
     public boolean ventaExiste(int pk){
-        System.out.println(model.ventaExiste(pk));
         return model.ventaExiste(pk);
     }
 
-    public void listarVenta(String pk){
-        if (buscarVenta(pk) != null){
-            System.out.println(buscarVenta(pk).toString());
-        } else{
-            System.out.println("La moto no existe en la bd");
-        }
-    }
-
     public void removeVenta(String pk){
-        if (model.removeVenta(pk)){
-            System.out.println("Venta eliminada con exito");
-        } else {
-            System.out.println("Error eliminando la venta");
-        }
+        model.removeVenta(pk);
     }
-
-//    public void removeVenta(int pk){
-//        if (model.removeVenta(pk)){
-//            System.out.println("Venta eliminada con exito");
-//        } else {
-//            System.out.println("Error eliminando la venta");
-//        }
-//    }
 
     public void updateVenta(Venta venta){
-        if (model.updateVenta(venta)){
-            System.out.println("Venta actualizada con exito");
-        } else {
-            System.out.println("Error actualizando la venta");
-        }
+        model.updateVenta(venta);
     }
 
     public void cambioExsite(Venta venta){
-        if(model.cambiarExiste(venta)){
-            System.out.println("Moto cambiada");
-        }else{
-            System.out.println("No se ha podido cambiar");
-        }
+        model.cambiarExiste(venta);
     }
 
 

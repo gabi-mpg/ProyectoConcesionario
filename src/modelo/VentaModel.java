@@ -58,7 +58,6 @@ public class VentaModel {
         //saveVentas();
         for(Venta v : listaVentas){
             if (v.getMatricula().equals(pk)){
-                System.out.println(v.toString());
                 return v;
 
             }
@@ -104,14 +103,7 @@ public class VentaModel {
         return buscarVenta(pk) != null;
     }
 
-    public void listarVenta(String pk){
-        if (buscarVenta(pk) != null){
-            System.out.println(buscarVenta(pk).toString());
-        } else{
-            System.out.println("La venta no existe en la bd");
-        }
 
-    }
 
     public ArrayList<Venta> getListaVentas(){
         saveVentas();
@@ -131,7 +123,6 @@ public class VentaModel {
     }
     public void addVenta(Venta venta){
         //saveVentas();
-        System.out.println("Dentro VentaModel addVenta");
         String sql = "INSERT INTO t_ventas (Matricula, DNI, Precio, IDVendedor, existe) values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -141,7 +132,6 @@ public class VentaModel {
             pst.setString(4, venta.getIdVendedor());//esto no lo pediremos al usuario
             pst.setInt(5,1);
             //sino que lo mandaremos directamente segun quien haya iniciado sesion
-            System.out.println("dentro try addVenta VentaModel");
             pst.executeUpdate();
         } catch (Exception e) {
             System.err.println("Error registrando la venta: " + e);
@@ -169,7 +159,6 @@ public class VentaModel {
     public boolean removeVenta(String pk){
         //saveVentas();
         String sql = "{call sp_eliminarVenta(?)}";
-        System.out.println(pk + " MODEL PK REMOVE");
         try {
             CallableStatement cst = conexion.prepareCall(sql);
             cst.setString(1, pk);
@@ -190,7 +179,6 @@ public class VentaModel {
     }
 
     public boolean updateVenta(Venta venta){
-        System.out.println(venta.toString());
         //saveVentas();
         String sql = "UPDATE t_ventas set Precio = ?, existe = ? where IDVenta = ?";
         try {

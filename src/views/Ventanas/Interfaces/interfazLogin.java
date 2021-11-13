@@ -216,7 +216,6 @@ public class interfazLogin extends javax.swing.JFrame{
                 jMensaje(this, "Faltan campos por completar", "Falta información", 2);
             } else {
                 int n = conexion.login(user, pass);
-                System.out.println(n);
                 switch (n) {
                     case -4:
                         jMensaje(this, "Ha ocurrido un error", "Error en la conexion", 0);
@@ -232,7 +231,6 @@ public class interfazLogin extends javax.swing.JFrame{
                     case 1:
                     case 2:
                     case 3:
-                        System.out.println("Esta llegando el ID "+n);
                         new mainInterface(n, user, new ControllerConexion());
                         conexion.cerrarCn();
                         this.dispose();

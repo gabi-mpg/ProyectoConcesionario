@@ -34,20 +34,9 @@ public class UsuarioCRUD {
         return model.usuarioExiste(pk);
     }
 
-    public void listarUsuario(String pk){
-        if (buscarUsuario(pk) != null){
-            System.out.println(buscarUsuario(pk).toString());
-        } else{
-            System.out.println("El usuario no existe en la bd");
-        }
-    }
 
     public void removeUsuario(String pk){
-        if (model.removeUsuario(pk)){
-            System.out.println("Usuario eliminado con exito");
-        } else {
-            System.out.println("Error eliminando el usuario");
-        }
+        model.removeUsuario(pk);
     }
 
     public void updateExiste(boolean existe, String pk){
@@ -55,11 +44,7 @@ public class UsuarioCRUD {
     }
 
     public void updateUsuario(Usuario usuario){
-        if (model.updateUsuario(usuario)){
-            System.out.println("Usuario actualizado con exito");
-        } else {
-            System.out.println("Error actualizando el usuario");
-        }
+        model.updateUsuario(usuario);
     }
 
 

@@ -196,7 +196,6 @@ public class insertarMoto extends javax.swing.JDialog {
 
     private void comprobarCampos(){
         String matricula = textoMatricula.getText();
-        System.out.println("en comprobar campos " + matricula);
         if (cnMoto.motoExiste(matricula)){
             Moto moto = cnMoto.buscarMoto(matricula);
             moto.setExiste(1);

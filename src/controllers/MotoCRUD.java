@@ -49,11 +49,7 @@ public class MotoCRUD {
     }
 
     public void removeMoto(String pk){
-        if (model.removeMoto(pk)){
-            System.out.println("Moto eliminada con exito");
-        } else {
-            System.out.println("Error eliminando la moto");
-        }
+        model.removeMoto(pk);
     }
 
     public void updateExiste(int existe, String pk){
@@ -61,28 +57,13 @@ public class MotoCRUD {
     }
 
     public void updateMoto(Moto moto){
-        if (model.updateMoto(moto)){
-            System.out.println("Moto actualizada con exito");
-        } else {
-            System.out.println("Error actualizando la moto");
-        }
+        model.updateMoto(moto);
     }
 
     public static void main(String[] args) {
         MotoCRUD mc = new MotoCRUD();
-        //mc.listarMoto("0677fwj");
-        //mc.listarMoto("5647gfd");
-       // Moto moto = new Moto("0677fwj", "suzuki", "negra", 70);
         mc.agregarMoto("0677fwj", "suzuki", "negra", 70);
-        //System.out.println(moto.toString());
-
         mc.listarMoto("0677fwj");
     }
-    //en el update ponemos todos los campos y los que deje en blanco o ponga un guion se mandan los preexistentes, sino se mandan los nuevos
-    //agregar el removeMoto, buscar moto, updateMoto
-//
-//    public Moto buscarMoto(String matricula){
-//        return
-//    }
 
 }
