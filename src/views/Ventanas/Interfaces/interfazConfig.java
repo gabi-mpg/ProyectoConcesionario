@@ -50,6 +50,7 @@ public class interfazConfig extends javax.swing.JFrame implements ActionListener
         configWallpaper.setSize(370, 410);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.boton.addActionListener(this);
+
     }
 
 

@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
+import static java.awt.Cursor.HAND_CURSOR;
 import static utils.Utilidades.jMensaje;
 
 /**
@@ -134,6 +135,8 @@ public class interfazLogin extends javax.swing.JFrame{
         botonLogin.setForeground(new java.awt.Color(255, 255, 255));
         botonLogin.setText("Iniciar sesión");
         botonLogin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonLogin.setPreferredSize(new Dimension(190, 30));
+        botonLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -167,6 +170,8 @@ public class interfazLogin extends javax.swing.JFrame{
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         getContentPane().add(jPanel1, gridBagConstraints);
 
+        jLabelSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        configLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         pack();
     }
 
