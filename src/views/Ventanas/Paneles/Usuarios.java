@@ -237,6 +237,8 @@ public class Usuarios extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "No introdujo ningun nick", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "No se encontró un usuario con este nick", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 
