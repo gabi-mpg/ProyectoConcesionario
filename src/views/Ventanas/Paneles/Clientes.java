@@ -236,13 +236,18 @@ public class Clientes extends javax.swing.JPanel {
     private String pedirDNI(){
         try{
             String dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
-
+        if (!dni.isEmpty()){
             while (!cnCliente.comprobarDNI(dni)){
                 JOptionPane.showMessageDialog(this, "Formato DNI incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 
                 dni = JOptionPane.showInputDialog(this, "Introduce el DNI del cliente", "DNI", JOptionPane.PLAIN_MESSAGE);
             }
             return dni;
+        } else {
+            JOptionPane.showMessageDialog(this, "No se ha introducido ningún DNI", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
         } catch (Exception e) {
             return null;
         }
