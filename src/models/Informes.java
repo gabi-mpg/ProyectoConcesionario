@@ -12,17 +12,33 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Clase que recoge toda la logica para crear los informes (informes incrustados) de la aplicacion.
+ */
 public class Informes {
 
     Document informe;
     VentaCRUD cnVentas;
 
+    /**
+     * Constructor de la clase en el que asignamos valores a las variables de la misma y llamamos
+     * al metodo que agrega los headers al documento de informe.
+     * @param cnVentas Recibe una instancia del Controller de Ventas
+     * @param tipoInforme Parametro que indica el tipo de informe a generar.
+     * @param rutaPDF Ruta donde se guardara el documento.
+     */
     public Informes(VentaCRUD cnVentas, String tipoInforme, String rutaPDF){
         this.informe = new Document();
         this.cnVentas = cnVentas;
         agregarHeader(tipoInforme, rutaPDF);
     }
 
+    /**
+     * Metodo que crea el informe en la ruta establecida, genera el nombre usando el tipo de informe dado, abre el documneto y le agrega el Header al informe.
+     * Luego crea el Header, agregandole la foto.
+     * @param tipoInforme Recibe el tipo de informe a generar.
+     * @param rutaPDF Ruta donde se creara el informe.
+     */
     private void agregarHeader(String tipoInforme, String rutaPDF){
         String ruta = rutaPDF + File.separator + tipoInforme + ".pdf";
         try {
@@ -41,6 +57,11 @@ public class Informes {
 
     }
 
+    /**
+     * Metodo que genera un informe general de ventas, mostrando todos los datos de todas las ventas. Para ello agrega la fila con los tipos
+     * de datos y luego fila a fila todas las ventas.
+     * @return Devuelve un boolean segun el exito de la accion.
+     */
     public boolean generarInformeVentas(){
         try{
             ArrayList<Venta> listaVentas = cnVentas.getListaVentas();
@@ -103,6 +124,12 @@ public class Informes {
         }
     }
 
+    /**
+     * Metodo que genera un informe de ventas hechas a un cliente dado, mostrando los datos de las ventas que se han hecho a ese cliente. Para ello agrega la fila con los tipos
+     * de datos y luego fila a fila todas las ventas de una lista filtrada.
+     * @param DNI Recibe el dni del cliente del que se quieren recoger las ventas que se le han hecho.
+     * @return Devuelve un boolean segun el exito de la accion.
+     */
     public boolean generarInformeVentasClientes(String DNI){
         try{
             ArrayList<Venta> listaVentas = cnVentas.getListaVentas();
@@ -171,6 +198,12 @@ public class Informes {
         }
     }
 
+    /**
+     * Metodo que genera un informe de ventas segun una marca dada, mostrando los datos de las ventas quese han realizado de esa marca. Para ello agrega la fila con los tipos
+     * de datos y luego fila a fila todas las ventas de una lista filtrada.
+     * @param marca Recibe la marca de moto de la que se quieren recoger las ventas.
+     * @return Devuelve un boolean segun el exito de la accion.
+     */
     public boolean generarInformeVentasMarca(String marca){
         try{
             ArrayList<Venta> listaVentas = cnVentas.getListaVentas();
@@ -242,6 +275,12 @@ public class Informes {
         }
     }
 
+    /**
+     * Metodo que genera un informe de ventas segun un usuario dado, mostrando los datos de las ventas que ha realizado ese usaurio. Para ello agrega la fila con los tipos
+     * de datos y luego fila a fila todas las ventas de una lista filtrada.
+     * @param nick Recibe el nick del usaurio del que se quieren recoger las ventas.
+     * @return Devuelve un boolean segun el exito de la accion.
+     */
     public boolean generarInformeVentasUsuario(String nick){
         try{
             ArrayList<Venta> listaVentas = cnVentas.getListaVentas();
