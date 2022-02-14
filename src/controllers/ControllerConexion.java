@@ -1,18 +1,18 @@
 package controllers;
 
-import modelo.MNGDB;
-import modelo.config;
+import models.MNGDB;
+import models.Config;
 
 import java.sql.Connection;
 
 public class ControllerConexion {
 
     private final MNGDB conexionMng;
-    private final config configuracion;
+    private final Config configuracion;
 
     public ControllerConexion(){
         this.conexionMng = new MNGDB();
-        this.configuracion = new config();
+        this.configuracion = new Config();
     }
 
     public void setRegistros(){

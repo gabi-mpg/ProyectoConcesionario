@@ -1,7 +1,7 @@
 package controllers;
 
 import entidades.Cliente;
-import modelo.EntidadesModels.ClienteModel;
+import models.ClienteModel;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package controllers;
 
 import entidades.Usuario;
-import modelo.EntidadesModels.UsuarioModel;
+import models.UsuarioModel;
 
 import java.util.ArrayList;
 

@@ -3,7 +3,7 @@ package controllers;
 import entidades.Cliente;
 import entidades.Moto;
 import entidades.Venta;
-import modelo.EntidadesModels.VentaModel;
+import models.VentaModel;
 
 import java.util.ArrayList;
 

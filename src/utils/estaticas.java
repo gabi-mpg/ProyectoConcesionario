@@ -7,9 +7,8 @@ public class estaticas {
 
     //Variable que almacena la ruta de la carpeta de imágenes
     public static final String RUTA_IMAGENES = System.getProperty("user.dir")+
-            File.separator+"src"+File.separator+"views"+File.separator
-            +"imagenes"+ File.separator;
-
+            File.separator+ "Recourses" + File.separator
+            + "imagenes"+ File.separator;
     //Variables para identificar paneles en mainInterface
     public static final String PANEL_USUARIO = "usuario";
     public static final String PANEL_CLIENTE = "cliente";

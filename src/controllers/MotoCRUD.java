@@ -1,13 +1,14 @@
 package controllers;
 
 import entidades.Moto;
-import modelo.EntidadesModels.MotoModel;
+import models.MotoModel;
 
 import java.util.ArrayList;
 
 public class MotoCRUD {
 
     private MotoModel model;
+
     public MotoCRUD(){
         this.model = new MotoModel();
     }
