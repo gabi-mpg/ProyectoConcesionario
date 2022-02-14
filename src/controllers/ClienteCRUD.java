@@ -31,12 +31,6 @@ public class ClienteCRUD {
         return dni.matches("[0-9]{7,8}[A-Za-z]");
     }
 
-    public void cambiarEstadoCliente(String dni){
-        Cliente cliente = buscarCliente(dni);
-        removeCliente(dni);
-        cliente.setExiste(1);
-        model.addCliente(cliente);
-    }
 
     public Cliente buscarCliente(String pk){
         return model.buscarCliente(pk);

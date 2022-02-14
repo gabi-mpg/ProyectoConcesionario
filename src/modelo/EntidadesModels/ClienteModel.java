@@ -84,21 +84,6 @@ public class ClienteModel {
         return getListaClientes();
     }
 
-    /*public boolean removeCliente(String dni){
-        saveClientes();
-        String sql = "delete from t_clientes where dni like ?";
-        try {
-            PreparedStatement pst = conexion.prepareStatement(sql);
-            pst.setString(1, dni);
-            pst.executeUpdate();
-            listaClientes.removeIf(c -> c.getDni().equalsIgnoreCase(dni));
-            return true;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return false;
-        }
-    }*/
-
     public boolean removeCliente(String dni){
         saveClientes();
         String sql = "{call sp_eliminarcliente(?)}";

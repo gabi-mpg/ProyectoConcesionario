@@ -269,9 +269,9 @@ public class Clientes extends javax.swing.JPanel {
     }
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {
-        String matricula = pedirDNI();
-        if (matricula != null){
-            cnCliente.removeCliente(matricula);
+        String DNI = pedirDNI();
+        if (DNI != null){
+            cnCliente.removeCliente(DNI);
             fillTable();
         }
     }

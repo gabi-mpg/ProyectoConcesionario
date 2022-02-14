@@ -204,7 +204,6 @@ public class Ventas extends javax.swing.JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this, "La venta con ese ID no existe en la BD", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
-
             }catch (NumberFormatException ex){
                 JOptionPane.showMessageDialog(this,"No se ha introducido un numero","Error en la entrada",JOptionPane.ERROR_MESSAGE);
             }

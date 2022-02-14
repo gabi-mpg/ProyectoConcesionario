@@ -15,18 +15,12 @@ public class ControllerConexion {
         this.configuracion = new config();
     }
 
-
-
     public void setRegistros(){
         conexionMng.setRegistros(configuracion.getConfig());
     }
 
     public String[] getRegistros(){
         return configuracion.getConfig();
-    }
-
-    public boolean estadoCn(){
-        return conexionMng.isEstado();
     }
 
     public boolean conectarComprobar(){
@@ -45,8 +39,5 @@ public class ControllerConexion {
         return conexionMng.iniciarSesion(user, passw);
     }
 
-    public Connection getConexion(){
-        return conexionMng.getConexion();
-    }
 
 }
