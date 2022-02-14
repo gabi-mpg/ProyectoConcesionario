@@ -8,7 +8,7 @@ package models;
 import views.interfaces.interfazLogin;
 
 /**
- *
+ * Clase que recoge la instancia de la interfaz de login, donde se dispara la ejecucion del resto del programa
  * @author chris
  */
 public class main {

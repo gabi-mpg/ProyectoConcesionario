@@ -5,6 +5,11 @@ import models.MotoModel;
 
 import java.util.ArrayList;
 
+/**
+ * Dentro de esta clase recogemos todos los metodos que representan los metodos del modelo de motos.
+ * De este modo, esta clase se usa para hacer de intermediaria entre las vistas y el modelo. Para mas informacion
+ * al respecto, consultar las explicaciones de los metodos del modelo.
+ */
 public class MotoCRUD {
 
     private MotoModel model;

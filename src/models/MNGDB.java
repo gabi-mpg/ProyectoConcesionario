@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Dentro de esta clase recogemos todos los metodos que contienen la logica de creacion y conexion a la base de datos-
  * @author chris
  */
 public class MNGDB {
@@ -30,8 +30,11 @@ public class MNGDB {
 
     public MNGDB(){
     }
-    
 
+    /**
+     * En este metodo conectamos a la base de datos usando
+     * @return
+     */
     public boolean establecerConexionComprobar(){
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");

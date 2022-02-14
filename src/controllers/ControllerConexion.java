@@ -8,7 +8,7 @@ import java.sql.Connection;
 /**
  * Dentro de esta clase recogemos todos los metodos que representan los metodos del modelo de conexion.
  * De este modo, esta clase se usa para hacer de intermediaria entre las vistas y el modelo. Para mas informacion
- * al respecto, consultar las explicaciones de los metodos del modeloConexion.
+ * al respecto, consultar las explicaciones de los metodos de MNGDB.
  */
 public class ControllerConexion {
 
