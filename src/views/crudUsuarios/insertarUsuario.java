@@ -171,6 +171,7 @@ public class insertarUsuario extends JDialog {
         // TODO add your handling code here:
     }
 
+
     private void insertarUser(){
             String nick = textoNick.getText();
             if (cnUser.usuarioExiste(nick)){

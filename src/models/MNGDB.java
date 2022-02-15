@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Dentro de esta clase recogemos todos los metodos que contienen la logica de creacion y conexion a la base de datos-
- * @author chris
+ * @author gaby y chris
  */
 public class MNGDB {
     

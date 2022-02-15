@@ -169,7 +169,10 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
 
     }
 
-    //Para activar el campo de busqueda
+    /**
+     * Este método activa el campo de búsqueda cuando se ha marcado el radioButton
+     * @param e Evento que recibe
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         JRadioButton radio = (JRadioButton) e.getSource();
@@ -179,7 +182,9 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         }
     }
 
-    //Comprueba dni
+    /**
+     * Comprueba que el texto en el campo DNI sea el correcto (7 u 8 números y una letra)
+     */
     private void procesarCampoDNI(){
         campoBusqueda.addKeyListener(new KeyAdapter() {
             @Override
@@ -195,7 +200,9 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         });
     }
 
-    //comprueba matricula
+    /**
+     * Comprueba que el texto en el campo de la matrícula sea correcto (4 dígitos, guión y 3 letras)
+     */
     private void procesarCampoMatricula(){
         campoBusqueda.addKeyListener(new KeyAdapter() {
             @Override
@@ -211,6 +218,10 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         });
     }
 
+    /**
+     * Desactiva el campo de texto si el radiobutton cambia de de estado (Seleccionado -> Deseleccionado)
+     * @param e Evento que recibe
+     */
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.DESELECTED) {
@@ -220,6 +231,13 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         }
     }
 
+    /**
+     * En función del radioButton que esté marcado, llamrá un método u otro. En el caso del radio del DNI, comprobará
+     * si el valor introducido en el campo de texto corresponde con el DNI. En el caso de la matrícula, se comprueba
+     * si ésta cumple la expresión regular de las matrícula. Por último, si está marcado del radio del vendedor,
+     * se comprueba que el campo de texto no esté vacío. Si no hay ningún radio marcado, se comprueba que el texto
+     * introducido sea un número
+     */
     public void busquedaVenta(){
         if(rbDNI.isSelected()){
             procesarCampoDNI();
@@ -233,6 +251,9 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         }
     }
 
+    /**
+     * Hace que sólo se pueda añadir números al campo de texto
+     */
     private void comprobarNumero(){
         campoBusqueda.addKeyListener(new KeyAdapter() {
             @Override
@@ -248,6 +269,9 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         });
     }
 
+    /**
+     * Comprueba que el campo de búsqueda no esté vacío. De estarlom deshabilita el botón de realizar la búsqueda
+     */
     private void comprobarVacio(){
         campoBusqueda.addKeyListener(new KeyAdapter() {
             @Override
@@ -261,6 +285,10 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         });
     }
 
+    /**
+     * Este método toma el valor introducido en el campo de búsqueda. En función del radio que esté marcado, hará una
+     * consulta a la base de datos tomando como valor de la cláusula where un campo u otro.
+     */
     private void enviarArray(){
         if (rbDNI.isSelected()){
             if (cnVenta.buscarCliente(campoBusqueda.getText()) != null){
@@ -295,12 +323,6 @@ public class buscarVenta extends javax.swing.JDialog implements ActionListener, 
         return listaV;
     }
 
-
-
-
-    public String getValorBusqueda(){
-        return this.valorBusqueda;
-    }
 
     // Variables declaration - do not modify
     private javax.swing.JButton botonBusqueda;

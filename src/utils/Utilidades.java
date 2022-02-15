@@ -14,7 +14,7 @@ import javax.swing.*;
 
 /**
  *
- * @author chris
+ * @author gabriela y chris
  */
 public class Utilidades {
 
@@ -29,10 +29,10 @@ public class Utilidades {
 
     /**
      *
-     * @param parent
-     * @param titulo
-     * @param mensaje
-     * @param tipoMensaje 0 - Error, 1 - Informacion, 2 - Aviso, 3 - Pregunta
+     * @param parent Componente padre sobre el que aparecerá el JPanel
+     * @param titulo Titulo de la ventana
+     * @param mensaje Mensaje que aparecerá en la ventana
+     * @param tipoMensaje Int que indica a la ventana que icono mostrar 0 - Error, 1 - Informacion, 2 - Aviso, 3 - Pregunta
      */
     public static void jMensaje(Component parent, String titulo, String mensaje, int tipoMensaje){
         switch (tipoMensaje){
