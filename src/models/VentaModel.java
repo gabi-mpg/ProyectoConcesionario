@@ -35,8 +35,7 @@ public class VentaModel {
     }
 
     /**
-     * Metodo que recoge todos los clientes de la base de datos y los guarda en el ArrayList
-     * de la clase.
+     * Metodo que recoge todas las ventas de la base de datos y los guarda en el ArrayList de la clase.
      */
     private void saveVentas(){
         listaVentas.clear();
@@ -79,8 +78,7 @@ public class VentaModel {
     }
 
     /**
-     * Metodo que busca una venta, usando el id como clave primaria, en el
-     * ArrayList de la clase que los contiene.
+     * Metodo que busca una venta, usando el id como clave primaria, en el ArrayList de la clase que los contiene.
      * @param pk Recibe el id de la venta a buscar.
      * @return Devuelve el objeto de tipo venta correspondiente a la venta dada.
      */
@@ -94,6 +92,12 @@ public class VentaModel {
         return null;
     }
 
+    /**
+     * Metodo que recorre el ArrayList de la clase y va buscando todas aquellas que coincidan con el DNI de un cliente pasado por parametro.
+     * Todas las que coincidan, seran agregadas al ArrayList que se devuelve.
+     * @param dni DNI del cliente del que se quieren buscar las ventas.
+     * @return Devuelve el ArrayList filtrado con las ventas del cliente dado.
+     */
     public ArrayList<Venta> buscarVentasCliente(String dni){
         ArrayList<Venta> listaVCliente = new ArrayList<>();
         for (Venta v : listaVentas){
@@ -104,7 +108,12 @@ public class VentaModel {
         return  listaVCliente;
     }
 
-
+    /**
+     * Metodo que recorre el ArrayList de la clase y va buscando todas aquellas que coincidan con el nick de un usuario pasado por parametro.
+     * Todas las que coincidan, seran agregadas al ArrayList que se devuelve.
+     * @param nick Nick del usuario del que se quieren buscar las ventas.
+     * @return Devuelve el ArrayList filtrado con las ventas del usuario dado.
+     */
     public ArrayList<Venta> buscarVentasNick(String nick){
         ArrayList<Venta> listaVCliente = new ArrayList<>();
         for (Venta v : listaVentas){
@@ -146,19 +155,41 @@ public class VentaModel {
         return listaVentas;
     }
 
+    /**
+     * Metodo usado para comprobar la previa existencia de los objetos moto y cliente, con los que se quiere crear una venta. Para ello usa los metodos de la clase
+     * que comprueban la existencia de cada uno de estos objetos por separado y devuelve el resultado de ambas busquedas.
+     * @param matricula Matricula de la moto de la que se quiere comprobar la existencia.
+     * @param dni DNI del cliente del que se quiere comprobar la existencia.
+     * @return Devuelve un booelano segun el resultado de la accion.
+     */
     public boolean buscarExistencia(String matricula, String dni){
         return modelM.motoExiste(matricula) && modelC.clienteExiste(dni);
     }
 
+    /**
+     * Metodo que utiliza la instancia del Modelo de moto que tiene esta clase, para comprobar la existencia de una moto en concreto.
+     * @param matricula Recibe la matricula que se quiere consultar.
+     * @return Devuelve un booleano segun el resultado de la accion.
+     */
     public Moto buscarMoto(String matricula){
         return modelM.buscarMoto(matricula);
     }
 
+    /**
+     * Metodo que utiliza la instancia del Modelo de cliente que tiene esta clase, para comprobar la existencia de un cliente en concreto.
+     * @param DNI Recibe el dni que se quiere consultar.
+     * @return Devuelve un booleano segun el resultado de la accion.
+     */
     public Cliente buscarCliente(String DNI){
         return modelC.buscarCliente(DNI);
     }
+
+    /**
+     * Guarda la nueva venta en la base de datos y actualiza el ArrayList de la clase llamando
+     * al metodo saveVentas()
+     * @param venta Recibe el nuevo usuario a guardar en la base de datos.
+     */
     public void addVenta(Venta venta){
-        //saveVentas();
         String sql = "INSERT INTO t_ventas (Matricula, DNI, Precio, IDVendedor, existe) values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = conexion.prepareStatement(sql);
@@ -173,7 +204,7 @@ public class VentaModel {
             System.err.println("Error registrando la venta: " + e);
         }
 
-        getListaVentas();
+        saveVentas();
     }
 
     /**
@@ -254,7 +285,7 @@ public class VentaModel {
     }
 
     /**
-     * Actuliza los valores de la venta actualizada en el ArrayList de la clase, de modo que los valores de la base
+     * Actualiza los valores de la venta actualizada en el ArrayList de la clase, de modo que los valores de la base
      * de datos y de la lista que contiene el programa, coincidan.
      * @param venta Recibe la venta a actulizar.
      */

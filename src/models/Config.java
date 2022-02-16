@@ -4,10 +4,11 @@ package models;
 
 import java.io.*;
 
-
+/**
+ * Clase que recoge la logica que permite guardar la informacion de conexion a la base de datos
+ * de cada usuario en concreto
+ */
 public class Config implements Serializable{
-
-
 
     public File ficheroConfig;
     private File ficheroTema;
@@ -16,6 +17,9 @@ public class Config implements Serializable{
     public final String NOCTURNO_ACTIVADO = "true";
     public final String NOCTURNO_DESACTIVADO = "false";
 
+    /**
+     * Contructor de la clase donde se asigna valor a las variables de la misma y se llama al metodo encargado de la configuracion inicial.
+     */
     public Config() {
         String RUTA_CONFIG = System.getProperty("user.dir") + File.separator + "config.dat";
         String RUTA_CONFIGTEMA = System.getProperty("user.dir") + File.separator + "temaNocturno.txt";
@@ -24,6 +28,9 @@ public class Config implements Serializable{
         configuracionInicial();
     }
 
+    /**
+     * Este metodo comprueba la existencia del fichero de configuracion, si existe recoge los datos del mismo y sino, lo crea. Asignandole unos valores por defecto.
+     */
     public void configuracionInicial() {
         try {
             if (!this.ficheroConfig.exists()) {
@@ -40,6 +47,10 @@ public class Config implements Serializable{
         }
     }
 
+    /**
+     * Guarda la informacion de los datos de conexion guardados en el fichero de configuracion.
+     * @param info Recibe un array con los datos necesarios, para ser guardados.
+     */
     public void escribirFichero(String[] info) {
         try {
             this.informacion = info;
